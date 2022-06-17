@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+     @apply bg-mp-peach-1;
+}
+
+.dropdown{
+     @apply p-2 mx-auto rounded-md border text-mp-dark-1 flex text-sm font-semibold cursor-pointer
+}
+.dropdown-item {
+     @apply font-light my-2 px-2 hover:bg-mp-gray-2 cursor-pointer
+}
+button{
+     @apply outline-none
+}
+.chip{
+     @apply flex px-1 py-1 border-2 rounded-full my-2 mx-1 cursor-pointer font-light
+}
