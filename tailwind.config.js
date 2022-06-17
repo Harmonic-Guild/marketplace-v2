@@ -5,7 +5,43 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'mp-dark': {
+          1: '#252B42',
+          2: '#161621',
+          3: '#0F0F1C'
+        },
+        'mp-gray': {
+          1: '#F9F9F9',
+          2: '#F5F4FB',
+          3: '#C7C8D8',
+          4: '#737373',
+          5: '#272E46',
+          6: '#223354',
+          7: '#0A142F'
+        },
+        'mp-orange': {
+          1: '#FF902B',
+          2: '#FFBD1C'
+        },
+        'mp-brown':{
+          1: '#BF9861',
+          2: '#AA5F2A'
+        },
+        'mp-peach': {
+          1: '#FDFBFF',
+          2: '#FFF8E9'
+        },
+        'mp-blue': {
+          1: '#5533FF',
+          2: '#6E80FF'
+        },
+        'mp-light': {
+          1: '#FAFAFA'
+        }
+      }
+    },
   },
   plugins: [],
 }
