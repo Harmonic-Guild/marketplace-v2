@@ -36,7 +36,7 @@ const image = [
 //     );
 //   }
 
-export default class Responsive extends Component {
+export default class FeaturesNft extends Component {
   render() {
     var settings = {
       dots: false,
@@ -45,7 +45,9 @@ export default class Responsive extends Component {
       infinite: true,
       centerPadding: "8px",
       slidesToShow: 3,
-      speed: 700,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      pauseOnHover: true,
       slidesToScroll: 4,
       initialSlide: 0,
     //   nextArrow: <SampleNextArrow />,
@@ -87,7 +89,7 @@ export default class Responsive extends Component {
         <Slider {...settings}>
           {/* <div> */}
             {image.map(image => (
-                 <img src={image.src} alt="" className="px-2 rounded-3xl"/>
+              <img src={image.src} alt="" className="px-2 rounded-3xl"/>
             ))}
           {/* </div>           */}
         </Slider>

@@ -37,7 +37,7 @@ const image = [
 //     );
 //   }
 
-export default class Responsive extends Component {
+export default class WeeklyNft extends Component {
   render() {
     var settings = {
       dots: false,
