@@ -1,18 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 
-const image = [
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'}
-]
-
 export default class NavBreadCrumb extends Component {
   render() {
     var settings = {
@@ -29,7 +17,7 @@ export default class NavBreadCrumb extends Component {
         initialSlide: 0,
     };
     return (
-      <div className="">
+      <div className="block lg:hidden">
         <Slider {...settings}>
             <div className="py-2 text-center">
                 <span className="bg-yellow-100 border border-yellow-600 rounded-full px-3 py-2">featured nft</span>
