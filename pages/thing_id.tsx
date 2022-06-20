@@ -19,7 +19,7 @@ const thing_id = () =>  {
     <div className={`w-full h-full p-4 bg-white text-gray-700`}>
       {image.map((image, index) => (
         <div key={index} className="lg:flex block justify-around pl-0 lg:pl-8">
-          <div className="">
+          <div className="lg:w-1/3 w-5/6 rounded-3xl">
             <img src={image.src} alt="" />
           </div>
           <div className="lg:w-2/3 w-full">
@@ -42,8 +42,8 @@ const thing_id = () =>  {
                     </div>
                     <div className="w-3/5 ml-2 lg:ml-20 gap-y-8 my-5">
                         <span className="text">Discription</span>
-                        <span className="border-b border-yellow-600 py-2 px-44 lg:-ml-24 -ml-20"></span>
-                        <p className={hide ? 'pt-2' : 'pt-2 truncate'}>
+                        <span className="border-b border-yellow-600 py-2 pb-2 z-10 px-44 lg:-ml-24 -ml-20"></span>
+                        <p className={hide ? 'pt-2 h-24 overflow-y-scroll ' : 'pt-2 h-16 overflow-y-scroll truncate'}>
                             <span>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic 
                             </span>     
