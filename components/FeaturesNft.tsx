@@ -41,14 +41,13 @@ export default class FeaturesNft extends Component {
     var settings = {
       dots: false,
       className: "center",
-      centerMode: true,
       infinite: true,
       centerPadding: "8px",
       slidesToShow: 3,
       autoplay: true,
       autoplaySpeed: 2000,
       pauseOnHover: true,
-      slidesToScroll: 4,
+      slidesToScroll: 1,
       initialSlide: 0,
     //   nextArrow: <SampleNextArrow />,
     //   prevArrow: <SamplePrevArrow />,
@@ -80,16 +79,16 @@ export default class FeaturesNft extends Component {
       ]
     };
     return (
-      <div className="w-full h-fit pt-10 lg:px-32 px-12 bg-gray-200">
+      <div className="w-full h-fit pt-10 lg:px-32 px-12 ">
         <div className=" text-center  font-bold text-gray-900 ">
             <h1 className="justify-center flex text-yellow-400">Hot <BsStars className="w-6 h-6"/></h1>
-            <h2 className="text-3xl"> Featured NFTs </h2>
-            <p className="text-2xl">New arivals</p>
+            <h2 className="lg:text-3xl text-xl"> Featured NFTs </h2>
+            <p className="lg:text-2xl text-lg">New arivals</p>
         </div>
         <Slider {...settings}>
           {/* <div> */}
-            {image.map(image => (
-              <img src={image.src} alt="" className="px-2 rounded-3xl"/>
+            {image.map((image, index) => (
+              <img key={index} src={image.src} alt="" className="px-2 rounded-3xl"/>
             ))}
           {/* </div>           */}
         </Slider>

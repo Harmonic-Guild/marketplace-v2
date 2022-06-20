@@ -6,14 +6,13 @@ export default class NavBreadCrumb extends Component {
     var settings = {
         dots: false,
         className: "center",
-        centerMode: true,
         infinite: true,
         centerPadding: "-3px",
         // slidesToShow: 1,
         autoplay: true,
         autoplaySpeed: 2000,
         pauseOnHover: true,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
         initialSlide: 0,
     };
     return (
