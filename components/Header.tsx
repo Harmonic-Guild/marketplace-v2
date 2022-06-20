@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { BsMoonStars, BsSun, BsDot, BsLayoutTextSidebarReverse } from 'react-icons/bs'
-// import { useWallet } from '../services/providers/MintbaseWalletContext'
 import { FiMenu, FiX, FiUsers } from "react-icons/fi";
-
 import NavBreadCrumb from './NavBreadCrumb'
 
 const navTitles = [
@@ -13,13 +11,7 @@ const navTitles = [
   { title: 'MyNFTs', href:'/'}
 ]
 
-// const activeTitle = () => {
-//     // console.log('efljl');
-    
-// }
-
 const Header = () => {
-//   const { wallet, isConnected, details } = useWallet()
   const [toggleMenu, setToggleMenu] = useState<boolean>(true)  
   const [darkMode, setDarkMode] = useState<boolean>(true)
   const [toggleIcons, setToggleIcons] = useState<boolean>()
@@ -29,9 +21,9 @@ const Header = () => {
     <header className={`w-full px-6 text-gray-700`}>
       <div className="container flex mx-auto max-w-8xl md:flex justify-between items-center">
         <Link href="/" passHref>
-          <a className="py-6 w-full">
-            <img src="https://marketplace.sevendeadstars.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.9356f04b.png&w=256&q=75" alt="" className='w-24 h-9'/>
-          </a>
+          <span className="py-6 w-full">
+            <img src="https://marketplace.sevendeadstars.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.9356f04b.png&w=256&q=75" alt="" className='w-24 h-9 cursor-pointer'/>
+          </span>
         </Link>        
 
         <div className='flex lg:hidden cursor-pointer'>
