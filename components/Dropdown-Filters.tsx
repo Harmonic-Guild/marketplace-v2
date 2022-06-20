@@ -13,7 +13,7 @@ function DropDown() {
                     <div className="justify-around flex w-5/6">
                         <div className='p-2 text-mp-gray-4'>Sort by:</div>
                         <div className="w-1/4">
-                            <div className={`dropdown ${pop? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setPop(!pop)}> 
+                            <div className={`dropdown ${pop? 'bg-mp-gray-2': 'bg-white w-full'}`} onClick={()=> setPop(!pop)}> 
                                 <p className=''>Popularity</p>
                                 {pop? (
                                     <Up className="h-full w-fit py-1 px-2"></Up>
@@ -24,7 +24,7 @@ function DropDown() {
                             </div>
                             {/* dropdown Items */}
                             {!!pop && (
-                                <ul className='border mt-1 p-2 rounded bg-white'>
+                                <ul className='dropdown-content'>
                                 <li className='dropdown-item'>Highest Bid</li>
                                 <li className='dropdown-item'>This Week</li>
                                 <li className='dropdown-item'>Popular Artist</li>
@@ -43,7 +43,7 @@ function DropDown() {
                             </div>
                             {/* dropdown Items */}
                             {!!type && (
-                                <ul className='border mt-1 p-2 rounded bg-white'>
+                                <ul className='dropdown-content'>
                                 <li className='dropdown-item'>Video</li>
                                 <li className='dropdown-item'>Audio</li>
                                 <li className='dropdown-item'>GIF</li>
@@ -63,7 +63,7 @@ function DropDown() {
                             </div>
                             {/* dropdown Items */}
                             {!!range && (
-                                <ul className='border mt-1 p-2 rounded bg-white'>
+                                <ul className='dropdown-content'>
                                 <li className='dropdown-item'>0.1-5 Near</li>
                                 <li className='dropdown-item'>5-20 Near</li>
                                 <li className='dropdown-item'> &gt; 20 Near</li>
