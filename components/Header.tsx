@@ -4,6 +4,8 @@ import { BsMoonStars, BsSun, BsDot, BsLayoutTextSidebarReverse } from 'react-ico
 // import { useWallet } from '../services/providers/MintbaseWalletContext'
 import { FiMenu, FiX, FiUsers } from "react-icons/fi";
 
+import NavBreadCrumb from './NavBreadCrumb'
+
 const navTitles = [
   { title: 'Home', href:'/'},
   { title: 'Explore', href:'/'},
@@ -91,6 +93,7 @@ const Header = () => {
           </div>         
         </div>
       </div>
+      <NavBreadCrumb/>
     </header>
   )
 }
