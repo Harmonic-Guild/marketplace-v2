@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { BsMoonStars, BsSun, BsDot, BsLayoutTextSidebarReverse } from 'react-icons/bs'
 import { FiMenu, FiX, FiUsers } from "react-icons/fi";
 import NavBreadCrumb from './NavBreadCrumb'
+import Near from '../icons/near.svg'
 
 const navTitles = [
   { title: 'Home', href:'/'},
@@ -78,9 +79,9 @@ const Header = () => {
           <div className="flex flex-row items-center space-x-5">
             <div onClick={() => setToggleIcons(!toggleIcons)}>
             </div>
-            <button className='flex gap-1 no-underline bg-yellow-400 px-10 py-3 font-bold rounded-full text-gray-900 text-sm'>
+            <button className='action-btn pb-2 flex'>
                 <span>Connect</span>
-                <span className='w-5 h-5'><img src="https://marketplace.sevendeadstars.com/images/near.png" alt=""/></span>
+                <span className='ml-2 mt-[0.22rem]'><Near></Near></span>
             </button>
           </div>         
         </div>
