@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import { BsStars } from "react-icons/bs";
 
+import Vector from '../icons/Vector.svg'
+
 const image = [
     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
@@ -80,10 +82,10 @@ export default class FeaturesNft extends Component {
     };
     return (
       <div className="w-full h-fit pt-10 lg:px-32 px-12 ">
-        <div className=" text-center  font-bold text-gray-900 ">
-            <h1 className="justify-center flex text-yellow-400">Hot <BsStars className="w-6 h-6"/></h1>
-            <h2 className="lg:text-3xl text-xl"> Featured NFTs </h2>
-            <p className="lg:text-2xl text-lg">New arivals</p>
+        <div className=" text-center  font-bold text-gray-900 mb-6">
+        <p className='text-mp-orange-1 mb-2'>Lorem <Vector className='inline'></Vector></p>
+          <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
+          <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
         </div>
         <Slider {...settings}>
           {/* <div> */}

@@ -6,7 +6,7 @@ import NavBreadCrumb from './NavBreadCrumb'
 
 const navTitles = [
   { title: 'Home', href:'/'},
-  { title: 'Explore', href:'/'},
+  { title: 'Explore', href:'/explore'},
   { title: 'Profile', href:'/'},
   { title: 'MyNFTs', href:'/'}
 ]
