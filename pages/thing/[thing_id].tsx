@@ -8,7 +8,8 @@ const image = [
 ]
 
 
-const thing_id = () =>  {
+const thing_id = ({ id }: {id:string}) =>  {
+    
 
   const [hide, setHide] = useState<boolean>(false)
   const play = () => {
@@ -128,4 +129,14 @@ const thing_id = () =>  {
     </div>
   )
 }
-export default thing_id
+export default thing_id;
+
+export function getServerSideProps({query}: any){
+
+    return {
+        props: {
+            id: query.thing_id
+        }
+    }
+    
+}
