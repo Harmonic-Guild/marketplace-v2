@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Slider from "react-slick";
-import { BsStars } from "react-icons/bs";
-
-import Vector from '../icons/Vector.svg'
+import Vector from '../icons/Vector.svg';
+import Vector_right from '../icons/Vector_right.svg';
+import Vector_left from '../icons/Vector_left.svg';
 
 const image = [
     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
@@ -16,43 +16,41 @@ const image = [
     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'}
 ]
 
-// function SampleNextArrow(props: any) {
-//     const { className, style, onClick } = props;
-//     return (
-//       <div
-//         className={className}
-//         style={{ ...style, display: "block", background: "red" }}
-//         onClick={onClick}
-//       />
-//     );
+// function SampleNextArrow({onClick}) {
+//   return (
+//     <div className="arrow arrow-right" onClick={onClick}>
+//       <Vector_right/>
+//     </div>
+//   );
 // }
 
-// function SamplePrevArrow(props: any) {
-//     const { className, style, onClick } = props;
-//     return (
-//       <div
-//         className={className}
-//         style={{ ...style, display: "block", background: "green" }}
-//         onClick={onClick}
-//       />
-//     );
-//   }
+// function SamplePrevArrow({onClick}) {
+//   return (
+//     <div className="arrow arrow-left" onClick={onClick}>
+//       <Vector_left/>
+//     </div>
+//   );
+// }
+const FeaturesNft = () => {
 
-export default class FeaturesNft extends Component {
-  render() {
-    var settings = {
-      dots: false,
+  const [slideIndex, setSlideIndex] = useState(0)
+
+  // render() {
+    const settings = {
+      dots: true,
       className: "center",
       infinite: true,
       centerPadding: "8px",
+      centerMode: true,
       slidesToShow: 3,
       autoplay: true,
       autoplaySpeed: 2000,
       pauseOnHover: true,
       slidesToScroll: 1,
       initialSlide: 0,
-    //   nextArrow: <SampleNextArrow />,
-    //   prevArrow: <SamplePrevArrow />,
+      beforeChange: (current:any, next:any) => setSlideIndex(next),
+      // nextArrow: <SampleNextArrow/>,
+      // prevArrow: <SamplePrevArrow/>,
       responsive: [
         {
           breakpoint: 1024,
@@ -64,11 +62,11 @@ export default class FeaturesNft extends Component {
           }
         },
         {
-          breakpoint: 600,
+          breakpoint: 800,
           settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            initialSlide: 3
           }
         },
         {
@@ -88,14 +86,15 @@ export default class FeaturesNft extends Component {
           <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
         </div>
         <Slider {...settings}>
-          {/* <div> */}
             {image.map((image, index) => (
-              <img key={index} src={image.src} alt="" className="px-2 rounded-3xl"/>
+              <div className={index === slideIndex ? 'slide:active' : 'slide'}>
+                <img key={index} src={image.src} alt="" className="px-2 rounded-2xl"/>
+              </div>
             ))}
-          {/* </div>           */}
         </Slider>
       </div>
     );
-  }
 }
+
+export default FeaturesNft
 

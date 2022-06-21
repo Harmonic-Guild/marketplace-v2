@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import { BsCircle, BsStars } from "react-icons/bs";
-import { BiShareAlt } from "react-icons/bi";
-import Link from "next/link";
+import Right from '../icons/right.svg';
+import Share from '../icons/share.svg'
+import Near from '../icons/near.svg'
+
 
 import Vector from '../icons/Vector.svg'
+import { BiArrowFromLeft, BiArrowFromRight } from "react-icons/bi";
 
 const image = [
     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
@@ -25,7 +27,9 @@ const image = [
 //         className={className}
 //         style={{ ...style, display: "block", background: "red" }}
 //         onClick={onClick}
-//       />
+//       >
+        
+//       </div>
 //     );
 // }
 
@@ -43,16 +47,16 @@ const image = [
 export default class WeeklyNft extends Component {
   render() {
     var settings = {
-      dots: false,
+      dots: true,
       className: "center",
       infinite: true,
-      centerPadding: "1px",
-      slidesToShow: 3,
+      centerPadding: "8px",
+      slidesToShow: 4,
       speed: 700,
       slidesToScroll: 1,
       initialSlide: 0,
-    //   nextArrow: <SampleNextArrow />,
-    //   prevArrow: <SamplePrevArrow />,
+      // nextArrow: <SampleNextArrow />,
+      // prevArrow: <SamplePrevArrow/>,
       responsive: [
         {
           breakpoint: 1024,
@@ -89,20 +93,23 @@ export default class WeeklyNft extends Component {
         <Slider {...settings}>
             {image.map((image, index) => (
                 <div key={index} className="p-2 ">
-                    <div className="rounded-3xl p-2 border border-yellow-600">
+                    <div className="rounded-2xl p-2 border border-yellow-600">
                         <img src={image.src} alt="" className="px-2 rounded-2xl"/>
-                        <div className="px-2">
-                            <p className="text-gray-900 font-bold lg:text-2xl text-sm">{image.title}</p>
-                            <span className="lg:text-lg text-sm font-medium text-stone-900">starts in: </span>
-                        </div>
-                        <div className="flex justify-around">
-                            <Link href="/thing_id" passHref>
-                              <button className="bg-yellow-500 py-4 px-6 rounded-xl w-1/2 text-center text-gray-900 font-medium lg:text-lg text-xs">Buy</button>
-                            </Link>
-                            <div className=' text-yellow-300'>
-                                <BsCircle className="relative lg:h-12 h-8 lg:w-12 w-9"/>
-                                <BiShareAlt className='absolute lg:h-8 h-6 lg:w-8 w-6 lg:-mt-10 -mt-7 lg:ml-2 ml-1 '/>
-                            </div>
+                        <div className="text-sm py-2 text-mp-dark-3 relative">
+                          <div className="timer">16:12:56 hrs</div>
+                          <div className="font-semibold my-1 py-1">Buster Character Color</div>
+                          <div className="flex my-1 py-1 justify-between">
+                              <p className='flex'>Last Bid: 0.25 <span className='mt-[.15rem] ml-1'><Near></Near></span></p>
+                              <div className="flex relative">
+                                  <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
+                                  <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
+                                  <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
+                              </div>
+                          </div>
+                          <div className="flex mt-4 pt-1 justify-between px-2">
+                              <button className='flex action-btn'>Bid <span className='border-l border-black pl-2 ml-2'><Right></Right></span></button>
+                              <button><Share></Share></button>
+                          </div>
                         </div>
                     </div>
                 </div>
