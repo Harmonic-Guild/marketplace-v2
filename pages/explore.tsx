@@ -1,17 +1,107 @@
-import Image from 'next/image';
+import { gql } from 'apollo-boost'
+import { useLazyQuery } from '@apollo/client'
+import { useEffect, useState } from 'react';
+import { useWallet } from '../services/providers/MintbaseWalletContext';
+import { Store } from '../interfaces/wallet.interface';
+
 import DropDown from '../components/Dropdown-Filters';
 import NFT from '../components/NFT';
+import SideOptions from '../components/SideOptions';
 import Vector from '../icons/Vector.svg'
-import Cross from '../icons/cross.svg'
 import Burger from '../icons/burger.svg'
 import Lists from '../icons/lists.svg'
-import { useState } from 'react';
 
+const FETCH_STORE = gql`
+  query FetchStore($storeId: String!) {
+    store(where: { id: { _eq: $storeId } }) {
+      id
+      name
+      symbol
+      baseUri
+      owner
+    }
+  }
+`
 
+const FETCH_TOKENS = gql`
+  query FetchTokensByStoreId($storeId: String!, $limit: Int, $offset: Int) {
+    token(
+      order_by: { thingId: asc }
+      where: { storeId: { _eq: $storeId }, burnedAt: { _is_null: true } }
+      limit: $limit
+      offset: $offset
+      distinct_on: thingId
+    ) {
+      id
+      thingId
+      thing {
+        id
+        metaId
+      }
+    }
+  }
+`
 
 function Explore() {
 
+    const { wallet } = useWallet()
+    const [store, setStore] = useState<Store | null>(null)
+    const [things, setThings] = useState<any>([])
     const [showOptions, setShowOptions] = useState<boolean>(false)
+
+    // fetching
+    const [getStore, { loading: loadingStoreData, data: storeData }] =
+    useLazyQuery(FETCH_STORE, {
+      variables: {
+        storeId: ''
+      },
+    })
+
+  const [getTokens, { loading: loadingTokensData, data: tokensData }] =
+    useLazyQuery(FETCH_TOKENS, {
+      variables: {
+        storeId: '',
+        limit: 10,
+        offset: 0,
+      },
+    })
+
+  useEffect(() => {
+    getStore({
+      variables: {
+        storeId: 'muti.mintbase1.near',
+      },
+    })
+  }, [])
+
+  useEffect(() => {
+    // console.log(storeData);
+    
+    if (!storeData) return
+
+    if (storeData?.store.length === 0) return
+
+    setStore({
+      ...storeData.store[0],
+    })
+    getTokens({
+      variables: {
+        storeId: storeData.store[0].id,
+        limit: 10,
+        offset: 0,
+      },
+    })
+  }, [storeData])
+
+  useEffect(() => {
+    if (!store || !tokensData) return
+
+    
+
+    const things = tokensData.token.map((token: any) => token.thing)
+
+    setThings(things)
+  }, [tokensData])
 
     return ( 
         <div className='my-12 w-11/12 mx-auto'>
@@ -33,61 +123,20 @@ function Explore() {
                 </div>
             </div>
 
-            
             <div className='grid grid-cols-10'>
                 {/* checkboxes */}
                 {showOptions && (
-                    <div className="col-end-11 col-span-3 order-last py-4">
-                    <div className="flex justify-end">
-                        <div className="w-4/5 px-4 pt-6 pb-8 text-sm border-2 rounded-md">
-                            <h3 className='text-xl font-semibold text-mp-dark-1 mb-3'>Categories</h3>
-                            <div className="flex flex-wrap text-mp-gray-6">
-                                <div className="chip">not up for bidding <Cross className="mx-1 my-1"></Cross></div>
-                                <div className="chip">up for bidding <Cross className="mx-1 my-1"></Cross></div>
-                                <div className="chip">purchase direct <Cross className="mx-1 my-1"></Cross></div>
-                            </div>  
-                        </div>  
-                    </div>
-
-                    <div className="flex justify-end mt-3">
-                        <div className="w-4/5 px-4 p-4 text-sm border-2 rounded-md">
-                            <input type='text' placeholder='Search By Artist' className="w-full outline-none border rounded-sm p-2 bg-mp-gray-2 text-mp-gray-4" />
-                            <h3 className='text-xl font-semibold text-mp-dark-1 my-3'>Artist Names</h3>
-
-                            <div className="text-mp-gray-6">
-                                <div className="artist">
-                                    <p className=''>Ben Afleck</p>
-                                    <p className=''>98 </p>
-                                </div>
-                                <div className="artist">
-                                    <p className=''>Joseph Morgan</p>
-                                    <p className=''>12</p>
-                                </div>
-                                <div className="artist">
-                                    <p className=''>Emilia Clarke</p>
-                                    <p className=''>56 </p>
-                                </div>
-                                <div className="artist">
-                                    <p className=''>Leonardo Da Vinci</p>
-                                    <p className=''>8989 </p>
-                                </div>
-                                <div className="artist">
-                                    <p className=''>Mikel Angelo</p>
-                                    <p className=''>506 </p>
-                                </div>
-                            </div>  
-                        </div>  
-                    </div>
-                </div>)}
+                    <SideOptions/>
+                    )}
 
                 {/* nfts wrapper */}
                 <div className={`col-start-1 ${showOptions?'col-span-7 grid-cols-3' : 'col-span-10 grid-cols-4'} order-1 grid  p-4 gap-3`}>
-                    <NFT/>
-                    <NFT/>
-                    <NFT/>
-                    <NFT/>
-                    <NFT/>
-                    <NFT/>
+                    {things.map((thing: any)=> {
+                      return (
+                          
+                          <NFT thing={thing} baseUri={store?.baseUri} key={thing.id}/>
+                      )
+                    })}
                 </div>
 
             </div>
