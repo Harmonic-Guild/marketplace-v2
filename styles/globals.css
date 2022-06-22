@@ -30,6 +30,34 @@ button{
      @apply flex mb-2 py-2 justify-between font-semibold text-mp-gray-4 hover:text-mp-gray-7 cursor-pointer
 }
 .action-btn{
-     background: linear-gradient(84.5deg, #FFD12F 0%, #FFB038 100%);
-     @apply py-2 px-4 rounded-full font-semibold
+     background: radial-gradient(62.1% 62.79% at 32.81% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%) , linear-gradient(84.42deg, #FFD12F 0%, #FFB038 100%);
+     @apply px-8 pt-2  rounded-full font-semibold
 }
+
+.slick-arrow.slick-next{
+     @apply rounded-full bg-yellow-500 w-fit p-3 h-fit -right-10 opacity-0 md:opacity-100
+}
+.slick-arrow.slick-prev {
+     width: 20px;
+     height: 20px;
+     @apply rounded-full bg-yellow-500 w-fit p-3 h-fit -left-10 opacity-0 md:opacity-100
+}
+.slide{
+     transform: scale(.7);
+     transition: .5s;
+     filter: blur(5px);
+}
+.slide.active{
+     filter: blur(0);
+     opacity: 1;
+     transform: scale(1.1);
+}
+/* .arrow{
+     @apply rounded-full bg-yellow-500 p-4 absolute top-[200px] 
+}
+.arrow-right{
+     @apply right-[0px]
+}
+.arrow-left{
+     @apply left-[0px]
+} */
