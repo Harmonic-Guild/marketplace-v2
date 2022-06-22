@@ -1,8 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import FeaturesNft from '../components/FeaturesNft'
-import WeeklyNft from '../components/WeeklyNft'
+import dynamic from 'next/dynamic';
+
+const FeaturesNft = dynamic(()=> import('../components/FeaturesNft'))
+const WeeklyNft = dynamic(()=> import('../components/WeeklyNft'))
 
 const Home: NextPage = () => {
   return (

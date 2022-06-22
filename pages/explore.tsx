@@ -3,13 +3,15 @@ import { useLazyQuery } from '@apollo/client'
 import { useEffect, useState } from 'react';
 import { useWallet } from '../services/providers/MintbaseWalletContext';
 import { Store } from '../interfaces/wallet.interface';
-
-import DropDown from '../components/Dropdown-Filters';
-import NFT from '../components/NFT';
-import SideOptions from '../components/SideOptions';
+import dynamic from 'next/dynamic';
 import Vector from '../icons/Vector.svg'
 import Burger from '../icons/burger.svg'
 import Lists from '../icons/lists.svg'
+
+const DropDown = dynamic(()=> import('../components/Dropdown-Filters'))
+const NFT = dynamic(()=> import('../components/NFT'))
+const SideOptions = dynamic(()=> import('../components/SideOptions'))
+
 
 const FETCH_STORE = gql`
   query FetchStore($storeId: String!) {
@@ -33,6 +35,17 @@ const FETCH_TOKENS = gql`
       distinct_on: thingId
     ) {
       id
+      lists(
+        order_by: {createdAt: desc}, limit: 1
+      ){
+        price
+        autotransfer
+        offer{
+          price
+          timeout
+        }
+      }
+      txId
       thingId
       thing {
         id
@@ -42,11 +55,13 @@ const FETCH_TOKENS = gql`
   }
 `
 
+
 function Explore() {
 
     const { wallet } = useWallet()
     const [store, setStore] = useState<Store | null>(null)
     const [things, setThings] = useState<any>([])
+    const [tokens, setTokens] = useState<any>([])
     const [showOptions, setShowOptions] = useState<boolean>(false)
 
     // fetching
@@ -69,7 +84,7 @@ function Explore() {
   useEffect(() => {
     getStore({
       variables: {
-        storeId: 'muti.mintbase1.near',
+        storeId: 'sevendeadstars.mintbase1.near',
       },
     })
   }, [])
@@ -96,11 +111,17 @@ function Explore() {
   useEffect(() => {
     if (!store || !tokensData) return
 
-    
-
     const things = tokensData.token.map((token: any) => token.thing)
 
     setThings(things)
+
+    const tokens = tokensData.token.map((token: any)=> {
+      return {id: token.id, list : token.lists[0], thing: token.thing, txid: token.txid, thingId: token.thingId}
+    }) 
+
+    setTokens(tokens)
+    // console.log(tokensData, '-=-=-=-=-=++_+_+');
+    
   }, [tokensData])
 
     return ( 
@@ -131,10 +152,10 @@ function Explore() {
 
                 {/* nfts wrapper */}
                 <div className={`col-start-1 ${showOptions?'col-span-7 grid-cols-3' : 'col-span-10 grid-cols-4'} order-1 grid  p-4 gap-3`}>
-                    {things.map((thing: any)=> {
+                    {tokens.map((token: any)=> {
                       return (
                           
-                          <NFT thing={thing} baseUri={store?.baseUri} key={thing.id}/>
+                          <NFT token={token} baseUri={store?.baseUri} key={token.thing.id}/>
                       )
                     })}
                 </div>

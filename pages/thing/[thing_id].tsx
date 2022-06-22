@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import { BsCircle, BsHeart, BsStars } from "react-icons/bs";
+import React, {  useState } from "react";
+import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import { FiLayers } from "react-icons/fi";
 
