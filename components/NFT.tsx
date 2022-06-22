@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react'
 import Near from '../icons/near.svg'
 import Right from '../icons/right.svg'
 import Share from '../icons/share.svg'
-function NFT({thing, baseUri}: any) {
-    
+import {formatNearAmount} from 'near-api-js/lib/utils/format'
 
+function NFT({token, baseUri}: any) {
+    
+    const {thing, list} = token;
+    
     const [metadata, setMetadata] =
       useState<{
         [key: string]: string
@@ -20,10 +23,13 @@ function NFT({thing, baseUri}: any) {
       if (!result) return
   
       setMetadata(result)
+      
     }
   
     useEffect(() => {
       fetchMetadata(`${baseUri}/${thing.metaId}`)
+      
+      
     }, [])
   
     if (!metadata) return null
@@ -31,17 +37,37 @@ function NFT({thing, baseUri}: any) {
     
     return ( 
         <Link href={`/thing/${thing.id}`} passHref>
-            <div className="border border-mp-brown-2 rounded-md bg-mp-peach-2">
+            <div className="border border-mp-brown-2 rounded-md bg-mp-peach-2 cursor-pointer">
                 <div className="p-2">
-                    <img className="h-64 object-cover mx-auto rounded-md shadow-lg shadow-gray-300 "
-                        // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
-                        src={metadata.media}
-                        alt={'alt'} />
+                    
+                        {metadata.animation_hash ? (
+                            <video controls className='h-64 object-cover mx-auto rounded-md shadow-lg shadow-gray-300 ' poster={metadata.media} controlsList="nodownload" muted>
+                                <source src={metadata.animation_url} ></source>
+                            </video>
+                        ) : (
+                            <img className="h-64 object-cover mx-auto rounded-md shadow-lg shadow-gray-300 "
+                            // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
+                            src={metadata.media}
+                            alt={'alt'} />
+                        )}
                         <div className="text-sm py-2 text-mp-dark-3 relative">
-                            <div className="timer">16:12:56 hrs</div>
-                            <div className="font-semibold mt-3 py-1">{metadata.title}</div>
+                            {list?.offer?.timeout && <div className="timer">timeout :{new Date(list?.offer?.timeout).toLocaleDateString()}
+                            </div>}
+                            <div className="font-semibold mt-3 py-1 h-12">{metadata.title}</div>
                             <div className="flex my-1 py-1 justify-between">
-                                <p className='flex'>Last Bid: 0.25 <span className='mt-[.15rem] ml-1'><Near></Near></span></p>
+                                <p className='flex'>
+                                    {list? list?.offer?.price?
+                                     (<>
+                                     Last Bid: {formatNearAmount(Number(list?.offer?.price).toLocaleString('fullwide', { useGrouping: false }),5)}
+                                     <span className='pt-1  ml-1'><Near></Near></span>
+                                    </>):
+                                    (<>
+                                        Price: {formatNearAmount(Number(list?.price).toLocaleString('fullwide', { useGrouping: false }),5)}
+                                        <span className='pt-1  ml-1'><Near></Near></span>
+                                       </>): 
+                                    `Not Available`
+                                    }
+                                    </p>
                                 <div className="flex relative">
                                     <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
                                     <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
@@ -49,7 +75,14 @@ function NFT({thing, baseUri}: any) {
                                 </div>
                             </div>
                             <div className="flex mt-4 pt-1 justify-between">
-                                <button className='flex action-btn'>Get Details <span className='border-l border-black pl-2 ml-2'><Right></Right></span></button>
+                                <button className='flex action-btn'>
+                                    <span className=''>
+                                    {
+                                    list? list?.offer?.price? 'Bid': 'Get Details' : 'N/A'
+                                    }
+                                    </span> 
+                                     <span className='border-l border-black pl-2 ml-2'><Right></Right></span> 
+                                     </button>
                                 <button><Share></Share></button>
                             </div>
                         </div>
