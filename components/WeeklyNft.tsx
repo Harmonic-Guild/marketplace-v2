@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import { BsCircle, BsStars } from "react-icons/bs";
+import { BsCircle } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import Link from "next/link";
 
@@ -90,7 +90,7 @@ export default class WeeklyNft extends Component {
             {image.map((image, index) => (
                 <div key={index} className="p-2 ">
                     <div className="rounded-3xl p-2 border border-yellow-600">
-                        <img src={image.src} alt="" className="px-2 rounded-2xl"/>
+                        <img src={image.src} alt="" className="px-2 rounded-2xl h-64"/>
                         <div className="px-2">
                             <p className="text-gray-900 font-bold lg:text-2xl text-sm">{image.title}</p>
                             <span className="lg:text-lg text-sm font-medium text-stone-900">starts in: </span>
