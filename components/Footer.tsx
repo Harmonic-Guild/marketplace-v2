@@ -1,6 +1,10 @@
 import Link from 'next/link'
+import dynamic from "next/dynamic";
 import { FiUsers } from "react-icons/fi";
 import { BsArrowUp } from "react-icons/bs";
+import Line_2 from '../icons/Line_2.svg'
+import Line_3 from '../icons/Line_3.svg'
+import { useState } from 'react';
 
 
 const navTitles = [
@@ -14,11 +18,15 @@ const Footer = () => {
 
   return (
     <footer className={`w-full px-6 py-10 text-gray-700`}>
-        <button 
-        className='flex space-x-8 no-underline bg-yellow-500 px-10 py-3 font-bold rounded-md text-gray-900 text-sm'>
-            <div className='flex gap-2'>Community <FiUsers/></div>
-            <span>coming soon...</span>
-        </button>
+            {/* <span className='absolute w-20 left-0 top-full pt-20'><Line_2/></span> */}
+        <div className='absolute bg-red-300 p-2'>
+            <button 
+            className='flex space-x-8 no-underline bg-yellow-500 px-10 py-3 font-bold rounded-md text-gray-900 text-sm'>
+                <div className='flex gap-2'>Community <FiUsers/></div>
+                <span>coming soon...</span>
+            </button>
+        </div>
+            {/* <span className='right-0 absolute '><Line_3/></span>            */}
         <div className='pt-12 flex lg:hidden justify-between px-20'>
             <div>
                 <Link href="/" passHref>
