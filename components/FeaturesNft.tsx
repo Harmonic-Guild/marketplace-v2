@@ -56,7 +56,7 @@ const FeaturesNft = () => {
           breakpoint: 1024,
           settings: {
             slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToScroll: 1,
             infinite: true,
             dots: true
           }
@@ -65,7 +65,7 @@ const FeaturesNft = () => {
           breakpoint: 800,
           settings: {
             slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToScroll: 1,
             initialSlide: 3
           }
         },
@@ -87,7 +87,7 @@ const FeaturesNft = () => {
         </div>
         <Slider {...settings}>
             {image.map((image, index) => (
-              <div className={index === slideIndex ? 'slide:active' : 'slide'}>
+              <div key={index} className={index === slideIndex ? 'slide:active' : 'slide'}>
                 <img key={index} src={image.src} alt="" className="px-2 rounded-2xl"/>
               </div>
             ))}
