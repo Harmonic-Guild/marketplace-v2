@@ -35,12 +35,12 @@ button{
 }
 
 .slick-arrow.slick-next{
-     @apply rounded-full bg-yellow-500 w-fit p-3 h-fit -right-10 opacity-0 md:opacity-100
+     @apply rounded-full bg-yellow-500 p-3  -right-10 opacity-0 md:opacity-100
 }
 .slick-arrow.slick-prev {
      width: 20px;
      height: 20px;
-     @apply rounded-full bg-yellow-500 w-fit p-3 h-fit -left-10 opacity-0 md:opacity-100
+     @apply rounded-full bg-yellow-500 p-3  -left-10 opacity-0 md:opacity-100
 }
 .slide{
      transform: scale(.7);
