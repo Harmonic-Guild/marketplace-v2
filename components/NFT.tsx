@@ -4,6 +4,7 @@ import Near from '../icons/near.svg'
 import Right from '../icons/right.svg'
 import Share from '../icons/share.svg'
 import {formatNearAmount} from 'near-api-js/lib/utils/format'
+import Image from 'next/image'
 
 function NFT({token, baseUri}: any) {
     
@@ -45,10 +46,15 @@ function NFT({token, baseUri}: any) {
                                 <source src={metadata.animation_url} ></source>
                             </video>
                         ) : (
-                            <img className="h-64 object-cover mx-auto rounded-md shadow-lg shadow-gray-300 "
-                            // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
-                            src={metadata.media}
-                            alt={'alt'} />
+                            <div className="h-64 object-cover mx-auto rounded-md shadow-lg shadow-gray-300 ">
+                                <Image
+                                // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
+                                height={260}
+                                width={260}
+                                objectFit="cover"
+                                src={metadata.media}
+                                alt={'alt'} />
+                            </div>
                         )}
                         <div className="text-sm py-2 text-mp-dark-3 relative">
                             {list?.offer?.timeout && <div className="timer">timeout :{new Date(list?.offer?.timeout).toLocaleDateString()}
