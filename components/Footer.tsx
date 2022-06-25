@@ -19,7 +19,7 @@ const Footer = () => {
   return (
     <footer className={`w-full px-6 py-10 text-gray-700`}>
             {/* <span className='absolute w-20 left-0 top-full pt-20'><Line_2/></span> */}
-        <div className='absolute bg-red-300 p-2'>
+        <div className='absolute p-2'>
             <button 
             className='flex space-x-8 no-underline bg-yellow-500 px-10 py-3 font-bold rounded-md text-gray-900 text-sm'>
                 <div className='flex gap-2'>Community <FiUsers/></div>
