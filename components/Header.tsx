@@ -7,7 +7,7 @@ import Near from '../icons/near.svg'
 
 const navTitles = [
   { title: 'Home', href:'/'},
-  { title: 'Explore', href:'/explore_2'},
+  { title: 'Explore', href:'/explore'},
   { title: 'Profile', href:'/'},
   { title: 'MyNFTs', href:'/'}
 ]
