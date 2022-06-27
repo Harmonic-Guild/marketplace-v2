@@ -13,12 +13,12 @@ function DropDown() {
                     <div className="justify-around flex w-5/6">
                         <div className='p-2 text-mp-gray-4'>Sort by:</div>
                         <div className="w-1/4">
-                            <div className={`dropdown ${pop? 'bg-mp-gray-2': 'bg-white w-full'}`} onClick={()=> setPop(!pop)}> 
-                                <p className=''>Popularity</p>
+                            <div className={`dropdown ${pop? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setPop(!pop)}> 
+                                <p className='w-full'>Popularity</p>
                                 {pop? (
-                                    <Up className="h-full w-fit py-1 px-2"></Up>
+                                    <Up className="h-5 w-full py-1 px-2"></Up>
                                 ) : (
-                                    <Down className="h-full w-fit py-1 px-2"></Down>
+                                    <Down className="h-5 w-full py-1 px-2"></Down>
                                 )}
                                 
                             </div>
@@ -33,11 +33,11 @@ function DropDown() {
                         </div>
                         <div className="w-1/4">
                             <div className={`dropdown ${type? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setType(!type)}>
-                                <p className=''>Type</p> 
+                                <p className='w-full'>Type</p> 
                                 {type? (
-                                    <Up className="h-full w-fit py-1 px-2"></Up>
+                                    <Up className="h-5 w-full py-1 px-2"></Up>
                                 ) : (
-                                    <Down className="h-full w-fit py-1 px-2"></Down>
+                                    <Down className="h-5 w-full py-1 px-2"></Down>
                                 )}
                                 
                             </div>
@@ -53,11 +53,11 @@ function DropDown() {
                         </div>
                         <div className="w-1/4">
                             <div className={`dropdown ${range? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setRange(!range)}>
-                                <p className=''>Price Range</p>
+                                <p className='w-full'>Price Range</p>
                                 {range? (
-                                    <Up className="h-full w-fit py-1 px-2"></Up>
+                                    <Up className="h-5 w-12 py-1 px-2"></Up>
                                 ) : (
-                                    <Down className="h-full w-fit py-1 px-2"></Down>
+                                    <Down className="h-5 w-12 py-1 px-2"></Down>
                                 )}
                                 
                             </div>

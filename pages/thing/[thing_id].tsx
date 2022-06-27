@@ -1,5 +1,5 @@
-import React, { Component, useState } from "react";
-import { BsCircle, BsHeart, BsStars } from "react-icons/bs";
+import React, {  useState } from "react";
+import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import { FiLayers } from "react-icons/fi";
 import SimilarNft from "../components/SimilarNft";
@@ -10,7 +10,8 @@ const image = [
 ]
 
 
-const thing_id = () =>  {
+const thing_id = ({ id }: {id:string}) =>  {
+    
 
   const [hide, setHide] = useState<boolean>(false)  
   const play = () => {
@@ -132,4 +133,14 @@ const thing_id = () =>  {
     </div>
   )
 }
-export default thing_id
+export default thing_id;
+
+export function getServerSideProps({query}: any){
+
+    return {
+        props: {
+            id: query.thing_id
+        }
+    }
+    
+}

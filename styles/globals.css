@@ -11,7 +11,7 @@ body {
 }
 
 .dropdown{
-     @apply p-2 mx-auto rounded-md border text-mp-dark-1 flex text-sm font-semibold cursor-pointer select-none
+     @apply p-2 mx-auto rounded-md border w-full text-mp-dark-1 flex text-sm font-semibold cursor-pointer select-none
 }
 .dropdown-content{
      @apply border mt-1 p-2 rounded bg-white z-10
@@ -29,24 +29,22 @@ button{
      @apply absolute text-white rounded-md px-2 py-1 -top-3 left-5;
      background: rgba(15, 15, 28, 0.7);
      backdrop-filter: blur(4px);
-     /* Note: backdrop-filter has minimal browser support */
-
 }
 .artist {
      @apply flex py-2 justify-between font-semibold text-mp-gray-5 hover:text-mp-gray-7 cursor-pointer
 }
 .action-btn{
      background: radial-gradient(62.1% 62.79% at 32.81% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%) , linear-gradient(84.42deg, #FFD12F 0%, #FFB038 100%);
-     @apply px-5 pt-3  rounded-full font-semibold
+     @apply px-5 pt-3  rounded-full font-semibold -ml-2
 }
 
 .slick-arrow.slick-next{
-     @apply rounded-full bg-yellow-500  p-3  -right-10 opacity-0 md:opacity-100
+     @apply rounded-full bg-yellow-500 p-3  -right-10 opacity-0 md:opacity-100
 }
 .slick-arrow.slick-prev {
      width: 20px;
      height: 20px;
-     @apply rounded-full bg-yellow-500  p-3  -left-10 opacity-0 md:opacity-100
+     @apply rounded-full bg-yellow-500 p-3  -left-10 opacity-0 md:opacity-100
 }
 .slide{
      transform: scale(.7);

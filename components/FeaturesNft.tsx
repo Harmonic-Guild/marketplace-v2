@@ -87,8 +87,8 @@ const FeaturesNft = () => {
         </div>
         <Slider {...settings}>
             {image.map((image, index) => (
-              <div key={index} className={index === slideIndex ? 'slide:active' : 'slide'}>
-                <img key={index} src={image.src} alt="" className="px-2 rounded-2xl"/>
+              <div className={index === slideIndex ? 'slide:active' : 'slide'} key={index}>
+                <img src={image.src} alt="" className="px-2 rounded-2xl"/>
               </div>
             ))}
         </Slider>
