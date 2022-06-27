@@ -2,6 +2,8 @@ import React, {  useState } from "react";
 import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import { FiLayers } from "react-icons/fi";
+import SimilarNft from "../../components/SimilarNft";
+import Vector_back from '../../icons/Vector_back.svg'
 
 const image = [
     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'}
@@ -11,13 +13,14 @@ const image = [
 const thing_id = ({ id }: {id:string}) =>  {
     
 
-  const [hide, setHide] = useState<boolean>(false)
+  const [hide, setHide] = useState<boolean>(false)  
   const play = () => {
     setHide(!hide)
   }
 
   return (
     <div className={`w-full h-full p-4 bg-white text-gray-700`}>
+        <div className="lg:flex hidden"><Vector_back/></div>
       {image.map((image, index) => (
         <div key={index} className="lg:flex block justify-around pl-0 lg:pl-8">
           <div className="lg:w-1/3 w-5/6 rounded-3xl">
@@ -125,7 +128,8 @@ const thing_id = ({ id }: {id:string}) =>  {
                     </div>
                 </div>
         </div>
-      ))}      
+      ))} 
+      <SimilarNft/>     
     </div>
   )
 }

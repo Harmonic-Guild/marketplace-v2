@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.screenTest{
+     @apply xl:bg-yellow-300 lg:bg-green-300 md:bg-purple-300 sm:bg-red-300 xs:bg-pink-300
+}
+
 body {
      @apply bg-mp-peach-1;
 }
@@ -27,11 +31,11 @@ button{
      backdrop-filter: blur(4px);
 }
 .artist {
-     @apply flex mb-2 py-2 justify-between font-semibold text-mp-gray-4 hover:text-mp-gray-7 cursor-pointer
+     @apply flex py-2 justify-between font-semibold text-mp-gray-5 hover:text-mp-gray-7 cursor-pointer
 }
 .action-btn{
      background: radial-gradient(62.1% 62.79% at 32.81% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%) , linear-gradient(84.42deg, #FFD12F 0%, #FFB038 100%);
-     @apply px-8 pt-2  rounded-full font-semibold
+     @apply px-5 pt-3  rounded-full font-semibold -ml-2
 }
 
 .slick-arrow.slick-next{
