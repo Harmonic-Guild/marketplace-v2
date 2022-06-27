@@ -2,8 +2,8 @@ import React, {  useState } from "react";
 import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import { FiLayers } from "react-icons/fi";
-import SimilarNft from "../components/SimilarNft";
-import Vector_back from '../icons/Vector_back.svg'
+import SimilarNft from "../../components/SimilarNft";
+import Vector_back from '../../icons/Vector_back.svg'
 
 const image = [
     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'}
