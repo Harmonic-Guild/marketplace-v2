@@ -46,7 +46,7 @@ function NFT({token, baseUri}: any) {
                             // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
                             //     <source src={metadata.animation_url} ></source>
                             // </video>
-                            <div className="object-contain mx-auto rounded-lg">
+                            <div className="object-contain mx-auto rounded-lg relative">
                                 <Image
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
@@ -54,6 +54,8 @@ function NFT({token, baseUri}: any) {
                                 objectFit="cover"
                                 src={metadata.media}
                                 alt={'alt'} />
+                                
+                                <div className='absolute w-7 h-7 rounded-lg bg-gray-900 top-1/2 left-1/2 text-white  cursor-pointer'>play</div>
                             </div>
                         ) : (
                             <div className="object-contain mx-auto rounded-lg">
