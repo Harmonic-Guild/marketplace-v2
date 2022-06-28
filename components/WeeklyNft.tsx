@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Slider from "react-slick";
 import Right from '../icons/right.svg';
 import Share from '../icons/share.svg'
@@ -7,18 +7,37 @@ import Near from '../icons/near.svg'
 
 import Vector from '../icons/Vector.svg'
 import { BiArrowFromLeft, BiArrowFromRight } from "react-icons/bi";
+import { gql } from "apollo-boost";
+import { useLazyQuery } from "@apollo/client";
+import Image from 'next/image';
 
-const image = [
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'}
-]
+const FETCH_WEEKLY = gql`
+query MyQuery($storeId: String!) {
+  token(where: {storeId: {_eq: $storeId}, burnedAt: {_is_null: true}}, limit: 5, distinct_on: thingId, order_by: {thingId: asc}) {
+    id
+    thing {
+      id
+      metaId
+      metadata {
+        media
+      }
+    }
+  }
+}
+`
+
+
+// const image = [
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
+//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'}
+// ]
 
 // function SampleNextArrow(props: any) {
 //     const { className, style, onClick } = props;
@@ -44,9 +63,11 @@ const image = [
 //     );
 //   }
 
-export default class WeeklyNft extends Component {
-  render() {
-    var settings = {
+ const  WeeklyNft = () => {
+
+  const [tokens, setTokens] = useState<[]>([])
+
+    const settings = {
       dots: true,
       className: "center",
       infinite: true,
@@ -84,6 +105,38 @@ export default class WeeklyNft extends Component {
         }
       ]
     };
+
+    const [getTokens, { loading: loadingtokensData, data: tokensData }] =
+     useLazyQuery(FETCH_WEEKLY, {
+       variables: {
+         storeId: ''
+       },
+     })
+
+     useEffect(() => {
+      getTokens({
+        variables: {
+          storeId: 'sevendeadstars.mintbase1.near',
+        },
+      })
+    }, []);
+
+    useEffect(() => {
+      // console.log(storeData);
+      
+      if (!tokensData) return
+  
+      if (tokensData?.token.length === 0) return;
+  
+      const weeklyTokens = tokensData.token.map((token: {}) => token)
+
+      setTokens(weeklyTokens);     
+      
+      console.log(tokens);
+      
+      
+    }, [tokensData])
+
     return (
       <div className="w-full h-full pt-10 lg:px-32 px-12 ">
         <div className=" text-center  font-bold text-gray-900 mb-4">
@@ -91,10 +144,10 @@ export default class WeeklyNft extends Component {
             <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
         </div>
         <Slider {...settings}>
-            {image.map((image, index) => (
-                <div key={index} className="p-2 ">
+            {tokens.map((token:any) => (
+                <div key={token.id} className="p-2 ">
                     <div className="rounded-2xl p-2 border border-yellow-600">
-                        <img src={image.src} alt="" className="px-2 rounded-2xl"/>
+                        <img src={token.thing.metadata.media} alt="" className="px-2 rounded-2xl"/>
                         <div className="text-sm py-2 text-mp-dark-3 relative">
                           <div className="timer">16:12:56 hrs</div>
                           <div className="font-semibold my-1 py-1">Buster Character Color</div>
@@ -118,5 +171,6 @@ export default class WeeklyNft extends Component {
       </div>
     );
   }
-}
+
+export default WeeklyNft;
 
