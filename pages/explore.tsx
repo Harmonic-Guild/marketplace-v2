@@ -53,23 +53,20 @@ const FETCH_TOKENS = gql`
     }
   }
 `
-
-
-
 const explore = () => {
 
-    const { wallet } = useWallet()
-    const [store, setStore] = useState<Store | null>(null)
-    const [things, setThings] = useState<any>([])
-    const [tokens, setTokens] = useState<any>([])
+  const { wallet } = useWallet()
+  const [store, setStore] = useState<Store | null>(null)
+  const [things, setThings] = useState<any>([])
+  const [tokens, setTokens] = useState<any>([])
 
-     // fetching
-     const [getStore, { loading: loadingStoreData, data: storeData }] =
-     useLazyQuery(FETCH_STORE, {
-       variables: {
-         storeId: ''
-       },
-     })
+    // fetching
+    const [getStore, { loading: loadingStoreData, data: storeData }] =
+    useLazyQuery(FETCH_STORE, {
+      variables: {
+        storeId: ''
+      },
+    })
  
    const [getTokens, { loading: loadingTokensData, data: tokensData }] =
      useLazyQuery(FETCH_TOKENS, {
@@ -127,7 +124,7 @@ const explore = () => {
     <div className='px-8'>
         <div className='text-center'>
             <p className='text-mp-orange-1'>Lorem <Vector className='inline'></Vector></p>
-            <h2 className='text-mp-dark-2 text-4xl font-bold'>Explore</h2>
+            <h2 className='text-mp-dark-2 text-4xl font-bold py-6'>Explore</h2>
         </div>
         <div>
             <DropDown/>  
