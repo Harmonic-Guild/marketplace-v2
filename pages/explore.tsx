@@ -6,9 +6,9 @@ import { useWallet } from '../services/providers/MintbaseWalletContext';
 import DropDown from '../components/Dropdown-Filters'
 import NFT from '../components/NFT'
 import Vector from '../icons/Vector.svg'
-import Categories from '../category/Categories'
-import Artists from '../category/Artists'
-import Color from '../category/Color'
+import Categories from '../components/category/Categories'
+import Artists from '../components/category/Artists'
+import Color from '../components/category/Color'
 import { Store } from '../interfaces/wallet.interface';
 
 
