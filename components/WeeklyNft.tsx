@@ -13,7 +13,7 @@ import Image from 'next/image';
 
 const FETCH_WEEKLY = gql`
 query MyQuery($storeId: String!) {
-  token(where: {storeId: {_eq: $storeId}, burnedAt: {_is_null: true}}, limit: 5, distinct_on: thingId, order_by: {thingId: asc}) {
+  token(where: {storeId: {_eq: $storeId}, burnedAt: {_is_null: true}}, limit: 5, distinct_on: thingId, order_by: {thingId: desc}) {
     id
     thing {
       id
@@ -26,18 +26,6 @@ query MyQuery($storeId: String!) {
 }
 `
 
-
-// const image = [
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'},
-//     {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg', title: 'Buster character color'}
-// ]
 
 // function SampleNextArrow(props: any) {
 //     const { className, style, onClick } = props;
@@ -147,11 +135,18 @@ query MyQuery($storeId: String!) {
             {tokens.map((token:any) => (
                 <div key={token.id} className="p-2 ">
                     <div className="rounded-2xl p-2 border border-yellow-600">
-                        <img src={token.thing.metadata.media} alt="" className="px-2 rounded-2xl"/>
+                      <div className="h-64 w-fit rounded-lg shadow-xl relative overflow-hidden">
+                        <Image
+                          src={token.thing.metadata.media} 
+                          alt=""
+                          objectFit="cover"
+                          layout="fill"
+                        />
+                      </div>
                         <div className="text-sm py-2 text-mp-dark-3 relative">
                           <div className="timer">16:12:56 hrs</div>
-                          <div className="font-semibold my-1 py-1">Buster Character Color</div>
-                          <div className="flex my-1 py-1 justify-between">
+                          <div className="font-semibold my-3 py-1">Buster Character Color</div>
+                          <div className="flex my-0 py-1 justify-between">
                               <p className='flex'>Last Bid: 0.25 <span className='mt-[.15rem] ml-1'><Near></Near></span></p>
                               <div className="flex relative">
                                   <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
@@ -159,7 +154,7 @@ query MyQuery($storeId: String!) {
                                   <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                               </div>
                           </div>
-                          <div className="flex mt-4 pt-1 justify-between px-2">
+                          <div className="flex mt-2 pt-1 justify-between px-2">
                               <button className='flex action-btn'>Bid <span className='border-l border-black pl-2 ml-2'><Right></Right></span></button>
                               <button><Share></Share></button>
                           </div>
