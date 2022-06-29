@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import dynamic from 'next/dynamic';
 
-const FeaturesNft = dynamic(()=> import('../components/FeaturesNft'))
+const FeaturedNft = dynamic(()=> import('../components/FeaturedNft'))
 const WeeklyNft = dynamic(()=> import('../components/WeeklyNft'))
 
 const Home: NextPage = () => {
@@ -12,7 +12,7 @@ const Home: NextPage = () => {
         <title>MarketPlace Version_2</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <FeaturesNft/>
+      <FeaturedNft/>
       <WeeklyNft/>
     </div>
   )
