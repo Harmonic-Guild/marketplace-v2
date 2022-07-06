@@ -56,7 +56,7 @@ function NFT({token, baseUri}: any) {
                                 className='rounded-lg'
                                 src={metadata.media}
                                 alt={'alt'} />
-                                <div className='absolute z-10 text-red-300'><FiPlayCircle className='w-12 h-12'/></div>
+                                <div className='absolute z-10'><FiPlayCircle className='w-12 h-12'/></div>
                             </div>
                         ) : (
                             <div className="object-contain mx-auto">
