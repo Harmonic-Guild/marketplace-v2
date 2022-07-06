@@ -161,7 +161,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) =>  {
                   <FiLayers className="w-4 h-4 absolute -mt-6 ml-2"/>
                 </span>
               </div>
-              <span className="w-full border-b border-yellow-600 py-2 font-medium text-xl mt-3 bg-blue-300">Perks</span>
+              <span className="w-full border-b border-yellow-600 py-2 font-medium text-xl mt-3">Perks</span>
               {/* <span className="border-b border-yellow-600 py-2 px-44"></span> */}
               <div className=" mt-6 px-4">
                 <span className="text-sm ">
