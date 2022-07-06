@@ -92,11 +92,16 @@ export default class SimilarNft extends Component {
                     <div className="rounded-2xl p-2 border border-yellow-600">
                         <img src={image.src} alt="" className="px-2 rounded-2xl"/>
                         <div className="text-sm py-2 text-mp-dark-3 relative">
-                          <div className="timer">16:12:56 hrs</div>
+                        <div className="flex sm:hidden absolute text-white rounded-md px-2 py-1 -top-4 left-16">
+                            <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
+                            <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
+                            <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
+                          </div>
+                          <div className="timer sm:flex hidden">16:12:56 hrs</div>
                           <div className="font-semibold my-1 py-1">Buster Character Color</div>
                           <div className="flex my-1 py-1 justify-between">
                               <p className='flex'>Last Bid: 0.25 <span className='mt-[.15rem] ml-1'><Near></Near></span></p>
-                              <div className="flex relative">
+                              <div className="md:flex hidden relative">
                                   <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
                                   <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                   <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
