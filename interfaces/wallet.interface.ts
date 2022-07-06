@@ -13,4 +13,5 @@ export interface Thing {
     id: string
     metaId: string
     memo: string
+    metadata: any
 }
