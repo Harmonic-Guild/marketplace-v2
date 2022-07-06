@@ -6,6 +6,7 @@ import Share from '../icons/share.svg'
 import {formatNearAmount} from 'near-api-js/lib/utils/format'
 import Image from 'next/image'
 import { AiOutlineRight } from 'react-icons/ai'
+import { FiPlayCircle } from 'react-icons/fi'
 
 function NFT({token, baseUri}: any) {
     
@@ -34,34 +35,37 @@ function NFT({token, baseUri}: any) {
       
     }, [])
   
-    if (!metadata) return null
+    if (!metadata) return null    
     
     
     return ( 
         <Link href={`/thing/${thing.id}`} passHref>
             <div className="lg:w-full md:w-5/6  border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
                 <div className="p-3">
-                    
+
                         {metadata.animation_hash ? (
                             // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
                             //     <source src={metadata.animation_url} ></source>
                             // </video>
-                            <div className="object-contain mx-auto rounded-lg">
+                            <div className="object-contain mx-auto">
                                 <Image
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
                                 width={500}
                                 objectFit="cover"
+                                className='rounded-lg'
                                 src={metadata.media}
                                 alt={'alt'} />
+                                <div className='absolute z-10 text-red-300'><FiPlayCircle className='w-12 h-12'/></div>
                             </div>
                         ) : (
-                            <div className="object-contain mx-auto rounded-lg">
+                            <div className="object-contain mx-auto">
                                 <Image
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
                                 width={500}
                                 objectFit="cover"
+                                className='rounded-lg'
                                 src={metadata.media}
                                 alt={'alt'} />
                             </div>
@@ -110,7 +114,7 @@ function NFT({token, baseUri}: any) {
                 </div>
             </div>
         </Link>
-     );
+    );
 }
 
 export default NFT;
