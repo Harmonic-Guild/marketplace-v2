@@ -130,7 +130,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) =>  {
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2"/>
           </div>
         </div>
-        <div className="w-full lg:w-1/2 bg-red-300">
+        <div className="w-full lg:w-1/2">
           <div className="w-full container">
             <span className="lg:text-4xl text-xl font-medium ">{things?.metadata.title}</span>
           </div>
@@ -140,7 +140,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) =>  {
           </div>
           {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
           <div className="">
-            <div className="bg-blue-300 w-2/3">
+            <div className="w-2/3">
               <span className="text">Discription</span>
               {/* <span className="border-b border-yellow-600 py-2 pb-2 z-10 px-40 lg:-ml-24 -ml-20"></span> */}
               <p className={hide ? 'pt-2 h-24 overflow-y-scroll ' : 'pt-2 h-16 overflow-y-scroll truncate'}>
