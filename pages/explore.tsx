@@ -80,7 +80,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: 'sevendeadstars.mintbase1.near',
+         storeId: 'muti.mintbase1.near',
        },
      })
    }, [])
@@ -119,6 +119,9 @@ const explore = () => {
      // console.log(tokensData, '-=-=-=-=-=++_+_+');
      
    }, [tokensData])
+
+  //  console.log(tokensData , '********');
+   
 
   return (
     <div className='px-8'>
