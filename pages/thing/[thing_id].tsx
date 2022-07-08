@@ -95,21 +95,22 @@ const thing_id = ({ thing_id }: { thing_id: string }) =>  {
     <div className={`min-h-screen p-4 bg-white text-gray-700`}>
       <div className="lg:flex hidden"><Vector_back/></div>
       <div className="lg:flex block justify-evenly w-4/5 lg:w-full mx-auto">
-        <div className="">
+        <div className="pl-0 xl:pl-12 mx-auto w-full xl:w-4/5">
           {things?.metadata.animation_hash ? (
               <video controls className='' poster={things?.metadata.media} controlsList="nodownload" muted>
                   <source src={things?.metadata.animation_url} ></source>
               </video>
             ) : (
-              <div className="w-full lg:w-4/5">
+              <div className=" w-full xl:w-4/5">
                 { things?.metadata.media &&
                   <div className="">
                     <Image
                     src={things?.metadata.media}
                     objectFit="cover"
                     className="rounded-lg shadow-xl"
-                    width={800}
-                    height={800}
+                    width={700}
+                    height={700}
+                    // layout="fill"
                     alt={'alt'} />
                   </div>
                 }
