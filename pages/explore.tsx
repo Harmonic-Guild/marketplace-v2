@@ -10,6 +10,8 @@ import Categories from '../components/category/Categories'
 import Artists from '../components/category/Artists'
 import Color from '../components/category/Color'
 import { Store } from '../interfaces/wallet.interface';
+import QueryFilters from '../helpers/getQuery';
+
 
 
 const FETCH_STORE = gql`
@@ -28,7 +30,12 @@ const FETCH_TOKENS = gql`
   query FetchTokensByStoreId($storeId: String!, $limit: Int, $offset: Int) {
     token(
       order_by: { thingId: asc }
-      where: { storeId: { _eq: $storeId }, burnedAt: { _is_null: true } }
+      where: {
+         storeId: { _eq: $storeId },
+          burnedAt: { _is_null: true },
+          list: {},
+          thing: {}
+        }
       limit: $limit
       offset: $offset
       distinct_on: thingId
@@ -49,6 +56,12 @@ const FETCH_TOKENS = gql`
       thing {
         id
         metaId
+        metadata{
+          media
+          media_type
+          animation_url
+          animation_type
+        }
       }
     }
   }
@@ -62,6 +75,7 @@ const explore = () => {
     const [store, setStore] = useState<Store | null>(null)
     const [things, setThings] = useState<any>([])
     const [tokens, setTokens] = useState<any>([])
+    const [filterParams, setFilterParams] = useState<any>(null)
 
      // fetching
      const [getStore, { loading: loadingStoreData, data: storeData }] =
@@ -105,7 +119,7 @@ const explore = () => {
          offset: 0,
        },
      })
-   }, [storeData])
+   }, [storeData, filterParams])
  
    useEffect(() => {
      if (!store || !tokensData) return
@@ -123,14 +137,21 @@ const explore = () => {
      
    }, [tokensData])
 
+   const setFilters = (filters: any) => {
+    // console.log(filters, '=--=-=-=-=-=-=-=-=-=+_+_+_+_+_');
+
+    const res = QueryFilters(filters);
+    setFilterParams(res);
+   }
+
   return (
     <div className='px-8'>
         <div className='text-center'>
-            <p className='text-mp-orange-1'>Lorem <Vector className='inline'></Vector></p>
+            <p className='text-mp-orange-1'>NFTs <Vector className='inline'></Vector></p>
             <h2 className='text-mp-dark-2 text-4xl font-bold'>Explore</h2>
         </div>
         <div>
-            <DropDown/>  
+            <DropDown setFilters={setFilters}/>  
         </div>    
         <div className='lg:flex block justify-around'>
             <div className=' order-last pt-4'>
