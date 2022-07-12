@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { Component } from "react";
 import Slider from "react-slick";
 
@@ -19,9 +20,9 @@ export default class NavBreadCrumb extends Component {
       <div className="block lg:hidden">
         <Slider {...settings}>
             <div className="py-2 text-center">
-                <span className="bg-yellow-100 border border-yellow-600 rounded-full px-3 py-2">featured nft</span>
-                <span className="bg-yellow-100 border border-yellow-600 rounded-full px-3 py-2">nfts of the week</span>
-                <span className="bg-yellow-100 border border-yellow-600 rounded-full px-3 py-2">jump to</span>
+                <Link href='/' passHref><span className="bg-yellow-100 border border-yellow-600 rounded-full px-3 py-2">featured nft</span></Link>
+                <Link href='/' passHref><span className="bg-yellow-100 border border-yellow-600 rounded-full px-3 py-2">nfts of the week</span></Link>
+                <Link href='/' passHref><span className="bg-yellow-100 border border-yellow-600 rounded-full px-3 py-2">jump to</span></Link>
             </div>
         </Slider>
       </div>
