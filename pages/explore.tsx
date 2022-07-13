@@ -27,13 +27,16 @@ const FETCH_STORE = gql`
 `
 
 const FETCH_TOKENS = gql`
-  query FetchTokensByStoreId($storeId: String!, $limit: Int, $offset: Int) {
+  query FetchTokensByStoreId($storeId: String!, $lt: numeric, $gt: numeric, $limit: Int, $offset: Int) {
     token(
       order_by: { thingId: asc }
       where: {
          storeId: { _eq: $storeId },
           burnedAt: { _is_null: true },
-          list: {},
+          list: {_or: {
+            # offer: {price: {_gte: $gt, _lte: $lt}},
+             price: {_gte: $gt, _lte: $lt},
+          }},
           thing: {}
         }
       limit: $limit
@@ -89,8 +92,10 @@ const explore = () => {
      useLazyQuery(FETCH_TOKENS, {
        variables: {
          storeId: '',
-         limit: 10,
+         limit: 15,
          offset: 0,
+         lt: 0,
+         gt: 0
        },
      })
  
@@ -101,6 +106,7 @@ const explore = () => {
        },
      })
    }, [])
+   
  
    useEffect(() => {
      // console.log(storeData);
@@ -115,10 +121,15 @@ const explore = () => {
      getTokens({
        variables: {
          storeId: storeData.store[0].id,
-         limit: 10,
+         limit: 15,
          offset: 0,
+         lt: filterParams.prices.lt.toString(),
+         gt: filterParams.prices.gt.toString()
        },
      })
+    //  console.log(filterParams.prices);
+     
+     
    }, [storeData, filterParams])
  
    useEffect(() => {
@@ -138,10 +149,11 @@ const explore = () => {
    }, [tokensData])
 
    const setFilters = (filters: any) => {
-    // console.log(filters, '=--=-=-=-=-=-=-=-=-=+_+_+_+_+_');
 
+    const {order} = filters;
+    
     const res = QueryFilters(filters);
-    setFilterParams(res);
+    setFilterParams({...res, order});
    }
 
   return (
