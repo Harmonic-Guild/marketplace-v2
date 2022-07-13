@@ -4,7 +4,6 @@ import { TbExternalLink } from 'react-icons/tb';
 import { FiLayers } from "react-icons/fi";
 import SimilarNft from "../../components/SimilarNft";
 import Vector_back from '../../icons/Vector_back.svg'
-import Near from '../../icons/near.svg'
 import { gql } from "apollo-boost";
 import { Thing } from "../../interfaces/wallet.interface";
 import { useLazyQuery } from "@apollo/client";
@@ -13,7 +12,8 @@ import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import { AiOutlineExpandAlt } from "react-icons/ai";
 import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format";
-
+import MakeOffer from "../../Modal/MakeOffer";
+import PurchaseNft from "../../Modal/PurchaseNft";
 
 const FETCH_TOKENS = gql`
 query MyQuery ($thing_id: String!) {
@@ -52,15 +52,12 @@ query MyQuery ($thing_id: String!) {
 
 const thing_id = ({ thing_id }: { thing_id: string }) => {
 
-  const [things, setThing] = useState<Thing | null>(null)
+  const [things, setThing] = useState<any>(null)
   const [tokens, setTokens] = useState<any>([])
+  const [bid, setBid] = useState('0')
   const [allTokens, setAllTokens] = useState<any>([])
   const { wallet, isConnected } = useWallet();
   const [hide, setHide] = useState(false)
-
-  const tokensList = things?.tokens[0]?.lists[0]
-  const price = (Number(tokensList?.price).toLocaleString('fullwide', { useGrouping: false }))
-  console.log(things?.id);
 
   const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] =
     useLazyQuery(FETCH_TOKENS, {
@@ -69,6 +66,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
       },
     })
   useEffect(() => {
+
 
     getTokens({
       variables: {
@@ -97,13 +95,28 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   }
 
   const buy = () => {
-    if (tokensList?.autotransfer) {
-      wallet?.makeOffer(things?.id, price, { marketAddress: process.env.marketAddress })
+    if (things?.tokens[0]?.lists[0]?.autotransfer) {
+      wallet?.makeOffer(things?.id, tokenPrice, { marketAddress: process.env.marketAddress })
     }
     else {
-      wallet?.makeOffer(things?.id, parseNearAmount(bid), { marketAddress: process.env.marketAddress })
+      wallet?.makeOffer(things?.id, parseNearAmount(bid)!.toString(), { marketAddress: process.env.marketAddress })
   }
   }
+  const tokenPriceNumber = Number(things?.tokens[0]?.lists[0]?.price)
+  const price = things?.tokens[0]?.lists[0] &&  formatNearAmount((tokenPriceNumber).toLocaleString('fullwide', { useGrouping: false }), 2)
+  const tokenPrice = (tokenPriceNumber).toLocaleString('fullwide', { useGrouping: false })
+  // console.log(price, '@@@@@@@@@@@@@@@@@@@@@');
+  var currentBid;
+  if (things?.tokens[0]?.lists[0]?.offer == null) {
+    currentBid = '0'
+  }
+  else {
+    currentBid = formatNearAmount((Number(things?.tokens[0]?.lists[0]?.offer?.price)).toLocaleString('fullwide', { useGrouping: false }), 5)
+  }
+  // console.log(currentBid, '----------------');
+  // console.log(things?.tokens[0]?.lists[0]?.offer?.price, '##################');
+  
+  
 
   return (
     <div className={`min-h-screen p-4 bg-white text-gray-700`}>
@@ -193,27 +206,21 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
               </div>
             </div>
           </div>
-          <div className={`lg:flex block justify-between border border-yellow-600 bg-yellow-100 rounded-lg lg:w-2/3 w-full p-6 mt-4`}>
-            <div className="flex justify-between lg:block">
-              <div className="flex">
-                <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                <span className="pl-2">@Latest bidder</span>
-              </div>
-              <span className=" font-medium flex">
-                <span>Latest bid: </span>
-                <span className="pl-3 pr-1">{(Number(tokensList?.price).toLocaleString('fullwide', { useGrouping: false }), 5)}</span>
-                <span className='pt-1  ml-1'><Near /></span>
-              </span>
+          <div>
+            {things?.tokens[0]?.lists[0]?.autotransfer && 
+              <PurchaseNft buy ={buy} price={price}/>
+            }
+            {/* {bid} */}
+            {/* <DisabledMakeOffer buy ={buy} price={price}/>  */}
+            {!things?.tokens[0]?.lists[0]?.autotransfer && 
+            <div>
+              <MakeOffer buy ={buy} price={price} NewBid={data => setBid(data)}/>
             </div>
-            <span className="border-b border-yellow-600 lg:hidden flex py-2 px-32"></span>
-            <div className="mt-8 lg:mt-0">
-              <button onClick={buy}  className="bg-yellow-400 py-2 rounded-md  font-medium text-gray-900 w-full lg:px-3 px-16">{(tokensList?.offer) ? 'Make an offer' : 'Buy'}</button>
-              <span className="text-center lg:flex block pt-4">
-                <p className=" font-medium">Owned by: </p>
-                <img className="inline-block h-4 w-4 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                <span>@owner</span>
-              </span>
-            </div>
+            }
+            {/* <PlaceBid/> */}
+            {/* <BidSucess/> */}
+            {/* <MintingNft/> */}
+            {/* <MintNft/> */}
           </div>
           <div className="hidden lg:flex justify-around mt-5 w-3/5 ml-20">
             <div>
