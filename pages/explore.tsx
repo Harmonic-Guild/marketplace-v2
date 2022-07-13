@@ -80,7 +80,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: 'muti.mintbase1.near',
+         storeId: 'naruto.mintspace2.testnet',
        },
      })
    }, [])
