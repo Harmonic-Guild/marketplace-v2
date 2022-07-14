@@ -179,7 +179,7 @@ const explore = () => {
                     </span>
                 </div>
             </div>
-            <div className='grid lg:grid-cols-3 grid-cols-2 lg:w-3/4 w-full pt-4 gap-y-5 gap-x-3'>
+            <div className='grid md:grid-cols-3 grid-cols-1 lg:w-3/4 w-full pt-4 gap-y-5 lg:gap-x-3 mgap-x-0'>
                 {tokens.map((token: any)=> {
                     return (
                           
