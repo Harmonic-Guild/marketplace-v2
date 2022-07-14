@@ -97,7 +97,7 @@ const Header = () => {
               }
               >
                 {isConnected ? 'Disconnect' : 'Connect'}
-                <span className='ml-2 mt-1'><Near></Near></span>
+                <span className='ml-2 mt-1.5'><Near></Near></span>
             </button>
           </div>         
         </div>
