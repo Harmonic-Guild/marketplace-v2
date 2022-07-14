@@ -1,5 +1,5 @@
 import React from 'react'
-import Cross from '../icons/cross.svg'
+import Cross from '../../icons/cross.svg'
 
 const Categories = () => {
   return (

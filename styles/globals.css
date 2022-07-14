@@ -17,14 +17,14 @@
  }
 
 body {
-     @apply bg-mp-peach-1;
+     @apply bg-mp-peach-1 outline-none
 }
 
 .dropdown{
      @apply p-2 mx-auto rounded-md border w-full text-mp-dark-1 flex text-sm font-semibold cursor-pointer select-none
 }
 .dropdown-content{
-     @apply border mt-1 p-2 rounded bg-white z-10
+     @apply border mt-1 p-2 rounded bg-white z-10 absolute w-40
 }
 .dropdown-item {
      @apply font-light my-2 px-2 hover:bg-mp-gray-2 cursor-pointer select-none

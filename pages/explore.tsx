@@ -6,10 +6,12 @@ import { useWallet } from '../services/providers/MintbaseWalletContext';
 import DropDown from '../components/Dropdown-Filters'
 import NFT from '../components/NFT'
 import Vector from '../icons/Vector.svg'
-import Categories from '../category/Categories'
-import Artists from '../category/Artists'
-import Color from '../category/Color'
+import Categories from '../components/category/Categories'
+import Artists from '../components/category/Artists'
+import Color from '../components/category/Color'
 import { Store } from '../interfaces/wallet.interface';
+import QueryFilters from '../helpers/getQuery';
+
 
 
 const FETCH_STORE = gql`
@@ -25,10 +27,18 @@ const FETCH_STORE = gql`
 `
 
 const FETCH_TOKENS = gql`
-  query FetchTokensByStoreId($storeId: String!, $limit: Int, $offset: Int) {
+  query FetchTokensByStoreId($storeId: String!, $lt: numeric, $gt: numeric, $limit: Int, $offset: Int) {
     token(
       order_by: { thingId: asc }
-      where: { storeId: { _eq: $storeId }, burnedAt: { _is_null: true } }
+      where: {
+         storeId: { _eq: $storeId },
+          burnedAt: { _is_null: true },
+          list: {_or: {
+            # offer: {price: {_gte: $gt, _lte: $lt}},
+             price: {_gte: $gt, _lte: $lt},
+          }},
+          thing: {}
+        }
       limit: $limit
       offset: $offset
       distinct_on: thingId
@@ -49,16 +59,30 @@ const FETCH_TOKENS = gql`
       thing {
         id
         metaId
+        metadata{
+          media
+          media_type
+          animation_url
+          animation_type
+        }
       }
     }
   }
 `
 const explore = () => {
 
+<<<<<<< HEAD
   const { wallet } = useWallet()
   const [store, setStore] = useState<Store | null>(null)
   const [things, setThings] = useState<any>([])
   const [tokens, setTokens] = useState<any>([])
+=======
+    const { wallet } = useWallet()
+    const [store, setStore] = useState<Store | null>(null)
+    const [things, setThings] = useState<any>([])
+    const [tokens, setTokens] = useState<any>([])
+    const [filterParams, setFilterParams] = useState<any>(null)
+>>>>>>> 4096af738ce360f9c7f276fbc81c1d18da0de0e4
 
     // fetching
     const [getStore, { loading: loadingStoreData, data: storeData }] =
@@ -72,8 +96,10 @@ const explore = () => {
      useLazyQuery(FETCH_TOKENS, {
        variables: {
          storeId: '',
-         limit: 10,
+         limit: 15,
          offset: 0,
+         lt: 0,
+         gt: 0
        },
      })
  
@@ -84,6 +110,7 @@ const explore = () => {
        },
      })
    }, [])
+   
  
    useEffect(() => {
      // console.log(storeData);
@@ -98,11 +125,16 @@ const explore = () => {
      getTokens({
        variables: {
          storeId: storeData.store[0].id,
-         limit: 10,
+         limit: 15,
          offset: 0,
+         lt: filterParams.prices.lt.toString(),
+         gt: filterParams.prices.gt.toString()
        },
      })
-   }, [storeData])
+    //  console.log(filterParams.prices);
+     
+     
+   }, [storeData, filterParams])
  
    useEffect(() => {
      if (!store || !tokensData) return
@@ -120,17 +152,32 @@ const explore = () => {
      
    }, [tokensData])
 
+<<<<<<< HEAD
   //  console.log(tokensData , '********');
    
+=======
+   const setFilters = (filters: any) => {
+
+    const {order} = filters;
+    
+    const res = QueryFilters(filters);
+    setFilterParams({...res, order});
+   }
+>>>>>>> 4096af738ce360f9c7f276fbc81c1d18da0de0e4
 
   return (
     <div className='px-8'>
         <div className='text-center'>
+<<<<<<< HEAD
             <p className='text-mp-orange-1'>Lorem <Vector className='inline'></Vector></p>
             <h2 className='text-mp-dark-2 text-4xl font-bold py-6'>Explore</h2>
+=======
+            <p className='text-mp-orange-1'>NFTs <Vector className='inline'></Vector></p>
+            <h2 className='text-mp-dark-2 text-4xl font-bold'>Explore</h2>
+>>>>>>> 4096af738ce360f9c7f276fbc81c1d18da0de0e4
         </div>
         <div>
-            <DropDown/>  
+            <DropDown setFilters={setFilters}/>  
         </div>    
         <div className='lg:flex block justify-around'>
             <div className=' order-last pt-4'>

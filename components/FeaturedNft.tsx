@@ -1,38 +1,32 @@
-import React, { Component, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Vector from '../icons/Vector.svg';
 import Vector_right from '../icons/Vector_right.svg';
 import Vector_left from '../icons/Vector_left.svg';
 
-const image = [
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'},
-    {src: 'https://arweave.net/Yjn-nuWnEv8IgiFsw1LPKq1xjfa86yC2WVheWGPpixg'}
-]
+import { gql } from "apollo-boost";
+import { useLazyQuery } from "@apollo/client";
+import Image from "next/image";
 
-// function SampleNextArrow({onClick}) {
-//   return (
-//     <div className="arrow arrow-right" onClick={onClick}>
-//       <Vector_right/>
-//     </div>
-//   );
-// }
+const FETCH_WEEKLY = gql`
+query MyQuery($storeId: String!) {
+  token(where: {storeId: {_eq: $storeId}, burnedAt: {_is_null: true}}, limit: 5, distinct_on: thingId, order_by: {thingId: asc}) {
+    id
+    thing {
+      id
+      metaId
+      metadata {
+        media
+      }
+    }
+  }
+}
+`
 
-// function SamplePrevArrow({onClick}) {
-//   return (
-//     <div className="arrow arrow-left" onClick={onClick}>
-//       <Vector_left/>
-//     </div>
-//   );
-// }
+
 const FeaturesNft = () => {
 
+  const [tokens, setTokens] = useState<[]>([])
   const [slideIndex, setSlideIndex] = useState(0)
 
   // render() {
@@ -78,6 +72,37 @@ const FeaturesNft = () => {
         }
       ]
     };
+
+    const [getTokens, { loading: loadingtokensData, data: tokensData }] =
+     useLazyQuery(FETCH_WEEKLY, {
+       variables: {
+         storeId: ''
+       },
+     })
+
+     useEffect(() => {
+      getTokens({
+        variables: {
+          storeId: 'sevendeadstars.mintbase1.near',
+        },
+      })
+    }, []);
+
+    useEffect(() => {
+      // console.log(storeData);
+      
+      if (!tokensData) return
+  
+      if (tokensData?.token.length === 0) return;
+  
+      const weeklyTokens = tokensData.token.map((token: {}) => token)
+
+      setTokens(weeklyTokens);     
+      
+      console.log(tokens);
+      
+      
+    }, [tokensData])
     return (
       <div className="w-full h-fit pt-10 lg:px-32 px-12 ">
         <div className=" text-center  font-bold text-gray-900 mb-6">
@@ -86,9 +111,16 @@ const FeaturesNft = () => {
           <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
         </div>
         <Slider {...settings}>
-            {image.map((image, index) => (
+            {tokens.map((token:any, index) => (
               <div className={index === slideIndex ? 'slide:active' : 'slide'} key={index}>
-                <img src={image.src} alt="" className="px-2 rounded-2xl"/>
+                <div className="h-96 w-fit rounded-xl shadow-lg relative overflow-hidden">
+                        <Image
+                          src={token.thing.metadata.media} 
+                          alt=""
+                          objectFit="cover"
+                          layout="fill"
+                        />
+                      </div>
               </div>
             ))}
         </Slider>
