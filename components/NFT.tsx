@@ -40,7 +40,7 @@ function NFT({token, baseUri}: any) {
     
     return ( 
         <Link href={`/thing/${thing.id}`} passHref>
-            <div className="lg:w-full md:w-5/6  border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
+            <div className="lg:w-full md:w-5/6 nft_height border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
                 <div className="p-3">
 
                         {metadata.animation_hash ? (
