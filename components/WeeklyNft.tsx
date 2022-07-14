@@ -104,7 +104,7 @@ query MyQuery($storeId: String!) {
      useEffect(() => {
       getTokens({
         variables: {
-          storeId: 'sevendeadstars.mintbase1.near',
+          storeId: process.env.NEXT_PUBLIC_STOREID!,
         },
       })
     }, []);
