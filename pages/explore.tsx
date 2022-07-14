@@ -71,18 +71,11 @@ const FETCH_TOKENS = gql`
 `
 const explore = () => {
 
-<<<<<<< HEAD
-  const { wallet } = useWallet()
-  const [store, setStore] = useState<Store | null>(null)
-  const [things, setThings] = useState<any>([])
-  const [tokens, setTokens] = useState<any>([])
-=======
     const { wallet } = useWallet()
     const [store, setStore] = useState<Store | null>(null)
     const [things, setThings] = useState<any>([])
     const [tokens, setTokens] = useState<any>([])
     const [filterParams, setFilterParams] = useState<any>(null)
->>>>>>> 4096af738ce360f9c7f276fbc81c1d18da0de0e4
 
     // fetching
     const [getStore, { loading: loadingStoreData, data: storeData }] =
@@ -152,10 +145,6 @@ const explore = () => {
      
    }, [tokensData])
 
-<<<<<<< HEAD
-  //  console.log(tokensData , '********');
-   
-=======
    const setFilters = (filters: any) => {
 
     const {order} = filters;
@@ -163,18 +152,12 @@ const explore = () => {
     const res = QueryFilters(filters);
     setFilterParams({...res, order});
    }
->>>>>>> 4096af738ce360f9c7f276fbc81c1d18da0de0e4
 
   return (
     <div className='px-8'>
         <div className='text-center'>
-<<<<<<< HEAD
-            <p className='text-mp-orange-1'>Lorem <Vector className='inline'></Vector></p>
-            <h2 className='text-mp-dark-2 text-4xl font-bold py-6'>Explore</h2>
-=======
             <p className='text-mp-orange-1'>NFTs <Vector className='inline'></Vector></p>
             <h2 className='text-mp-dark-2 text-4xl font-bold'>Explore</h2>
->>>>>>> 4096af738ce360f9c7f276fbc81c1d18da0de0e4
         </div>
         <div>
             <DropDown setFilters={setFilters}/>  

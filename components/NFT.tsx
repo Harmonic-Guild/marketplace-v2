@@ -47,11 +47,7 @@ function NFT({token, baseUri}: any) {
                             // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
                             //     <source src={metadata.animation_url} ></source>
                             // </video>
-<<<<<<< HEAD
-                            <div className="object-contain mx-auto">
-=======
                             <div className="object-contain mx-auto rounded-lg relative">
->>>>>>> 4096af738ce360f9c7f276fbc81c1d18da0de0e4
                                 <Image
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
@@ -60,12 +56,8 @@ function NFT({token, baseUri}: any) {
                                 className='rounded-lg'
                                 src={metadata.media}
                                 alt={'alt'} />
-<<<<<<< HEAD
-                                <div className='absolute z-10'><FiPlayCircle className='w-12 h-12'/></div>
-=======
                                 
                                 <div className='absolute w-7 h-7 rounded-lg bg-gray-900 top-1/2 left-1/2 text-white  cursor-pointer'>play</div>
->>>>>>> 4096af738ce360f9c7f276fbc81c1d18da0de0e4
                             </div>
                         ) : (
                             <div className="object-contain mx-auto">
