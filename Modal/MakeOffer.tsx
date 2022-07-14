@@ -9,6 +9,7 @@ const MakeOffer = (props: any,{buy, price}: {buy: any, price: any}) => {
   const { wallet, isConnected } = useWallet();
   const [showModal, setShowModal] = useState(false)
   const [bid, setBid] = useState('0')
+  const [showNotConnectedModal, setShowNotConnectedModal] = useState(false)
 
   const handleChange = (e: any) => {
     setBid(e.target.value)
@@ -54,7 +55,7 @@ const MakeOffer = (props: any,{buy, price}: {buy: any, price: any}) => {
             </div>
 
             <div className="">
-                <button onClick={(buy) => props.NewBid(bid)} className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800">Place bid</button>                    
+                <button onClick={() => props.NewBid(bid)} className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800">Place bid</button>                    
             </div>
             
         </div>
