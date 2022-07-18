@@ -45,27 +45,27 @@ const handlePriceRange = (range: string) => {
 }
 
 const handleTypeFilter = (type:string)=> {
-    let typeFilter = {};
+    let typeFilter: string[] = [];
 
     switch (type) {
         case 'video':
-            typeFilter = { thing:{ metadata: { animation_type: { _eq: "video/mp4" }}}}
+            typeFilter = ["video/mp4", "video/ogg"]
 
             break;
         case 'audio': 
-            typeFilter = { thing:{ metadata: { animation_type: { _eq: "audio/mpeg" }}}}
+            typeFilter = ["audio/mpeg", "audio/mp3", "audio/ogg"]
         
             break;
         case 'image': 
-            typeFilter = { thing:{ metadata: { animation_type: {_nin: ["video/mp4", "audio/mpeg", "image/gif"]}}}}
+            typeFilter = ["image/jpeg", "image/png", ]
 
             break;
         case 'gif': 
-            typeFilter= { thing:{ metadata: { animation_type: { _eq: "image/gif" }}}}
+            typeFilter= ["image/gif"]
 
             break;
         default: 
-            typeFilter= {};
+            typeFilter= ["video/mp4", "video/ogg", "audio/mpeg", "audio/mp3", "audio/ogg", "image/gif", "image/jpeg", "image/png", "image/gif"];
     }
 
     return typeFilter;  
