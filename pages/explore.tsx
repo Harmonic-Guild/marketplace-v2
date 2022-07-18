@@ -27,17 +27,22 @@ const FETCH_STORE = gql`
 `
 
 const FETCH_TOKENS = gql`
-  query FetchTokensByStoreId($storeId: String!, $lt: numeric, $gt: numeric, $limit: Int, $offset: Int) {
+  query FetchTokensByStoreId($storeId: String!, $lt: numeric, $type:[String!], $gt: numeric, $limit: Int, $offset: Int) {
     token(
       order_by: { thingId: asc }
       where: {
          storeId: { _eq: $storeId },
           burnedAt: { _is_null: true },
           list: {_or: {
-            # offer: {price: {_gte: $gt, _lte: $lt}},
              price: {_gte: $gt, _lte: $lt},
           }},
-          thing: {}
+          thing: {
+            metadata: {
+              animation_type: {
+              #  _in: $type
+              }
+            }
+          }
         }
       limit: $limit
       offset: $offset
@@ -76,7 +81,7 @@ const explore = () => {
 
     const { wallet } = useWallet()
     const [store, setStore] = useState<Store | null>(null)
-    const [things, setThings] = useState<any>([])
+    // const [things, setThings] = useState<any>([])
     const [tokens, setTokens] = useState<any>([])
     const [filterParams, setFilterParams] = useState<any>(null)
 
@@ -120,7 +125,7 @@ const explore = () => {
      })
      getTokens({
        variables: {
-         storeId: storeData.store[0].id,
+         storeId: 'sevendeadstars.mintbase1.near',
          limit: 15,
          offset: 0,
          lt: filterParams.prices.lt.toString(),
@@ -135,16 +140,16 @@ const explore = () => {
    useEffect(() => {
      if (!store || !tokensData) return
  
-     const things = tokensData.token.map((token: any) => token.thing)
+    //  const things = tokensData.token.map((token: any) => token.thing)
  
-     setThings(things)
+    //  setThings(things)
  
      const tokens = tokensData.token.map((token: any)=> {
-       return {id: token.id, list : token.lists[0], thing: token.thing, txid: token.txid, thingId: token.thingId}
+       return token
      }) 
  
      setTokens(tokens)
-     // console.log(tokensData, '-=-=-=-=-=++_+_+');
+    //  console.log(tokens, '-=-=-=-=-=++_+_+');
      
    }, [tokensData])
 
