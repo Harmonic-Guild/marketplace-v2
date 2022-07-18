@@ -95,6 +95,7 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                             {/* dropdown Items */}
                             {!!showRange && (
                                 <ul className='dropdown-content'>
+                                <li className='dropdown-item' onClick={()=> handleSelection(setShowRange, setRange, {text: 'All', value: 'all'})}>All</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowRange, setRange, {text: '1 - 5', value: '1-5'})}>1-5 Near</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowRange, setRange, {text: '5 - 10', value: '5-10'})}>5-10 Near</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowRange, setRange, {text: '10- 100', value: '10-100'})}>10-100 Near</li>
