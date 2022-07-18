@@ -74,9 +74,6 @@ const FETCH_TOKENS = gql`
     }
   }
 `
-
-
-
 const explore = () => {
 
     const { wallet } = useWallet()
@@ -85,13 +82,13 @@ const explore = () => {
     const [tokens, setTokens] = useState<any>([])
     const [filterParams, setFilterParams] = useState<any>(null)
 
-     // fetching
-     const [getStore, { loading: loadingStoreData, data: storeData }] =
-     useLazyQuery(FETCH_STORE, {
-       variables: {
-         storeId: ''
-       },
-     })
+    // fetching
+    const [getStore, { loading: loadingStoreData, data: storeData }] =
+    useLazyQuery(FETCH_STORE, {
+      variables: {
+        storeId: ''
+      },
+    })
  
    const [getTokens, { loading: loadingTokensData, data: tokensData }] =
      useLazyQuery(FETCH_TOKENS, {
@@ -107,7 +104,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: 'sevendeadstars.mintbase1.near',
+         storeId: process.env.NEXT_PUBLIC_STOREID!,
        },
      })
    }, [])
@@ -187,7 +184,7 @@ const explore = () => {
                     </span>
                 </div>
             </div>
-            <div className='grid lg:grid-cols-3 grid-cols-2 lg:w-3/4 w-full pt-4 gap-y-5 gap-x-3'>
+            <div className='grid md:grid-cols-3 grid-cols-1 lg:w-3/4 w-full pt-4 gap-y-5 lg:gap-x-3 mgap-x-0'>
                 {tokens.map((token: any)=> {
                     return (
                           

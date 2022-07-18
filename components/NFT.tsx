@@ -6,6 +6,7 @@ import Share from '../icons/share.svg'
 import {formatNearAmount} from 'near-api-js/lib/utils/format'
 import Image from 'next/image'
 import { AiOutlineRight } from 'react-icons/ai'
+import { FiPlayCircle } from 'react-icons/fi'
 
 function NFT({token}: any) {
     
@@ -15,7 +16,7 @@ function NFT({token}: any) {
     
     return ( 
         <Link href={`/thing/${thing.id}`} passHref>
-            <div className="lg:w-full md:w-5/6  border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
+            <div className="lg:w-full md:w-5/6 nft_height border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
                 <div className="p-3">
                     
                         {(thing.metadata.animation_type !== null && thing.metadata.animation_type !== 'image/jpeg' && thing.metadata.animation_type !== 'image/png' ) ? (
@@ -34,7 +35,7 @@ function NFT({token}: any) {
                                 <div className='absolute w-7 h-7 rounded-lg bg-gray-900 top-1/2 left-1/2 text-white  cursor-pointer'>play</div>
                             </div>
                         ) : (
-                            <div className="object-contain mx-auto rounded-lg">
+                            <div className="object-contain mx-auto">
                                 <Image
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
@@ -88,7 +89,7 @@ function NFT({token}: any) {
                 </div>
             </div>
         </Link>
-     );
+    );
 }
 
 export default NFT;

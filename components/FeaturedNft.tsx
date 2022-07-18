@@ -83,13 +83,13 @@ const FeaturesNft = () => {
      useEffect(() => {
       getTokens({
         variables: {
-          storeId: 'sevendeadstars.mintbase1.near',
+          storeId: process.env.NEXT_PUBLIC_STOREID!,
         },
       })
     }, []);
 
     useEffect(() => {
-      // console.log(storeData);
+      console.log(tokensData, '--------------@@@');
       
       if (!tokensData) return
   
