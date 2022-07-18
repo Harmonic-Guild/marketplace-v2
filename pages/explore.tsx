@@ -99,7 +99,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: 'naruto.mintspace2.testnet',
+         storeId: process.env.NEXT_PUBLIC_STOREID!,
        },
      })
    }, [])

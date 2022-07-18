@@ -4,7 +4,7 @@ import Near from '../icons/near.svg'
 import { useWallet } from '../services/providers/MintbaseWalletContext';
 import PlaceBid from './PlaceBid';
 
-const MakeOffer = (props: any,{buy, price}: {buy: any, price: any}) => {
+const MakeOffer = ({buy, price}: {buy: any, price: any}) => {
 
   const { wallet, isConnected } = useWallet();
   const [showModal, setShowModal] = useState(false)
@@ -35,7 +35,7 @@ const MakeOffer = (props: any,{buy, price}: {buy: any, price: any}) => {
             <span className="text-center lg:flex block pt-4">
               <p className=" font-medium">Owned by: </p>
               <img className="inline-block h-4 w-4 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-              <span onClick={buy}>@owner</span>
+              <span>@owner</span>
             </span>
       </div>
       {showModal ? (
@@ -55,7 +55,12 @@ const MakeOffer = (props: any,{buy, price}: {buy: any, price: any}) => {
             </div>
 
             <div className="">
-                <button onClick={() => props.NewBid(bid)} className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800">Place bid</button>                    
+                <button onClick={bid ?
+                  () =>{ buy()
+                     setShowModal(false)}
+                     : ()=> {console.log('me');
+                     }
+                } className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800">Place bid</button>                    
             </div>
             
         </div>

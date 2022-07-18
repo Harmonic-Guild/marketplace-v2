@@ -96,16 +96,19 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
   const buy = () => {
     if (things?.tokens[0]?.lists[0]?.autotransfer) {
-      wallet?.makeOffer(things?.id, tokenPrice, { marketAddress: process.env.marketAddress })
+      wallet?.makeOffer(things?.tokens[0]?.id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
     }
     else {
-      wallet?.makeOffer(things?.id, parseNearAmount(bid)!.toString(), { marketAddress: process.env.marketAddress })
+      wallet?.makeOffer(things?.tokens[0]?.id, parseNearAmount(bid)!.toString(), { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
   }
   }
+  // console.log(wallet);
+  
+
   const tokenPriceNumber = Number(things?.tokens[0]?.lists[0]?.price)
   const price = things?.tokens[0]?.lists[0] &&  formatNearAmount((tokenPriceNumber).toLocaleString('fullwide', { useGrouping: false }), 2)
   const tokenPrice = (tokenPriceNumber).toLocaleString('fullwide', { useGrouping: false })
-  // console.log(price, '@@@@@@@@@@@@@@@@@@@@@');
+
   var currentBid;
   if (things?.tokens[0]?.lists[0]?.offer == null) {
     currentBid = '0'
@@ -113,10 +116,6 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   else {
     currentBid = formatNearAmount((Number(things?.tokens[0]?.lists[0]?.offer?.price)).toLocaleString('fullwide', { useGrouping: false }), 5)
   }
-  // console.log(currentBid, '----------------');
-  // console.log(things?.tokens[0]?.lists[0]?.offer?.price, '##################');
-  
-  
 
   return (
     <div className={`min-h-screen p-4 bg-white text-gray-700`}>
@@ -135,8 +134,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     src={things?.metadata.media}
                     objectFit="cover"
                     className="rounded-lg shadow-xl"
-                    width={700}
-                    height={700}
+                    width={600}
+                    height={600}
                     // layout="fill"
                     alt={'alt'} />
                 </div>
@@ -211,16 +210,11 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
               <PurchaseNft buy ={buy} price={price}/>
             }
             {/* {bid} */}
-            {/* <DisabledMakeOffer buy ={buy} price={price}/>  */}
             {!things?.tokens[0]?.lists[0]?.autotransfer && 
             <div>
-              <MakeOffer buy ={buy} price={price} NewBid={data => setBid(data)}/>
+              <MakeOffer buy ={buy} price={price}/>
             </div>
             }
-            {/* <PlaceBid/> */}
-            {/* <BidSucess/> */}
-            {/* <MintingNft/> */}
-            {/* <MintNft/> */}
           </div>
           <div className="hidden lg:flex justify-around mt-5 w-3/5 ml-20">
             <div>
