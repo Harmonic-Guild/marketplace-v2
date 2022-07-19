@@ -65,6 +65,7 @@ const FETCH_TOKENS = gql`
         id
         metaId
         metadata{
+          title
           media
           media_type
           animation_url
@@ -104,7 +105,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: process.env.NEXT_PUBLIC_STOREID!,
+         storeId: 'sevendeadstars.mintbase1.near',
        },
      })
    }, [])
@@ -120,6 +121,7 @@ const explore = () => {
      setStore({
        ...storeData.store[0],
      })
+     
      getTokens({
        variables: {
          storeId: 'sevendeadstars.mintbase1.near',
@@ -146,7 +148,6 @@ const explore = () => {
      }) 
  
      setTokens(tokens)
-    //  console.log(tokens, '-=-=-=-=-=++_+_+');
      
    }, [tokensData])
 
@@ -159,7 +160,7 @@ const explore = () => {
    }
 
   return (
-    <div className='px-8'>
+    <div className='px-8 w-full xl:w-5/6 mx-auto'>
         <div className='text-center'>
             <p className='text-mp-orange-1'>NFTs <Vector className='inline'></Vector></p>
             <h2 className='text-mp-dark-2 text-4xl font-bold'>Explore</h2>
@@ -167,11 +168,11 @@ const explore = () => {
         <div>
             <DropDown setFilters={setFilters}/>  
         </div>    
-        <div className='lg:flex block justify-around'>
-            <div className=' order-last pt-4'>
-                <div className='lg:block hidden'>
+        <div className='xl:flex block justify-around'>
+            {/* <div className=' order-last pt-4'>
+                <div className='lg:block hidden lg:w-3/4'>
                     <Categories/>
-                    <span><Artists/></span> 
+                    <Artists/>
                     <Color/>
                 </div>
                 <div className='lg:hidden sm:flex block'>
@@ -183,8 +184,8 @@ const explore = () => {
                         <Artists/> 
                     </span>
                 </div>
-            </div>
-            <div className='grid md:grid-cols-3 grid-cols-1 lg:w-3/4 w-full pt-4 gap-y-5 lg:gap-x-3 mgap-x-0'>
+            </div> */}
+            <div className='grid lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3  w-full pt-4 gap-y-5 gap-x-2'>
                 {tokens.map((token: any)=> {
                     return (
                           
