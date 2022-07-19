@@ -15,8 +15,12 @@ query MyQuery($storeId: String!) {
     thing {
       id
       metaId
-      metadata {
+      metadata{
         media
+        media_type
+        animation_url
+        animation_type
+        title
       }
     }
   }
@@ -24,7 +28,18 @@ query MyQuery($storeId: String!) {
 `
 
 
-const FeaturesNft = () => {
+const FeaturesNft = ({storeId}: {storeId: string}) => {
+
+  interface Token {
+    id: string;
+    thing: {
+      id: string;
+      metaId: string;
+      metadata: {
+        media: string 
+      }
+    }
+  }
 
   const [tokens, setTokens] = useState<[]>([])
   const [slideIndex, setSlideIndex] = useState(0)
@@ -83,23 +98,23 @@ const FeaturesNft = () => {
      useEffect(() => {
       getTokens({
         variables: {
-          storeId: process.env.NEXT_PUBLIC_STOREID!,
+          storeId,
         },
       })
+      
     }, []);
 
     useEffect(() => {
-      console.log(tokensData, '--------------@@@');
       
       if (!tokensData) return
   
       if (tokensData?.token.length === 0) return;
   
-      const weeklyTokens = tokensData.token.map((token: {}) => token)
+      const weeklyTokens = tokensData.token.map((token: Token) => token)
 
       setTokens(weeklyTokens);     
       
-      console.log(tokens);
+      // console.log(tokens);
       
       
     }, [tokensData])
@@ -111,7 +126,7 @@ const FeaturesNft = () => {
           <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
         </div>
         <Slider {...settings}>
-            {tokens.map((token:any, index) => (
+            {tokens.map((token: Token, index) => (
               <div className={index === slideIndex ? 'slide:active' : 'slide'} key={index}>
                 <div className="h-96 w-fit rounded-xl shadow-lg relative overflow-hidden">
                         <Image
