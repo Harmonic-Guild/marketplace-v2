@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .screenTest{
-     @apply xl:bg-yellow-300 lg:bg-green-300 md:bg-purple-300 sm:bg-red-300 xs:bg-pink-300
+     @apply xl:bg-yellow-300 lg:bg-green-300 md:bg-purple-300 sm:bg-red-800 xs:bg-pink-300
 }
 .btnColor{
      background: radial-gradient(62.1% 62.79% at 32.81% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%) , linear-gradient(84.42deg, #FFD12F 0%, #FFB038 100%);
@@ -27,10 +27,10 @@ body {
      @apply p-2 mx-auto rounded-md border w-full text-mp-dark-1 flex text-sm font-semibold cursor-pointer select-none
 }
 .dropdown-content{
-     @apply border mt-1 p-2 rounded bg-white z-10 absolute w-40
+     @apply border mt-1 p-2 rounded bg-white z-10 absolute
 }
 .dropdown-item {
-     @apply font-light my-2 px-2 hover:bg-mp-gray-2 cursor-pointer select-none
+     @apply font-light my-2 px-2 hover:bg-mp-gray-2 cursor-pointer select-none md:w-full
 }
 button{
      @apply outline-none
