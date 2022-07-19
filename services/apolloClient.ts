@@ -9,7 +9,7 @@ import merge from 'deepmerge'
 import isEqual from 'lodash/isEqual'
 import mintbase from '../constants/mintbase'
 
-const [GRAPH_HTTPS, GRAPH_WSS] = mintbase('testnet');
+const [GRAPH_HTTPS, GRAPH_WSS] = mintbase('mainnet');
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
