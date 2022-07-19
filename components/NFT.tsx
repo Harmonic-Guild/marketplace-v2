@@ -6,6 +6,7 @@ import Share from '../icons/share.svg'
 import {formatNearAmount} from 'near-api-js/lib/utils/format'
 import Image from 'next/image'
 import { AiOutlineRight } from 'react-icons/ai'
+import { FiPlayCircle } from 'react-icons/fi'
 
 function NFT({token}: any) {
     
@@ -13,9 +14,10 @@ function NFT({token}: any) {
     const list = lists[0];
     
     
+    
     return ( 
         <Link href={`/thing/${thing.id}`} passHref>
-            <div className="lg:w-full md:w-5/6  border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
+            <div className="w-full nft_height border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
                 <div className="p-3">
                     
                         {(thing.metadata.animation_type !== null && thing.metadata.animation_type !== 'image/jpeg' && thing.metadata.animation_type !== 'image/png' ) ? (
@@ -34,7 +36,7 @@ function NFT({token}: any) {
                                 <div className='absolute w-7 h-7 rounded-lg bg-gray-900 top-1/2 left-1/2 text-white  cursor-pointer'>play</div>
                             </div>
                         ) : (
-                            <div className="object-contain mx-auto rounded-lg">
+                            <div className="object-contain mx-auto">
                                 <Image
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
@@ -52,7 +54,7 @@ function NFT({token}: any) {
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div>
-                            <div className="font-semibold my-1 py-1 text-sm">{thing.metadata.title}</div>
+                            <div className="font-semibold my-1 py-1 text-sm truncate">{thing.metadata.title}</div>
                             <div className="flex my-1 py-1 justify-between">
                                 <p className='flex'>
                                     {list? !list?.autotransfer?
@@ -64,7 +66,7 @@ function NFT({token}: any) {
                                         Price: {formatNearAmount(Number(list?.price).toLocaleString('fullwide', { useGrouping: false }),5)}
                                         <span className='pt-1  ml-1'><Near></Near></span>
                                        </>): 
-                                    `Not Available ${list?.price}`
+                                    `Not Available`
                                     }
                                     </p>
                                 <div className="md:flex hidden relative">
@@ -88,7 +90,7 @@ function NFT({token}: any) {
                 </div>
             </div>
         </Link>
-     );
+    );
 }
 
 export default NFT;

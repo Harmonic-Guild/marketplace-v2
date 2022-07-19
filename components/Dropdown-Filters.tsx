@@ -40,11 +40,11 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
 
     }, [order, type, range])
 
-    return ( 
-        <div className='flex w-3/5 justify-start mt-4'>
-                    <div className="justify-around flex w-5/6">
-                        <div className='p-2 text-mp-gray-4'>Sort by:</div>
-                        <div className="w-1/4">
+    return ( <>
+         <div className='grid xs:w-full  lg:w-4/5 mt-4 pt-4'>
+                    <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 mx-3">
+                        <div className='p-2 text-mp-gray-4 col-span-1'>Sort by:</div>
+                        <div className="w-full pb-2 col-span-2 ">
                             <div className={`dropdown ${pop? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setPop(!pop)}> 
                                 <p className='w-full'>{order? order.text: 'Order'}</p>
                                 {pop? (
@@ -55,13 +55,13 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                                 
                             </div>
                             {!!pop && (
-                                <ul className='dropdown-content'>
-                                <li className='dropdown-item' onClick={()=> handleSelection(setPop, setOrder, {text: 'ascending', value: 'asc'})}>Ascending</li>
+                                <ul className='dropdown-content w-40 sm:w-40 md:w-48 lg:w-48 xl:w-56'>
+                                <li className='dropdown-item ' onClick={()=> handleSelection(setPop, setOrder, {text: 'ascending', value: 'asc'})}>Ascending</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setPop, setOrder, {text: 'Descending', value: 'desc'})}>Descending</li>
                             </ul>
                             )}
                         </div>
-                        <div className="w-1/4">
+                        <div className="w-full pb-2 col-span-2">
                             <div className={`dropdown ${showType? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setShowType(!showType)}>
                                 <p className='w-full'>{type? type.text: 'Type'}</p> 
                                 {showType? (
@@ -73,7 +73,7 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                             </div>
                             {/* dropdown Items */}
                             {!!showType && (
-                                <ul className='dropdown-content'>
+                                <ul className='dropdown-content w-40 sm:w-40 md:w-48 lg:w-48 xl:w-56'>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'All', value: 'all'})}>All</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'Video', value: 'video'})}>Video</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'Audio', value: 'audio'})}>Audio</li>
@@ -82,7 +82,7 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                             </ul>
                             )}
                         </div>
-                        <div className="w-1/4">
+                        <div className="w-full pb-2 col-span-2">
                             <div className={`dropdown ${showRange? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setShowRange(!showRange)}>
                                 <p className='w-full'>{range? range?.text: 'Price Range'}</p>
                                 {showRange? (
@@ -94,7 +94,7 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                             </div>
                             {/* dropdown Items */}
                             {!!showRange && (
-                                <ul className='dropdown-content'>
+                                <ul className='dropdown-content w-40 sm:w-40 md:w-48 lg:w-48 xl:w-56'>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowRange, setRange, {text: 'All', value: 'all'})}>All</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowRange, setRange, {text: '1 - 5', value: '1-5'})}>1-5 Near</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowRange, setRange, {text: '5 - 10', value: '5-10'})}>5-10 Near</li>
@@ -105,6 +105,9 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                         </div> 
                     </div>
                 </div>
+
+    </>
+       
      );
 }
 
