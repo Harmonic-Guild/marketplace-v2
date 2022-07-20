@@ -1,6 +1,3 @@
-import { Network, Chain, Wallet } from 'mintbase';
-import { ReactNode } from 'react'
-
 export interface Store {
     id: string
     name: string
