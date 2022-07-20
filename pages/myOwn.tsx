@@ -46,7 +46,7 @@ const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type }: {
   return (
     <div className="w-full h-auto border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
       <div className="p-4">
-      {sellModal &&<MintNft closeModal={()=> showSellModal(false)} tokenId={tokenId} />}
+      {sellModal &&<MintNft closeModal={()=> showSellModal(false)} tokenId={tokenId} title={title} />}
         <div>
 
           {(animation_type === null || animation_type === 'image/jpeg' || animation_type === 'image/png' || animation_type === 'image/gif' ) ?
