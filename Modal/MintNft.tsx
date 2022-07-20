@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { useWallet } from '../services/providers/MintbaseWalletContext';
 import {parseNearAmount} from 'near-api-js/lib/utils/format'
 
-const MintNft = ({closeModal, tokenId}: any) => {
+const MintNft = ({closeModal, tokenId, title}: any) => {
     const { wallet } = useWallet();
     const [price, setPrice] = useState<string|undefined>('0')
 
@@ -30,7 +30,7 @@ const MintNft = ({closeModal, tokenId}: any) => {
             <div className="h-screen w-screen glass-morphism fixed top-0 left-0 z-40">
                 <div className="align-middle mx-auto md:w-2/5 w-5/6 relative top-80 lg:top-44 rounded-xl p-8 bg-white">
                     <div className='flex w-full justify-between'>
-                        <p className='text-xl font-bold '>Buster character color</p>
+                        <p className='text-xl font-bold '>{title}</p>
                         <span className='text-gray-400 border border-mp-brown-1 rounded-full p-2 cursor-pointer' onClick={cancel}><AiOutlineClose/></span>
                     </div>
                     <div className='flex text-xl text-gray-400 '>
