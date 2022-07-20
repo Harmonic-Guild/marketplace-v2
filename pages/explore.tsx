@@ -105,7 +105,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: 'sevendeadstars.mintbase1.near',
+         storeId: 'mintingmusic.mintspace2.testnet',
        },
      })
    }, [])
@@ -124,7 +124,7 @@ const explore = () => {
      
      getTokens({
        variables: {
-         storeId: 'sevendeadstars.mintbase1.near',
+         storeId: 'mintingmusic.mintspace2.testnet',
          limit: 15,
          offset: 0,
          lt: filterParams.prices.lt.toString(),
