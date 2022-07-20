@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import Vector from '../icons/Vector.svg';
-import Vector_right from '../icons/Vector_right.svg';
-import Vector_left from '../icons/Vector_left.svg';
+import { GiStarShuriken } from 'react-icons/gi';
 
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
@@ -121,7 +119,7 @@ const FeaturesNft = ({storeId}: {storeId: string}) => {
     return (
       <div className="w-full h-fit lg:px-32 px-12 ">
         <div className=" text-center  font-bold text-gray-900 mb-6">
-        <p className='text-mp-orange-1 mb-2'>Lorem <Vector className='inline'></Vector></p>
+        <p className='text-mp-orange-1 mb-2'>Lorem <GiStarShuriken className='inline w-6 h-5'/></p>
           <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
           <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
         </div>

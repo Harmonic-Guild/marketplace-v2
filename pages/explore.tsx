@@ -5,12 +5,9 @@ import { useEffect, useState } from 'react';
 import { useWallet } from '../services/providers/MintbaseWalletContext';
 import DropDown from '../components/Dropdown-Filters'
 import NFT from '../components/NFT'
-import Vector from '../icons/Vector.svg'
-import Categories from '../components/category/Categories'
-import Artists from '../components/category/Artists'
-import Color from '../components/category/Color'
 import { Store } from '../interfaces/wallet.interface';
 import QueryFilters from '../helpers/getQuery';
+import { GiStarShuriken } from 'react-icons/gi';
 
 
 
@@ -105,7 +102,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: 'mintingmusic.mintspace2.testnet',
+         storeId: 'naruto.mintspace2.testnet',
        },
      })
    }, [])
@@ -124,7 +121,7 @@ const explore = () => {
      
      getTokens({
        variables: {
-         storeId: 'mintingmusic.mintspace2.testnet',
+         storeId: 'naruto.mintspace2.testnet',
          limit: 15,
          offset: 0,
          lt: filterParams.prices.lt.toString(),
@@ -162,7 +159,7 @@ const explore = () => {
   return (
     <div className='px-8 w-full xl:w-5/6 mx-auto'>
         <div className='text-center'>
-            <p className='text-mp-orange-1'>NFTs <Vector className='inline'></Vector></p>
+            <p className='text-mp-orange-1'>NFTs <GiStarShuriken className='inline w-6 h-5'/></p>
             <h2 className='text-mp-dark-2 text-4xl font-bold'>Explore</h2>
         </div>
         <div>
@@ -185,7 +182,7 @@ const explore = () => {
                     </span>
                 </div>
             </div> */}
-            <div className='grid lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3  w-full pt-4 gap-y-5 gap-x-2'>
+            <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2'>
                 {tokens.map((token: any)=> {
                     return (
                           

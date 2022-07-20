@@ -84,7 +84,7 @@ const Header = () => {
             <div onClick={() => setToggleIcons(!toggleIcons)}>
             </div>
             <button 
-              className='action-btn pb-2 flex'
+              className='btnColor rounded-full font-semibold p-2 px-4 flex'
               onClick={
                 isConnected
                 ? () => {
@@ -97,7 +97,7 @@ const Header = () => {
               }
               >
                 {isConnected ? 'Disconnect' : 'Connect'}
-                <span className='ml-2 mt-1.5'><Near></Near></span>
+                <span className='ml-2 mt-1'><Near className='w-4 h-4'/></span>
             </button>
           </div>         
         </div>

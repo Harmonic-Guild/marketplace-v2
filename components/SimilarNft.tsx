@@ -1,12 +1,9 @@
 import React, { Component, useEffect, useState } from "react";
 import Slider from "react-slick";
-import Right from '../icons/right.svg';
-import Share from '../icons/share.svg'
 import Near from '../icons/near.svg'
-
-
-import Vector from '../icons/Vector.svg'
-import { BiArrowFromLeft, BiArrowFromRight } from "react-icons/bi";
+import { BiShareAlt } from "react-icons/bi";
+import { AiOutlineRight } from 'react-icons/ai'
+import { BsCircle } from "react-icons/bs";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import Image from 'next/image';
@@ -154,8 +151,11 @@ query MyQuery($storeId: String!) {
                               </div>
                           </div>
                           <div className="flex mt-2 pt-1 justify-between px-2">
-                              <button className='flex action-btn'>Bid <span className='border-l border-black pl-2 ml-2'><Right></Right></span></button>
-                              <button><Share></Share></button>
+                              <button className='flex action-btn'>Bid <span className='border-l border-black pl-2 ml-2'><AiOutlineRight/></span></button>
+                              <button className='text-yellow-500'>
+                                <BiShareAlt className='w-6 h-6 absolute ml-2 mt-2'/>
+                                <BsCircle className='w-10 h-10'/>
+                              </button>
                           </div>
                         </div>
                     </div>

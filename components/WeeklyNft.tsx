@@ -1,15 +1,7 @@
-import React, { Component, useEffect, useState } from "react";
-import Slider from "react-slick";
-import Right from '../icons/right.svg';
-import Share from '../icons/share.svg'
-import Near from '../icons/near.svg'
-
-
-import Vector from '../icons/Vector.svg'
-import { BiArrowFromLeft, BiArrowFromRight } from "react-icons/bi";
+import React, { useEffect, useState } from "react";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
-import Image from 'next/image';
+import { GiStarShuriken } from "react-icons/gi";
 import NFT from "./NFT";
 
 const FETCH_WEEKLY = gql`
@@ -122,7 +114,7 @@ query MyQuery($storeId: String!) {
     return (
       <div className="w-full h-full pt-10 lg:px-32 px-12 ">
         <div className=" text-center  font-bold text-gray-900 mb-4">
-        <p className='text-mp-orange-1 mb-2'>Lorem <Vector className='inline'></Vector></p>
+        <p className='text-mp-orange-1 mb-2'>Lorem <GiStarShuriken className='inline w-6 h-5'/></p>
             <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
         </div>
         <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 w-full pt-4 gap-y-5 gap-2">

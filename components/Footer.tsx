@@ -1,11 +1,6 @@
 import Link from 'next/link'
-import dynamic from "next/dynamic";
 import { FiUsers } from "react-icons/fi";
 import { BsArrowUp } from "react-icons/bs";
-import Line_2 from '../icons/Line_2.svg'
-import Line_3 from '../icons/Line_3.svg'
-import { useState } from 'react';
-
 
 const navTitles = [
   { title: 'Home', href:'/'},
@@ -21,7 +16,7 @@ const Footer = () => {
             {/* <span className='absolute w-20 left-0 top-full pt-20'><Line_2/></span> */}
         <div className='absolute p-2'>
             <button 
-            className='flex space-x-8 no-underline bg-yellow-500 px-10 py-3 font-bold rounded-md text-gray-900 text-sm'>
+            className='flex space-x-8 no-underline btnColor px-10 py-3 font-bold rounded-md text-gray-900 text-sm'>
                 <div className='flex gap-2'>Community <FiUsers/></div>
                 <span>coming soon...</span>
             </button>
@@ -39,7 +34,7 @@ const Footer = () => {
                     <span>+2343878472983</span>
                 </div>
             </div> 
-            <div className='p-4 bg-yellow-500 rounded-full w-10 h-10 cursor-pointer'>
+            <div className='p-4 btnColor rounded-full w-10 h-10 cursor-pointer'>
                 <BsArrowUp className='w-6 h-6 -mt-2 -ml-2'/>
             </div>
         </div>
@@ -75,7 +70,7 @@ const Footer = () => {
                 <li>LinkedIn</li>
                 <li>Twitter</li>
             </div>
-            <div className='p-4 bg-yellow-500 rounded-full w-10 h-10 lg:block hidden cursor-pointer'>
+            <div className='p-4 btnColor rounded-full w-10 h-10 lg:block hidden cursor-pointer'>
                 <BsArrowUp className='w-6 h-6 -mt-2 -ml-2'/>
             </div>
         </div>

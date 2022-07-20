@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import Near from '../icons/near.svg'
 import { useWallet } from '../services/providers/MintbaseWalletContext';
-import PlaceBid from './PlaceBid';
 
 const MakeOffer = ({buy, price}: {buy: any, price: any}) => {
 

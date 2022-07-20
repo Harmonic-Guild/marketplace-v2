@@ -1,19 +1,15 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import Near from '../icons/near.svg'
-import Right from '../icons/right.svg'
-import Share from '../icons/share.svg'
 import {formatNearAmount} from 'near-api-js/lib/utils/format'
 import Image from 'next/image'
 import { AiOutlineRight } from 'react-icons/ai'
-import { FiPlayCircle } from 'react-icons/fi'
+import { BiShareAlt } from 'react-icons/bi'
+import { BsCircle } from 'react-icons/bs'
 
 function NFT({token}: any) {
     
     const {thing, lists} = token;
     const list = lists[0];
-    
-    
     
     return ( 
         <Link href={`/thing/${thing.id}`} passHref>
@@ -82,9 +78,12 @@ function NFT({token}: any) {
                                     list? !list?.autotransfer ? 'Bid': 'Get Details' : 'N/A' 
                                     }
                                     </span> 
-                                     <span className='border-l border-black  md:ml-2 ml-0'><AiOutlineRight className=' w-6 h-6'/></span> 
+                                     <span className='border-l border-black  md:ml-2 ml-0'><AiOutlineRight className=' w-5 h-5'/></span> 
                                      </button>
-                                <button><Share></Share></button>
+                                <button className='text-yellow-500'>
+                                    <BiShareAlt className='w-6 h-6 absolute ml-2 mt-2'/>
+                                    <BsCircle className='w-10 h-10'/>
+                                </button>
                             </div>
                         </div>
                 </div>
