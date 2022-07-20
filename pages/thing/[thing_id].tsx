@@ -16,39 +16,47 @@ import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 
 const FETCH_TOKENS = gql`
-query MyQuery ($thing_id: String!) {
-    thing(where: {id: {_eq: $thing_id}}) {
+query MyQuery($thing_id: String!) {
+  thing(where: {id: {_eq: $thing_id}}) {
+    id
+    tokens(distinct_on: id, where: {list: {removedAt: {_is_null: true}}}) {
       id
-      tokens(distinct_on: id, where: {list: {removedAt: {_is_null: true}}}) {
-        id
-        lists (order_by: {createdAt: desc}, limit: 1){
+      lists(order_by: {createdAt: desc}, limit: 1) {
+        price
+        autotransfer
+        offer {
           price
-          autotransfer
-          offer {
-            price
-          }
         }
-        txId
+        createdAt
+        tokenKey
       }
-      allTokens: tokens(distinct_on: id) {
-        id
-      }
-      storeId
-      store{
-        name
-        }   
-      metadata {
-        animation_type
-        animation_url
-        media
-        title
-        description
-        tags
-        external_url
-        category
-      }
+      txId
+      minter
     }
-  }`
+    allTokens: tokens(distinct_on: id) {
+      id
+      txId
+      minter
+    }
+    storeId
+    store {
+      name
+      owner
+    }
+    metadata {
+      animation_type
+      animation_url
+      media
+      title
+      description
+      external_url
+      category
+      tags
+      youtube_url
+    }
+  }
+}
+`
 
 const thing_id = ({ thing_id }: { thing_id: string }) => {
 
@@ -56,7 +64,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   const [tokens, setTokens] = useState<any>([])
   const [bid, setBid] = useState('0')
   const [allTokens, setAllTokens] = useState<any>([])
-  const { wallet, isConnected } = useWallet();
+  const { wallet } = useWallet();
   const [hide, setHide] = useState(false)
 
   const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] =
@@ -66,7 +74,6 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
       },
     })
   useEffect(() => {
-
 
     getTokens({
       variables: {
