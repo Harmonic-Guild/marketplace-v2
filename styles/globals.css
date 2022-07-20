@@ -77,12 +77,12 @@ button{
      opacity: 1;
      transform: scale(1.1);
 }
-/* .arrow{
-     @apply rounded-full bg-yellow-500 p-4 absolute top-[200px] 
+.slick-dots button:before {
+     transform: scale(1.1);
+     transition: .5s;
+     @apply text-yellow-500
 }
-.arrow-right{
-     @apply right-[0px]
+.slick-dots li.slick-active button:before {
+     transform: scale(3.1);
+     @apply text-yellow-500
 }
-.arrow-left{
-     @apply left-[0px]
-} */

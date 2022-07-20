@@ -119,7 +119,7 @@ const FeaturesNft = ({storeId}: {storeId: string}) => {
       
     }, [tokensData])
     return (
-      <div className="w-full h-fit pt-10 lg:px-32 px-12 ">
+      <div className="w-full h-fit lg:px-32 px-12 ">
         <div className=" text-center  font-bold text-gray-900 mb-6">
         <p className='text-mp-orange-1 mb-2'>Lorem <Vector className='inline'></Vector></p>
           <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
