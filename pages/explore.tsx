@@ -102,7 +102,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: 'mintingmusic.mintspace2.testnet',
+         storeId: 'naruto.mintspace2.testnet',
        },
      })
    }, [])
@@ -121,11 +121,7 @@ const explore = () => {
      
      getTokens({
        variables: {
-<<<<<<< HEAD
          storeId: 'naruto.mintspace2.testnet',
-=======
-         storeId: 'mintingmusic.mintspace2.testnet',
->>>>>>> 87e2877b7f8aa51d3e8d168abd237b29b9682447
          limit: 15,
          offset: 0,
          lt: filterParams.prices.lt.toString(),
