@@ -20,7 +20,7 @@ function NFT({token}: any) {
             <div className="w-full nft_height border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
                 <div className="p-3">
                     
-                        {(thing.metadata.animation_type !== null && thing.metadata.animation_type !== 'image/jpeg' && thing.metadata.animation_type !== 'image/png' ) ? (
+                        {(thing.metadata.animation_type !== null && thing.metadata.animation_type !== 'image/jpeg' && thing.metadata.animation_type !== 'image/png'&& thing.metadata.animation_type !== 'image/gif' ) ? (
                             // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
                             //     <source src={metadata.animation_url} ></source>
                             // </video>
@@ -47,7 +47,7 @@ function NFT({token}: any) {
                             </div>
                         )}
                         <div className="text-sm py-2 text-mp-dark-3 relative">
-                            {list?.offer?.timeout && <div className="timer sm:flex hidden">timeout :{new Date(list?.offer?.timeout).toLocaleDateString()}
+                            {list?.autoTransfer && <div className="timer sm:flex hidden">timeout :{new Date(list?.offer?.timeout).toLocaleDateString()}
                             </div>}
                             <div className="flex md:hidden absolute text-white rounded-md px-2 py-1 -top-4 left-16">
                                 <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
