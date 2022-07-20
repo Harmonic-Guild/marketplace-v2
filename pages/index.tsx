@@ -12,8 +12,8 @@ const Home: NextPage = () => {
         <title>MarketPlace Version_2</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <FeaturedNft storeId={`sevendeadstars.mintbase1.near`}/>
-      <WeeklyNft storeId={`sevendeadstars.mintbase1.near`}/>
+      <FeaturedNft storeId={`naruto.mintspace2.testnet`}/>
+      <WeeklyNft storeId={`naruto.mintspace2.testnet`}/>
     </div>
   )
 }
