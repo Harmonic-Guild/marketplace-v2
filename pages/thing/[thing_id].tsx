@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useWallet } from '../../services/providers/MintbaseWalletContext';
 import { TbExternalLink } from 'react-icons/tb';
 import { FiLayers } from "react-icons/fi";
-import SimilarNft from "../../components/SimilarNft";
-import Vector_back from '../../icons/Vector_back.svg'
-import { gql } from "apollo-boost";
-import { Thing } from "../../interfaces/wallet.interface";
-import { useLazyQuery } from "@apollo/client";
-import Image from "next/image";
 import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import { AiOutlineExpandAlt } from "react-icons/ai";
+import SimilarNft from "../../components/SimilarNft";
+import Vector_back from '../../icons/Vector_back.svg'
+import { gql } from "apollo-boost";
+import { useLazyQuery } from "@apollo/client";
+import Image from "next/image";
 import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format";
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";

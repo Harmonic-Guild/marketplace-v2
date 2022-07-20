@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import Down from '../icons/down.svg'
-import Up from '../icons/up.svg'
+import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 
 function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
 
@@ -48,9 +47,9 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                             <div className={`dropdown ${pop? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setPop(!pop)}> 
                                 <p className='w-full'>{order? order.text: 'Order'}</p>
                                 {pop? (
-                                    <Up className="h-5 w-full py-1 px-2"></Up>
+                                    <AiOutlineUp className="h-6 w-full py-1 px-2 text-indigo-400"/>
                                 ) : (
-                                    <Down className="h-5 w-full py-1 px-2"></Down>
+                                    <AiOutlineDown className="h-6 w-full py-1 px-2 text-indigo-400"/>
                                 )}
                                 
                             </div>
@@ -63,11 +62,11 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                         </div>
                         <div className="w-full pb-2 col-span-2">
                             <div className={`dropdown ${showType? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setShowType(!showType)}>
-                                <p className='w-full'>{type? type.text: 'Type'}</p> 
+                                <p className='w-full'>{type? type.text: 'Type of nft'}</p> 
                                 {showType? (
-                                    <Up className="h-5 w-full py-1 px-2"></Up>
+                                    <AiOutlineUp className="h-6 w-full py-1 px-2 text-indigo-400"/>
                                 ) : (
-                                    <Down className="h-5 w-full py-1 px-2"></Down>
+                                    <AiOutlineDown className="h-6 w-full py-1 px-2 text-indigo-400"/>
                                 )}
                                 
                             </div>
@@ -86,9 +85,9 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                             <div className={`dropdown ${showRange? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setShowRange(!showRange)}>
                                 <p className='w-full'>{range? range?.text: 'Price Range'}</p>
                                 {showRange? (
-                                    <Up className="h-5 w-12 py-1 px-2"></Up>
+                                    <AiOutlineUp className="h-6 w-12 py-1 px-2 text-indigo-400"/>
                                 ) : (
-                                    <Down className="h-5 w-12 py-1 px-2"></Down>
+                                    <AiOutlineDown className="h-6 w-12 py-1 px-2 text-indigo-400"/>
                                 )}
                                 
                             </div>
