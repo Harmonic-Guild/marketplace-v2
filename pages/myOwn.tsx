@@ -63,7 +63,7 @@ const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type }: {
             </div>) : 
             (<div className="lg:h-80 h-64 mx-auto flex items-center">
               
-              <video poster={media} controls className='object-contain' controlsList="nodownload" autoPlay loop muted>
+              <video poster={media} controls className='object-contain' controlsList="nodownload" loop muted>
                   <source src={animation_url}></source>
               </video>
             </div>)
