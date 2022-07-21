@@ -103,11 +103,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   }
 
   const buy = () => {
+    const token_Id = things?.tokens[0]?.id.split(":"+process.env.NEXT_PUBLIC_STORE_NAME)[0]
+
     if (things?.tokens[0]?.lists[0]?.autotransfer) {
-      wallet?.makeOffer(things?.tokens[0]?.id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
+      wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
     }
     else {
-      wallet?.makeOffer(things?.tokens[0]?.id, parseNearAmount(bid)!.toString(), { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
+      wallet?.makeOffer(token_Id, parseNearAmount(bid)!.toString(), { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
   }
   }
   // console.log(wallet);
