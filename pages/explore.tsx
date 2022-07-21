@@ -80,6 +80,8 @@ const explore = () => {
     const [tokens, setTokens] = useState<any>([])
     const [filterParams, setFilterParams] = useState<any>(null)
 
+    const storeName = process.env.NEXT_PUBLIC_STORE_NAME!
+
     // fetching
     const [getStore, { loading: loadingStoreData, data: storeData }] =
     useLazyQuery(FETCH_STORE, {
@@ -102,7 +104,7 @@ const explore = () => {
    useEffect(() => {
      getStore({
        variables: {
-         storeId: 'naruto.mintspace2.testnet',
+         storeId: storeName,
        },
      })
    }, [])
@@ -121,7 +123,7 @@ const explore = () => {
      
      getTokens({
        variables: {
-         storeId: 'naruto.mintspace2.testnet',
+         storeId: storeName,
          limit: 15,
          offset: 0,
          lt: filterParams.prices.lt.toString(),
