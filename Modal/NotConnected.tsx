@@ -8,6 +8,10 @@ const NotConnected = () => {
 
     const [cancleModal, setCancleModal] = useState(true)
     const { wallet, isConnected} = useWallet()
+    
+    setTimeout(() => {
+        setCancleModal(false)
+    }, 5000);
 
   return (
     <div>
