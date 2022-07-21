@@ -4,7 +4,7 @@ import {formatNearAmount} from 'near-api-js/lib/utils/format'
 import Image from 'next/image'
 import { AiOutlineRight } from 'react-icons/ai'
 import { BiShareAlt } from 'react-icons/bi'
-import { BsCircle } from 'react-icons/bs'
+import { BsCircle, BsPlayCircle } from 'react-icons/bs'
 
 function NFT({token}: any) {
     
@@ -29,7 +29,7 @@ function NFT({token}: any) {
                                 src={thing.metadata.media}
                                 alt={'alt'} />
                                 
-                                <div className='absolute w-7 h-7 rounded-lg bg-gray-900 top-1/2 left-1/2 text-white  cursor-pointer'>play</div>
+                                <div className='absolute w-7 h-7 rounded-lg bg-gray-900 top-1/2 left-1/2 text-white  cursor-pointer'><BsPlayCircle className='w-10 h-10'/></div>
                             </div>
                         ) : (
                             <div className="object-contain mx-auto">
