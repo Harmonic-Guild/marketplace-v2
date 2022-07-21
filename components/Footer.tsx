@@ -14,13 +14,13 @@ const Footer = () => {
   return (
     <footer className={`w-full px-6 py-10 text-gray-700`}>
             {/* <span className='absolute w-20 left-0 top-full pt-20'><Line_2/></span> */}
-        <div className='absolute p-2'>
+        {/* <div className='absolute p-2'>
             <button 
             className='flex space-x-8 no-underline btnColor px-10 py-3 font-bold rounded-md text-gray-900 text-sm'>
                 <div className='flex gap-2'>Community <FiUsers/></div>
                 <span>coming soon...</span>
             </button>
-        </div>
+        </div> */}
             {/* <span className='right-0 absolute '><Line_3/></span>            */}
         <div className='pt-12 flex lg:hidden justify-between px-20'>
             <div>

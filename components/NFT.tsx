@@ -39,17 +39,18 @@ function NFT({token}: any) {
                                 width={500}
                                 objectFit="cover"
                                 src={thing.metadata.media}
-                                alt={'alt'} />
+                                alt={'alt'} 
+                                className="object-contain mx-auto rounded-lg"/>
                             </div>
                         )}
                         <div className="text-sm py-2 text-mp-dark-3 relative">
                             {list?.autoTransfer && <div className="timer sm:flex hidden">timeout :{new Date(list?.offer?.timeout).toLocaleDateString()}
                             </div>}
-                            <div className="flex md:hidden absolute text-white rounded-md px-2 py-1 -top-4 left-16">
+                            {/* <div className="flex md:hidden absolute text-white rounded-md px-2 py-1 -top-4 left-16">
                                 <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
-                            </div>
+                            </div> */}
                             <div className="font-semibold my-1 py-1 text-sm truncate">{thing.metadata.title}</div>
                             <div className="flex my-1 py-1 justify-between">
                                 <p className='flex'>
@@ -65,11 +66,11 @@ function NFT({token}: any) {
                                     `Not Available`
                                     }
                                     </p>
-                                <div className="md:flex hidden relative">
+                                {/* <div className="md:flex hidden relative">
                                     <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
                                     <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                     <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="flex mt-4 pt-1 justify-between">
                                 <button className='flex action-btn '>

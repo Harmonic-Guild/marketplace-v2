@@ -5,7 +5,7 @@ import { FiLayers } from "react-icons/fi";
 import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import { AiOutlineExpandAlt } from "react-icons/ai";
-import SimilarNft from "../../components/SimilarNft";
+// import SimilarNft from "../../components/SimilarNft";
 import Vector_back from '../../icons/Vector_back.svg'
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
@@ -13,6 +13,8 @@ import Image from "next/image";
 import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format";
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
+import Near from '../../icons/near.svg'
+import moment from 'moment'
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -124,7 +126,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   }
 
   return (
-    <div className={`min-h-screen p-4 bg-white text-gray-700`}>
+    <div className={`min-h-screen p-4 text-gray-700`}>
       <div className="lg:flex hidden"><Vector_back /></div>
       <div className="lg:flex block justify-evenly w-4/5 lg:w-full mx-auto">
         <div className="pl-0 xl:pl-12 mx-auto w-full xl:w-4/5">
@@ -168,34 +170,41 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <span className="lg:text-4xl text-xl font-medium ">{things?.metadata.title}</span>
           </div>
           <div className="flex w-3/4 py-4">
-            <span>Minted on: Jun-14-2022</span>
+            <span>Minted on: {moment(things?.tokens[0].lists[0].createdAt).format('MMM DD, YYYY')}</span>
             <TbExternalLink className="text-yellow-300 w-6 h-6" />
           </div>
           {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
           <div className="">
             <div className="w-2/3">
               <span className="text">Discription</span>
-              {/* <span className="border-b border-yellow-600 py-2 pb-2 z-10 px-40 lg:-ml-24 -ml-20"></span> */}
+              <span className="border-b border-mp-brown-1 flex"></span>
               <p className={hide ? 'pt-2 h-24 overflow-y-scroll ' : 'pt-2 h-16 overflow-y-scroll truncate'}>
                 <span>{things?.metadata.description}</span>
               </p>
               <span id='span' onClick={toggleDiscription} className='cursor-pointer p-2 text-blue-500 hover:underline'> {!hide ? '.....see more' : 'see less'}</span>
               {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
             </div>
-            <div className="lg:hidden block">
+            <div className="lg:hidden block w-2/3">
               {/* <span className="border-b border-yellow-600 py-2 px-44"></span> */}
               <div className="flex my-6">
                 <span className="mx-2">
-                  <BsCircle className="relative h-8 w-8 text-gray-800" />
-                  <img src="https://marketplace.mintingmusic.com/images/near.png" alt="" className='w-4 h-4 absolute -mt-6 ml-2' />
+                  <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0].txId}`}  target="_blank" rel="noreferrer" >
+                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
+                    <Near className='w-4 h-4 absolute -mt-6 ml-2' />
+                  </a>
                 </span>
                 <span>
-                  <BsCircle className="relative h-8 w-8 text-gray-800" />
-                  <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
+                  <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
+                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
+                    <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
+                  </a>
                 </span>
               </div>
-              <span className="w-full border-b border-yellow-600 py-2 font-medium text-xl mt-3">Perks</span>
-              {/* <span className="border-b border-yellow-600 py-2 px-44"></span> */}
+              <div className="flex justify-between">
+                <span className="w-full py-2 font-medium text-xl mt-3">Perks</span>
+                <span></span>
+              </div>
+              <span className="border-b border-mp-brown-1 flex"></span>
               <div className=" mt-6 px-4">
                 <span className="text-sm ">
                   <li>First Perk</li>
@@ -232,14 +241,20 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <div>
               <div className="flex justify-evenly w-full">
                 <p className="text">Details</p>
+                {console.log(things, 'banana')
+                }
                 <span className="border-b px-8 border-yellow-600 mb-4 mx-2"></span>
                 <div className="mx-2">
-                  <BsCircle className="relative h-8 w-8 text-yellow-300" />
-                  <img src="https://marketplace.sevendeadstars.com/images/near.png" alt="" className='w-4 h-4 absolute -mt-6 ml-2' />
+                  <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0].txId}`}  target="_blank" rel="noreferrer" >
+                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
+                    <Near className='w-4 h-4 absolute -mt-6 ml-2' />
+                  </a>
                 </div>
                 <div>
-                  <BsCircle className="relative h-8 w-8 text-yellow-300" />
-                  <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
+                  <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
+                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
+                    <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
+                  </a>
                 </div>
               </div>
               <div className="flex justify-evenly mt-3">
@@ -254,7 +269,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
           </div>
         </div>
       </div>
-      <SimilarNft />
+      {/* <SimilarNft /> */}
     </div>
   )
 }

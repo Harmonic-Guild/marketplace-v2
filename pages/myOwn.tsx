@@ -6,6 +6,8 @@ import React from 'react'
 // import dynamic from 'next/dynamic';
 import Image from 'next/image'
 import MintNft from '../Modal/MintNft'
+import { BsCircle } from 'react-icons/bs'
+import { AiOutlineExpandAlt } from 'react-icons/ai'
 
 
 
@@ -57,13 +59,17 @@ const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type }: {
               width={500}
               objectFit="cover"
               src={media}
-              alt={title} />
-              <div className='absolute bottom-2 z-10 right-2' onClick={()=> toggleFullScreen(media)}>[]</div>
+              alt={title} 
+              className="object-contain mx-auto rounded-lg"/>
+              <div className='absolute bottom-2 z-10 right-2 text-yellow-500' onClick={()=> toggleFullScreen(media)}>
+                <BsCircle className="relative h-8 w-8" />
+                <AiOutlineExpandAlt title='full screen' className="w-4 h-4 absolute -mt-6 ml-2" />
+              </div>
               </div>
             </div>) : 
             (<div className="lg:h-80 h-64 mx-auto flex items-center">
               
-              <video poster={media} controls className='object-contain' controlsList="nodownload" loop muted>
+              <video poster={media} controls className='object-contain mx-auto rounded-lg' controlsList="nodownload" loop muted>
                   <source src={animation_url}></source>
               </video>
             </div>)
@@ -143,7 +149,10 @@ const MyOwn = () => {
             layout="fill"
             objectFit='contain'
           />
-          <div className='absolute bottom-2 right-8 text-white' onClick={()=> setFullScreen(false)}>[]</div>
+          <div className='absolute bottom-2 right-8 text-yellow-500' onClick={()=> setFullScreen(false)}>
+            <BsCircle className="relative h-8 w-8" />
+            <AiOutlineExpandAlt title='close screen' className="w-4 h-4 absolute -mt-6 ml-2" />
+          </div>
         </div>
       </div>}
       {loadingTokensData && 'Loading...'}

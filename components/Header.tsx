@@ -3,13 +3,12 @@ import { useState } from 'react'
 import { useWallet } from '../services/providers/MintbaseWalletContext';
 import { BsMoonStars, BsSun, BsDot, BsLayoutTextSidebarReverse } from 'react-icons/bs'
 import { FiMenu, FiX, FiUsers } from "react-icons/fi";
-import NavBreadCrumb from './NavBreadCrumb'
+// import NavBreadCrumb from './NavBreadCrumb'
 import Near from '../icons/near.svg'
 
 const navTitles = [
   { title: 'Home', href:'/'},
   { title: 'Explore', href:'/explore'},
-  { title: 'Profile', href:'/'},
   { title: 'MyNFTs', href:'/myOwn'}
 ]
 
@@ -102,7 +101,7 @@ const Header = () => {
           </div>         
         </div>
       </div>
-      <NavBreadCrumb/>
+      {/* <NavBreadCrumb/> */}
     </header>
   )
 }
