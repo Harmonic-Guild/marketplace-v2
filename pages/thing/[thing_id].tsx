@@ -187,13 +187,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <div className="lg:hidden block w-2/3">
               {/* <span className="border-b border-yellow-600 py-2 px-44"></span> */}
               <div className="flex my-6">
-                <span className="mx-2">
+                <span className="mx-2 cursor-pointer">
                   <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0].txId}`}  target="_blank" rel="noreferrer" >
                     <BsCircle className="relative h-8 w-8 text-yellow-300" />
                     <Near className='w-4 h-4 absolute -mt-6 ml-2' />
                   </a>
                 </span>
-                <span>
+                <span className="cursor-pointer">
                   <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
                     <BsCircle className="relative h-8 w-8 text-yellow-300" />
                     <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
@@ -244,13 +244,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                 {console.log(things, 'banana')
                 }
                 <span className="border-b px-8 border-yellow-600 mb-4 mx-2"></span>
-                <div className="mx-2">
+                <div className="mx-2 cursor-pointer">
                   <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0].txId}`}  target="_blank" rel="noreferrer" >
                     <BsCircle className="relative h-8 w-8 text-yellow-300" />
                     <Near className='w-4 h-4 absolute -mt-6 ml-2' />
                   </a>
                 </div>
-                <div>
+                <div className="cursor-pointer">
                   <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
                     <BsCircle className="relative h-8 w-8 text-yellow-300" />
                     <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />

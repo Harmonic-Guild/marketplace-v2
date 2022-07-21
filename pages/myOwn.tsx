@@ -52,19 +52,20 @@ const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type }: {
         <div>
 
           {(animation_type === null || animation_type === 'image/jpeg' || animation_type === 'image/png' || animation_type === 'image/gif' ) ?
-            (<div className="object-contain mx-auto rounded lg:h-80 h-64 ">
-              <div className="relative">
-              <Image
-              height={500}
-              width={500}
-              objectFit="cover"
-              src={media}
-              alt={title} 
-              className="object-contain mx-auto rounded-lg"/>
-              <div className='absolute bottom-2 z-10 right-2 text-yellow-500' onClick={()=> toggleFullScreen(media)}>
-                <BsCircle className="relative h-8 w-8" />
-                <AiOutlineExpandAlt title='full screen' className="w-4 h-4 absolute -mt-6 ml-2" />
-              </div>
+            (<div className="object-contain mx-auto rounded">
+              <div className="object-contain mx-auto rounded-lg relative">
+                <Image
+                  height={500}
+                  width={500}
+                  objectFit="cover"
+                  src={media}
+                  alt={title} 
+                  className="object-contain mx-auto rounded-lg"
+                />
+                <div className='absolute bottom-2 z-10 right-2 text-yellow-500' onClick={()=> toggleFullScreen(media)}>
+                  <BsCircle className="relative h-8 w-8" />
+                  <AiOutlineExpandAlt title='full screen' className="w-4 h-4 absolute -mt-6 ml-2" />
+                </div>
               </div>
             </div>) : 
             (<div className="lg:h-80 h-64 mx-auto flex items-center">
@@ -141,7 +142,7 @@ const MyOwn = () => {
   }
 
   return (
-    <div className="bg-fixed bg-gradient-to-r from-slate-50 to-slate-100 w-full px-6 py-10 relative">
+    <div className="bg-fixed bg-gradient-to-r from-slate-50 to-slate-100 w-full px-6 relative">
       {fullScreen && <div className='h-screen w-screen bg-gray-900 z-50 fixed left-0 top-0 '>
         <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
           <Image

@@ -34,8 +34,7 @@ const MintNft = ({closeModal, tokenId, title}: any) => {
                         <span className='text-gray-400 border border-mp-brown-1 rounded-full p-2 cursor-pointer' onClick={cancel}><AiOutlineClose/></span>
                     </div>
                     <div className='flex text-xl text-gray-400 '>
-                        <p>Adress: <span className='font-bold text-gray-800'>0xa2ba...7D051</span></p> 
-                        <span className='mt-2 px-2'><Near/></span>
+                        <p>Adress: <span className='font-bold text-gray-800'>{wallet?.activeAccount?.accountId}</span></p> 
                     </div>
         
                     <div className="flex mt-3">
