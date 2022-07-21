@@ -8,14 +8,15 @@ import Image from 'next/image'
 import MintNft from '../Modal/MintNft'
 import { BsCircle } from 'react-icons/bs'
 import { AiOutlineExpandAlt } from 'react-icons/ai'
+import { formatNearAmount } from 'near-api-js/lib/utils/format';
 
 
 
 const FETCH_TOKENS = gql`
-query FetchTokensByStoreId($ownerId: String!, $limit: Int, $offset: Int) {
+query FetchTokensByStoreId($ownerId: String!, $storeId: String!, $limit: Int, $offset: Int) {
   metadata(
     order_by: { thing_id: asc }
-    where: {thing: {tokens: {ownerId: {_eq: $ownerId}}}}
+    where: {thing: {tokens: {ownerId: {_eq: $ownerId}}, storeId: {_eq: $storeId}}}
     limit: $limit
     offset: $offset
     distinct_on: thing_id
@@ -30,12 +31,46 @@ query FetchTokensByStoreId($ownerId: String!, $limit: Int, $offset: Int) {
       id
       metaId
       memo
+      tokens(where: {burnedAt: {_is_null: true}, ownerId: {_eq: $ownerId}}) {
+        id
+        ownerId
+        lists(order_by: {createdAt: desc}) {
+          autotransfer
+          offer {
+            price
+          }
+          price
+        }
+      }
     }
   }
 }
 `
 
-const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type }: {toggle: any, tokenId: string, media: string; title: string; animation_url: string; animation_type: string }) => {
+// const FETCH_Others = gql`
+// query FetchTokensByStoreId($ownerId: String!, $storeId: String!, $limit: Int, $offset: Int) {
+//   metadata(
+//     order_by: { thing_id: asc }
+//     where: {thing: {tokens: {ownerId: {_eq: $ownerId}}, storeId: {_eq: $storeId}}}
+//     limit: $limit
+//     offset: $offset
+//     distinct_on: thing_id
+//   ) {
+//     id
+//     media
+//     animation_url
+//     title
+//     thing_id
+//     animation_type
+//     thing {
+//       id
+//       metaId
+//       memo
+//     }
+//   }
+// }`
+
+const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type, lists }: {toggle: any, tokenId: string, media: string; title: string; animation_url: string; animation_type: string, lists: any }) => {
   
   const [sellModal, showSellModal] = useState(false)
 
@@ -46,7 +81,7 @@ const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type }: {
   
 
   return (
-    <div className="w-full h-auto border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
+    <div className="w-full h-auto border border-mp-brown-2 rounded-2xl bg-mp-peach-2">
       <div className="p-4">
       {sellModal &&<MintNft closeModal={()=> showSellModal(false)} tokenId={tokenId} title={title} />}
         <div>
@@ -82,6 +117,7 @@ const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type }: {
             <div className="w-full flex justify-center mt-6">
               <button className='btnColor px-4 py-2 rounded-lg mx-center w-4/5' onClick={()=> showSellModal(true)}>Sell NFT</button>
             </div>
+            {lists.length && <div className="text-center mt-2 text-gray-600">Currently on sale at {formatNearAmount(Number(lists[0]?.price).toLocaleString('fullwide', { useGrouping: false }),5)} Near</div>}
           </div>
         </div>
       </div>
@@ -97,7 +133,28 @@ type MetaData = {
   title: string
   animation_type: string
   thing_id: string
+  thing: {
+    id: string;
+    metaId: string;
+    memo: string;
+    tokens: Tokens[]
+  }
 }
+
+interface Tokens {
+  id: string;
+  ownerId: string;
+  lists: List[]
+}
+
+interface List {
+  autotransfer: boolean;
+  offer: {
+    price: number;
+  }
+  price: number;
+}
+
 
 const MyOwn = () => {
   const { wallet} = useWallet()
@@ -112,6 +169,7 @@ const MyOwn = () => {
         ownerId: '',
         limit: 10,
         offset: 0,
+        storeId: ''
       },
     })
 
@@ -122,6 +180,7 @@ const MyOwn = () => {
         ownerId: wallet?.activeAccount?.accountId!,
         limit: 20,
         offset: 0,
+        storeId: process.env.NEXT_PUBLIC_STORE_NAME!
       },
     })
   }, [wallet?.activeAccount?.accountId])
@@ -131,7 +190,7 @@ const MyOwn = () => {
     
     setMetaData(tokensData.metadata)
 
-    console.log(tokensData, '][][[][]]');
+    console.log(tokensData, '*-*-*--*-*-')
     
     
   }, [tokensData])
@@ -159,24 +218,46 @@ const MyOwn = () => {
       {loadingTokensData && 'Loading...'}
       {!loadingTokensData && (
         <>
-        <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-4xl px-6 py-8">
-          {wallet?.activeAccount?.accountId}, your tokens
+        <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8">
+          {/* {wallet?.activeAccount?.accountId}  */}
+          your tokens from this store
         </h1>
         <div className="pb-24 w-full mx-auto ">
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
             {metaData.map((meta: MetaData) => (
                 <NFT
                 key={meta.id}
-                  tokenId={meta.id}
+                  tokenId={meta.thing.tokens[0].id}
                   media={meta.media}
                   title={meta.title}
                   animation_url={meta.animation_url}
                   animation_type={meta.animation_type}
+                  lists={meta.thing.tokens[0].lists}
                   toggle={toggle}
                 />
             ))}
           </div>
         </div>
+
+        {/* <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 pb-4">
+          your tokens from Other stores
+        </h1>
+        <div className="pb-24 w-full mx-auto ">
+          <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
+            {metaData.map((meta: MetaData) => (
+                <NFT
+                key={meta.id}
+                  tokenId={meta.thing.tokens[0].id}
+                  media={meta.media}
+                  title={meta.title}
+                  animation_url={meta.animation_url}
+                  animation_type={meta.animation_type}
+                  lists={meta.thing.tokens[0].lists}
+                  toggle={toggle}
+                />
+            ))}
+          </div>
+        </div> */}
       </>
       )}
       
