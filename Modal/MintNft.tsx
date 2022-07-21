@@ -12,17 +12,17 @@ const MintNft = ({closeModal, tokenId, title}: any) => {
     
     const sellNFT = () => {
         if(!price) return;
-        const contractName = process.env.NEXT_PUBLIC_marketAddress!
+        const contractName = process.env.NEXT_PUBLIC_STORE_NAME!
         const amount = parseNearAmount(price)!
 
+        const token_id = tokenId.split(":"+process.env.NEXT_PUBLIC_STORE_NAME)[0]
         
 
-        wallet?.list(tokenId, contractName ,amount).then(res=> {
+        wallet?.list(token_id, contractName ,amount).then(res=> {
             console.log(res, '=*****-0--*-***--*-*--===-=-****');
         }).catch(e=> console.log(e)
         )
 
-        
     }
   return (
     <div>
