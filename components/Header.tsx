@@ -20,7 +20,7 @@ const Header = () => {
   const { wallet, isConnected} = useWallet()
   
   return (
-    <header className={`w-full px-6 text-gray-700`}>
+    <header className={`w-full px-6 text-gray-700`} id="nav">
       <div className="container flex mx-auto max-w-8xl md:flex justify-between items-center">
         <Link href="/" passHref>
           <span className="py-6 w-full">
