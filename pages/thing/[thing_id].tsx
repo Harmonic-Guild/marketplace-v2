@@ -36,8 +36,8 @@ query MyQuery($thing_id: String!) {
     }
     allTokens: tokens(distinct_on: id) {
       id
-      txId
-      minter
+      # txId
+      # minter
     }
     storeId
     store {
@@ -60,13 +60,54 @@ query MyQuery($thing_id: String!) {
 `
 
 const thing_id = ({ thing_id }: { thing_id: string }) => {
+   interface Thing {
+    id: string;
+    tokens: [Tokens?]
+    allTokens: [id:string]
+    storeId: string
+    store :{
+      name: string
+      owner: string
+    }
+    metadata: MetaData
+    
+   }
 
-  const [things, setThing] = useState<any>(null)
-  const [tokens, setTokens] = useState<any>([])
-  const [bid, setBid] = useState('0')
-  const [allTokens, setAllTokens] = useState<any>([])
+   interface Tokens {
+    id: string
+    lists: [List?]
+    createdAt: string|number
+    tokenKey: string|number
+    txId:string
+    minter:string
+   }
+
+   interface List {
+    price: number
+    autotransfer: boolean
+    offer: {
+      price:number
+    }
+    createdAt: string| number
+  }
+    interface MetaData   {
+      animation_type: string
+      animation_url: string
+      media: string
+      title: string
+      description: string
+      external_url: string
+      category: string
+      tags: any
+      youtube_url: string
+    }
+
+  const [things, setThing] = useState<Thing|null>(null)
+  const [tokens, setTokens] = useState<[Tokens?]>([])
+  const [bid, setBid] = useState<string>('0')
+  const [allTokens, setAllTokens] = useState<[id?:string]>([])
   const { wallet } = useWallet();
-  const [hide, setHide] = useState(false)
+  const [hide, setHide] = useState<Boolean>(false)
 
   const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] =
     useLazyQuery(FETCH_TOKENS, {
@@ -103,7 +144,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   }
 
   const buy = () => {
-    const token_Id = things?.tokens[0]?.id.split(":"+process.env.NEXT_PUBLIC_STORE_NAME)[0]
+    const token_Id = things?.tokens[0]?.id.split(":"+process.env.NEXT_PUBLIC_STORE_NAME)[0]!
 
     if (things?.tokens[0]?.lists[0]?.autotransfer) {
       wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
@@ -132,24 +173,27 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
       <div className="lg:flex hidden"><Vector_back /></div>
       <div className="lg:flex block justify-evenly w-4/5 lg:w-full mx-auto">
         <div className="pl-0 xl:pl-12 mx-auto w-full xl:w-4/5">
-          {things?.metadata.animation_hash ? (
-            <video controls className='' poster={things?.metadata.media} controlsList="nodownload" muted>
-              <source src={things?.metadata.animation_url} ></source>
-            </video>
+          {(things?.metadata.animation_type !== null && things?.metadata.animation_type !== 'image/jpeg' && things?.metadata.animation_type !== 'image/png'&& things?.metadata.animation_type !== 'image/gif' ) ? (
+            <div className="w-full xl:w-4/5 mx-auto flex align-middle">
+              <video controls className='' poster={things?.metadata.media} controlsList="nodownload" muted>
+                <source src={things?.metadata.animation_url} ></source>
+              </video>
+            </div>
           ) : (
-            <div className=" w-full xl:w-4/5">
-              {things?.metadata.media &&
-                <div className="">
-                  <Image
-                    src={things?.metadata.media}
-                    objectFit="cover"
-                    className="rounded-lg shadow-xl"
-                    width={600}
-                    height={600}
-                    // layout="fill"
-                    alt={'alt'} />
-                </div>
-              }
+
+            <div className=" w-full xl:w-4/5 mx-auto">
+            {things?.metadata.media &&
+              <div className="">
+                <Image
+                  src={things?.metadata.media}
+                  objectFit="cover"
+                  className="rounded-lg shadow-xl"
+                  width={600}
+                  height={600}
+                  // layout="fill"
+                  alt={'alt'} />
+              </div>
+            }
             </div>
           )}
         </div>
@@ -172,7 +216,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <span className="lg:text-4xl text-xl font-medium ">{things?.metadata.title}</span>
           </div>
           <div className="flex w-3/4 py-4">
-            <span>Minted on: {moment(things?.tokens[0].lists[0].createdAt).format('MMM DD, YYYY')}</span>
+            {/* <span>Minted on: {moment(things?.tokens[0]?.lists[0]?.createdAt).format('MMM DD, YYYY')}</span> */}
+            {new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()}
             <TbExternalLink className="text-yellow-300 w-6 h-6" />
           </div>
           {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
@@ -190,7 +235,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
               {/* <span className="border-b border-yellow-600 py-2 px-44"></span> */}
               <div className="flex my-6">
                 <span className="mx-2 cursor-pointer">
-                  <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0].txId}`}  target="_blank" rel="noreferrer" >
+                  <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
                     <BsCircle className="relative h-8 w-8 text-yellow-300" />
                     <Near className='w-4 h-4 absolute -mt-6 ml-2' />
                   </a>
@@ -223,15 +268,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             </div>
           </div>
           <div>
-            {things?.tokens[0]?.lists[0]?.autotransfer && 
-              <PurchaseNft buy ={buy} price={price}/>
+            {things?.tokens[0]?.lists[0]?.autotransfer ?
+            'Yes': 'No'
+              // <PurchaseNft buy ={buy} price={price}/> 
+              // <MakeOffer buy ={buy} price={price}/> 
+              
+
             }
-            {/* {bid} */}
-            {!things?.tokens[0]?.lists[0]?.autotransfer && 
-            <div>
-              <MakeOffer buy ={buy} price={price}/>
-            </div>
-            }
+            
           </div>
           <div className="hidden lg:flex justify-around mt-5 w-3/5 ml-20">
             <div>
@@ -247,7 +291,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                 }
                 <span className="border-b px-8 border-yellow-600 mb-4 mx-2"></span>
                 <div className="mx-2 cursor-pointer">
-                  <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0].txId}`}  target="_blank" rel="noreferrer" >
+                  <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
                     <BsCircle className="relative h-8 w-8 text-yellow-300" />
                     <Near className='w-4 h-4 absolute -mt-6 ml-2' />
                   </a>
