@@ -29,7 +29,7 @@ function NFT({token}: any) {
                                 src={thing.metadata.media}
                                 alt={'alt'} />
                                 
-                                <div className='absolute w-7 h-7 rounded-lg bg-gray-900 top-1/2 left-1/2 text-white  cursor-pointer'><BsPlayCircle className='w-10 h-10'/></div>
+                                <div className='absolute w-full h-7 top-1/2 text-white  cursor-pointer'><BsPlayCircle className='w-10 h-10 mx-auto'/></div>
                             </div>
                         ) : (
                             <div className="object-contain mx-auto">
