@@ -32,6 +32,7 @@ const FETCH_TOKENS = gql`
           burnedAt: { _is_null: true },
           list: {_or: {
              price: {_gte: $gt, _lte: $lt},
+             removedAt: {_is_null: true}
           }},
           thing: {
             metadata: {
