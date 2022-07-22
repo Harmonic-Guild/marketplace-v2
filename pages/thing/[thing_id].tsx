@@ -14,7 +14,6 @@ import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format"
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from '../../icons/near.svg'
-import moment from 'moment'
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -104,9 +103,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
   const [things, setThing] = useState<Thing|null>(null)
   const [tokens, setTokens] = useState<[Tokens?]>([])
-  const [bid, setBid] = useState<string>('0')
   const [allTokens, setAllTokens] = useState<[id?:string]>([])
-  const { wallet } = useWallet();
+  const { wallet, isConnected } = useWallet();
   const [hide, setHide] = useState<Boolean>(false)
 
   const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] =
@@ -143,15 +141,20 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     setHide(!hide)
   }
 
-  const buy = () => {
-    const token_Id = things?.tokens[0]?.id.split(":"+process.env.NEXT_PUBLIC_STORE_NAME)[0]!
+  const buy = (bid: number) => {
+    const token_Id = things?.tokens[0]?.id!
+    
 
     if (things?.tokens[0]?.lists[0]?.autotransfer) {
-      wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
+      wallet?.makeOffer(token_Id, tokenPrice)
     }
     else {
-      wallet?.makeOffer(token_Id, parseNearAmount(bid)!.toString(), { marketAddress: process.env.NEXT_PUBLIC_marketAddress })
+      wallet?.makeOffer(
+        token_Id,
+         parseNearAmount(bid.toString())!.toString(),
+         )
   }
+
   }
   // console.log(wallet);
   
@@ -160,7 +163,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   const price = things?.tokens[0]?.lists[0] &&  formatNearAmount((tokenPriceNumber).toLocaleString('fullwide', { useGrouping: false }), 2)
   const tokenPrice = (tokenPriceNumber).toLocaleString('fullwide', { useGrouping: false })
 
-  var currentBid;
+  let currentBid;
   if (things?.tokens[0]?.lists[0]?.offer == null) {
     currentBid = '0'
   }
@@ -223,7 +226,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
           {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
           <div className="">
             <div className="w-2/3">
-              <span className="text">Discription</span>
+              <span className="text">Description</span>
               <span className="border-b border-mp-brown-1 flex"></span>
               <p className={hide ? 'pt-2 h-24 overflow-y-scroll ' : 'pt-2 h-16 overflow-y-scroll truncate'}>
                 <span>{things?.metadata.description}</span>
@@ -247,6 +250,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   </a>
                 </span>
               </div>
+              <p className="text-gray-500">{tokens.length}/{allTokens.length} Tokens available</p>
               <div className="flex justify-between">
                 <span className="w-full py-2 font-medium text-xl mt-3">Perks</span>
                 <span></span>
@@ -269,9 +273,12 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
           </div>
           <div>
             {things?.tokens[0]?.lists[0]?.autotransfer ?
-            'Yes': 'No'
-              // <PurchaseNft buy ={buy} price={price}/> 
-              // <MakeOffer buy ={buy} price={price}/> 
+            (
+              <PurchaseNft buy ={buy} price={price!} isConnected={isConnected}/> 
+            ): (
+
+              <MakeOffer buy ={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price}/> 
+            )
               
 
             }
@@ -287,8 +294,6 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <div>
               <div className="flex justify-evenly w-full">
                 <p className="text">Details</p>
-                {console.log(things, 'banana')
-                }
                 <span className="border-b px-8 border-yellow-600 mb-4 mx-2"></span>
                 <div className="mx-2 cursor-pointer">
                   <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
