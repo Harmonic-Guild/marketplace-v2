@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import Near from '../icons/near.svg'
-import { useWallet } from '../services/providers/MintbaseWalletContext';
-import { Connect } from './Connect';
 import NotConnected from './NotConnected';
 
-const MakeOffer = ({buy, price}: {buy: any, price: any}) => {
+const MakeOffer = ({buy, isConnected, latestBid}: any) => {
 
-  const { wallet, isConnected } = useWallet();
   const [showModal, setShowModal] = useState(false)
   const [bid, setBid] = useState('0')
   const [showNotConnectedModal, setShowNotConnectedModal] = useState(false)
@@ -23,12 +20,12 @@ const MakeOffer = ({buy, price}: {buy: any, price: any}) => {
         {/* <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> */}
         <span className="pl-2 text-sm ">@Latest bidder</span>
         </div>
-        <span className=" font-medium flex md:text-base text-sm">
+        <div className=" font-medium flex md:text-base text-sm">
             <span className=''>Latestbid: </span>
-            <span className="pl-3 pr-1">{bid}</span>
+            <span className="pl-3 pr-1">{latestBid || 'none'}</span>
             {/* <span className="pl-3 pr-1">{price}</span> */}
-            <span className='pt-1  ml-1'><Near /></span>
-        </span>
+            {latestBid && <span className='pt-1  ml-1'><Near /></span>}
+        </div>
       </div>
       <span className="border-b border-mp-brown-1 lg:hidden flex py-2 "></span>
       <div className="mt-8 lg:mt-0">
@@ -54,12 +51,12 @@ const MakeOffer = ({buy, price}: {buy: any, price: any}) => {
                   <span className='lg:text-sm text-lg'>Time remaining</span>
               </div>
               <div className='my-2 flex justify-between w-full lg:w-3/5 border border-gray-400 rounded-lg'>
-                  <input type="number" className='w-full' value={bid} onChange={handleChange}/> 
+                  <input type="number" className='w-full outline-none' value={bid} onChange={handleChange}/> 
                   <span className='border-l border-gray-400 p-2'><Near/></span>
               </div>
 
               <div className="">
-                  <button onClick={buy} className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800">Place bid</button>                    
+                  <button onClick={()=> buy(bid)} className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800">Place bid</button>                    
               </div>
               
           </div>

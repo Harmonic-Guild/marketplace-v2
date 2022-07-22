@@ -1,10 +1,8 @@
 import React from 'react'
 import Near from '../icons/near.svg'
-import { useWallet } from '../services/providers/MintbaseWalletContext';
 
-const PurchaseNft = ({buy, price}: {buy: any, price: any}) => {
+const PurchaseNft = ({buy, price, isConnected}: {buy: any, price: string, isConnected: boolean}) => {
 
-  const { wallet, isConnected } = useWallet();
 
   return (
     <div className={`flex justify-between border border-mp-brown-1 bg-mp-peach-2 rounded-lg lg:w-4/5 w-fulltokenPriceNumber p-6 mt-4`}>
