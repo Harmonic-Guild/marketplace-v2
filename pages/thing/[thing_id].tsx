@@ -228,7 +228,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <div className="w-2/3">
               <span className="text">Description</span>
               <span className="border-b border-mp-brown-1 flex"></span>
-              <p className={hide ? 'pt-2 h-24 overflow-y-scroll ' : 'pt-2 h-16 overflow-y-scroll truncate'}>
+              <p className={hide ? 'pt-2 h-24 overflow-y-scroll ' : 'pt-2 h-16 overflow-y-scroll line-clamp-3'}>
                 <span>{things?.metadata.description}</span>
               </p>
               <span id='span' onClick={toggleDiscription} className='cursor-pointer p-2 text-blue-500 hover:underline'> {!hide ? '.....see more' : 'see less'}</span>

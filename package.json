@@ -8,6 +8,7 @@
   "dependencies": {
     "@apollo/client": "~3.4.0",
     "@svgr/webpack": "^6.2.1",
+    "@tailwindcss/line-clamp": "^0.4.0",
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
