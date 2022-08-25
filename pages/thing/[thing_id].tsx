@@ -191,8 +191,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   src={things?.metadata.media}
                   objectFit="cover"
                   className="rounded-lg shadow-xl"
-                  width={600}
-                  height={600}
+                  width={500}
+                  height={500}
                   // layout="fill"
                   alt={'alt'} />
               </div>
