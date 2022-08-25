@@ -5,6 +5,7 @@ import { BsMoonStars, BsSun, BsDot, BsLayoutTextSidebarReverse } from 'react-ico
 import { FiMenu, FiX, FiUsers } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
 import Near from '../icons/near.svg'
+import { useRouter } from 'next/dist/client/router';
 
 const navTitles = [
   { title: 'Home', href:'/'},
@@ -18,6 +19,7 @@ const Header = () => {
   const [toggleIcons, setToggleIcons] = useState<boolean>()
   const [activeTitle, setActiveTitle] = useState<boolean>(true)
   const { wallet, isConnected} = useWallet()
+  const router = useRouter();
   
   return (
     <header className={`w-full px-6 text-gray-700`} id="nav">
@@ -68,16 +70,16 @@ const Header = () => {
 
         <div className="hidden lg:flex w-full lg:w-auto mb-6 lg:mb-0 text-center space-x-5 lg:text-right">
           <div className=' mt-2 flex justify-around gap-16 mx-12 text-lg font-bold'>
-          {navTitles.map((item, index) => (
-            <Link key={index} href={item.href} passHref>
-                <div 
-                    className={`cursor-pointer ${activeTitle? 'border-b border-yellow-600' : 'border-b border-red-600'}`} 
-                    onClick={() => setActiveTitle(false)}
-                >
-                    {item.title}
-                </div>
-            </Link>
-          ))}
+          {navTitles.map((item, index) => {
+            const isActive = router.asPath.endsWith(`${item.href}`)
+            // console.log(item.href);
+            
+            return (
+              <Link key={index} href={item.href} passHref>
+                <div className={`cursor-pointer space-x-8 transition duration-700 ${isActive? 'text-yellow-500' : 'text-gray-500'}`}> {item.title} </div>
+              </Link>
+            )
+          })}
           </div>
           <div className="flex flex-row items-center space-x-5">
             <div onClick={() => setToggleIcons(!toggleIcons)}>
