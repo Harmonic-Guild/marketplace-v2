@@ -243,7 +243,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
               <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
                 <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
                   <p className="text-xl pr-1 text-2xl font-bold text-center lg:text-left">
-                    History of NFT mine
+                    History of NFT
                   </p>
                   {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/> */}
                 </div>

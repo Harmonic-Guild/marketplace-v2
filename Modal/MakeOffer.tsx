@@ -14,7 +14,7 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
   }
 
   return (
-    <div className="border border-yellow-600 bg-yellow-100 rounded-lg p-6 mt-8 lg:flex lg:gap-10">
+    <div className="border border-yellow-600 bg-yellow-100 rounded-lg p-6 mt-8  lg:flex lg:justify-around lg:gap-10">
       <div className="flex flex-col justify-center items-center">
         <div className="flex items-center gap-2">
             <img
