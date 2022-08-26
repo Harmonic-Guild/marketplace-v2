@@ -216,7 +216,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         </div>
         <div className="w-full">
           
-          <div  className="text-4xl font-bold my-5">
+          <div  className="text-4xl font-bold mb-5">
             {things?.metadata.title}
           </div>
 
