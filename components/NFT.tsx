@@ -13,8 +13,9 @@ function NFT({token}: any) {
     
     return ( 
         <Link href={`/thing/${thing.id}`} passHref>
-            <div className="w-full nft_height border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer">
-                <div className="p-3">
+            <div className="w-full nft_height border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer p-3 lg:p-5">
+                {/* purpose of w full and nft height? */}
+                <div className="">
                     
                         {(thing.metadata.animation_type !== null && thing.metadata.animation_type !== 'image/jpeg' && thing.metadata.animation_type !== 'image/png'&& thing.metadata.animation_type !== 'image/gif' ) ? (
                             // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
@@ -22,6 +23,7 @@ function NFT({token}: any) {
                             // </video>
                             <div className="object-contain mx-auto rounded-lg relative">
                                 <Image
+                                className='rounded-lg'
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
                                 width={500}
@@ -34,13 +36,14 @@ function NFT({token}: any) {
                         ) : (
                             <div className="object-contain mx-auto">
                                 <Image
+                                className='object-contain mx-auto rounded-lg'
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
                                 width={500}
                                 objectFit="cover"
                                 src={thing.metadata.media}
                                 alt={'alt'} 
-                                className="object-contain mx-auto rounded-lg"/>
+                                />
                             </div>
                         )}
                         <div className="text-sm py-2 text-mp-dark-3 relative">
@@ -51,7 +54,7 @@ function NFT({token}: any) {
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div> */}
-                            <div className="font-semibold my-1 py-1 text-sm truncate">{thing.metadata.title}</div>
+                            <div className="font-bold mt-4 mb-2 text-xl">{thing.metadata.title}</div>
                             <div className="flex my-1 py-1 justify-between">
                                 <p className='flex'>
                                     {list? !list?.autotransfer?
