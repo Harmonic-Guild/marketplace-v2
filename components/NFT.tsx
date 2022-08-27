@@ -55,35 +55,47 @@ function NFT({token}: any) {
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div> */}
                             <div className="font-bold mt-4 mb-2 text-xl">{thing.metadata.title}</div>
-                            <div className="flex my-1 py-1 justify-between">
-                                <p className='flex'>
+                            <div>
+                                
+                                <div className='flex gap-2 items-center text-xl'>
                                     {list? !list?.autotransfer?
-                                     (<>
-                                     Last Bid: {formatNearAmount(Number(list?.offer?.price || 0).toLocaleString('fullwide', { useGrouping: false }),5)}
-                                     <span className='pt-1  ml-1'><Near></Near></span>
-                                    </>):
+                                     (
+                                    <>
+                                        Last Bid: {formatNearAmount(Number(list?.offer?.price || 0).toLocaleString('fullwide', { useGrouping: false }),5)}
+                                        <div><Near className="w-4 h-4" /></div>
+                                    </>
+                                    ):
                                     (<>
                                         Price: {formatNearAmount(Number(list?.price).toLocaleString('fullwide', { useGrouping: false }),5)}
-                                        <span className='pt-1  ml-1'><Near></Near></span>
+                                        <div><Near className="w-4 h-4"/></div>
                                        </>): 
                                     `Not Available`
                                     }
-                                    </p>
+                                </div>
                                 {/* <div className="md:flex hidden relative">
                                     <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
                                     <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                     <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                                 </div> */}
                             </div>
-                            <div className="flex mt-4 pt-1 justify-between">
-                                <button className='flex action-btn '>
-                                    <span className=''>
+                            <div className="flex mt-4 justify-between">
+                                <button className='flex justify-between items-center rounded-full bg-yellow-300 gap-5 px-5 py-3 font-semibold text-md'>
+                                    <div className=''>
+                                        {
+                                        list? !list?.autotransfer ? 'Bid': 'Get Details' : 'N/A' 
+                                        }
+                                    </div> 
+                                <div className='border-l border-black h-full'></div>
+                                <AiOutlineRight className=' w-5 h-5'/>
+                                </button>
+                                {/* <button className='flex action-btn'>
+                                    <div className='pr-3'>
                                     {
                                     list? !list?.autotransfer ? 'Bid': 'Get Details' : 'N/A' 
                                     }
-                                    </span> 
-                                     <span className='border-l border-black  md:ml-2 ml-0'><AiOutlineRight className=' w-5 h-5'/></span> 
-                                     </button>
+                                    </div> 
+                                     <div className='border-l border-black pl-3'><AiOutlineRight className=' w-5 h-5'/></div> 
+                                </button> */}
                                 <button className='text-yellow-500'>
                                     <BiShareAlt className='w-6 h-6 absolute ml-2 mt-2'/>
                                     <BsCircle className='w-10 h-10'/>
