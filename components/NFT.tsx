@@ -13,7 +13,7 @@ function NFT({token}: any) {
     
     return ( 
         <Link href={`/thing/${thing.id}`} passHref>
-            <div className="w-full nft_height border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer p-3 lg:p-5">
+            <div className="w-full nft_height border border-mp-brown-2 rounded-2xl bg-mp-peach-2 cursor-pointer p-5">
                 {/* purpose of w full and nft height? */}
                 <div className="">
                     
@@ -21,9 +21,9 @@ function NFT({token}: any) {
                             // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
                             //     <source src={metadata.animation_url} ></source>
                             // </video>
-                            <div className="object-contain mx-auto rounded-lg relative">
+                            <div className="object-contain mx-auto rounded-lg">
                                 <Image
-                                className='rounded-lg'
+                                className='object-contain mx-auto rounded-lg'
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
                                 height={500}
                                 width={500}
@@ -54,36 +54,54 @@ function NFT({token}: any) {
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div> */}
-                            <div className="font-bold mt-4 mb-2 text-xl">{thing.metadata.title}</div>
-                            <div className="flex my-1 py-1 justify-between">
-                                <p className='flex'>
+                            <div className="font-bold mt-4 mb-1 text-xl">{thing.metadata.title}</div>
+                            <div>
+                                
+                                <div className='flex gap-2 items-center text-lg'>
                                     {list? !list?.autotransfer?
-                                     (<>
-                                     Last Bid: {formatNearAmount(Number(list?.offer?.price || 0).toLocaleString('fullwide', { useGrouping: false }),5)}
-                                     <span className='pt-1  ml-1'><Near></Near></span>
-                                    </>):
-                                    (<>
-                                        Price: {formatNearAmount(Number(list?.price).toLocaleString('fullwide', { useGrouping: false }),5)}
-                                        <span className='pt-1  ml-1'><Near></Near></span>
-                                       </>): 
+                                     (
+                                    <div className='flex items-center gap-2'>
+                                        <div>
+                                            Last Bid: <span className='font-bold'>{formatNearAmount(Number(list?.offer?.price || 0).toLocaleString('fullwide', { useGrouping: false }),5)}</span>
+                                        </div>
+                                        <div><Near className="w-4 h-4" /></div>
+                                    </div>
+                                    ):
+                                    (
+                                    <div className='flex items-center gap-2'>
+                                        <div>
+                                            Price: <span className='font-bold'>{formatNearAmount(Number(list?.price).toLocaleString('fullwide', { useGrouping: false }),5)}</span>
+                                        </div>
+                                        <div><Near className="w-4 h-4"/></div>
+                                    </div>
+                                    ): 
                                     `Not Available`
                                     }
-                                    </p>
+                                </div>
                                 {/* <div className="md:flex hidden relative">
                                     <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
                                     <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                     <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                                 </div> */}
                             </div>
-                            <div className="flex mt-4 pt-1 justify-between">
-                                <button className='flex action-btn '>
-                                    <span className=''>
+                            <div className="flex mt-4 justify-between">
+                                <button className='flex justify-between items-center rounded-lg gap-3 bg-gradient-to-r from-actionBtn-Yellow-1 to-actionBtn-Orange-1 px-5 py-3 font-semibold text-md'>
+                                    <div className=''>
+                                        {
+                                        list? !list?.autotransfer ? 'Bid': 'Get Details' : 'N/A' 
+                                        }
+                                    </div> 
+                                <div className='border-l border-black h-full w-0'></div>
+                                <AiOutlineRight className=' w-5 h-5'/>
+                                </button>
+                                {/* <button className='flex action-btn'>
+                                    <div className='pr-3'>
                                     {
                                     list? !list?.autotransfer ? 'Bid': 'Get Details' : 'N/A' 
                                     }
-                                    </span> 
-                                     <span className='border-l border-black  md:ml-2 ml-0'><AiOutlineRight className=' w-5 h-5'/></span> 
-                                     </button>
+                                    </div> 
+                                     <div className='border-l border-black pl-3'><AiOutlineRight className=' w-5 h-5'/></div> 
+                                </button> */}
                                 <button className='text-yellow-500'>
                                     <BiShareAlt className='w-6 h-6 absolute ml-2 mt-2'/>
                                     <BsCircle className='w-10 h-10'/>
