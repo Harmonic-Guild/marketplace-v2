@@ -14,6 +14,7 @@ import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format"
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from '../../icons/near.svg'
+import Link from "next/link";
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -126,7 +127,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     if (!tokensData) return;
     setThing(tokensData.thing[0])
 
-    const tokens = tokensData.thing[0].tokens.map((token: any) => {
+    const tokens = tokensData.thing[0].tokens.map((token: Tokens) => {
       return token
     })
     const allTokens = tokensData.thing[0].allTokens.map((token: any) => {
@@ -173,17 +174,17 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
   return (
     <div className={`min-h-screen p-4 text-gray-700`}>
-      <div className="lg:flex hidden"><Vector_back /></div>
+      <Link href="/explore" passHref><div className="lg:flex hidden cursor-pointer"><Vector_back /></div></Link>
       <div className="lg:flex block justify-evenly w-4/5 lg:w-full mx-auto">
         <div className="pl-0 xl:pl-12 mx-auto w-full xl:w-4/5">
           {(things?.metadata.animation_type !== null && things?.metadata.animation_type !== 'image/jpeg' && things?.metadata.animation_type !== 'image/png'&& things?.metadata.animation_type !== 'image/gif' ) ? (
             <div className="w-full xl:w-4/5 mx-auto flex align-middle">
               <video controls className='' poster={things?.metadata.media} controlsList="nodownload" muted>
                 <source src={things?.metadata.animation_url} ></source>
-              </video>
+              </video><br/>
             </div>
           ) : (
-
+            
             <div className=" w-full xl:w-4/5 mx-auto">
             {things?.metadata.media &&
               <div className="">
@@ -234,7 +235,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
               <span id='span' onClick={toggleDiscription} className='cursor-pointer p-2 text-blue-500 hover:underline'> {!hide ? '.....see more' : 'see less'}</span>
               {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
             </div>
-            <div className="lg:hidden block w-2/3">
+            <div className="block w-2/3">
               {/* <span className="border-b border-yellow-600 py-2 px-44"></span> */}
               <div className="flex my-6">
                 <span className="mx-2 cursor-pointer">
