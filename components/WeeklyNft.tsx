@@ -6,7 +6,7 @@ import NFT from "./NFT";
 
 const FETCH_WEEKLY = gql`
 query MyQuery($storeId: String!) {
-  token(where: {storeId: {_eq: $storeId}, list: {price: {_is_null: false}}, burnedAt: {_is_null: true}}, limit: 4, distinct_on: thingId, order_by: {thingId: desc}) {
+  token(where: {storeId: {_eq: $storeId}, list: {price: {_is_null: false}}, burnedAt: {_is_null: true}}, limit: 3, offset:3, distinct_on: thingId, order_by: {thingId: desc}) {
     id
     lists(
       order_by: {createdAt: desc}, limit: 1
@@ -41,45 +41,6 @@ query MyQuery($storeId: String!) {
 
   const [tokens, setTokens] = useState<[]>([])
 
-    const settings = {
-      dots: true,
-      className: "center",
-      infinite: true,
-      centerPadding: "8px",
-      slidesToShow: 4,
-      speed: 700,
-      slidesToScroll: 1,
-      initialSlide: 0,
-      // nextArrow: <SampleNextArrow />,
-      // prevArrow: <SamplePrevArrow/>,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    };
-
     const [getTokens, { loading: loadingtokensData, data: tokensData }] =
      useLazyQuery(FETCH_WEEKLY, {
        variables: {
@@ -112,17 +73,20 @@ query MyQuery($storeId: String!) {
     }, [tokensData])
 
     return (
+      <>
+      {loadingtokensData && <div className="h-5 w-5 bg-yellow-500 animate-pulse rounded-full"></div>}
       <div className="w-full h-full pt-10 lg:px-32 px-12 ">
-        <div className=" text-center  font-bold text-gray-900 mb-4">
-        <p className='text-mp-orange-1 mb-2'>Lorem <GiStarShuriken className='inline w-6 h-5'/></p>
-            <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
-        </div>
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 w-full pt-4 gap-y-5 gap-2">
-            {tokens.map((token:any) => (
-                <NFT token={token} key={token.id} />
-            ))}
-        </div>
+      <div className=" text-center  font-bold text-gray-900 mb-4">
+      <p className='text-mp-orange-1 mb-2'>Lorem <GiStarShuriken className='inline w-6 h-5'/></p>
+          <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
       </div>
+      <div className="grid md:grid-cols-3 sm:grid-cols-3 w-full pt-4 gap-y-5 gap-2">
+          {tokens.map((token:any) => (
+              <NFT token={token} key={token.id} />
+          ))}
+      </div>
+    </div>
+      </>
     );
   }
 
