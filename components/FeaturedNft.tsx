@@ -26,7 +26,7 @@ query MyQuery($storeId: String!) {
 `
 
 
-const FeaturesNft = ({storeId}: {storeId: string}) => {
+const FeaturedNft = ({storeId}: {storeId: string}) => {
 
   interface Token {
     id: string;
@@ -35,6 +35,7 @@ const FeaturesNft = ({storeId}: {storeId: string}) => {
       metaId: string;
       metadata: {
         media: string 
+        title: string
       }
     }
   }
@@ -133,6 +134,7 @@ const FeaturesNft = ({storeId}: {storeId: string}) => {
                           objectFit="cover"
                           layout="fill"
                         />
+                      <div className="absolute bottom-5 text-white text-center font-semibold w-full">{token.thing.metadata.title}</div>
                       </div>
               </div>
             ))}
@@ -141,5 +143,5 @@ const FeaturesNft = ({storeId}: {storeId: string}) => {
     );
 }
 
-export default FeaturesNft
+export default FeaturedNft
 
