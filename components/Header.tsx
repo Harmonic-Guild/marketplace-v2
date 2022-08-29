@@ -1,14 +1,15 @@
 import Link from 'next/link'
 import { useState } from 'react'
+import { useWallet } from '../services/providers/MintbaseWalletContext';
 import { BsMoonStars, BsSun, BsDot, BsLayoutTextSidebarReverse } from 'react-icons/bs'
 import { FiMenu, FiX, FiUsers } from "react-icons/fi";
-import NavBreadCrumb from './NavBreadCrumb'
+// import NavBreadCrumb from './NavBreadCrumb'
+import Near from '../icons/near.svg'
 
 const navTitles = [
   { title: 'Home', href:'/'},
   { title: 'Explore', href:'/explore'},
-  { title: 'Profile', href:'/'},
-  { title: 'MyNFTs', href:'/'}
+  { title: 'MyNFTs', href:'/myOwn'}
 ]
 
 const Header = () => {
@@ -16,9 +17,10 @@ const Header = () => {
   const [darkMode, setDarkMode] = useState<boolean>(true)
   const [toggleIcons, setToggleIcons] = useState<boolean>()
   const [activeTitle, setActiveTitle] = useState<boolean>(true)
-
+  const { wallet, isConnected} = useWallet()
+  
   return (
-    <header className={`w-full px-6 text-gray-700`}>
+    <header className={`w-full px-6 text-gray-700`} id="nav">
       <div className="container flex mx-auto max-w-8xl md:flex justify-between items-center">
         <Link href="/" passHref>
           <span className="py-6 w-full">
@@ -32,9 +34,11 @@ const Header = () => {
             : <div className='w-1/2 h-full'>
               <FiX className='w-6 h-6 relative text-yellow-400' onClick={() => setToggleMenu(true)}/>
               <div className={`bg-white text-gray-900 absolute top-20 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-8 h-screen w-4/5 z-10`}>
-                <p className="text-sm py-2 px-3">
-                  Hi, Abdullahi sani
+              {isConnected && (
+                <p className="text-lg py-2 px-8 font-semibold text-black">
+                  {wallet?.activeAccount?.accountId}
                 </p>
+              )}
                 {navTitles.map((item, index) => (
                   <Link key={index} href={item.href} passHref><div className={`cursor-pointer`}>{item.title}</div></Link>
                 ))}
@@ -78,14 +82,26 @@ const Header = () => {
           <div className="flex flex-row items-center space-x-5">
             <div onClick={() => setToggleIcons(!toggleIcons)}>
             </div>
-            <button className='flex gap-1 no-underline bg-yellow-400 px-10 py-3 font-bold rounded-full text-gray-900 text-sm'>
-                <span>Connect</span>
-                <span className='w-5 h-5'><img src="https://marketplace.sevendeadstars.com/images/near.png" alt=""/></span>
+            <button 
+              className='btnColor rounded-full font-semibold p-2 px-4 flex'
+              onClick={
+                isConnected
+                ? () => {
+                  wallet?.disconnect()
+                  window.location.reload()
+                }
+                : () => {
+                  wallet?.connect({ requestSignIn: true })
+                } 
+              }
+              >
+                {isConnected ? 'Disconnect' : 'Connect'}
+                <span className='ml-2 mt-1'><Near className='w-4 h-4'/></span>
             </button>
           </div>         
         </div>
       </div>
-      <NavBreadCrumb/>
+      {/* <NavBreadCrumb/> */}
     </header>
   )
 }
