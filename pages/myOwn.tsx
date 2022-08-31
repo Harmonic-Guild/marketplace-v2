@@ -9,7 +9,7 @@ import MintNft from '../Modal/MintNft'
 import { BsCircle } from 'react-icons/bs'
 import { AiOutlineExpandAlt } from 'react-icons/ai'
 import { formatNearAmount } from 'near-api-js/lib/utils/format';
-
+import Link from 'next/link'
 
 
 const FETCH_TOKENS = gql`
@@ -190,7 +190,7 @@ const MyOwn = () => {
     
     setMetaData(tokensData.metadata)
 
-    console.log(tokensData, '*-*-*--*-*-')
+    // console.log(tokensData, '*-*-*--*-*-')
     
     
   }, [tokensData])
@@ -215,14 +215,21 @@ const MyOwn = () => {
           </div>
         </div>
       </div>}
-      {loadingTokensData && 'Loading...'}
+      {/* {loadingTokensData && 'Loading...'} */}
       {!loadingTokensData && (
         <>
         <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8">
-          {/* {wallet?.activeAccount?.accountId}  */}
-          your tokens from this store
+          {wallet?.activeAccount?.accountId ? "Your tokens from this store" : "Connnect your wallet to see your tokens"} 
+          
         </h1>
         <div className="pb-24 w-full mx-auto ">
+          <div>{metaData.length <1 && (
+            <div className='text-center'>
+              <span className='text-2xl mx-8 my-12'>You have no tokens</span>
+              <Link href="/" passHref ><a className='btnColor mx-4 px-4 py-2 rounded-lg'>Buy now!</a></Link>
+              
+            </div>
+          ) }</div>
           <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
             {metaData.map((meta: MetaData) => (
                 <NFT
