@@ -220,10 +220,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             {things?.metadata.title}
           </div>
 
-          <div className="flex text-lg">
-            {/* <span>Minted on: {moment(things?.tokens[0]?.lists[0]?.createdAt).format('MMM DD, YYYY')}</span> */}
-            {`Minted On: ` + new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()}
-            <TbExternalLink className="text-yellow-300 w-6 h-6" />
+          <div className="text-lg">
+            {things?.tokens[0]?.lists[0]?.createdAt! === undefined ? `Mint date is not available` : <div className="flex gap-3">{`Minted On: ` + new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()} <TbExternalLink className="text-yellow-300 w-6 h-6" /></div>}
           </div>
           {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
           <div className="">
