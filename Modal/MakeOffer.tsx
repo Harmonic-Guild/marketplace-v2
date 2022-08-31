@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import Near from '../icons/near.svg'
 import NotConnected from './NotConnected';
+import { formatNearAmount } from 'near-api-js/lib/utils/format';
 
 const MakeOffer = ({buy, isConnected, latestBid}: any) => {
 
@@ -25,12 +26,20 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
             <span className="font-bold text-lg">@Latest bidder</span>
         </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
         <div className="flex flex-row gap-2 mt-3 mb-3 lg:mb-0">
             <div className="font-medium text-lg">Latest bid: </div>
             <div className="font-bold text-xl flex items-center gap-2">
             {
             latestBid ? 
+<<<<<<< HEAD
             <div className='flex items-center gap-1'>{latestBid}<Near className="w-4 h-4" /></div>
+=======
+            <div className='flex items-center gap-1'>{latestBid}<Near/></div>
+>>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
             : 
             'none'
             }
