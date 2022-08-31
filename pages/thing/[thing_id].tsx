@@ -203,14 +203,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
           )}
         </div>
         <div className='flex lg:hidden gap-5 justify-end py-4'>
-          <div className=' text-yellow-300 sm:hidden block'>
+          {/* <div className=' text-yellow-300 sm:hidden block'>
             <BsCircle className="relative h-8 w-8" />
             <BsHeart className="w-4 h-4 absolute -mt-6 ml-2" />
           </div>
           <div className=' text-yellow-300'>
             <BsCircle className="relative h-8 w-8" />
             <BiShareAlt className='w-4 h-4 absolute -mt-6 ml-2' />
-          </div>
+          </div> */}
           <div className=' text-yellow-300'>
             <BsCircle className="relative h-8 w-8" />
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
