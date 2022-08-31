@@ -14,6 +14,7 @@ import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format"
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from '../../icons/near.svg'
+import Arweave from '../../public/images/ARWEAVE.png'
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -303,8 +304,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                 </div>
                 <div className="cursor-pointer">
                   <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
-                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
-                    <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
+                    {/* <BsCircle className="relative h-8 w-8 text-yellow-300" /> */}
+                    <div className="w-8 h-8">
+                      <Image 
+                      src={Arweave}
+                      className="absolute -mt-6 ml-2" 
+                      />
+                    </div>
                   </a>
                 </div>
               </div>
