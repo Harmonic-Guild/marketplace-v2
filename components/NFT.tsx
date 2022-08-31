@@ -54,7 +54,7 @@ function NFT({token}: any) {
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div> */}
-                            <div className="font-bold mt-4 mb-1 text-xl">{thing.metadata.title}</div>
+                            <div className="font-bold mt-4 mb-1 text-xl overflow-x-hidden">{thing.metadata.title}</div>
                             <div>
                                 
                                 <div className='flex gap-2 items-center text-lg'>
