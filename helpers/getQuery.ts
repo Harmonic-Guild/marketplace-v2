@@ -65,7 +65,7 @@ const handleTypeFilter = (type:string)=> {
 
             break;
         default: 
-            typeFilter= ["video/mp4", "video/ogg", "audio/mpeg", "audio/mp3", "audio/ogg", "image/gif", "image/jpeg", "image/png", "image/gif"];
+            typeFilter= ["video/mp4", "video/ogg", "audio/mpeg", "audio/mp3", "audio/ogg", "image/gif", "image/jpeg", "image/png", "image/gif", "text/html; charset=utf-8",];
     }
 
     return typeFilter;  

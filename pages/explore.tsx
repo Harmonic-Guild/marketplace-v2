@@ -37,7 +37,7 @@ const FETCH_TOKENS = gql`
           thing: {
             metadata: {
               animation_type: {
-              #  _in: $type
+               _in: $type
               }
             }
           }
@@ -98,7 +98,8 @@ const explore = () => {
          limit: 15,
          offset: 0,
          lt: 0,
-         gt: 0
+         gt: 0,
+         type: []
        },
      })
  
@@ -128,7 +129,8 @@ const explore = () => {
          limit: 15,
          offset: 0,
          lt: filterParams.prices.lt.toString(),
-         gt: filterParams.prices.gt.toString()
+         gt: filterParams.prices.gt.toString(),
+         type: filterParams.types
        },
      })
     //  console.log(filterParams.prices);

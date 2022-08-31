@@ -57,6 +57,12 @@ module.exports = {
         },
         'mp-light': {
           1: '#FAFAFA'
+        },
+        'actionBtn-Yellow' :{
+          1: '#FFD12F'
+        },
+        'actionBtn-Orange' :{
+          1: '#FFB038'
         }
       }
     },

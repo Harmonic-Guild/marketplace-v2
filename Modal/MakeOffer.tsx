@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import Near from '../icons/near.svg'
 import NotConnected from './NotConnected';
+import { formatNearAmount } from 'near-api-js/lib/utils/format';
 
 const MakeOffer = ({buy, isConnected, latestBid}: any) => {
 
@@ -14,31 +15,52 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
   }
 
   return (
-    <div className={`lg:flex block justify-between border bg-mp-peach-2 border-mp-brown-1 rounded-lg lg:w-5/6 w-full p-6 mt-4`}>
-      <div className="flex justify-between lg:block">
-        <div className="flex">
-        {/* <img className="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> */}
-        <span className="pl-2 text-sm ">@Latest bidder</span>
+    <div className="border border-yellow-600 bg-yellow-100 rounded-lg p-6 mt-8  lg:flex lg:justify-around lg:gap-10">
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex items-center gap-2">
+            <img
+              className="inline-block h-10 w-10 rounded-full"
+              src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              alt=""
+            />
+            <span className="font-bold text-lg">@Latest bidder</span>
         </div>
-        <div className=" font-medium flex md:text-base text-sm">
-            <span className=''>Latestbid: </span>
-            <span className="pl-3 pr-1">{latestBid || 'none'}</span>
-            {/* <span className="pl-3 pr-1">{price}</span> */}
-            {latestBid && <span className='pt-1  ml-1'><Near /></span>}
+
+
+        <div className="flex flex-row gap-2 mt-3 mb-3 lg:mb-0">
+            <div className="font-medium text-lg">Latest bid: </div>
+            <div className="font-bold text-xl flex items-center gap-2">
+            {
+            latestBid ? 
+            <div className='flex items-center gap-1'>{latestBid}<Near/></div>
+            : 
+            'none'
+            }
+            </div>
         </div>
       </div>
-      <span className="border-b border-mp-brown-1 lg:hidden flex py-2 "></span>
-      <div className="mt-8 lg:mt-0">
-        {isConnected 
-          ?(<button onClick={() => setShowModal(true) }  className={`py-2 rounded-md font-medium text-gray-900 w-full sm:px-20 px-5 btnColor`}>Bid</button>)
-          :(<button onClick={() => setShowNotConnectedModal(true) }  className={`py-2 rounded-md  font-medium text-gray-900 w-full sm:px-20 px-5 ${isConnected ? 'btnColor' : 'border border-mp-brown-1 py-2 cursor-not-allowed'}`}>Bid</button>)
-        }
-        <span className="text-center lg:flex block pt-4">
-          <p className=" font-medium">Owned by: </p>
-          {/* <img className="inline-block h-4 w-4 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> */}
+
+      {/* <span className="border-b border-mp-brown-1 lg:hidden flex py-2 "></span> */}
+      <div className="flex flex-col flex-grow">
+
+        <div>
+          {isConnected 
+            ?(<button onClick={() => setShowModal(true) }  className={`tracking-wider font-bold text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 btnColor`}>Bid</button>)
+            :(<button onClick={() => setShowNotConnectedModal(true) }  className={`tracking-wider font-bold text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 ${isConnected ? 'btnColor' : 'border border-mp-brown-1 py-2 cursor-not-allowed'}`}>Bid</button>)
+          }
+        </div>
+
+        <div className="text-center flex justify-center items-center mt-3">
+          <p className="font-bold">Owned by:</p>
+          <img
+            className="h-5 w-5 rounded-full mx-2"
+            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            alt=""
+          />
           <span>@owner</span>
-        </span>
-      </div>
+        </div>
+
+        </div>
       {showModal ? (
         <div className="h-screen w-screen glass-morphism fixed top-0 left-0 z-40">
           <div className="align-middle mx-auto md:w-2/5 w-5/6 relative top-80 lg:top-52 rounded-xl p-8 bg-white">

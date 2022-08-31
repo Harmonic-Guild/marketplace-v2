@@ -14,7 +14,6 @@ import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format"
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from '../../icons/near.svg'
-import Arweave from '../../public/images/ARWEAVE.png'
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -127,7 +126,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     if (!tokensData) return;
     setThing(tokensData.thing[0])
 
-    const tokens = tokensData.thing[0].tokens.map((token: any) => {
+    const tokens = tokensData.thing[0].tokens.map((token: Tokens) => {
       return token
     })
     const allTokens = tokensData.thing[0].allTokens.map((token: any) => {
@@ -173,18 +172,19 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   }
 
   return (
-    <div className={`min-h-screen p-4 text-gray-700`}>
+
+    <div className="container mx-auto mt-10 text-gray-700">
       <div className="lg:flex hidden"><Vector_back /></div>
-      <div className="lg:flex block justify-evenly w-4/5 lg:w-full mx-auto">
-        <div className="pl-0 xl:pl-12 mx-auto w-full xl:w-4/5">
+      <div className="lg:flex justify-between w-4/5 lg:w-full mx-auto">
+        <div className="mx-auto w-full">
           {(things?.metadata.animation_type !== null && things?.metadata.animation_type !== 'image/jpeg' && things?.metadata.animation_type !== 'image/png'&& things?.metadata.animation_type !== 'image/gif' ) ? (
             <div className="w-full xl:w-4/5 mx-auto flex align-middle">
               <video controls className='' poster={things?.metadata.media} controlsList="nodownload" muted>
                 <source src={things?.metadata.animation_url} ></source>
-              </video>
+              </video><br/>
             </div>
           ) : (
-
+            
             <div className=" w-full xl:w-4/5 mx-auto">
             {things?.metadata.media &&
               <div className="">
@@ -192,8 +192,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   src={things?.metadata.media}
                   objectFit="cover"
                   className="rounded-lg shadow-xl"
-                  width={500}
-                  height={500}
+                  width={600}
+                  height={600}
                   // layout="fill"
                   alt={'alt'} />
               </div>
@@ -215,63 +215,34 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
           </div>
         </div>
-        <div className="w-full lg:w-1/2">
-          <div className="w-full container">
-            <span className="lg:text-4xl text-xl font-medium ">{things?.metadata.title}</span>
+        <div className="w-full">
+          
+          <div  className="text-4xl font-bold mb-5">
+            {things?.metadata.title}
           </div>
-          <div className="flex w-3/4 py-4">
+
+          <div className="flex text-lg">
             {/* <span>Minted on: {moment(things?.tokens[0]?.lists[0]?.createdAt).format('MMM DD, YYYY')}</span> */}
-            {new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()}
+            {`Minted On: ` + new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()}
             <TbExternalLink className="text-yellow-300 w-6 h-6" />
           </div>
           {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
           <div className="">
-            <div className="w-2/3">
-              <span className="text">Description</span>
-              <span className="border-b border-mp-brown-1 flex"></span>
-              <p className={hide ? 'pt-2 h-24 overflow-y-scroll ' : 'pt-2 h-16 overflow-y-scroll line-clamp-3'}>
-                <span>{things?.metadata.description}</span>
+            <div className="mt-10">
+              <div className="border-b border-yellow-600 mb-3 pb-3">
+                <span className="text-3xl font-medium">Description</span>
+              </div>
+
+              <p className={hide ? "" : "line-clamp-3"}>
+                {things?.metadata.description}
               </p>
-              <span id='span' onClick={toggleDiscription} className='cursor-pointer p-2 text-blue-500 hover:underline'> {!hide ? '.....see more' : 'see less'}</span>
+              <span id='span' onClick={toggleDiscription} className='cursor-pointer text-blue-400 hover:underline'> {!hide ? '.....see more' : 'see less'}</span>
               {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
             </div>
-            <div className="lg:hidden block w-2/3">
-              {/* <span className="border-b border-yellow-600 py-2 px-44"></span> */}
-              <div className="flex my-6">
-                <span className="mx-2 cursor-pointer">
-                  <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
-                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
-                    <Near className='w-4 h-4 absolute -mt-6 ml-2' />
-                  </a>
-                </span>
-                <span className="cursor-pointer">
-                  <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
-                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
-                    <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
-                  </a>
-                </span>
-              </div>
-              <p className="text-gray-500">{tokens.length}/{allTokens.length} Tokens available</p>
-              <div className="flex justify-between">
-                <span className="w-full py-2 font-medium text-xl mt-3">Perks</span>
-                <span></span>
-              </div>
-              <span className="border-b border-mp-brown-1 flex"></span>
-              <div className=" mt-6 px-4">
-                <span className="text-sm ">
-                  <li>First Perk</li>
-                  <li>Second Perk</li>
-                  <li>Exclusive access to comunity</li>
-                </span>
-              </div>
-              <div className="px-8 py-4">
-                <p className="flex">
-                  <span className="font-medium text-xl pr-1">History of NFT</span>
-                </p>
-                <span className=" border-r-2 border-yellow-600 h-20"></span>
-              </div>
-            </div>
+
           </div>
+
+
           <div>
             {things?.tokens[0]?.lists[0]?.autotransfer ?
             (
@@ -285,7 +256,47 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             }
             
           </div>
-          <div className="hidden lg:flex justify-around mt-5 w-3/5 ml-20">
+
+          <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
+                  <p className="text-xl pr-1  font-bold text-center lg:text-left">
+                    History of NFT
+                  </p>
+                  {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/> */}
+                </div>
+                <div className="">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-2xl font-bold">Details</p>
+                    <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
+                    <div className="border-2 border-yellow-400 rounded-full p-2">
+                    <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
+                      <Near className="w-4 h-4" />
+                    </a>
+                    </div>
+                    <div className="border-2 border-yellow-400 rounded-full p-2">
+                    <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
+                      <FiLayers className="w-4 h-4" />
+                    </a>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="lg:hidden text-center text-gray-500 text-lg my-5">{tokens.length}/{allTokens.length} Tokens available</p>
+                  </div>
+                  
+                  <div className="lg:flex lg:items-center gap-10">
+                    <p className="text-2xl font-bold mb-5 pb-5 border-b border-yellow-400 lg:border-0">
+                      Perks
+                    </p>
+                    <span className="text-lg">
+                      <li>First Perk</li>
+                      <li>Second Perk</li>
+                      <li>Exclusive access to comunity</li>
+                    </span>
+                  </div>
+                </div>
+              </div>
+          {/* <div className="hidden lg:flex justify-around mt-5 w-3/5 ml-20">ss
             <div>
               <p className="flex">
                 <span className="font-medium text-xl pr-1">History of NFT</span>
@@ -304,13 +315,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                 </div>
                 <div className="cursor-pointer">
                   <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
-                    {/* <BsCircle className="relative h-8 w-8 text-yellow-300" /> */}
-                    <div className="w-8 h-8">
-                      <Image 
-                      src={Arweave}
-                      className="absolute -mt-6 ml-2" 
-                      />
-                    </div>
+                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
+                    <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
                   </a>
                 </div>
               </div>
@@ -323,7 +329,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                 </span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* <SimilarNft /> */}

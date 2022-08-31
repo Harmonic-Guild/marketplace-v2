@@ -117,7 +117,7 @@ const NFT = ({ toggle, tokenId, media, title, animation_url, animation_type, lis
             <div className="w-full flex justify-center mt-6">
               <button className='btnColor px-4 py-2 rounded-lg mx-center w-4/5' onClick={()=> showSellModal(true)}>Sell NFT</button>
             </div>
-            {lists.length && <div className="text-center mt-2 text-gray-600">Currently on sale at {formatNearAmount(Number(lists[0]?.price).toLocaleString('fullwide', { useGrouping: false }),5)} Near</div>}
+            {/* {lists.length && <div className="text-center mt-2 text-gray-600">Currently on sale at {formatNearAmount(Number(lists[0]?.price).toLocaleString('fullwide', { useGrouping: false }),5)} Near</div>} */}
           </div>
         </div>
       </div>
