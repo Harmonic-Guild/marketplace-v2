@@ -14,6 +14,7 @@ import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format"
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from '../../icons/near.svg'
+import Arweave from '../../public/images/ARWEAVE.png'
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -265,23 +266,25 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/> */}
                 </div>
                 <div className="">
-                  <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center  gap-3">
                     <p className="text-2xl font-bold">Details</p>
                     <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                    <div className="border-2 border-yellow-400 rounded-full p-2">
-                    <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
-                      <Near className="w-4 h-4" />
-                    </a>
+                    <div className="border-2 border-yellow-400 rounded-full p-2 px-5">
+                      <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
+                        <Near className="w-4 h-4" />
+                      </a>
                     </div>
-                    <div className="border-2 border-yellow-400 rounded-full p-2">
-                    <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
-                      <FiLayers className="w-4 h-4" />
-                    </a>
+                    <div className="border-2 border-yellow-400 rounded-full p-1 px-3">
+                      <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
+                        <div className="w-6 h-6">
+                        <Image src={Arweave} className="" />
+                        </div>
+                      </a>
                     </div>
                   </div>
 
-                  <div>
-                    <p className="lg:hidden text-center text-gray-500 text-lg my-5">{tokens.length}/{allTokens.length} Tokens available</p>
+                  <div className="bg-yellow-100 p-3 my-5 rounded-xl w-fit lg:hidden">
+                    <p className="lg:hidden text-center text-gray-500 text-lg">{tokens.length}/{allTokens.length} Tokens available</p>
                   </div>
                   
                   <div className="lg:flex lg:items-center gap-10">
@@ -296,40 +299,6 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   </div>
                 </div>
               </div>
-          {/* <div className="hidden lg:flex justify-around mt-5 w-3/5 ml-20">ss
-            <div>
-              <p className="flex">
-                <span className="font-medium text-xl pr-1">History of NFT</span>
-              </p>
-            </div>
-            <span className=" border-r-2 border-yellow-600 h-20"></span>
-            <div>
-              <div className="flex justify-evenly w-full">
-                <p className="text">Details</p>
-                <span className="border-b px-8 border-yellow-600 mb-4 mx-2"></span>
-                <div className="mx-2 cursor-pointer">
-                  <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
-                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
-                    <Near className='w-4 h-4 absolute -mt-6 ml-2' />
-                  </a>
-                </div>
-                <div className="cursor-pointer">
-                  <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
-                    <BsCircle className="relative h-8 w-8 text-yellow-300" />
-                    <FiLayers className="w-4 h-4 absolute -mt-6 ml-2" />
-                  </a>
-                </div>
-              </div>
-              <div className="flex justify-evenly mt-3">
-                <p className="font-medium text-xl px-6 mt-3">Perks</p>
-                <span className="text-sm ">
-                  <li>First Perk</li>
-                  <li>Second Perk</li>
-                  <li>Exclusive access to comunity</li>
-                </span>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
       {/* <SimilarNft /> */}
