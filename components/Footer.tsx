@@ -3,6 +3,11 @@ import { BsArrowUp } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 
 const Footer = () => {
+  const scrollToTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    
+  }
 
   return (
     <footer className="w-full px-6 py-10 text-gray-700 mt-20">
@@ -61,7 +66,7 @@ const Footer = () => {
             <li>Twitter</li>
           </ul>
         </div>
-        <div className='p-4 btnColor rounded-full w-10 h-10 cursor-pointer'>
+        <div onClick={() => scrollToTop()} className='p-4 btnColor rounded-full w-10 h-10 cursor-pointer'>
             <BsArrowUp className='w-6 h-6 -mt-2 -ml-2'/>
         </div>
       </div>
