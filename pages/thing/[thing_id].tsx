@@ -14,6 +14,7 @@ import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format"
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from '../../icons/near.svg'
+import Link from "next/link";
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -173,7 +174,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
   return (
     <div className="container mx-auto mt-10 text-gray-700">
-      <div className="lg:flex hidden"><Vector_back /></div>
+      <Link href='/explore' passHref>
+        <div className="lg:flex hidden cursor-pointer"><Vector_back /></div>
+      </Link>
       <div className="lg:flex justify-between w-4/5 lg:w-full mx-auto">
         <div className="mx-auto w-full">
           {(things?.metadata.animation_type !== null && things?.metadata.animation_type !== 'image/jpeg' && things?.metadata.animation_type !== 'image/png'&& things?.metadata.animation_type !== 'image/gif' ) ? (
