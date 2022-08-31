@@ -119,7 +119,7 @@ const FeaturesNft = ({storeId}: {storeId: string}) => {
     return (
       <div className="w-full h-fit lg:px-32 px-12 ">
         <div className=" text-center  font-bold text-gray-900 mb-6">
-        <p className='text-mp-orange-1 mb-2'>Lorem <GiStarShuriken className='inline w-6 h-5'/></p>
+        <p className='text-mp-orange-1 mb-2'>Hot <GiStarShuriken className='inline w-6 h-5'/></p>
           <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
           <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
         </div>

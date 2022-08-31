@@ -201,14 +201,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
           )}
         </div>
         <div className='flex lg:hidden gap-5 justify-end py-4'>
-          <div className=' text-yellow-300 sm:hidden block'>
+          {/* <div className=' text-yellow-300 sm:hidden block'>
             <BsCircle className="relative h-8 w-8" />
             <BsHeart className="w-4 h-4 absolute -mt-6 ml-2" />
           </div>
           <div className=' text-yellow-300'>
             <BsCircle className="relative h-8 w-8" />
             <BiShareAlt className='w-4 h-4 absolute -mt-6 ml-2' />
-          </div>
+          </div> */}
           <div className=' text-yellow-300'>
             <BsCircle className="relative h-8 w-8" />
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
@@ -240,12 +240,12 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             </div>
 
               <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
-                <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
+                {/* <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
                   <p className="text-xl pr-1 text-2xl font-bold text-center lg:text-left">
                     History of NFT
                   </p>
-                  {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/> */}
-                </div>
+                  {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/>
+                </div> */}
                 <div className="">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-2xl font-bold">Details</p>
@@ -266,7 +266,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     <p className="lg:hidden text-center text-gray-500 text-lg my-5">{tokens.length}/{allTokens.length} Tokens available</p>
                   </div>
                   
-                  <div className="lg:flex lg:items-center gap-10">
+                  {/* <div className="lg:flex lg:items-center gap-10">
                     <p className="text-2xl font-bold mb-5 pb-5 border-b border-yellow-400 lg:border-0">
                       Perks
                     </p>
@@ -275,7 +275,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                       <li>Second Perk</li>
                       <li>Exclusive access to comunity</li>
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

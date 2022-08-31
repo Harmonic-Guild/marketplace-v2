@@ -14,7 +14,7 @@ const Footer = () => {
               <FiUsers />
             </div>
           </div>
-          <div>coming soon...</div>
+          <div>Coming Soon</div>
         </button>
       </div>
       <div className="flex flex-wrap justify-between p-10 gap-8">

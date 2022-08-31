@@ -88,7 +88,7 @@ function NFT({token}: any) {
                                 <button className='flex justify-between items-center rounded-lg gap-3 bg-gradient-to-r from-actionBtn-Yellow-1 to-actionBtn-Orange-1 px-5 py-3 font-semibold text-md'>
                                     <div className=''>
                                         {
-                                        list? !list?.autotransfer ? 'Bid': 'Get Details' : 'N/A' 
+                                        list? !list?.autotransfer ? 'Bid': 'Buy' : 'N/A' 
                                         }
                                     </div> 
                                 <div className='border-l border-black h-full w-0'></div>
@@ -102,10 +102,10 @@ function NFT({token}: any) {
                                     </div> 
                                      <div className='border-l border-black pl-3'><AiOutlineRight className=' w-5 h-5'/></div> 
                                 </button> */}
-                                <button className='text-yellow-500'>
+                                {/* <button className='text-yellow-500'>
                                     <BiShareAlt className='w-6 h-6 absolute ml-2 mt-2'/>
                                     <BsCircle className='w-10 h-10'/>
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                 </div>
