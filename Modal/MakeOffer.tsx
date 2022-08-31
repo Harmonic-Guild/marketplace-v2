@@ -26,20 +26,13 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
             <span className="font-bold text-lg">@Latest bidder</span>
         </div>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
         <div className="flex flex-row gap-2 mt-3 mb-3 lg:mb-0">
             <div className="font-medium text-lg">Latest bid: </div>
             <div className="font-bold text-xl flex items-center gap-2">
             {
             latestBid ? 
-<<<<<<< HEAD
-            <div className='flex items-center gap-1'>{latestBid}<Near className="w-4 h-4" /></div>
-=======
             <div className='flex items-center gap-1'>{latestBid}<Near/></div>
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
             : 
             'none'
             }
@@ -81,7 +74,7 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
               </div>
               <div className='my-2 flex justify-between w-full lg:w-3/5 border border-gray-400 rounded-lg'>
                   <input type="number" className='w-full outline-none' value={bid} onChange={handleChange}/> 
-                  <span className='border-l border-gray-400 p-2'><Near className="w-4 h-4" /></span>
+                  <span className='border-l border-gray-400 p-2'><Near/></span>
               </div>
 
               <div className="">

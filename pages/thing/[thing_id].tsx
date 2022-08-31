@@ -14,11 +14,7 @@ import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format"
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from '../../icons/near.svg'
-<<<<<<< HEAD
 import Link from "next/link";
-=======
-import Arweave from '../../public/images/ARWEAVE.png'
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -177,16 +173,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   }
 
   return (
-<<<<<<< HEAD
-    <div className="container mx-auto mt-10 text-gray-700">
-      <Link href='/explore' passHref>
-        <div className="lg:flex hidden cursor-pointer"><Vector_back /></div>
-      </Link>
-=======
 
     <div className="container mx-auto mt-10 text-gray-700">
       <div className="lg:flex hidden"><Vector_back /></div>
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
       <div className="lg:flex justify-between w-4/5 lg:w-full mx-auto">
         <div className="mx-auto w-full">
           {(things?.metadata.animation_type !== null && things?.metadata.animation_type !== 'image/jpeg' && things?.metadata.animation_type !== 'image/png'&& things?.metadata.animation_type !== 'image/gif' ) ? (
@@ -214,14 +203,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
           )}
         </div>
         <div className='flex lg:hidden gap-5 justify-end py-4'>
-          {/* <div className=' text-yellow-300 sm:hidden block'>
+          <div className=' text-yellow-300 sm:hidden block'>
             <BsCircle className="relative h-8 w-8" />
             <BsHeart className="w-4 h-4 absolute -mt-6 ml-2" />
           </div>
           <div className=' text-yellow-300'>
             <BsCircle className="relative h-8 w-8" />
             <BiShareAlt className='w-4 h-4 absolute -mt-6 ml-2' />
-          </div> */}
+          </div>
           <div className=' text-yellow-300'>
             <BsCircle className="relative h-8 w-8" />
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
@@ -233,15 +222,10 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             {things?.metadata.title}
           </div>
 
-<<<<<<< HEAD
-          <div className="text-lg">
-            {things?.tokens[0]?.lists[0]?.createdAt! === undefined ? `Mint date is not available` : <div className="flex gap-3">{`Minted On: ` + new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()} <TbExternalLink className="text-yellow-300 w-6 h-6" /></div>}
-=======
           <div className="flex text-lg">
             {/* <span>Minted on: {moment(things?.tokens[0]?.lists[0]?.createdAt).format('MMM DD, YYYY')}</span> */}
             {`Minted On: ` + new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()}
             <TbExternalLink className="text-yellow-300 w-6 h-6" />
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
           </div>
           {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
           <div className="">
@@ -257,14 +241,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
               {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
             </div>
 
-<<<<<<< HEAD
+
               <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
-                {/* <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
+                <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
                   <p className="text-xl pr-1 text-2xl font-bold text-center lg:text-left">
                     History of NFT
                   </p>
-                  {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/>
-                </div> */}
+                  {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/> */}
+                </div>
                 <div className="">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-2xl font-bold">Details</p>
@@ -285,7 +269,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     <p className="lg:hidden text-center text-gray-500 text-lg my-5">{tokens.length}/{allTokens.length} Tokens available</p>
                   </div>
                   
-                  {/* <div className="lg:flex lg:items-center gap-10">
+                  <div className="lg:flex lg:items-center gap-10">
                     <p className="text-2xl font-bold mb-5 pb-5 border-b border-yellow-400 lg:border-0">
                       Perks
                     </p>
@@ -294,12 +278,10 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                       <li>Second Perk</li>
                       <li>Exclusive access to comunity</li>
                     </span>
-                  </div> */}
+                  </div>
                 </div>
               </div>
 
-=======
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
           </div>
 
 
@@ -316,51 +298,6 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             }
             
           </div>
-<<<<<<< HEAD
-=======
-
-          <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
-                <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
-                  <p className="text-xl pr-1  font-bold text-center lg:text-left">
-                    History of NFT
-                  </p>
-                  {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/> */}
-                </div>
-                <div className="">
-                  <div className="flex items-center  gap-3">
-                    <p className="text-2xl font-bold">Details</p>
-                    <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                    <div className="border-2 border-yellow-400 rounded-full p-2 px-5">
-                      <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
-                        <Near className="w-4 h-4" />
-                      </a>
-                    </div>
-                    <div className="border-2 border-yellow-400 rounded-full p-1 px-3">
-                      <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
-                        <div className="w-6 h-6">
-                        <Image src={Arweave} className="" />
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="bg-yellow-100 p-3 my-5 rounded-xl w-fit lg:hidden">
-                    <p className="lg:hidden text-center text-gray-500 text-lg">{tokens.length}/{allTokens.length} Tokens available</p>
-                  </div>
-                  
-                  <div className="lg:flex lg:items-center gap-10">
-                    <p className="text-2xl font-bold mb-5 pb-5 border-b border-yellow-400 lg:border-0">
-                      Perks
-                    </p>
-                    <span className="text-lg">
-                      <li>First Perk</li>
-                      <li>Second Perk</li>
-                      <li>Exclusive access to comunity</li>
-                    </span>
-                  </div>
-                </div>
-              </div>
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
         </div>
       </div>
       {/* <SimilarNft /> */}

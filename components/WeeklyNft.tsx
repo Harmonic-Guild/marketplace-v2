@@ -76,17 +76,6 @@ query MyQuery($storeId: String!) {
       <>
       {loadingtokensData && <div className="h-5 w-5 bg-yellow-500 animate-pulse rounded-full"></div>}
       <div className="w-full h-full pt-10 lg:px-32 px-12 ">
-<<<<<<< HEAD
-        <div className=" text-center  font-bold text-gray-900 mb-4">
-        <p className='text-mp-orange-1 mb-2'><GiStarShuriken className='inline w-6 h-5'/></p>
-            <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
-        </div>
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 w-full pt-4 gap-y-5 gap-2">
-            {tokens.map((token:any) => (
-                <NFT token={token} key={token.id} />
-            ))}
-        </div>
-=======
       <div className=" text-center  font-bold text-gray-900 mb-4">
       <p className='text-mp-orange-1 mb-2'>Lorem <GiStarShuriken className='inline w-6 h-5'/></p>
           <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
@@ -95,7 +84,6 @@ query MyQuery($storeId: String!) {
           {tokens.map((token:any) => (
               <NFT token={token} key={token.id} />
           ))}
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
       </div>
     </div>
       </>
@@ -103,4 +91,3 @@ query MyQuery($storeId: String!) {
   }
 
 export default WeeklyNft;
-

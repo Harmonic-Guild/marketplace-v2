@@ -54,11 +54,7 @@ function NFT({token}: any) {
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div> */}
-<<<<<<< HEAD
-                            <div className="font-bold mt-4 mb-1 text-xl overflow-x-hidden">{thing.metadata.title}</div>
-=======
                             <div className="font-bold mt-4 mb-1 text-xl">{thing.metadata.title}</div>
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
                             <div>
                                 
                                 <div className='flex gap-2 items-center text-lg'>
@@ -92,11 +88,8 @@ function NFT({token}: any) {
                                 <button className='flex justify-between items-center rounded-lg gap-3 bg-gradient-to-r from-actionBtn-Yellow-1 to-actionBtn-Orange-1 px-5 py-3 font-semibold text-md'>
                                     <div className=''>
                                         {
-<<<<<<< HEAD
-                                        list? !list?.autotransfer ? 'Bid': 'Buy' : 'N/A' 
-=======
+
                                         list? !list?.autotransfer ? 'Bid': 'Get Details' : 'N/A' 
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
                                         }
                                     </div> 
                                 <div className='border-l border-black h-full w-0'></div>
@@ -110,14 +103,10 @@ function NFT({token}: any) {
                                     </div> 
                                      <div className='border-l border-black pl-3'><AiOutlineRight className=' w-5 h-5'/></div> 
                                 </button> */}
-<<<<<<< HEAD
-                                {/* <button className='text-yellow-500'>
-=======
                                 <button className='text-yellow-500'>
->>>>>>> eafec3f652cfde11d12433f70e59bcbd045215a3
                                     <BiShareAlt className='w-6 h-6 absolute ml-2 mt-2'/>
                                     <BsCircle className='w-10 h-10'/>
-                                </button> */}
+                                </button> 
                             </div>
                         </div>
                 </div>
