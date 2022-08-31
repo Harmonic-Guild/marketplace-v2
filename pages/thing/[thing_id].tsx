@@ -15,6 +15,7 @@ import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from '../../icons/near.svg'
 import Link from "next/link";
+import Arweave from '../../public/images/ARWEAVE.png'
 
 const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
@@ -251,14 +252,16 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-2xl font-bold">Details</p>
                     <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                    <div className="border-2 border-yellow-400 rounded-full p-2">
+                    <div className="border-2 border-yellow-400 rounded-full p-2 px-3">
                     <a href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}  target="_blank" rel="noreferrer" >
                       <Near className="w-4 h-4" />
                     </a>
                     </div>
-                    <div className="border-2 border-yellow-400 rounded-full p-2">
+                    <div className="border-2 border-yellow-400 rounded-full p-1 px-3">
                     <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}  target="_blank" rel="noreferrer" >
-                      <FiLayers className="w-4 h-4" />
+                    <div className="w-6 h-6">
+                      <Image src={Arweave} className="" />
+                      </div>
                     </a>
                     </div>
                   </div>
