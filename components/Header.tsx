@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/dist/client/router";
 import { useWallet } from "../services/providers/MintbaseWalletContext";
 import {
     BsMoonStars,
@@ -11,21 +12,30 @@ import { FiMenu, FiX, FiUsers } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
 import Near from "../icons/near.svg";
 
+import styles from "../styles/Header.module.scss";
+
 const navTitles = [
     { title: "Home", href: "/" },
     { title: "Explore", href: "/explore" },
-    { title: "MyNFTs", href: "/myOwn" },
+    { title: "My NFTs", href: "/myOwn" },
+    { title: "Profile", href: "#" },
 ];
 
 const Header = () => {
+    const router = useRouter();
+
     const [toggleMenu, setToggleMenu] = useState<boolean>(true);
     const [darkMode, setDarkMode] = useState<boolean>(true);
     const [toggleIcons, setToggleIcons] = useState<boolean>();
-    const [activeTitle, setActiveTitle] = useState<boolean>(true);
+    const [currentPath, setCurrentPath] = useState<string>();
     const { wallet, isConnected } = useWallet();
 
+    useEffect(() => {
+        setCurrentPath(router.pathname);
+    }, [router.pathname]);
+
     return (
-        <header className={`w-full px-6 text-gray-700`} id="nav">
+        <header className={styles.header} id="nav">
             <div className="container flex mx-auto max-w-8xl md:flex justify-between items-center">
                 <Link href="/" passHref>
                     <span className="py-6 w-full">
@@ -93,25 +103,24 @@ const Header = () => {
                     )}
                 </div>
 
-                <div className="hidden lg:flex w-full lg:w-auto mb-6 lg:mb-0 text-center space-x-5 lg:text-right">
-                    <div className=" mt-2 flex justify-around gap-16 mx-12 text-lg font-bold">
+                <div className="hidden lg:flex w-full lg:w-3/5 mb-6 lg:mb-0 text-center space-x-5 lg:text-right">
+                    <div className={styles["nav-cont"]}>
                         {navTitles.map((item, index) => (
                             <Link key={index} href={item.href} passHref>
-                                <div
-                                    className={`cursor-pointer ${
-                                        activeTitle
-                                            ? "border-b border-yellow-600"
-                                            : "border-b border-red-600"
+                                <a
+                                    className={`${styles["nav-item"]} ${
+                                        currentPath == item.href
+                                            ? "border-b-2 border-black"
+                                            : ""
                                     }`}
-                                    onClick={() => setActiveTitle(false)}
                                 >
                                     {item.title}
-                                </div>
+                                </a>
                             </Link>
                         ))}
                     </div>
-                    <div className="flex flex-row items-center space-x-5">
-                        <div onClick={() => setToggleIcons(!toggleIcons)}></div>
+                    <div className="flex items-center">
+                        {/* <div onClick={() => setToggleIcons(!toggleIcons)}></div> */}
                         <button
                             className="btnColor rounded-full font-semibold p-2 px-4 flex"
                             onClick={

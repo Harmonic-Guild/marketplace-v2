@@ -17,9 +17,18 @@ html {
     @apply xl:bg-yellow-300 lg:bg-green-300 md:bg-purple-300 sm:bg-red-800 xs:bg-pink-300;
 }
 .btnColor {
-    background: linear-gradient(0deg, #64748b, #64748b),
-        linear-gradient(84.42deg, #5174a6 0%, #233247 100%);
+    @apply text-white;
+    background: linear-gradient(
+        to right,
+        rgba(81, 116, 166, 1),
+        rgba(35, 50, 71, 1)
+    );
 }
+
+.btnColor svg {
+    @apply text-white;
+}
+
 .glass-morphism {
     background: rgba(99, 96, 96, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

@@ -1,0 +1,11 @@
+.header {
+    @apply w-full px-6 text-gray-700;
+
+    .nav-cont {
+        @apply mt-2 flex justify-between mx-4 text-lg font-bold w-full;
+
+        .nav-item {
+            @apply cursor-pointer;
+        }
+    }
+}
