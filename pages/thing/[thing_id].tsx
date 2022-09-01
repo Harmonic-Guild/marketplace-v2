@@ -25,11 +25,17 @@ query MyQuery($thing_id: String!) {
       lists(order_by: {createdAt: desc}, limit: 1) {
         price
         autotransfer
-        offer {
+          offer {
           price
+          from
         }
         createdAt
         tokenKey
+        ownerId
+        #offers(limit: 1, order_by: {createdAt: desc}) {
+        #  price
+        #  from
+        #}
       }
       txId
       minter
@@ -74,19 +80,21 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
    }
 
    interface Tokens {
-    id: string
-    lists: [List?]
-    createdAt: string|number
-    tokenKey: string|number
-    txId:string
-    minter:string
+    id: string;
+    lists: [List?];
+    createdAt: string|number;
+    tokenKey: string|number;
+    ownerId: string;
+    txId:string;
+    minter:string;
    }
 
    interface List {
     price: number
     autotransfer: boolean
     offer: {
-      price:number
+      price:number;
+      from: string
     }
     createdAt: string| number
   }
@@ -292,7 +300,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
               <PurchaseNft buy ={buy} price={price!} isConnected={isConnected}/> 
             ): (
 
-              <MakeOffer buy ={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price}/> 
+              <MakeOffer buy ={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} bidder={tokens[0]?.lists[0]?.offer?.from} owner={tokens[0]?.ownerId} /> 
             )
               
 
