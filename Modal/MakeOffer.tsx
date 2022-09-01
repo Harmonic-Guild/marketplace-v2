@@ -32,7 +32,7 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
             <div className="font-bold text-xl flex items-center gap-2">
             {
             latestBid ? 
-            <div className='flex items-center gap-1'>{latestBid}<Near/></div>
+            <div className='flex items-center gap-1'>{latestBid}<Near className="w-4 h-4" /></div>
             : 
             'none'
             }
@@ -74,7 +74,7 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
               </div>
               <div className='my-2 flex justify-between w-full lg:w-3/5 border border-gray-400 rounded-lg'>
                   <input type="number" className='w-full outline-none' value={bid} onChange={handleChange}/> 
-                  <span className='border-l border-gray-400 p-2'><Near/></span>
+                  <span className='border-l border-gray-400 p-2'><Near className="w-4 h-4" /></span>
               </div>
 
               <div className="">
