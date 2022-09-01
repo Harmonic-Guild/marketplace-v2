@@ -17,7 +17,7 @@ const MakeOffer = ({buy, isConnected, latestBid, bidder, owner}: any) => {
   return (
     <div className="border border-yellow-600 bg-yellow-100 rounded-lg p-6 mt-8  lg:flex lg:justify-around lg:gap-10">
       <div className="flex flex-col justify-center items-center">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col lg:flex-row lg:gap-2 items-center">
             {/* <img
               className="inline-block h-10 w-10 rounded-full"
               src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
