@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import Near from '../icons/near.svg'
 import NotConnected from './NotConnected';
+import { formatNearAmount } from 'near-api-js/lib/utils/format';
 
-const MakeOffer = ({buy, isConnected, latestBid}: any) => {
+const MakeOffer = ({buy, isConnected, latestBid, bidder, owner}: any) => {
 
   const [showModal, setShowModal] = useState(false)
   const [bid, setBid] = useState('0')
@@ -17,24 +18,25 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
     <div className="border border-yellow-600 bg-yellow-100 rounded-lg p-6 mt-8  lg:flex lg:justify-around lg:gap-10">
       <div className="flex flex-col justify-center items-center">
         <div className="flex items-center gap-2">
-            <img
+            {/* <img
               className="inline-block h-10 w-10 rounded-full"
               src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
-            />
-            <span className="font-bold text-lg">@Latest bidder</span>
+            /> */}
+            <span className='font-normal text-md'>latest Bidder</span> -
+            <span className="font-bold text-lg">{bidder}</span>
         </div>
 
         <div className="flex flex-row gap-2 mt-3 mb-3 lg:mb-0">
-            <div className="font-medium text-lg">Latest bid: </div>
-            <div className="font-bold text-xl flex items-center gap-2">
+            <span className="font-normal text-md">Latest bid - </span>
+            <span className="font-bold text-xl flex items-center gap-2">
             {
             latestBid ? 
-            <div className='flex items-center gap-1'>{latestBid}<Near className="w-4 h-4" /></div>
+            <span className='flex items-center gap-1'>{formatNearAmount(Number(latestBid|| 0).toLocaleString('fullwide', { useGrouping: false }),5)}<Near className="w-4 h-4" /></span>
             : 
             'none'
             }
-            </div>
+            </span>
         </div>
       </div>
 
@@ -49,13 +51,13 @@ const MakeOffer = ({buy, isConnected, latestBid}: any) => {
         </div>
 
         <div className="text-center flex justify-center items-center mt-3">
-          <p className="font-bold">Owned by:</p>
-          <img
+          <p className="font-bold">Owned by -  @ {owner? owner: 'None'}</p>
+          {/* <img
             className="h-5 w-5 rounded-full mx-2"
             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
             alt=""
-          />
-          <span>@owner</span>
+          /> */}
+          {/* <span></span> */}
         </div>
 
         </div>
