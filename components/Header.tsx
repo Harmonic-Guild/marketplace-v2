@@ -33,16 +33,18 @@ const Header = () => {
             ?<FiMenu className='w-6 h-6 text-yellow-400' onClick={() => setToggleMenu(false)}/>
             : <div className='w-1/2 h-full'>
               <FiX className='w-6 h-6 relative text-yellow-400' onClick={() => setToggleMenu(true)}/>
-              <div className={`bg-white text-gray-900 absolute top-20 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-8 h-screen w-4/5 z-10`}>
+              <div className={`bg-white text-gray-900 absolute top-20 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-8 sm:h-screen sm:w-4/5 h-1/2 w-full z-10`}>
               {isConnected && (
                 <p className="text-lg py-2 px-8 font-semibold text-black">
                   {wallet?.activeAccount?.accountId}
                 </p>
               )}
-                {navTitles.map((item, index) => (
-                  <Link key={index} href={item.href} passHref><div className={`cursor-pointer`}>{item.title}</div></Link>
-                ))}
-                <div className='absolute bottom-0 mb-20'>
+                <div className=''>
+                  {navTitles.map((item, index) => (
+                    <Link key={index} href={item.href} passHref><div className={`cursor-pointer`}>{item.title}</div></Link>
+                  ))}
+                </div>
+                <div className='sm:absolute bottom-0 mb-20'>
                   <div className='flex justify-between w-fit bg-purple-200 border border-indigo-900 opacity-100 my-4 sm:text-md text-sm font-normal rounded-full p-4'>
                     <p className='flex pl'>Community <FiUsers className='px-1 w-6 h-6'/></p>
                     <p className='flex'><BsDot className='mt-1 text-green-400'/>100+ online</p>
@@ -60,7 +62,7 @@ const Header = () => {
                     </div>
                   </div> */}
                   <button 
-                    className='btnColor rounded-full font-semibold p-2 px-4 flex w-full justify-center  mt-8'
+                    className='btnColor rounded-full font-semibold p-2 px-32 flex w-full justify-center mt-8'
                     onClick={
                       isConnected
                       ? () => {
