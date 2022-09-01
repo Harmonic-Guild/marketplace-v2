@@ -62,7 +62,7 @@ const Header = () => {
                     </div>
                   </div> */}
                   <button 
-                    className='btnColor sm:rounded-full rounded-xl font-semibold p-2 px-32 flex w-full justify-center mt-8'
+                    className='btnColor rounded-full font-semibold p-2 px-4 flex w-full justify-center  mt-8'
                     onClick={
                       isConnected
                       ? () => {
