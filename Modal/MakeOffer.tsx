@@ -27,7 +27,7 @@ const MakeOffer = ({buy, isConnected, latestBid, bidder, owner}: any) => {
             <span className="font-bold text-lg">{bidder}</span>
         </div>
 
-        <div className="flex flex-row gap-2 mt-3 mb-3 lg:mb-0">
+        <div className="flex flex-row gap-2 mt-3 mb-3 lg:mb-0 lg:mt-1 items-center">
             <span className="font-normal text-md">Latest bid - </span>
             <span className="font-bold text-xl flex items-center gap-2">
             {
