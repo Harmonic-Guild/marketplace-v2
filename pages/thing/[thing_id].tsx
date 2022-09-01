@@ -107,6 +107,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   const [allTokens, setAllTokens] = useState<[id?:string]>([])
   const { wallet, isConnected } = useWallet();
   const [hide, setHide] = useState<Boolean>(false)
+  const [fullScreen, setFullScreen] = useState<Boolean>(false)
+  const [image, setImage] = useState<Boolean>(false)
 
   const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] =
     useLazyQuery(FETCH_TOKENS, {
@@ -171,6 +173,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   else {
     currentBid = formatNearAmount((Number(things?.tokens[0]?.lists[0]?.offer?.price)).toLocaleString('fullwide', { useGrouping: false }), 5)
   }
+  const media = things?.metadata.media
+  // const toggleFullScreen = () => {
+  //   setImage(media)
+  //   setFullScreen(true)
+  //   // console.log('jjd');
+    
+  // }
 
   return (
     <div className="container mx-auto mt-10 text-gray-700">
@@ -200,6 +209,12 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   alt={'alt'} />
               </div>
             }
+            <div className='text-yellow-300 cursor-pointer' onClick={() => setFullScreen(true)}>
+              <div className="lg:flex hidden gap-5 justify-end py-4">
+                <BsCircle className="relative h-8 w-8" />
+                <AiOutlineExpandAlt className="w-4 h-4 absolute mt-2 -ml-2" />
+              </div>
+          </div>
             </div>
           )}
         </div>
@@ -212,11 +227,24 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <BsCircle className="relative h-8 w-8" />
             <BiShareAlt className='w-4 h-4 absolute -mt-6 ml-2' />
           </div> */}
-          <div className=' text-yellow-300'>
+          <div className=' text-yellow-300' onClick={() => setFullScreen(true)}>
             <BsCircle className="relative h-8 w-8" />
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
           </div>
         </div>
+          {fullScreen ? 
+            (<div className="h-screen w-screen bg-gray-900 z-50 fixed left-0 top-0 " onClick={() => setFullScreen(false)}>
+              <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
+                <Image
+                src={media}
+                objectFit="cover"
+                className="w-4/5 lg:w-2/5 rounded-lg shadow-xl"
+                layout="fill"
+                alt={'alt'} />
+              </div>
+            </div>)
+            : null
+          }
         <div className="w-full">
           
           <div  className="text-4xl font-bold mb-5">
