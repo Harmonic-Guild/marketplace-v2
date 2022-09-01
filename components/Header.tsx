@@ -59,6 +59,22 @@ const Header = () => {
                       <BsLayoutTextSidebarReverse className='w-5 h-5  px-1 mt-1'/>
                     </div>
                   </div>
+                  <button 
+                    className='btnColor rounded-full font-semibold p-2 px-4 flex w-full justify-center  mt-8'
+                    onClick={
+                      isConnected
+                      ? () => {
+                        wallet?.disconnect()
+                        window.location.reload()
+                      }
+                      : () => {
+                        wallet?.connect({ requestSignIn: true })
+                      } 
+                    }
+                    >
+                      {isConnected ? 'Disconnect' : 'Connect'}
+                      <span className='ml-2 mt-1.5'><Near className='w-4 h-4'/></span>
+                  </button>
                 </div>
               </div>
             </div>
