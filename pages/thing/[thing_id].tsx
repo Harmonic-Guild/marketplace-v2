@@ -181,10 +181,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         <div className="mx-auto w-full">
           {(things?.metadata.animation_type !== null && things?.metadata.animation_type !== 'image/jpeg' && things?.metadata.animation_type !== 'image/png'&& things?.metadata.animation_type !== 'image/gif' ) ? (
             <div className="w-full xl:w-4/5 mx-auto flex align-middle">
-              <video controls className='' poster={things?.metadata.media} controlsList="nodownload" muted>
-                <source src={things?.metadata.animation_url} ></source>
-              </video>
+              { things?.metadata.animation_url && <video controls className=''
+              //  poster={things?.metadata.media}
+                controlsList="nodownload" muted>
+                <source src={things?.metadata?.animation_url!} type={things?.metadata.animation_type} ></source>
+              </video>}
             </div>
+            
           ) : (
 
             <div className=" w-full xl:w-4/5 mx-auto">
@@ -264,7 +267,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   </div>
 
                   <div>
-                    <p className="lg:hidden text-center text-gray-500 text-lg my-5">{tokens.length}/{allTokens.length} Tokens available</p>
+                    <p className="text-center text-gray-500 text-lg my-5">{tokens.length}/{allTokens.length} Tokens available</p>
                   </div>
                   
                   {/* <div className="lg:flex lg:items-center gap-10">
@@ -282,9 +285,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
           </div>
 
-
           <div>
             {things?.tokens[0]?.lists[0]?.autotransfer ?
+            
             (
               <PurchaseNft buy ={buy} price={price!} isConnected={isConnected}/> 
             ): (
