@@ -47,18 +47,18 @@ const Header = () => {
                     <p className='flex pl'>Community <FiUsers className='px-1 w-6 h-6'/></p>
                     <p className='flex'><BsDot className='mt-1 text-green-400'/>100+ online</p>
                   </div>
-                  <div className='flex justify-evenly'>
-                  {/* < div className='mt-4' onClick={() => setToggleIcons(!toggleIcons)}>
+                  {/* <div className='flex justify-evenly'>
+                  < div className='mt-4' onClick={() => setToggleIcons(!toggleIcons)}>
                       {toggleIcons 
                         ?<BsSun onClick={() => setToggleIcons(true)} className='cursor-pointer hover:text-yellow-400 w-6 h-6 transition duration-700'/>
                         :<BsMoonStars onClick={() => setDarkMode(false)} className='cursor-pointer hover:text-black text-gray-700 w-6 h-6 transition duration-700'/>
                       }
-                    </div> */}
+                    </div>
                     <div className='flex justify-between border border-indigo-900 opacity-700 text-md xs:text-sm font-normal rounded-3xl px-4 py-2 bg-purple-200'>
                       <span>News</span>
                       <BsLayoutTextSidebarReverse className='w-5 h-5  px-1 mt-1'/>
                     </div>
-                  </div>
+                  </div> */}
                   <button 
                     className='btnColor rounded-full font-semibold p-2 px-4 flex w-full justify-center  mt-8'
                     onClick={
