@@ -23,7 +23,7 @@ const MakeOffer = ({buy, isConnected, latestBid, bidder, owner}: any) => {
               src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
               alt=""
             /> */}
-            <span className='font-normal text-md'>latest Bidder</span> -
+            <span className='font-normal text-md'>Latest Bidder -</span>
             <span className="font-bold text-lg">{bidder}</span>
         </div>
 
