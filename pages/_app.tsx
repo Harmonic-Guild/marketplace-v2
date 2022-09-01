@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <NextProgress
                 delay={300}
                 options={{ showSpinner: false }}
-                color={"black"}
+                color={"#0F172A"}
             />
             <WalletProvider
                 apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""}

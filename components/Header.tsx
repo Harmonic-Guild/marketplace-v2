@@ -110,8 +110,8 @@ const Header = () => {
                                 <a
                                     className={`${styles["nav-item"]} ${
                                         currentPath == item.href
-                                            ? "border-b-2 border-black"
-                                            : ""
+                                            ? "border-black"
+                                            : "border-white"
                                     }`}
                                 >
                                     {item.title}
@@ -119,10 +119,9 @@ const Header = () => {
                             </Link>
                         ))}
                     </div>
-                    <div className="flex items-center">
+                    <div className={styles["button-cont"]}>
                         {/* <div onClick={() => setToggleIcons(!toggleIcons)}></div> */}
                         <button
-                            className="btnColor rounded-full font-semibold p-2 px-4 flex"
                             onClick={
                                 isConnected
                                     ? () => {

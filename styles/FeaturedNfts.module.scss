@@ -1,0 +1,10 @@
+@import "./variables";
+
+.container {
+    @apply w-full lg:px-32 px-12;
+
+    .bid-button {
+        @include buttonColor;
+        @apply rounded px-4 py-2 mt-4;
+    }
+}

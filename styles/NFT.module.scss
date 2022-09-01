@@ -1,0 +1,11 @@
+@import "./variables";
+
+.container {
+    @apply w-full border rounded-2xl cursor-pointer p-5;
+    border: 1px solid #94a3b8;
+    background: #f8f5ff;
+
+    .buy-button {
+        @apply flex justify-between items-center rounded-lg gap-3 bg-gradient-to-r from-secondary to-primary text-white px-5 py-3 font-semibold;
+    }
+}

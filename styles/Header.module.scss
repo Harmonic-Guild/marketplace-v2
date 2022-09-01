@@ -1,3 +1,5 @@
+@import "./variables";
+
 .header {
     @apply w-full px-6 text-gray-700;
 
@@ -5,7 +7,14 @@
         @apply mt-2 flex justify-between mx-4 text-lg font-bold w-full;
 
         .nav-item {
-            @apply cursor-pointer;
+            @apply cursor-pointer border-b-2 hover:border-black;
+        }
+    }
+
+    .button-cont {
+        button {
+            @include buttonColor;
+            @apply rounded-full font-semibold p-2 px-4 flex;
         }
     }
 }

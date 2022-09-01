@@ -1,0 +1,11 @@
+$primary: rgba(35, 50, 71, 1);
+$secondary: rgba(81, 116, 166, 1);
+
+@mixin buttonColor {
+    @apply text-white;
+    background: linear-gradient(to right, $secondary, $primary);
+
+    &:hover {
+        background: linear-gradient(to right, $primary, $secondary);
+    }
+}

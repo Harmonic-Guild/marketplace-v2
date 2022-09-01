@@ -18,11 +18,7 @@ html {
 }
 .btnColor {
     @apply text-white;
-    background: linear-gradient(
-        to right,
-        rgba(81, 116, 166, 1),
-        rgba(35, 50, 71, 1)
-    );
+    background: linear-gradient(to right, rgba(81, 116, 166, 1), rgba(35, 50, 71, 1));
 }
 
 .btnColor svg {
@@ -67,23 +63,18 @@ button {
     @apply flex py-2 justify-between font-semibold text-mp-gray-5 hover:text-mp-gray-7 cursor-pointer;
 }
 .action-btn {
-    background: radial-gradient(
-            62.1% 62.79% at 32.81% 20%,
-            rgba(255, 255, 255, 0.4) 0%,
-            rgba(255, 255, 255, 0) 69.79%,
-            rgba(255, 255, 255, 0) 100%
-        ),
+    background: radial-gradient(62.1% 62.79% at 32.81% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%),
         linear-gradient(84.42deg, #ffd12f 0%, #ffb038 100%);
     @apply px-5 pt-3  rounded-full font-semibold -ml-2;
 }
 
 .slick-arrow.slick-next {
-    @apply rounded-full bg-yellow-500 p-3  -right-10 opacity-0 md:opacity-100;
+    @apply rounded-full bg-primary p-3  -right-10 opacity-0 md:opacity-100;
 }
 .slick-arrow.slick-prev {
     width: 20px;
     height: 20px;
-    @apply rounded-full bg-yellow-500 p-3  -left-10 opacity-0 md:opacity-100;
+    @apply rounded-full bg-primary p-3  -left-10 opacity-0 md:opacity-100;
 }
 .slide {
     transform: scale(0.7);
@@ -96,11 +87,11 @@ button {
     transform: scale(1.1);
 }
 .slick-dots button:before {
-    transform: scale(1.1);
     transition: 0.5s;
-    @apply text-yellow-500;
+    transform: scale(1.5);
+    color: red;
 }
 .slick-dots li.slick-active button:before {
-    transform: scale(3.1);
-    @apply text-yellow-500;
+    transform: scale(1.5);
+    color: #6e61bf;
 }
