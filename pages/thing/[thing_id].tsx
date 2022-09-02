@@ -232,19 +232,19 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
           </div>
         </div>
-          {fullScreen ? 
-            (<div className="h-screen w-screen bg-gray-900 z-50 fixed left-0 top-0 " onClick={() => setFullScreen(false)}>
-              <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
-                <Image
-                src={media}
-                objectFit="cover"
-                className="w-4/5 lg:w-2/5 rounded-lg shadow-xl"
-                layout="fill"
-                alt={'alt'} />
-              </div>
-            </div>)
-            : null
-          }
+        {fullScreen && <div className='h-screen w-screen bg-gray-900 z-50 fixed left-0 top-0 '>
+        <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
+          <Image
+            src={media}
+            layout="fill"
+            objectFit='contain'
+          />
+          <div className='absolute bottom-2 right-8 text-yellow-500' onClick={()=> setFullScreen(false)}>
+            <BsCircle className="relative h-8 w-8" />
+            <AiOutlineExpandAlt title='close screen' className="w-4 h-4 absolute -mt-6 ml-2" />
+          </div>
+        </div>
+      </div>}
         <div className="w-full">
           
           <div  className="text-4xl font-bold mb-5">
