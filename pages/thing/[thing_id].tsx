@@ -10,10 +10,7 @@ import Vector_back from "../../icons/Vector_back.svg";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import Image from "next/image";
-import {
-    formatNearAmount,
-    parseNearAmount,
-} from "near-api-js/lib/utils/format";
+import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format";
 import MakeOffer from "../../Modal/MakeOffer";
 import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from "../../icons/near.svg";
@@ -24,10 +21,7 @@ const FETCH_TOKENS = gql`
     query MyQuery($thing_id: String!) {
         thing(where: { id: { _eq: $thing_id } }) {
             id
-            tokens(
-                distinct_on: id
-                where: { list: { removedAt: { _is_null: true } } }
-            ) {
+            tokens(distinct_on: id, where: { list: { removedAt: { _is_null: true } } }) {
                 id
                 lists(order_by: { createdAt: desc }, limit: 1) {
                     price
@@ -114,10 +108,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     const { wallet, isConnected } = useWallet();
     const [hide, setHide] = useState<Boolean>(false);
 
-    const [
-        getTokens,
-        { loading: loadingTokensData, data: tokensData, fetchMore },
-    ] = useLazyQuery(FETCH_TOKENS, {
+    const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] = useLazyQuery(FETCH_TOKENS, {
         variables: {
             thing_id: "",
         },
@@ -153,21 +144,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         if (things?.tokens[0]?.lists[0]?.autotransfer) {
             wallet?.makeOffer(token_Id, tokenPrice);
         } else {
-            wallet?.makeOffer(
-                token_Id,
-                parseNearAmount(bid.toString())!.toString()
-            );
+            wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString());
         }
     };
     // console.log(wallet);
 
     const tokenPriceNumber = Number(things?.tokens[0]?.lists[0]?.price);
-    const price =
-        things?.tokens[0]?.lists[0] &&
-        formatNearAmount(
-            tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }),
-            2
-        );
+    const price = things?.tokens[0]?.lists[0] && formatNearAmount(tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }), 2);
     const tokenPrice = tokenPriceNumber.toLocaleString("fullwide", {
         useGrouping: false,
     });
@@ -176,13 +159,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     if (things?.tokens[0]?.lists[0]?.offer == null) {
         currentBid = "0";
     } else {
-        currentBid = formatNearAmount(
-            Number(things?.tokens[0]?.lists[0]?.offer?.price).toLocaleString(
-                "fullwide",
-                { useGrouping: false }
-            ),
-            5
-        );
+        currentBid = formatNearAmount(Number(things?.tokens[0]?.lists[0]?.offer?.price).toLocaleString("fullwide", { useGrouping: false }), 5);
     }
 
     return (
@@ -199,16 +176,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     things?.metadata.animation_type !== "image/png" &&
                     things?.metadata.animation_type !== "image/gif" ? (
                         <div className="w-full xl:w-4/5 mx-auto flex align-middle">
-                            <video
-                                controls
-                                className=""
-                                poster={things?.metadata.media}
-                                controlsList="nodownload"
-                                muted
-                            >
-                                <source
-                                    src={things?.metadata.animation_url}
-                                ></source>
+                            <video controls className="" poster={things?.metadata.media} controlsList="nodownload" muted>
+                                <source src={things?.metadata.animation_url}></source>
                             </video>
                             <br />
                         </div>
@@ -245,20 +214,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
                 </div>
                 <div className="w-full">
-                    <div className="text-4xl font-bold mb-5">
-                        {things?.metadata.title}
-                    </div>
+                    <div className="text-4xl font-bold mb-5">{things?.metadata.title}</div>
 
                     <div className="text-lg">
-                        {things?.tokens[0]?.lists[0]?.createdAt! ===
-                        undefined ? (
+                        {things?.tokens[0]?.lists[0]?.createdAt! === undefined ? (
                             `Mint date is not available`
                         ) : (
                             <div className="flex gap-3">
-                                {`Minted On: ` +
-                                    new Date(
-                                        things?.tokens[0]?.lists[0]?.createdAt!
-                                    ).toDateString()}{" "}
+                                {`Minted On: ` + new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()}{" "}
                                 <TbExternalLink className="text-yellow-300 w-6 h-6" />
                             </div>
                         )}
@@ -267,19 +230,11 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     <div className="">
                         <div className="mt-10">
                             <div className="border-b border-yellow-600 mb-3 pb-3">
-                                <span className="text-3xl font-medium">
-                                    Description
-                                </span>
+                                <span className="text-3xl font-medium">Description</span>
                             </div>
 
-                            <p className={hide ? "" : "line-clamp-3"}>
-                                {things?.metadata.description}
-                            </p>
-                            <span
-                                id="span"
-                                onClick={toggleDiscription}
-                                className="cursor-pointer text-blue-400 hover:underline"
-                            >
+                            <p className={hide ? "" : "line-clamp-3"}>{things?.metadata.description}</p>
+                            <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
                                 {" "}
                                 {!hide ? ".....see more" : "see less"}
                             </span>
@@ -288,16 +243,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
                         <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
                             {/* <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
-                  <p className="text-xl pr-1 text-2xl font-bold text-center lg:text-left">
+                  <p className="text-xl pr-1 font-bold text-center lg:text-left">
                     History of NFT
                   </p>
                   {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/>
                 </div> */}
                             <div className="">
                                 <div className="flex items-center justify-between gap-3">
-                                    <p className="text-2xl font-bold">
-                                        Details
-                                    </p>
+                                    <p className="text-2xl font-bold">Details</p>
                                     <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
                                     <div className="border-2 border-yellow-400 rounded-full p-2 px-3">
                                         <a
@@ -309,18 +262,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         </a>
                                     </div>
                                     <div className="border-2 border-yellow-400 rounded-full p-1 px-3">
-                                        <a
-                                            href={`https://viewblock.io/arweave/tx/${
-                                                thing_id.split(":")[0]
-                                            }`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
+                                        <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
                                             <div className="w-6 h-6">
-                                                <Image
-                                                    src={Arweave}
-                                                    className=""
-                                                />
+                                                <Image src={Arweave} className="" />
                                             </div>
                                         </a>
                                     </div>
@@ -328,38 +272,29 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
                                 <div className="bg-yellow-100 rounded-lg my-8 py-2">
                                     <p className="lg:hidden text-center text-gray-500 text-lg">
-                                        {tokens.length}/{allTokens.length}{" "}
-                                        Tokens available
+                                        {tokens.length}/{allTokens.length} Tokens available
                                     </p>
                                 </div>
 
                                 {/* <div className="lg:flex lg:items-center gap-10">
-                    <p className="text-2xl font-bold mb-5 pb-5 border-b border-yellow-400 lg:border-0">
-                      Perks
-                    </p>
-                    <span className="text-lg">
-                      <li>First Perk</li>
-                      <li>Second Perk</li>
-                      <li>Exclusive access to comunity</li>
-                    </span>
-                  </div> */}
+                                    <p className="text-2xl font-bold mb-5 pb-5 border-b border-yellow-400 lg:border-0">
+                                    Perks
+                                    </p>
+                                    <span className="text-lg">
+                                    <li>First Perk</li>
+                                    <li>Second Perk</li>
+                                    <li>Exclusive access to comunity</li>
+                                    </span>
+                                </div> */}
                             </div>
                         </div>
                     </div>
 
                     <div>
                         {things?.tokens[0]?.lists[0]?.autotransfer ? (
-                            <PurchaseNft
-                                buy={buy}
-                                price={price!}
-                                isConnected={isConnected}
-                            />
+                            <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
                         ) : (
-                            <MakeOffer
-                                buy={buy}
-                                isConnected={isConnected}
-                                latestBid={tokens[0]?.lists[0]?.offer?.price}
-                            />
+                            <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
                         )}
                     </div>
                 </div>

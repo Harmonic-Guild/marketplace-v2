@@ -3,6 +3,9 @@ import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import { GiStarShuriken } from "react-icons/gi";
 import NFT from "./NFT";
+import { Token } from "../constants/interfaces";
+
+import styles from "../styles/WeeklyNft.module.scss";
 
 const FETCH_WEEKLY = gql`
     query MyQuery($storeId: String!) {
@@ -40,7 +43,7 @@ const FETCH_WEEKLY = gql`
 `;
 
 const WeeklyNft = ({ storeId }: { storeId: string }) => {
-    const [tokens, setTokens] = useState<[]>([]);
+    const [tokens, setTokens] = useState<Token[]>([]);
 
     const [getTokens, { loading: loadingtokensData, data: tokensData }] = useLazyQuery(FETCH_WEEKLY, {
         variables: {
@@ -73,24 +76,24 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
     return (
         <>
             {loadingtokensData && <div className="h-5 w-5 bg-primary animate-pulse rounded-full"></div>}
-            <div className="w-full h-full pt-10 lg:px-32 px-12 ">
+            <div className={styles.container}>
                 <div className=" text-center  font-bold text-gray-900 mb-4">
                     <p className="text-primary mb-2">
                         <GiStarShuriken className="inline w-6 h-5" />
                     </p>
                     <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
                 </div>
-                <div className="grid md:grid-cols-3 sm:grid-cols-2 lg:grid-cols-4 w-full pt-4 gap-y-5 gap-2">
-                    {tokens.map((token: any) => (
+                <div className={styles["nfts-cont"]}>
+                    {tokens.map((token) => (
                         <NFT token={token} key={token.id} />
                     ))}
                 </div>
             </div>
-            <div className="grid md:grid-cols-3 sm:grid-cols-3 w-full pt-4 gap-y-5 gap-2">
-                {tokens.map((token: any) => (
+            {/* <div className="grid md:grid-cols-3 sm:grid-cols-3 w-full pt-4 gap-y-5 gap-2">
+                {tokens.map((token) => (
                     <NFT token={token} key={token.id} />
                 ))}
-            </div>
+            </div> */}
         </>
     );
 };

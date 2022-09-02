@@ -51,7 +51,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
         centerPadding: "8px",
         centerMode: true,
         slidesToShow: 3,
-        autoplay: true,
+        // autoplay: true,
         autoplaySpeed: 2000,
         pauseOnHover: true,
         slidesToScroll: 1,

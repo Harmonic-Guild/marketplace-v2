@@ -6,11 +6,12 @@ import Image from "next/image";
 import { AiOutlineRight } from "react-icons/ai";
 import { BiShareAlt } from "react-icons/bi";
 import { BsCircle, BsPlayCircle } from "react-icons/bs";
+import { Token } from "../constants/interfaces";
 
 import styles from "../styles/NFT.module.scss";
 
 interface Props {
-    token: any;
+    token: Token;
 }
 
 const NFT: FC<Props> = ({ token }) => {
@@ -19,7 +20,7 @@ const NFT: FC<Props> = ({ token }) => {
 
     return (
         <Link href={`/thing/${thing.id}`} passHref>
-            <div className={`${styles.container} nft_height`}>
+            <a className={`${styles.container} nft_height`}>
                 {/* purpose of w full and nft height? */}
                 <div className="">
                     {thing.metadata.animation_type !== null &&
@@ -58,15 +59,15 @@ const NFT: FC<Props> = ({ token }) => {
                         </div>
                     )}
                     <div className="text-sm py-2 text-mp-dark-3 relative">
-                        {list?.autoTransfer && (
+                        {/* {list?.autotransfer && (
                             <div className="timer sm:flex hidden">timeout :{new Date(list?.offer?.timeout).toLocaleDateString()}</div>
-                        )}
+                        )} */}
                         {/* <div className="flex md:hidden absolute text-white rounded-md px-2 py-1 -top-4 left-16">
                                 <div className='bg-red-700 rounded-full h-7 w-7 absolute right-12 p-1 text-white'>MZ</div>
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div> */}
-                        <div className="font-bold mt-4 mb-1 text-xl overflow-x-hidden">{thing.metadata.title}</div>
+                        <div className={styles.title}>{thing.metadata.title}</div>
                         <div>
                             <div className="flex gap-2 items-center text-lg">
                                 {list ? (
@@ -129,7 +130,7 @@ const NFT: FC<Props> = ({ token }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </Link>
     );
 };

@@ -5,7 +5,13 @@
     border: 1px solid #94a3b8;
     background: #f8f5ff;
 
+    .title {
+        @apply font-bold mt-4 mb-1 text-xl overflow-hidden whitespace-nowrap;
+        text-overflow: ellipsis;
+    }
+
     .buy-button {
-        @apply flex justify-between items-center rounded-lg gap-3 bg-gradient-to-r from-secondary to-primary text-white px-5 py-3 font-semibold;
+        @include buttonColor;
+        @apply flex justify-between items-center rounded-lg gap-3 px-5 py-3 font-semibold;
     }
 }
