@@ -4,7 +4,7 @@ import { TbExternalLink } from 'react-icons/tb';
 import { FiLayers } from "react-icons/fi";
 import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
-import { AiOutlineExpandAlt } from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlineExpandAlt } from "react-icons/ai";
 // import SimilarNft from "../../components/SimilarNft";
 import Vector_back from '../../icons/Vector_back.svg'
 import { gql } from "apollo-boost";
@@ -232,19 +232,24 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
           </div>
         </div>
-        {fullScreen && <div className='h-screen w-screen bg-gray-900 z-50 fixed left-0 top-0 '>
-        <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
-          <Image
-            src={media}
-            layout="fill"
-            objectFit='contain'
-          />
-          <div className='absolute bottom-2 right-8 text-yellow-500' onClick={()=> setFullScreen(false)}>
-            <BsCircle className="relative h-8 w-8" />
-            <AiOutlineExpandAlt title='close screen' className="w-4 h-4 absolute -mt-6 ml-2" />
-          </div>
-        </div>
-      </div>}
+        {fullScreen ? 
+            (
+              <div className="fixed h-screen w-screen z-50 bg-gray-900 bg-opacity-75 top-0 left-0 flex justify-center p-5 lg:p-20 cursor-pointer" onClick={() => setFullScreen(false)}>
+                <div className="w-full mt-10 lg:mt-0 lg:w-1/2 lg:h-1/2 bg-opacity-100 relative" onClick={() => setFullScreen(false)}>
+                  <Image
+                  src={`${media}`}
+                  width='100%'
+                  height='100%'
+                  objectFit="cover"
+                  className="rounded-lg shadow-xl"
+                  layout="responsive"
+                  alt={'alt'} />
+                <AiOutlineCloseCircle className="rounded-full bg-white text-yellow-300 w-4 h-4 lg:w-8 lg:h-8 absolute top-0 right-0 -mr-3 -mt-3" />
+                </div>
+              </div>
+            )
+            : null
+          }
         <div className="w-full">
           
           <div  className="text-4xl font-bold mb-5">
