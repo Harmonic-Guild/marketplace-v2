@@ -279,7 +279,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
 
                   <div className="bg-yellow-100 rounded-lg my-8 py-2">
-                    <p className="lg:hidden text-center text-gray-500 text-lg">{tokens.length}/{allTokens.length} Tokens available</p>
+                    <p className="text-center text-gray-500 text-lg">{tokens.length}/{allTokens.length} Tokens available</p>
                   </div>
                   
                   {/* <div className="lg:flex lg:items-center gap-10">
