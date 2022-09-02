@@ -26,11 +26,17 @@ query MyQuery($thing_id: String!) {
       lists(order_by: {createdAt: desc}, limit: 1) {
         price
         autotransfer
-        offer {
+          offer {
           price
+          from
         }
         createdAt
         tokenKey
+        ownerId
+        #offers(limit: 1, order_by: {createdAt: desc}) {
+        #  price
+        #  from
+        #}
       }
       txId
       minter
@@ -75,19 +81,21 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
    }
 
    interface Tokens {
-    id: string
-    lists: [List?]
-    createdAt: string|number
-    tokenKey: string|number
-    txId:string
-    minter:string
+    id: string;
+    lists: [List?];
+    createdAt: string|number;
+    tokenKey: string|number;
+    ownerId: string;
+    txId:string;
+    minter:string;
    }
 
    interface List {
     price: number
     autotransfer: boolean
     offer: {
-      price:number
+      price:number;
+      from: string
     }
     createdAt: string| number
   }
@@ -182,10 +190,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         <div className="mx-auto w-full">
           {(things?.metadata.animation_type !== null && things?.metadata.animation_type !== 'image/jpeg' && things?.metadata.animation_type !== 'image/png'&& things?.metadata.animation_type !== 'image/gif' ) ? (
             <div className="w-full xl:w-4/5 mx-auto flex align-middle">
-              <video controls className='' poster={things?.metadata.media} controlsList="nodownload" muted>
-                <source src={things?.metadata.animation_url} ></source>
-              </video>
+              { things?.metadata.animation_url && <video controls className=''
+              //  poster={things?.metadata.media}
+                controlsList="nodownload" muted>
+                <source src={things?.metadata?.animation_url!} type={things?.metadata.animation_type} ></source>
+              </video>}
             </div>
+            
           ) : (
 
             <div className=" w-full xl:w-4/5 mx-auto">
@@ -266,6 +277,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
                   </div>
 
+
                   <div className="bg-yellow-100 rounded-lg my-8 py-2">
                     <p className="lg:hidden text-center text-gray-500 text-lg">{tokens.length}/{allTokens.length} Tokens available</p>
                   </div>
@@ -285,14 +297,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
           </div>
 
-
           <div>
             {things?.tokens[0]?.lists[0]?.autotransfer ?
+            
             (
               <PurchaseNft buy ={buy} price={price!} isConnected={isConnected}/> 
             ): (
 
-              <MakeOffer buy ={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price}/> 
+              <MakeOffer buy ={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} bidder={tokens[0]?.lists[0]?.offer?.from} owner={tokens[0]?.ownerId} /> 
             )
               
 

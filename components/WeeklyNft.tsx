@@ -106,7 +106,6 @@ query MyQuery($storeId: String!) {
 
       setTokens(weeklyTokens);    
 
-      console.log(tokensData, '*/*//*/*//+896');
       
       
     }, [tokensData])
