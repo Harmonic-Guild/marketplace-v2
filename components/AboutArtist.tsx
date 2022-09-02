@@ -9,6 +9,10 @@ import { Token } from "../constants/interfaces";
 import styles from "../styles/AboutArtist.module.scss";
 import Image from "next/image";
 
+interface Props {
+    storeId: string;
+}
+
 const FETCH_WEEKLY = gql`
     query MyQuery($storeId: String!) {
         token(
@@ -44,9 +48,11 @@ const FETCH_WEEKLY = gql`
     }
 `;
 
-interface Props {
-    storeId: string;
-}
+const images = [
+    "https://pbs.twimg.com/media/FbpyI7oUcAAJtWy?format=jpg&name=small",
+    "https://pbs.twimg.com/media/Fbpz9sVXkAA6l2h?format=jpg&name=small",
+    "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
+];
 
 const AboutArtist: FC<Props> = ({ storeId }) => {
     const [tokens, setTokens] = useState<Token[]>([]);
@@ -77,7 +83,8 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
         setTokens(weeklyTokens);
         console.log(weeklyTokens);
 
-        console.log(tokensData, "*/*//*/*//+896");
+        // console.log(tokensData, "*/*//*/*//+896");
+        // console.log(weeklyTokens[1].thing.metadata.media);
     }, [tokensData]);
 
     return (
@@ -92,17 +99,24 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
                 <>
                     <div className={styles["social-box"]}>
                         <div className={styles.header}>
-                            {/* {tokens[1].thing.metadata.media && (
+                            <div className={styles["header-image-cont"]}>
                                 <Image
-                                    src={tokens[1].thing.metadata.media}
+                                    src="https://pbs.twimg.com/media/FbnZWY1XwAAjUWk?format=jpg&name=small"
                                     className="object-contain mx-auto rounded-lg"
-                                    height={500}
-                                    width={500}
+                                    layout="fill"
                                     objectFit="cover"
-                                    alt={"alt"}
+                                    alt={"header"}
                                 />
-                            )} */}
+                            </div>
                             <div className={styles["mini-cont"]}>
+                                <div className={styles.avatar}>
+                                    <Image
+                                        src="https://pbs.twimg.com/media/Fbm9XtXXkAY-jxS?format=jpg&name=360x360"
+                                        layout="fill"
+                                        objectFit="cover"
+                                        alt={"avatar"}
+                                    />
+                                </div>
                                 <div className={styles["icons-cont"]}>
                                     <AiFillInstagram />
                                     <AiOutlineTwitter />
@@ -110,11 +124,17 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
                             </div>
                         </div>
                         <div className={styles["more-info"]}>
-                            <div className={"flex justify-between items-center"}>
+                            <div className={styles.top}>
                                 <p>
                                     Artist Name <MdVerified color="blue" />
                                 </p>
+                                <button>Find out more &rarr;</button>
                             </div>
+                            <p className={styles["artist-info"]}>
+                                About artist, Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur perferendis unde architecto totam esse
+                                reiciendis! Laboriosam enim eos aperiam dolor ducimus recusandae dignissimos nam, rerum animi, ullam consequuntur sint
+                                quo.
+                            </p>
                         </div>
                     </div>
                 </>

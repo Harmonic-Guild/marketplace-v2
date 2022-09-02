@@ -66,5 +66,5 @@ module.exports = {
             },
         },
     },
-    plugins: [require("@tailwindcss/line-clamp")],
+    plugins: [require("@tailwindcss/line-clamp"), require("postcss-import"), require("tailwindcss"), require("autoprefixer")],
 };

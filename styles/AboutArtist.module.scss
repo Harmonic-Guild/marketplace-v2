@@ -1,5 +1,57 @@
 @import "./variables";
 
 .container {
-    @apply my-10;
+    @apply my-10 w-full;
+
+    .social-box {
+        @apply bg-[#f8f5ff] border border-solid border-[#94a3b8] rounded-2xl w-full max-w-4xl mx-auto p-8;
+
+        .header {
+            @apply w-full relative h-60;
+
+            .header-image-cont {
+                @apply relative h-full rounded-xl overflow-hidden;
+            }
+
+            .mini-cont {
+                @apply flex justify-between items-end w-full mx-auto px-10 absolute -bottom-6 z-20;
+
+                .avatar {
+                    @apply relative w-24 h-24 rounded-full overflow-hidden;
+                }
+
+                .icons-cont {
+                    @apply z-10 flex border border-solid bg-white border-[#E2E8F0] py-2 px-1 rounded-xl;
+
+                    svg {
+                        @apply text-[#64748B] w-8 h-8 mx-2;
+                    }
+                }
+            }
+        }
+
+        .more-info {
+            @apply mt-8 px-10;
+
+            .top {
+                @apply flex justify-between items-center;
+
+                p {
+                    @apply text-5xl font-bold;
+
+                    svg {
+                        @apply inline;
+                    }
+                }
+
+                button {
+                    @apply border border-solid border-[#9E94DA] bg-[#F8F5FF] px-4 py-2 text-lg rounded-xl;
+                }
+            }
+
+            .artist-info {
+                @apply text-[#94A3B8] w-full max-w-lg;
+            }
+        }
+    }
 }

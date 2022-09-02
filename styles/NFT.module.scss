@@ -1,9 +1,7 @@
 @import "./variables";
 
 .container {
-    @apply w-full border rounded-2xl cursor-pointer p-5;
-    border: 1px solid #94a3b8;
-    background: #f8f5ff;
+    @apply w-full rounded-2xl cursor-pointer p-5 bg-[#f8f5ff] border border-solid border-[#94a3b8];
 
     .title {
         @apply font-bold mt-4 mb-1 text-xl overflow-hidden whitespace-nowrap;
