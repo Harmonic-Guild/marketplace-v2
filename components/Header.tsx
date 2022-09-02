@@ -33,32 +33,50 @@ const Header = () => {
             ?<FiMenu className='w-6 h-6 text-yellow-400' onClick={() => setToggleMenu(false)}/>
             : <div className='w-1/2 h-full'>
               <FiX className='w-6 h-6 relative text-yellow-400' onClick={() => setToggleMenu(true)}/>
-              <div className={`bg-white text-gray-900 absolute top-20 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-8 h-screen w-4/5 z-10`}>
+              <div className={`bg-white text-gray-900 absolute top-20 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-8 sm:h-screen sm:w-4/5 h-1/2 w-full z-10`}>
               {isConnected && (
                 <p className="text-lg py-2 px-8 font-semibold text-black">
                   {wallet?.activeAccount?.accountId}
                 </p>
               )}
-                {navTitles.map((item, index) => (
-                  <Link key={index} href={item.href} passHref><div className={`cursor-pointer`}>{item.title}</div></Link>
-                ))}
-                <div className='absolute bottom-0 mb-20'>
+                <div className=''>
+                  {navTitles.map((item, index) => (
+                    <Link key={index} href={item.href} passHref><div className={`cursor-pointer`}>{item.title}</div></Link>
+                  ))}
+                </div>
+                <div className='sm:absolute bottom-0 mb-20'>
                   <div className='flex justify-between w-fit bg-purple-200 border border-indigo-900 opacity-100 my-4 sm:text-md text-sm font-normal rounded-full p-4'>
                     <p className='flex pl'>Community <FiUsers className='px-1 w-6 h-6'/></p>
                     <p className='flex'><BsDot className='mt-1 text-green-400'/>100+ online</p>
                   </div>
-                  <div className='flex justify-evenly'>
-                  {/* < div className='mt-4' onClick={() => setToggleIcons(!toggleIcons)}>
+                  {/* <div className='flex justify-evenly'>
+                  < div className='mt-4' onClick={() => setToggleIcons(!toggleIcons)}>
                       {toggleIcons 
                         ?<BsSun onClick={() => setToggleIcons(true)} className='cursor-pointer hover:text-yellow-400 w-6 h-6 transition duration-700'/>
                         :<BsMoonStars onClick={() => setDarkMode(false)} className='cursor-pointer hover:text-black text-gray-700 w-6 h-6 transition duration-700'/>
                       }
-                    </div> */}
+                    </div>
                     <div className='flex justify-between border border-indigo-900 opacity-700 text-md xs:text-sm font-normal rounded-3xl px-4 py-2 bg-purple-200'>
                       <span>News</span>
                       <BsLayoutTextSidebarReverse className='w-5 h-5  px-1 mt-1'/>
                     </div>
-                  </div>
+                  </div> */}
+                  <button 
+                    className='btnColor rounded-full font-semibold p-2 px-4 flex w-full justify-center  mt-8'
+                    onClick={
+                      isConnected
+                      ? () => {
+                        wallet?.disconnect()
+                        window.location.reload()
+                      }
+                      : () => {
+                        wallet?.connect({ requestSignIn: true })
+                      } 
+                    }
+                    >
+                      {isConnected ? 'Disconnect' : 'Connect'}
+                      <span className='ml-2 mt-1.5'><Near className='w-4 h-4'/></span>
+                  </button>
                 </div>
               </div>
             </div>
