@@ -6,6 +6,7 @@ import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import { Token } from "../constants/interfaces";
 import logo from "../assets/harmonic-logo.png";
+import Near from "../icons/near.svg";
 
 import styles from "../styles/AboutArtist.module.scss";
 import Image from "next/image";
@@ -173,11 +174,17 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
                                 </div>
                                 <div className={styles["property"]}>
                                     <p className={styles["property-name"]}>Floor Price</p>
-                                    <p className={styles["property-value"]}>200.4k</p>
+                                    <p className={styles["property-value"]}>
+                                        <Near className={styles["near-logo"]} />
+                                        200.4k
+                                    </p>
                                 </div>
                                 <div className={styles["property"]}>
                                     <p className={styles["property-name"]}>Volume Trade</p>
-                                    <p className={styles["property-value"]}>36,3k</p>
+                                    <p className={styles["property-value"]}>
+                                        <Near className={styles["near-logo"]} />
+                                        36,3k
+                                    </p>
                                 </div>
                             </div>
                         </div>

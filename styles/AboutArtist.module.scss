@@ -59,14 +59,14 @@
         @apply bg-[#f8f5ff] border border-solid border-[#94a3b8] rounded-2xl w-[90%] max-w-3xl mx-auto my-8;
 
         .outer-image-cont {
-            @apply overflow-hidden rounded-2xl m-8;
+            @apply overflow-hidden rounded-xl m-8;
 
             .images-cont {
                 @apply flex items-center w-[150%];
                 transform: translateX(-17%);
 
                 .image-cont {
-                    @apply mx-4 relative w-[45%] h-[20rem];
+                    @apply mx-4 relative w-[45%] h-[20rem] rounded-xl overflow-hidden;
                 }
             }
         }
@@ -109,6 +109,10 @@
 
                             &-name {
                                 @apply text-xs text-[#AAB8C2];
+                            }
+
+                            .near-logo {
+                                @apply w-3 h-3 inline mb-1 mr-1;
                             }
                         }
                     }
