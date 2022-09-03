@@ -72,8 +72,12 @@
         }
 
         .org-info {
-            @apply border-t border-solid bg-[#ede8fb] border-[#94a3b8] rounded-2xl p-8 -mt-24 z-10;
-            clip-path: polygon(68% 2.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 2.5%);
+            @apply border-t border-solid bg-[#ede8fb] border-[#94a3b8] rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
+            clip-path: polygon(68% 9.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 9.5%);
+
+            @screen lg {
+                clip-path: polygon(68% 2.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 2.5%);
+            }
 
             .org-name-logo {
                 @apply flex justify-center items-center;
