@@ -78,8 +78,8 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
             {loadingtokensData && <div className="h-5 w-5 bg-primary animate-pulse rounded-full"></div>}
             <div className={styles.container}>
                 <div className=" text-center  font-bold text-gray-900 mb-4">
-                    <p className="text-primary mb-2">
-                        <GiStarShuriken className="inline w-6 h-5" />
+                    <p className="text-secondary mb-2">
+                        Lorem <GiStarShuriken className="inline w-6 h-5" />
                     </p>
                     <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
                 </div>
@@ -89,11 +89,6 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
                     ))}
                 </div>
             </div>
-            {/* <div className="grid md:grid-cols-3 sm:grid-cols-3 w-full pt-4 gap-y-5 gap-2">
-                {tokens.map((token) => (
-                    <NFT token={token} key={token.id} />
-                ))}
-            </div> */}
         </>
     );
 };
