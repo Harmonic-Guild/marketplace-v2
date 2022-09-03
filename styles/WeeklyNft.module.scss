@@ -2,18 +2,10 @@
     @apply w-full h-full pt-10 lg:px-32 px-12;
 
     .nfts-cont {
-        @apply flex flex-wrap justify-between items-center;
+        @apply flex gap-4 justify-between overflow-x-auto items-center;
 
         a {
-            @apply w-full;
-
-            @screen sm {
-                width: 47%;
-            }
-
-            @screen lg {
-                width: 30%;
-            }
+            @apply w-full sm:w-[47%] lg:w-[30%] min-w-[19rem];
         }
     }
 }
