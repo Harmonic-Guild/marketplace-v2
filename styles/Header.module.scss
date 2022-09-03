@@ -3,6 +3,22 @@
 .header {
     @apply w-full px-6 text-gray-700;
 
+    .mobile-nav {
+        @apply flex gap-4;
+
+        button {
+            @apply rounded-md font-semibold p-2 px-4 flex;
+        }
+
+        .connect-btn {
+            @include buttonColor;
+        }
+
+        .menu-btn {
+            @apply bg-black;
+        }
+    }
+
     .nav-cont {
         @apply mt-2 flex justify-end mx-4 text-lg font-bold w-full;
 

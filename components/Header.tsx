@@ -31,21 +31,42 @@ const Header = () => {
         setCurrentPath(router.pathname);
     }, [router.pathname]);
 
+    const walletAction = () => {
+        if (isConnected) {
+            wallet?.disconnect();
+            window.location.reload();
+        } else {
+            wallet?.connect({
+                requestSignIn: true,
+            });
+        }
+    };
+
     return (
         <header className={styles.header} id="nav">
             <div className="container flex mx-auto max-w-8xl md:flex justify-between items-center">
                 <Link href="/" passHref>
-                    <a className="py-6 relative w-40 h-20 inline-block">
+                    <a className="py-6 relative w-24 lg:w-40 h-20 inline-block">
                         <Image src={logo.src} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
                     </a>
                 </Link>
 
                 <div className="flex lg:hidden cursor-pointer">
                     {toggleMenu ? (
-                        <FiMenu className="w-6 h-6 text-yellow-400" onClick={() => setToggleMenu(false)} />
+                        <div className={styles["mobile-nav"]}>
+                            <button className={styles["connect-btn"]} onClick={walletAction}>
+                                {isConnected ? "Disconnect" : "Connect"}
+                                <span className="ml-2 mt-1">
+                                    <Near className="w-4 h-4" />
+                                </span>
+                            </button>
+                            <button className={styles["menu-btn"]}>
+                                <FiMenu className="w-6 h-6 text-white" onClick={() => setToggleMenu(false)} />
+                            </button>
+                        </div>
                     ) : (
                         <div className="w-1/2 h-full">
-                            <FiX className="w-6 h-6 relative text-yellow-400" onClick={() => setToggleMenu(true)} />
+                            <FiX className="w-6 h-6 relative text-black" onClick={() => setToggleMenu(true)} />
                             <div
                                 className={`bg-white text-gray-900 absolute top-20 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-8 h-screen w-4/5 z-10`}
                             >
@@ -93,20 +114,7 @@ const Header = () => {
                     </div>
                     <div className={styles["button-cont"]}>
                         {/* <div onClick={() => setToggleIcons(!toggleIcons)}></div> */}
-                        <button
-                            onClick={
-                                isConnected
-                                    ? () => {
-                                          wallet?.disconnect();
-                                          window.location.reload();
-                                      }
-                                    : () => {
-                                          wallet?.connect({
-                                              requestSignIn: true,
-                                          });
-                                      }
-                            }
-                        >
+                        <button onClick={walletAction}>
                             {isConnected ? "Disconnect" : "Connect"}
                             <span className="ml-2 mt-1">
                                 <Near className="w-4 h-4" />
