@@ -4,7 +4,7 @@
     @apply my-10 w-full;
 
     .social-box {
-        @apply bg-[#f8f5ff] border border-solid border-[#94a3b8] rounded-2xl w-full max-w-4xl mx-auto p-8;
+        @apply bg-[#f8f5ff] border border-solid border-[#94a3b8] rounded-2xl w-[90%] max-w-3xl mx-auto p-8 my-8;
 
         .header {
             @apply w-full relative h-60;
@@ -51,6 +51,68 @@
 
             .artist-info {
                 @apply text-[#94A3B8] w-full max-w-lg;
+            }
+        }
+    }
+
+    .org-cont {
+        @apply bg-[#f8f5ff] border border-solid border-[#94a3b8] rounded-2xl w-[90%] max-w-3xl mx-auto my-8;
+
+        .outer-image-cont {
+            @apply overflow-hidden rounded-2xl m-8;
+
+            .images-cont {
+                @apply flex items-center w-[150%];
+                transform: translateX(-17%);
+
+                .image-cont {
+                    @apply mx-4 relative w-[45%] h-[20rem];
+                }
+            }
+        }
+
+        .org-info {
+            @apply border-t border-solid bg-[#ede8fb] border-[#94a3b8] rounded-2xl p-8 -mt-24 z-10;
+            clip-path: polygon(68% 2.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 2.5%);
+
+            .org-name-logo {
+                @apply flex justify-center items-center;
+
+                .inner-logo-cont {
+                    @apply relative w-[30%] h-20;
+                }
+            }
+
+            .more-org-info {
+                @apply flex justify-between items-center mt-4;
+
+                .text-cont {
+                    @apply w-[55%];
+
+                    .name {
+                        @apply text-4xl font-bold mb-2;
+                    }
+
+                    .mini-text {
+                        @apply text-[.9rem];
+                    }
+                }
+
+                .info-cont {
+                    @apply w-2/5;
+
+                    .the-info {
+                        @apply bg-[#1E293B] rounded-xl flex justify-between items-center p-4 text-white;
+
+                        .property {
+                            @apply text-center;
+
+                            &-name {
+                                @apply text-xs text-[#AAB8C2];
+                            }
+                        }
+                    }
+                }
             }
         }
     }

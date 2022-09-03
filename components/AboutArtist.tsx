@@ -5,6 +5,7 @@ import { MdVerified } from "react-icons/md";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import { Token } from "../constants/interfaces";
+import logo from "../assets/harmonic-logo.png";
 
 import styles from "../styles/AboutArtist.module.scss";
 import Image from "next/image";
@@ -95,50 +96,94 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
                 </p>
                 <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> About Artist </h2>
             </div>
-            {tokens && (
-                <>
-                    <div className={styles["social-box"]}>
-                        <div className={styles.header}>
-                            <div className={styles["header-image-cont"]}>
-                                <Image
-                                    src="https://pbs.twimg.com/media/FbnZWY1XwAAjUWk?format=jpg&name=small"
-                                    className="object-contain mx-auto rounded-lg"
-                                    layout="fill"
-                                    objectFit="cover"
-                                    alt={"header"}
-                                />
-                            </div>
-                            <div className={styles["mini-cont"]}>
-                                <div className={styles.avatar}>
-                                    <Image
-                                        src="https://pbs.twimg.com/media/Fbm9XtXXkAY-jxS?format=jpg&name=360x360"
-                                        layout="fill"
-                                        objectFit="cover"
-                                        alt={"avatar"}
-                                    />
-                                </div>
-                                <div className={styles["icons-cont"]}>
-                                    <AiFillInstagram />
-                                    <AiOutlineTwitter />
-                                </div>
-                            </div>
+            <div className={styles["social-box"]}>
+                <div className={styles.header}>
+                    <div className={styles["header-image-cont"]}>
+                        <Image
+                            src="https://pbs.twimg.com/media/FbnZWY1XwAAjUWk?format=jpg&name=small"
+                            className="object-contain mx-auto rounded-lg"
+                            layout="fill"
+                            objectFit="cover"
+                            alt={"header"}
+                        />
+                    </div>
+                    <div className={styles["mini-cont"]}>
+                        <div className={styles.avatar}>
+                            <Image
+                                src="https://pbs.twimg.com/media/Fbm9XtXXkAY-jxS?format=jpg&name=360x360"
+                                layout="fill"
+                                objectFit="cover"
+                                alt={"avatar"}
+                            />
                         </div>
-                        <div className={styles["more-info"]}>
-                            <div className={styles.top}>
-                                <p>
-                                    Artist Name <MdVerified color="blue" />
-                                </p>
-                                <button>Find out more &rarr;</button>
-                            </div>
-                            <p className={styles["artist-info"]}>
-                                About artist, Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur perferendis unde architecto totam esse
-                                reiciendis! Laboriosam enim eos aperiam dolor ducimus recusandae dignissimos nam, rerum animi, ullam consequuntur sint
-                                quo.
-                            </p>
+                        <div className={styles["icons-cont"]}>
+                            <AiFillInstagram />
+                            <AiOutlineTwitter />
                         </div>
                     </div>
-                </>
-            )}
+                </div>
+                <div className={styles["more-info"]}>
+                    <div className={styles.top}>
+                        <p>
+                            Artist name <MdVerified color="#1D9BF0" />
+                        </p>
+                        <button>Find out more &rarr;</button>
+                    </div>
+                    <p className={styles["artist-info"]}>
+                        About artist, Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur perferendis unde architecto totam esse
+                        reiciendis! Laboriosam enim eos aperiam dolor ducimus recusandae dignissimos nam, rerum animi, ullam consequuntur sint quo.
+                    </p>
+                </div>
+            </div>
+
+            <div className={styles["org-cont"]}>
+                <div className={styles["outer-image-cont"]}>
+                    <div className={styles["images-cont"]}>
+                        {images.map((image, i: number) => (
+                            <div key={i} className={styles["image-cont"]}>
+                                <Image src={image} layout="fill" objectFit="cover" alt={`organiztion's nft number ${i + 1}`} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className={styles["org-info"]}>
+                    <div className={styles["org-name-logo"]}>
+                        <div className={styles["inner-logo-cont"]}>
+                            <Image src={logo.src} layout="fill" objectFit="contain" />
+                        </div>
+                    </div>
+                    <div className={styles["more-org-info"]}>
+                        <div className={styles["text-cont"]}>
+                            <p className={styles.name}>Harmonic Guild</p>
+                            <p className={styles["mini-text"]}>
+                                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse hic ut eum. Non cumque laudantium similique,
+                                voluptatem accusamus iste nostrum veritatis tenetur minus deleniti. Quibusdam mollitia nobis corrupti facilis
+                                inventore."
+                            </p>
+                        </div>
+                        <div className={styles["info-cont"]}>
+                            <div className={styles["the-info"]}>
+                                <div className={styles["property"]}>
+                                    <p className={styles["property-name"]}>Items</p>
+                                    <p className={styles["property-value"]}>5.6k</p>
+                                </div>
+                                <div className={styles["property"]}>
+                                    <p className={styles["property-name"]}>Owners</p>
+                                    <p className={styles["property-value"]}>3.7k</p>
+                                </div>
+                                <div className={styles["property"]}>
+                                    <p className={styles["property-name"]}>Floor Price</p>
+                                    <p className={styles["property-value"]}>200.4k</p>
+                                </div>
+                                <div className={styles["property"]}>
+                                    <p className={styles["property-name"]}>Volume Trade</p>
+                                    <p className={styles["property-value"]}>36,3k</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
