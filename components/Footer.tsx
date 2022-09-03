@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { BsArrowUp } from "react-icons/bs";
+import logo from "../assets/harmonic-logo.png";
 import { FiUsers } from "react-icons/fi";
 
 const Footer = () => {
@@ -9,7 +11,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="w-full px-6 py-10 text-gray-700 mt-20">
+        <footer className="w-full max-w-screen-2xl mx-auto px-6 py-10 text-gray-700 mt-20">
             {/* <div className="flex justify-center items-center my-10">
                 <button className="lg:flex lg:gap-10 text-center no-underline bg-yellow-500 px-10 py-3 font-bold rounded-md text-gray-900 text-lg">
                 <div className="flex items-center justify-center gap-3">
@@ -25,13 +27,9 @@ const Footer = () => {
                 <div className="mb-5">
                     <div>
                         <Link href="/" passHref>
-                            <span className="py-6 w-full">
-                                <img
-                                    src="https://marketplace.sevendeadstars.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.9356f04b.png&w=256&q=75"
-                                    alt=""
-                                    className="cursor-pointer mb-5"
-                                />
-                            </span>
+                            <a className="py-6 relative w-40 h-20 inline-block">
+                                <Image src={logo.src} layout="fill" objectFit="contain" alt="logo" className="cursor-pointer mb-5" />
+                            </a>
                         </Link>
                         <div className="leading-loose">
                             <span>support@harmonicguild.io</span> <br />

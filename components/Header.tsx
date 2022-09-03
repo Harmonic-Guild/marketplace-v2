@@ -1,12 +1,13 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
 import { useWallet } from "../services/providers/MintbaseWalletContext";
 import { BsMoonStars, BsSun, BsDot, BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { FiMenu, FiX, FiUsers } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
 import Near from "../icons/near.svg";
-import Logo from "../assets/harmonic-logo.png";
+import logo from "../assets/harmonic-logo.png";
 
 import styles from "../styles/Header.module.scss";
 
@@ -34,9 +35,9 @@ const Header = () => {
         <header className={styles.header} id="nav">
             <div className="container flex mx-auto max-w-8xl md:flex justify-between items-center">
                 <Link href="/" passHref>
-                    <span className="py-6 w-full">
-                        <img src={Logo.src} alt="" className="w-24 h-9 cursor-pointer" />
-                    </span>
+                    <a className="py-6 relative w-40 h-20 inline-block">
+                        <Image src={logo.src} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
+                    </a>
                 </Link>
 
                 <div className="flex lg:hidden cursor-pointer">
