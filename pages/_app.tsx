@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     const apolloClient = useApollo(pageProps);
     return (
         <>
-            <NextProgress delay={300} options={{ showSpinner: false }} color={"#0F172A"} />
+            <NextProgress options={{ showSpinner: false }} color={"#0F172A"} />
             <Head>
                 <title>MarketPlace Version_2</title>
                 <link rel="icon" href="/favicon.ico" />

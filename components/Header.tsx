@@ -44,7 +44,7 @@ const Header = () => {
 
     return (
         <header className={styles.header} id="nav">
-            <div className="container flex mx-auto max-w-8xl md:flex justify-between items-center">
+            <div className="container flex mx-auto justify-between items-center">
                 <Link href="/" passHref>
                     <a className="py-6 relative w-24 lg:w-40 h-20 inline-block">
                         <Image src={logo.src} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
@@ -57,7 +57,7 @@ const Header = () => {
                             <button className={styles["connect-btn"]} onClick={walletAction}>
                                 {isConnected ? "Disconnect" : "Connect"}
                                 <span className="ml-2 mt-1">
-                                    <Near className="w-4 h-4" />
+                                    <Near className="w-4 h-4" fill="white" />
                                 </span>
                             </button>
                             <button className={styles["menu-btn"]}>
@@ -117,7 +117,7 @@ const Header = () => {
                         <button onClick={walletAction}>
                             {isConnected ? "Disconnect" : "Connect"}
                             <span className="ml-2 mt-1">
-                                <Near className="w-4 h-4" />
+                                <Near className="w-4 h-4" fill="white" />
                             </span>
                         </button>
                     </div>

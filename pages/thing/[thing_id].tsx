@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useWallet } from "../../services/providers/MintbaseWalletContext";
 import { TbExternalLink } from "react-icons/tb";
 import { FiLayers } from "react-icons/fi";
-import { BsCircle, BsHeart } from "react-icons/bs";
+import { BsChevronLeft, BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
 import { AiOutlineExpandAlt } from "react-icons/ai";
 // import SimilarNft from "../../components/SimilarNft";
@@ -16,6 +16,8 @@ import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from "../../icons/near.svg";
 import Link from "next/link";
 import Arweave from "../../public/images/ARWEAVE.png";
+
+import styles from "../../styles/Thing.module.scss";
 
 const FETCH_TOKENS = gql`
     query MyQuery($thing_id: String!) {
@@ -106,13 +108,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     const [tokens, setTokens] = useState<[Tokens?]>([]);
     const [allTokens, setAllTokens] = useState<[id?: string]>([]);
     const { wallet, isConnected } = useWallet();
-    const [hide, setHide] = useState<Boolean>(false);
+    const [hide, setHide] = useState<boolean>(false);
 
     const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] = useLazyQuery(FETCH_TOKENS, {
         variables: {
             thing_id: "",
         },
     });
+
     useEffect(() => {
         getTokens({
             variables: {
@@ -120,6 +123,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             },
         });
     }, []);
+
     useEffect(() => {
         if (!tokensData) return;
         setThing(tokensData.thing[0]);
@@ -163,19 +167,19 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     }
 
     return (
-        <div className="container mx-auto mt-10 text-gray-700">
+        <div className={`container ${styles.container}`}>
             <Link href="/explore" passHref>
-                <div className="lg:flex hidden cursor-pointer">
-                    <Vector_back />
+                <div className="hidden lg:inline-block cursor-pointer bg-black text-white rounded-full p-2">
+                    <BsChevronLeft />
                 </div>
             </Link>
-            <div className="lg:flex justify-between w-4/5 lg:w-full mx-auto">
+            <div className="lg:flex gap-4 justify-between w-4/5 lg:w-full mx-auto">
                 <div className="mx-auto w-full">
                     {things?.metadata.animation_type !== null &&
                     things?.metadata.animation_type !== "image/jpeg" &&
                     things?.metadata.animation_type !== "image/png" &&
                     things?.metadata.animation_type !== "image/gif" ? (
-                        <div className="w-full xl:w-4/5 mx-auto flex align-middle">
+                        <div className="w-full mx-auto flex align-middle">
                             <video controls className="" poster={things?.metadata.media} controlsList="nodownload" muted>
                                 <source src={things?.metadata.animation_url}></source>
                             </video>
@@ -200,15 +204,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     )}
                 </div>
                 <div className="flex lg:hidden gap-5 justify-end py-4">
-                    {/* <div className=' text-yellow-300 sm:hidden block'>
-            <BsCircle className="relative h-8 w-8" />
-            <BsHeart className="w-4 h-4 absolute -mt-6 ml-2" />
-          </div>
-          <div className=' text-yellow-300'>
-            <BsCircle className="relative h-8 w-8" />
-            <BiShareAlt className='w-4 h-4 absolute -mt-6 ml-2' />
-          </div> */}
-                    <div className=" text-yellow-300">
+                    <div className="text-yellow-300">
                         <BsCircle className="relative h-8 w-8" />
                         <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
                     </div>
@@ -222,7 +218,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                         ) : (
                             <div className="flex gap-3">
                                 {`Minted On: ` + new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()}{" "}
-                                <TbExternalLink className="text-yellow-300 w-6 h-6" />
+                                <TbExternalLink color="#AA5F2A" className="w-6 h-6" />
                             </div>
                         )}
                     </div>
@@ -230,7 +226,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     <div className="">
                         <div className="mt-10">
                             <div className="border-b border-yellow-600 mb-3 pb-3">
-                                <span className="text-3xl font-medium">Description</span>
+                                <span className="text-3xl font-bold">Description</span>
                             </div>
 
                             <p className={hide ? "" : "line-clamp-3"}>{things?.metadata.description}</p>
@@ -240,43 +236,46 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             </span>
                             {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
                         </div>
+                    </div>
 
-                        <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
-                            {/* <div className="lg:w-2/5 bg-yellow-100 rounded-lg p-5 my-10 lg:mt-0">
-                  <p className="text-xl pr-1 font-bold text-center lg:text-left">
-                    History of NFT
-                  </p>
-                  {/* <TbExternalLink className="text-yellow-300 w-5 h-5"/>
-                </div> */}
-                            <div className="">
-                                <div className="flex items-center justify-between gap-3">
-                                    <p className="text-2xl font-bold">Details</p>
-                                    <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                                    <div className="border-2 border-yellow-400 rounded-full p-2 px-3">
-                                        <a
-                                            href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            <Near className="w-4 h-4" />
-                                        </a>
-                                    </div>
-                                    <div className="border-2 border-yellow-400 rounded-full p-1 px-3">
-                                        <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
-                                            <div className="w-6 h-6">
-                                                <Image src={Arweave} className="" />
-                                            </div>
-                                        </a>
-                                    </div>
+                    <div>
+                        {things?.tokens[0]?.lists[0]?.autotransfer ? (
+                            <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
+                        ) : (
+                            <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
+                        )}
+                    </div>
+
+                    <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                        <div className="">
+                            <div className="flex items-center justify-between gap-3">
+                                <p className="text-2xl font-bold">Details</p>
+                                <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
+                                <div className="border-2 border-primary rounded-full p-2 px-3">
+                                    <a
+                                        href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        <Near className="w-4 h-4" fill="black" />
+                                    </a>
                                 </div>
-
-                                <div className="bg-yellow-100 rounded-lg my-8 py-2">
-                                    <p className="lg:hidden text-center text-gray-500 text-lg">
-                                        {tokens.length}/{allTokens.length} Tokens available
-                                    </p>
+                                <div className="border-2 border-primary rounded-full p-1 px-3">
+                                    <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
+                                        <div className="w-6 h-6">
+                                            <Image src={Arweave} className="" />
+                                        </div>
+                                    </a>
                                 </div>
+                            </div>
 
-                                {/* <div className="lg:flex lg:items-center gap-10">
+                            <div className="bg-yellow-100 rounded-lg my-8 py-2">
+                                <p className="lg:hidden text-center text-gray-500 text-lg">
+                                    {tokens.length}/{allTokens.length} Tokens available
+                                </p>
+                            </div>
+
+                            {/* <div className="lg:flex lg:items-center gap-10">
                                     <p className="text-2xl font-bold mb-5 pb-5 border-b border-yellow-400 lg:border-0">
                                     Perks
                                     </p>
@@ -286,16 +285,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     <li>Exclusive access to comunity</li>
                                     </span>
                                 </div> */}
-                            </div>
                         </div>
-                    </div>
-
-                    <div>
-                        {things?.tokens[0]?.lists[0]?.autotransfer ? (
-                            <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
-                        ) : (
-                            <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
-                        )}
                     </div>
                 </div>
             </div>

@@ -175,14 +175,14 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
                                 <div className={styles["property"]}>
                                     <p className={styles["property-name"]}>Floor Price</p>
                                     <p className={styles["property-value"]}>
-                                        <Near className={styles["near-logo"]} />
+                                        <Near className={styles["near-logo"]} fill="white" />
                                         200.4k
                                     </p>
                                 </div>
                                 <div className={styles["property"]}>
                                     <p className={styles["property-name"]}>Volume Trade</p>
                                     <p className={styles["property-value"]}>
-                                        <Near className={styles["near-logo"]} />
+                                        <Near className={styles["near-logo"]} fill="white" />
                                         36,3k
                                     </p>
                                 </div>
