@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useWallet } from "../../services/providers/MintbaseWalletContext";
 import { TbExternalLink } from "react-icons/tb";
 import { FiLayers } from "react-icons/fi";
-import { BsChevronLeft, BsCircle, BsHeart } from "react-icons/bs";
+import { BsChevronLeft, BsHeart, BsArrowsAngleExpand } from "react-icons/bs";
+import { CgArrowsExpandRight } from "react-icons/cg";
 import { BiShareAlt } from "react-icons/bi";
 import { AiOutlineExpandAlt } from "react-icons/ai";
 // import SimilarNft from "../../components/SimilarNft";
@@ -198,16 +199,15 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         // layout="fill"
                                         alt={"alt"}
                                     />
+                                    <div className="flex gap-5 justify-end py-4">
+                                        <div className="bg-primary p-2 rounded-full cursor-pointer">
+                                            <CgArrowsExpandRight color="white" />
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </div>
                     )}
-                </div>
-                <div className="flex lg:hidden gap-5 justify-end py-4">
-                    <div className="text-yellow-300">
-                        <BsCircle className="relative h-8 w-8" />
-                        <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
-                    </div>
                 </div>
                 <div className="w-full">
                     <div className="text-4xl font-bold mb-5">{things?.metadata.title}</div>
