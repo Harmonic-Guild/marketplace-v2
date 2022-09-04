@@ -14,8 +14,8 @@ const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
     };
 
     return (
-        <div className="border border-purple-border bg-purple-bg rounded-lg p-6 mt-8  lg:flex lg:justify-around lg:gap-10">
-            <div className="flex flex-col justify-center items-center">
+        <div className="border border-purple-border bg-purple-bg rounded-lg px-6 py-6 mt-8 lg:flex lg:justify-between lg:gap-10">
+            <div className="flex flex-col justify-center items-center w-1/2">
                 <div className="flex items-center gap-2">
                     <img
                         className="inline-block h-10 w-10 rounded-full"
@@ -31,7 +31,7 @@ const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
                         {latestBid ? (
                             <div className="flex items-center gap-1">
                                 {latestBid}
-                                <Near className="w-4 h-4" />
+                                <Near className="w-4 h-4" fill="black" />
                             </div>
                         ) : (
                             "none"
@@ -41,23 +41,21 @@ const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
             </div>
 
             {/* <span className="border-b border-mp-brown-1 lg:hidden flex py-2 "></span> */}
-            <div className="flex flex-col flex-grow">
+            <div className="flex flex-col flex-grow w-1/2">
                 <div>
                     {isConnected ? (
                         <button
                             onClick={() => setShowModal(true)}
-                            className={`tracking-wider font-bold text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 btnColor`}
+                            className={`tracking-wider text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 btnColor`}
                         >
-                            Bid
+                            Make an offer
                         </button>
                     ) : (
                         <button
                             onClick={() => setShowNotConnectedModal(true)}
-                            className={`tracking-wider font-bold text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 ${
-                                isConnected ? "btnColor" : "border border-mp-brown-1 py-2 cursor-not-allowed"
-                            }`}
+                            className={`tracking-wider text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 border border-mp-brown-1 cursor-not-allowed`}
                         >
-                            Bid
+                            Make an offer
                         </button>
                     )}
                 </div>

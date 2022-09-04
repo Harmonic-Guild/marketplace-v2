@@ -88,22 +88,24 @@ button {
     transform: scale(1.1);
     /* color: red; */
 }
-/* .slick-dots button:before {
-    transition: 0.5s;
-    transform: scale(1.5);
-    color: red;
-} */
 
 .slick-dots {
     li {
-        &.stick-active {
+        button {
+            @apply bg-[#9E94DA] rounded-full w-3 h-3 transition-all duration-150 ease-in-out;
+
+            &::before {
+                @apply text-transparent;
+            }
+        }
+
+        &.slick-active {
             button {
-                background: red;
+                @apply bg-[#6E61BF] w-6;
+                transform: translateX(-7px);
 
                 &::before {
-                    transform: scale(1.5);
-                    // color: #6e61bf;
-                    // background: red;
+                    @apply text-transparent;
                 }
             }
         }

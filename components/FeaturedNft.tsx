@@ -51,7 +51,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
         centerPadding: "8px",
         centerMode: true,
         slidesToShow: 3,
-        // autoplay: true,
+        autoplay: true,
         autoplaySpeed: 2000,
         pauseOnHover: true,
         slidesToScroll: 1,
@@ -125,12 +125,14 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
             <Slider {...settings}>
                 {tokens.map((token: Token, index) => (
                     <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
-                        <div className="h-96 w-fit rounded-xl shadow-lg relative overflow-hidden">
+                        <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
                             <Image src={token.thing.metadata.media} alt="" objectFit="cover" layout="fill" />
-                            <div className="absolute bottom-5 text-center font-semibold w-full">
-                                <p className="text-white">{token.thing.metadata.title}</p>
-                                <button className={styles["bid-button"]}>Bid &rarr;</button>
-                            </div>
+                            {index === slideIndex && (
+                                <div className="absolute bottom-5 text-center font-semibold w-full">
+                                    <p className="text-white">{token.thing.metadata.title}</p>
+                                    <button className={styles["bid-button"]}>Bid &rarr;</button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))}

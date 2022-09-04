@@ -169,9 +169,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     return (
         <div className={`container ${styles.container}`}>
             <Link href="/explore" passHref>
-                <div className="hidden lg:inline-block cursor-pointer bg-black text-white rounded-full p-2">
+                <a className="hidden lg:inline-block cursor-pointer bg-black text-white rounded-full p-2 my-4">
                     <BsChevronLeft />
-                </div>
+                </a>
             </Link>
             <div className="lg:flex gap-4 justify-between w-4/5 lg:w-full mx-auto">
                 <div className="mx-auto w-full">
@@ -239,11 +239,12 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
 
                     <div>
-                        {things?.tokens[0]?.lists[0]?.autotransfer ? (
+                        {/* {things?.tokens[0]?.lists[0]?.autotransfer ? (
                             <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
                         ) : (
                             <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
-                        )}
+                        )} */}
+                        <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
                     </div>
 
                     <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
