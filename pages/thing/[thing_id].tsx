@@ -4,7 +4,7 @@ import { TbExternalLink } from 'react-icons/tb';
 import { FiLayers } from "react-icons/fi";
 import { BsCircle, BsHeart } from "react-icons/bs";
 import { BiShareAlt } from "react-icons/bi";
-import { AiOutlineExpandAlt } from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlineExpandAlt } from "react-icons/ai";
 // import SimilarNft from "../../components/SimilarNft";
 import Vector_back from '../../icons/Vector_back.svg'
 import { gql } from "apollo-boost";
@@ -116,6 +116,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   const [allTokens, setAllTokens] = useState<[id?:string]>([])
   const { wallet, isConnected } = useWallet();
   const [hide, setHide] = useState<Boolean>(false)
+  const [fullScreen, setFullScreen] = useState<Boolean>(false)
+  const [image, setImage] = useState<Boolean>(false)
 
   const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] =
     useLazyQuery(FETCH_TOKENS, {
@@ -180,6 +182,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
   else {
     currentBid = formatNearAmount((Number(things?.tokens[0]?.lists[0]?.offer?.price)).toLocaleString('fullwide', { useGrouping: false }), 5)
   }
+  const media = things?.metadata.media
+  // const toggleFullScreen = () => {
+  //   setImage(media)
+  //   setFullScreen(true)
+  //   // console.log('jjd');
+    
+  // }
 
   return (
     <div className="container mx-auto mt-10 text-gray-700">
@@ -212,6 +221,12 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                   alt={'alt'} />
               </div>
             }
+            <div className='text-yellow-300 cursor-pointer' onClick={() => setFullScreen(true)}>
+              <div className="lg:flex hidden gap-5 justify-end py-4">
+                <BsCircle className="relative h-8 w-8" />
+                <AiOutlineExpandAlt className="w-4 h-4 absolute mt-2 -ml-2" />
+              </div>
+          </div>
             </div>
           )}
         </div>
@@ -224,11 +239,29 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             <BsCircle className="relative h-8 w-8" />
             <BiShareAlt className='w-4 h-4 absolute -mt-6 ml-2' />
           </div> */}
-          <div className=' text-yellow-300'>
+          <div className=' text-yellow-300' onClick={() => setFullScreen(true)}>
             <BsCircle className="relative h-8 w-8" />
             <AiOutlineExpandAlt className="w-4 h-4 absolute -mt-6 ml-2" />
           </div>
         </div>
+        {fullScreen ? 
+            (
+              <div className="fixed h-screen w-screen z-50 bg-gray-900 bg-opacity-75 top-0 left-0 flex justify-center p-5 lg:p-20 cursor-pointer" onClick={() => setFullScreen(false)}>
+                <div className="w-full mt-10 lg:mt-0 lg:w-1/2 lg:h-1/2 bg-opacity-100 relative" onClick={() => setFullScreen(false)}>
+                  <Image
+                  src={`${media}`}
+                  width='100%'
+                  height='100%'
+                  objectFit="cover"
+                  className="rounded-lg shadow-xl"
+                  layout="responsive"
+                  alt={'alt'} />
+                <AiOutlineCloseCircle className="rounded-full bg-white text-yellow-300 w-4 h-4 lg:w-8 lg:h-8 absolute top-0 right-0 -mr-3 -mt-3" />
+                </div>
+              </div>
+            )
+            : null
+          }
         <div className="w-full">
           
           <div  className="text-4xl font-bold mb-5">
