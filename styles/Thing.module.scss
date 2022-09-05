@@ -2,4 +2,44 @@
 
 .container {
     @apply mx-auto mt-10 text-gray-700;
+
+    .history-cont {
+        @apply bg-purple-bg p-4 rounded-xl lg:min-w-[20rem];
+
+        .inner-cont {
+            @apply max-h-40 overflow-y-auto pr-2;
+
+            &::-webkit-scrollbar {
+                @apply w-1 m-2;
+            }
+
+            &::-webkit-scrollbar-track {
+                @apply bg-transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                @apply bg-primary rounded-lg border-none;
+            }
+        }
+
+        .header {
+            @apply text-2xl font-bold flex items-center gap-2;
+        }
+
+        .info-cont {
+            @apply flex items-center gap-2 my-2;
+
+            .image-cont {
+                @apply relative w-6 h-6 rounded-full overflow-hidden;
+            }
+        }
+
+        .col-name {
+            @apply flex justify-between items-center border-b border-purple-border border-solid p-1;
+
+            p {
+                @apply font-semibold;
+            }
+        }
+    }
 }

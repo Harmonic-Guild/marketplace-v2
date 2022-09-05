@@ -247,7 +247,37 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                         <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
                     </div>
 
-                    <div className="flex flex-col-reverse lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                    <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                        <div className={styles["history-cont"]}>
+                            <p className={styles.header}>
+                                <p>History of NFT</p>
+                                <TbExternalLink color="#342AAA" className="w-6 h-6" />
+                            </p>
+                            <div className={styles["inner-cont"]}>
+                                {[1, 1, 1].map((item, i: number) => (
+                                    <div key={i}>
+                                        <div className={styles["info-cont"]}>
+                                            <p className="font-semibold">Owned by:</p>
+                                            <div className={styles["image-cont"]}>
+                                                <Image
+                                                    src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                />
+                                            </div>
+                                            <p>@Latest bidder</p>
+                                        </div>
+                                        {i < 2 && (
+                                            <div className={styles["col-name"]}>
+                                                <p>Address.......</p>
+                                                <p>Date</p>
+                                                <p>Time</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                         <div className="">
                             <div className="flex items-center justify-between gap-3">
                                 <p className="text-2xl font-bold">Details</p>
@@ -270,22 +300,20 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                 </div>
                             </div>
 
-                            <div className="bg-yellow-100 rounded-lg my-8 py-2">
+                            {/* <div className="bg-yellow-100 rounded-lg my-8 py-2">
                                 <p className="lg:hidden text-center text-gray-500 text-lg">
                                     {tokens.length}/{allTokens.length} Tokens available
                                 </p>
-                            </div>
+                            </div> */}
 
-                            {/* <div className="lg:flex lg:items-center gap-10">
-                                    <p className="text-2xl font-bold mb-5 pb-5 border-b border-yellow-400 lg:border-0">
-                                    Perks
-                                    </p>
-                                    <span className="text-lg">
+                            <div className="flex items-center gap-10 mt-4">
+                                <p className="text-2xl font-bold border-b border-primary lg:border-0">Perks</p>
+                                <span className="text-lg">
                                     <li>First Perk</li>
                                     <li>Second Perk</li>
                                     <li>Exclusive access to comunity</li>
-                                    </span>
-                                </div> */}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
