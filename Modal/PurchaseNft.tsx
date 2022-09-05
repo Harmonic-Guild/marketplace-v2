@@ -15,7 +15,7 @@ const PurchaseNft = ({ buy, price, isConnected }: { buy: any; price: string; isC
                 <button
                     onClick={buy}
                     className={`w-full py-2 rounded-md text-lg font-bold text-gray-900 px-5 ${
-                        isConnected ? "btnColor" : "border border-mp-brown-1 py-2 cursor-not-allowed"
+                        isConnected ? "btnColor" : "border border-primary py-2 cursor-not-allowed"
                     }`}
                 >
                     Purchase

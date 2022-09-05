@@ -4,7 +4,7 @@
     @apply mx-auto mt-10 text-gray-700;
 
     .history-cont {
-        @apply bg-purple-bg p-4 rounded-xl lg:min-w-[20rem];
+        @apply bg-purple-bg p-4 rounded-xl w-full lg:min-w-[20rem] mt-8 lg:mt-0;
 
         .inner-cont {
             @apply max-h-40 overflow-y-auto pr-2;

@@ -14,8 +14,8 @@ const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
     };
 
     return (
-        <div className="border border-purple-border bg-purple-bg rounded-lg px-6 py-6 mt-8 lg:flex lg:justify-between lg:gap-10">
-            <div className="flex flex-col justify-center items-center w-1/2">
+        <div className="border border-purple-border border-solid bg-purple-bg rounded-lg px-6 py-6 mt-8 flex flex-col lg:flex-row justify-between lg:gap-10">
+            <div className="flex flex-col justify-center items-center w-full lg:w-1/2">
                 <div className="flex items-center gap-2">
                     <img
                         className="inline-block h-10 w-10 rounded-full"
@@ -41,7 +41,7 @@ const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
             </div>
 
             {/* <span className="border-b border-mp-brown-1 lg:hidden flex py-2 "></span> */}
-            <div className="flex flex-col flex-grow w-1/2">
+            <div className="flex flex-col flex-grow w-full lg:w-1/2">
                 <div>
                     {isConnected ? (
                         <button
@@ -60,14 +60,16 @@ const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
                     )}
                 </div>
 
-                <div className="text-center flex justify-center items-center mt-3">
+                <div className="text-center flex flex-col lg:flex-row justify-center items-center mt-3">
                     <p className="font-bold">Owned by:</p>
-                    <img
-                        className="h-5 w-5 rounded-full mx-2"
-                        src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                    />
-                    <span>@owner</span>
+                    <div className="flex">
+                        <img
+                            className="h-5 w-5 rounded-full mx-2"
+                            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            alt=""
+                        />
+                        <span>@owner</span>
+                    </div>
                 </div>
             </div>
             {showModal ? (

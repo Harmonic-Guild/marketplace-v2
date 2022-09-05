@@ -224,8 +224,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
                     {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
                     <div className="">
-                        <div className="mt-10">
-                            <div className="border-b border-yellow-600 mb-3 pb-3">
+                        <div className="mt-10 border-b md:border-b-0 border-primary pb-4">
+                            <div className="border-b border-primary mb-3 pb-3">
                                 <span className="text-3xl font-bold">Description</span>
                             </div>
 
@@ -238,81 +238,84 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                         </div>
                     </div>
 
-                    <div>
-                        {/* {things?.tokens[0]?.lists[0]?.autotransfer ? (
-                            <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
-                        ) : (
-                            <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
-                        )} */}
-                        <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
-                    </div>
-
-                    <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
-                        <div className={styles["history-cont"]}>
-                            <p className={styles.header}>
-                                <p>History of NFT</p>
-                                <TbExternalLink color="#342AAA" className="w-6 h-6" />
-                            </p>
-                            <div className={styles["inner-cont"]}>
-                                {[1, 1, 1].map((item, i: number) => (
-                                    <div key={i}>
-                                        <div className={styles["info-cont"]}>
-                                            <p className="font-semibold">Owned by:</p>
-                                            <div className={styles["image-cont"]}>
-                                                <Image
-                                                    src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                />
-                                            </div>
-                                            <p>@Latest bidder</p>
-                                        </div>
-                                        {i < 2 && (
-                                            <div className={styles["col-name"]}>
-                                                <p>Address.......</p>
-                                                <p>Date</p>
-                                                <p>Time</p>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
+                    <div className="flex flex-col-reverse lg:flex-col">
+                        <div>
+                            {things?.tokens[0]?.lists[0]?.autotransfer ? (
+                                <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
+                            ) : (
+                                <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
+                            )}
                         </div>
-                        <div className="">
-                            <div className="flex items-center justify-between gap-3">
-                                <p className="text-2xl font-bold">Details</p>
-                                <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                                <div className="border-2 border-primary rounded-full p-2 px-3">
-                                    <a
-                                        href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        <Near className="w-4 h-4" fill="black" />
-                                    </a>
-                                </div>
-                                <div className="border-2 border-primary rounded-full p-1 px-3">
-                                    <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
-                                        <div className="w-6 h-6">
-                                            <Image src={Arweave} className="" />
+
+                        <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                            <div className={styles["history-cont"]}>
+                                <p className={styles.header}>
+                                    <p>History of NFT</p>
+                                    <TbExternalLink color="#342AAA" className="w-6 h-6" />
+                                </p>
+                                <div className={styles["inner-cont"]}>
+                                    {[1, 1, 1].map((item, i: number) => (
+                                        <div key={i}>
+                                            <div className={styles["info-cont"]}>
+                                                <p className="font-semibold">Owned by:</p>
+                                                <div className={styles["image-cont"]}>
+                                                    <Image
+                                                        src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                        layout="fill"
+                                                        objectFit="cover"
+                                                    />
+                                                </div>
+                                                <p>@Latest bidder</p>
+                                            </div>
+                                            {i < 2 && (
+                                                <div className={styles["col-name"]}>
+                                                    <p>Address.......</p>
+                                                    <p>Date</p>
+                                                    <p>Time</p>
+                                                </div>
+                                            )}
                                         </div>
-                                    </a>
+                                    ))}
                                 </div>
                             </div>
+                            <div className="">
+                                <div className="flex items-center justify-between gap-3">
+                                    <p className="text-2xl font-bold">Details</p>
+                                    <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
+                                    <div className="border-2 border-primary rounded-full p-2 px-3">
+                                        <a
+                                            href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            <Near className="w-4 h-4" fill="black" />
+                                        </a>
+                                    </div>
+                                    <div className="border-2 border-primary rounded-full p-1 px-3">
+                                        <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
+                                            <div className="w-6 h-6">
+                                                <Image src={Arweave} className="" />
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
 
-                            {/* <div className="bg-yellow-100 rounded-lg my-8 py-2">
-                                <p className="lg:hidden text-center text-gray-500 text-lg">
-                                    {tokens.length}/{allTokens.length} Tokens available
-                                </p>
-                            </div> */}
+                                {/* <div className="bg-yellow-100 rounded-lg my-8 py-2">
+                                    <p className="lg:hidden text-center text-gray-500 text-lg">
+                                        {tokens.length}/{allTokens.length} Tokens available
+                                    </p>
+                                </div> */}
 
-                            <div className="flex items-center gap-10 mt-4">
-                                <p className="text-2xl font-bold border-b border-primary lg:border-0">Perks</p>
-                                <span className="text-lg">
-                                    <li>First Perk</li>
-                                    <li>Second Perk</li>
-                                    <li>Exclusive access to comunity</li>
-                                </span>
+                                <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-10 mt-4">
+                                    <div className="border-b border-primary lg:border-0 w-full lg:w-1/4 pb-2 lg:pb-0">
+                                        <p className="text-2xl font-bold">Perks</p>
+                                    </div>
+                                    <span className="text-lg w-4/5 lg:w-3/4">
+                                        <li>First Perk</li>
+                                        <li>Second Perk</li>
+                                        <li>Exclusive access to comunity</li>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
