@@ -12,6 +12,7 @@ import styles from "../styles/NFT.module.scss";
 
 interface Props {
     token: Token;
+    baseUri?: string | undefined;
 }
 
 const NFT: FC<Props> = ({ token }) => {
@@ -83,7 +84,7 @@ const NFT: FC<Props> = ({ token }) => {
                                                 </span>
                                             </div>
                                             <div>
-                                                <Near className="w-4 h-4" />
+                                                <Near className="w-4 h-4" fill="black" />
                                             </div>
                                         </div>
                                     ) : (
@@ -95,7 +96,7 @@ const NFT: FC<Props> = ({ token }) => {
                                                 </span>
                                             </div>
                                             <div>
-                                                <Near className="w-4 h-4" />
+                                                <Near className="w-4 h-4" fill="black" />
                                             </div>
                                         </div>
                                     )
