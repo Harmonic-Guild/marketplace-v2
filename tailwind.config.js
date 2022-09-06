@@ -24,8 +24,8 @@ module.exports = {
             colors: {
                 primary: "rgba(35, 50, 71, 1)",
                 secondary: "rgba(81, 116, 166, 1)",
-                "purple-border": "#94a3b8",
-                "purple-bg": "#f8f5ff",
+                "purple-border": "#9E94DA",
+                "purple-bg": "#ECE1FF",
                 "mp-dark": {
                     1: "#252B42",
                     2: "#161621",

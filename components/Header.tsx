@@ -29,6 +29,7 @@ const Header = () => {
 
     useEffect(() => {
         setCurrentPath(router.pathname);
+        console.log("wallet", wallet);
     }, [router.pathname]);
 
     const walletAction = () => {
@@ -51,7 +52,7 @@ const Header = () => {
                     </a>
                 </Link>
 
-                <div className="flex lg:hidden cursor-pointer">
+                <div className={styles["mobile-nav-cont"]}>
                     {toggleMenu ? (
                         <div className={styles["mobile-nav"]}>
                             <button className={styles["connect-btn"]} onClick={walletAction}>
@@ -66,36 +67,54 @@ const Header = () => {
                         </div>
                     ) : (
                         <div className="w-1/2 h-full">
-                            <FiX className="w-6 h-6 relative text-black" onClick={() => setToggleMenu(true)} />
-                            <div
-                                className={`bg-white text-gray-900 absolute top-20 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-8 h-screen w-4/5 z-10`}
-                            >
-                                {isConnected && <p className="text-lg py-2 px-8 font-semibold text-black">{wallet?.activeAccount?.accountId}</p>}
+                            <FiX className="w-6 h-6 relative text-black z-20" onClick={() => setToggleMenu(true)} />
+                            <div className={styles["nav-content"]}>
+                                <div className={styles["connection-cont"]}>
+                                    {isConnected ? (
+                                        <div className={styles["info-cont"]}>
+                                            <div className={styles.avatar}>
+                                                <Image
+                                                    src="https://images.unsplash.com/photo-1654792393225-3e8a53d124d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fG5mdCUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                />
+                                            </div>
+                                            <div className={styles["info-text"]}>
+                                                <p className={styles["big-text"]}>Email</p>
+                                                <p className={styles.address}>Address: {wallet?.activeAccount?.accountId}</p>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <p>Not connected</p>
+                                    )}
+                                </div>
                                 {navTitles.map((item, index) => (
                                     <Link key={index} href={item.href} passHref>
-                                        <div className={`cursor-pointer`}>{item.title}</div>
+                                        <div className={`${styles["nav-link"]} ${currentPath == item.href ? "border-black" : "border-white"}`}>
+                                            {item.title}
+                                        </div>
                                     </Link>
                                 ))}
-                                <div className="absolute bottom-0 mb-20">
-                                    <div className="flex justify-between w-fit bg-purple-200 border border-indigo-900 opacity-100 my-4 sm:text-md text-sm font-normal rounded-full p-4">
-                                        <p className="flex pl">
-                                            Community <FiUsers className="px-1 w-6 h-6" />
-                                        </p>
-                                        <p className="flex">
-                                            <BsDot className="mt-1 text-green-400" />
-                                            100+ online
-                                        </p>
-                                    </div>
-                                    <div className="flex justify-evenly">
-                                        {/* < div className='mt-4' onClick={() => setToggleIcons(!toggleIcons)}>
-                                        {toggleIcons 
-                                            ?<BsSun onClick={() => setToggleIcons(true)} className='cursor-pointer hover:text-yellow-400 w-6 h-6 transition duration-700'/>
-                                            :<BsMoonStars onClick={() => setDarkMode(false)} className='cursor-pointer hover:text-black text-gray-700 w-6 h-6 transition duration-700'/>
-                                        }
-                                        </div> */}
-                                        <div className="flex justify-between border border-indigo-900 opacity-700 text-md xs:text-sm font-normal rounded-3xl px-4 py-2 bg-purple-200">
-                                            <span>News</span>
-                                            <BsLayoutTextSidebarReverse className="w-5 h-5  px-1 mt-1" />
+                                <div className={styles["nav-bottom"]}>
+                                    <div className={styles["inner-cont"]}>
+                                        <div className={styles["toggle-light-dark"]} onClick={() => setToggleIcons(!toggleIcons)}>
+                                            {/* {toggleIcons ? (
+                                                <BsSun
+                                                    onClick={() => setToggleIcons(true)}
+                                                    className="cursor-pointer hover:text-yellow-400 w-6 h-6 transition duration-700"
+                                                />
+                                            ) : (
+                                                <BsMoonStars
+                                                    onClick={() => setDarkMode(false)}
+                                                    className="cursor-pointer hover:text-black text-gray-700 w-6 h-6 transition duration-700"
+                                                />
+                                            )} */}
+                                            <div className={`${styles.ball} ${toggleIcons ? styles.active : ""}`}></div>
+                                        </div>
+                                        <div className={"border-r border-solid border-gray-300 h-8"}></div>
+                                        <div className={styles["update-cont"]}>
+                                            <span>Updates</span>
+                                            <BsLayoutTextSidebarReverse className="w-5 h-5  px-1" />
                                         </div>
                                     </div>
                                 </div>
