@@ -3,7 +3,7 @@ import { useWallet } from "../services/providers/MintbaseWalletContext";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import React from "react";
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 import Image from "next/image";
 import MintNft from "../Modal/MintNft";
 import { BsCircle } from "react-icons/bs";
@@ -216,7 +216,7 @@ const MyOwn = () => {
     const [image, setImage] = useState<any>(null);
     const [slideIndex, setSlideIndex] = useState(0);
 
-    const settings = {
+    const settings: Settings = {
         dots: false,
         arrows: false,
         // className: "center",
@@ -333,7 +333,9 @@ const MyOwn = () => {
                                 <div
                                     className={`${styles.nft} ${
                                         index === slideIndex ? "slide:active" : index < slideIndex ? "slide lower" : "slide higher"
-                                    }`}
+                                    }
+                                        ${index == nftExamples.length - 1 ? styles.last : ""}
+                                    `}
                                     key={image}
                                 >
                                     <div className={styles["image-cont"]}>
@@ -347,6 +349,8 @@ const MyOwn = () => {
                                     )}
                                 </div>
                             ))}
+                            <div></div>
+                            <div></div>
                         </Slider>
                     </div>
 

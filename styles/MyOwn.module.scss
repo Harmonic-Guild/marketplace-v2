@@ -13,5 +13,9 @@
         .title {
             @apply text-3xl font-semibold mt-10;
         }
+
+        &.last {
+            @apply mr-[30vw];
+        }
     }
 }
