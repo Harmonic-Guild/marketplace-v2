@@ -98,17 +98,6 @@ const Header = () => {
                                 <div className={styles["nav-bottom"]}>
                                     <div className={styles["inner-cont"]}>
                                         <div className={styles["toggle-light-dark"]} onClick={() => setToggleIcons(!toggleIcons)}>
-                                            {/* {toggleIcons ? (
-                                                <BsSun
-                                                    onClick={() => setToggleIcons(true)}
-                                                    className="cursor-pointer hover:text-yellow-400 w-6 h-6 transition duration-700"
-                                                />
-                                            ) : (
-                                                <BsMoonStars
-                                                    onClick={() => setDarkMode(false)}
-                                                    className="cursor-pointer hover:text-black text-gray-700 w-6 h-6 transition duration-700"
-                                                />
-                                            )} */}
                                             <div className={`${styles.ball} ${toggleIcons ? styles.active : ""}`}></div>
                                         </div>
                                         <div className={"border-r border-solid border-gray-300 h-8"}></div>
