@@ -1,13 +1,13 @@
 @import "./variables";
 
 .container {
-    @apply bg-fixed bg-gradient-to-r from-slate-50 to-slate-100 w-full px-6 relative;
+    @apply bg-fixed bg-gradient-to-r from-slate-50 to-slate-100 w-full px-0 relative;
 
     .nft {
         @apply text-center;
 
         .image-cont {
-            @apply w-full aspect-video relative;
+            @apply w-full aspect-video relative rounded-xl overflow-hidden;
         }
 
         .title {

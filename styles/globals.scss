@@ -88,23 +88,30 @@ button {
     }
 }
 
+.slick-slider {
+    .slick-list {
+        @apply overflow-hidden;
+    }
+}
 .slide {
     transform: scale(0.7);
     transition: 0.5s;
 
-    &.lower {
-        perspective: 200px;
+    @screen md {
+        &.lower {
+            perspective: 10vw;
 
-        & > div {
-            transform: rotateY(-10deg);
+            & > div {
+                transform: rotateY(-10deg);
+            }
         }
-    }
 
-    &.higher {
-        perspective: 200px;
+        &.higher {
+            perspective: 10vw;
 
-        & > div {
-            transform: rotateY(10deg);
+            & > div {
+                transform: rotateY(10deg);
+            }
         }
     }
 }

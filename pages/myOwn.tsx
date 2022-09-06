@@ -214,13 +214,13 @@ const MyOwn = () => {
     const [metaData, setMetaData] = useState<any>([]);
     const [fullScreen, setFullScreen] = useState(false);
     const [image, setImage] = useState<any>(null);
-    const [slideIndex, setSlideIndex] = useState(3);
+    const [slideIndex, setSlideIndex] = useState(0);
 
     const settings = {
         dots: false,
         arrows: false,
         // className: "center",
-        // infinite: true,
+        infinite: false,
         centerPadding: "8px",
         centerMode: true,
         slidesToShow: 3,
@@ -238,8 +238,6 @@ const MyOwn = () => {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
-                    infinite: true,
-                    dots: true,
                 },
             },
             {
@@ -268,6 +266,8 @@ const MyOwn = () => {
             storeId: "",
         },
     });
+
+    console.log(slideIndex);
 
     useEffect(() => {
         getTokens({
