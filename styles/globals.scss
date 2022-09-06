@@ -91,8 +91,22 @@ button {
 .slide {
     transform: scale(0.7);
     transition: 0.5s;
-    filter: blur(5px);
-    color: red;
+
+    &.lower {
+        perspective: 200px;
+
+        & > div {
+            transform: rotateY(-10deg);
+        }
+    }
+
+    &.higher {
+        perspective: 200px;
+
+        & > div {
+            transform: rotateY(10deg);
+        }
+    }
 }
 .slide.active {
     filter: blur(0);
