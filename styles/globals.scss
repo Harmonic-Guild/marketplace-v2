@@ -69,13 +69,25 @@ button {
 }
 
 .slick-arrow.slick-next {
-    @apply rounded-full bg-primary p-3  -right-10 opacity-0 md:opacity-100;
+    @apply rounded-full bg-primary p-3  -right-10 opacity-100 md:opacity-100;
 }
 .slick-arrow.slick-prev {
     width: 20px;
     height: 20px;
-    @apply rounded-full bg-primary p-3  -left-10 opacity-0 md:opacity-100;
+    @apply rounded-full bg-primary p-3  -left-10 opacity-100 md:opacity-100;
 }
+
+.slick-arrow {
+    &.slick-prev,
+    &.slick-next {
+        background: radial-gradient(50% 50% at 50% 50%, #5174a6 0%, rgba(254, 254, 254, 0) 100%);
+    }
+
+    &::before {
+        @apply w-full h-full rounded-full absolute top-[3px] left-0;
+    }
+}
+
 .slide {
     transform: scale(0.7);
     transition: 0.5s;
