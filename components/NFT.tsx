@@ -88,7 +88,7 @@ const NFT: FC<Props> = ({ token }) => {
                                             </div>
                                         </div>
                                     ) : (
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-2 whitespace-nowrap">
                                             <div>
                                                 Price:{" "}
                                                 <span className="font-bold">
@@ -113,8 +113,7 @@ const NFT: FC<Props> = ({ token }) => {
                         <div className="flex mt-4 justify-between">
                             <button className={styles["buy-button"]}>
                                 <div className="">{list ? (!list?.autotransfer ? "Bid" : "Buy") : "N/A"}</div>
-                                <div className="border-l border-black h-full w-0"></div>
-                                <AiOutlineRight className=" w-5 h-5" />
+                                <span>&rarr;</span>
                             </button>
                             {/* <button className='flex action-btn'>
                                     <div className='pr-3'>

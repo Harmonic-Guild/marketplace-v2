@@ -1,7 +1,7 @@
 @import "./variables";
 
 .container {
-    @apply w-full rounded-2xl cursor-pointer p-5 bg-[#f8f5ff] border border-solid border-[#94a3b8] my-4;
+    @apply w-[90%] inline-block rounded-2xl cursor-pointer p-5 bg-[#f8f5ff] border border-solid border-[#94a3b8] my-4 mx-[5%];
 
     .title {
         @apply font-bold mt-4 mb-1 text-xl overflow-hidden whitespace-nowrap;
@@ -10,6 +10,6 @@
 
     .buy-button {
         @include buttonColor;
-        @apply flex justify-between items-center rounded-lg gap-3 px-5 py-3 font-semibold;
+        @apply flex justify-between items-center rounded-lg gap-3 px-3 py-2 lg:px-5 lg:py-3 font-semibold;
     }
 }

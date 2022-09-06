@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import { GiStarShuriken } from "react-icons/gi";
+import Slider from "react-slick";
 import NFT from "./NFT";
 import { Token } from "../constants/interfaces";
 
@@ -11,7 +12,7 @@ const FETCH_WEEKLY = gql`
     query MyQuery($storeId: String!) {
         token(
             where: { storeId: { _eq: $storeId }, list: { price: { _is_null: false } }, burnedAt: { _is_null: true } }
-            limit: 3
+            limit: 20
             offset: 3
             distinct_on: thingId
             order_by: { thingId: desc }
@@ -43,6 +44,43 @@ const FETCH_WEEKLY = gql`
 `;
 
 const WeeklyNft = ({ storeId }: { storeId: string }) => {
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        // autoplay: true,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 900,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    initialSlide: 3,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    dots: true,
+                },
+            },
+        ],
+    };
+
     const [tokens, setTokens] = useState<Token[]>([]);
 
     const [getTokens, { loading: loadingtokensData, data: tokensData }] = useLazyQuery(FETCH_WEEKLY, {
@@ -57,6 +95,7 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
                 storeId,
             },
         });
+        console.log(storeId);
     }, []);
 
     useEffect(() => {
@@ -83,11 +122,13 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
                     </p>
                     <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
                 </div>
-                <div className={styles["nfts-cont"]}>
+                {/* <div className={styles["nfts-cont"]}> */}
+                <Slider {...settings} className={styles["nfts-cont"]}>
                     {tokens.map((token) => (
                         <NFT token={token} key={token.id} />
                     ))}
-                </div>
+                </Slider>
+                {/* </div> */}
             </div>
         </>
     );

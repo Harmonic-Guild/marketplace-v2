@@ -1,11 +1,11 @@
 .container {
-    @apply w-full h-full pt-10 lg:px-32 px-12;
+    @apply w-full h-full pt-10 lg:px-32 px-8;
 
-    .nfts-cont {
-        @apply flex gap-4 justify-between overflow-x-auto items-center;
+    // .nfts-cont {
+    //     @apply flex gap-4 justify-between overflow-x-auto items-center;
 
-        a {
-            @apply w-full sm:w-[47%] lg:w-[30%] min-w-[19rem];
-        }
-    }
+    //     a {
+    //         @apply w-full sm:w-[47%] lg:w-[30%] min-w-[19rem];
+    //     }
+    // }
 }

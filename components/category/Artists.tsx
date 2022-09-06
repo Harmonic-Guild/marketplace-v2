@@ -17,21 +17,21 @@ const Artists = () => {
             <div className="text-mp-gray-6">
                 <div className="artist">
                     <span className="flex">
-                        <input type="checkbox" name="artist" id="" className=" w-5 h-5 " />
+                        <input type="checkbox" name="artist" id="" className=" w-5 h-5" />
                         <p className="pl-2">Ben Afleck</p>
                     </span>
                     <p className="">98 </p>
                 </div>
                 <div className="artist">
                     <span className="flex">
-                        <input type="checkbox" name="artist" id="" className=" w-5 h-5 " />
+                        <input type="checkbox" name="artist" id="" className=" w-5 h-5" />
                         <p className="pl-2">Joseph Morgan</p>
                     </span>
                     <p className="">12</p>
                 </div>
                 <div className="artist">
                     <span className="flex">
-                        <input type="checkbox" name="artist" id="" className=" w-5 h-5 " />
+                        <input type="checkbox" name="artist" id="" className=" w-5 h-5" />
                         <p className="pl-2">Emilia Clarke</p>
                     </span>
                     <p className="">56 </p>
