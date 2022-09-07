@@ -42,9 +42,9 @@ const NFT: FC<Props> = ({ token }) => {
                                 alt={"alt"}
                             />
 
-                            {/* <div className="absolute h-7 top-1/2 text-white  cursor-pointer">
-                                <BsPlayCircle className="w-10 h-10 mx-auto" />
-                            </div> */}
+                            <div style={{ top: "40%", left: "45%" }} className="absolute text-white cursor-pointer">
+                                <BsPlayCircle className="w-10 h-10" />
+                            </div>
                         </div>
                     ) : (
                         <div className="object-contain mx-auto">
