@@ -45,8 +45,8 @@ const MakeOffer = ({buy, isConnected, latestBid, bidder, owner}: any) => {
 
         <div>
           {isConnected 
-            ?(<button onClick={() => setShowModal(true) }  className={`tracking-wider font-bold text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 btnColor`}>Bid</button>)
-            :(<button onClick={() => setShowNotConnectedModal(true) }  className={`tracking-wider font-bold text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 ${isConnected ? 'btnColor' : 'border border-mp-brown-1 py-2 cursor-not-allowed'}`}>Bid</button>)
+            ?(<button onClick={() => setShowModal(true) }  className={`tracking-widertext-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 btnColor`}>Bid</button>)
+            :(<button onClick={() => setShowNotConnectedModal(true) }  className={`tracking-wider text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 ${isConnected ? 'btnColor' : 'border border-mp-brown-1 py-2 cursor-not-allowed'}`}>Bid</button>)
           }
         </div>
 

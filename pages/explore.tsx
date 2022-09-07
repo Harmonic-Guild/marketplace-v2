@@ -2,7 +2,6 @@ import React from 'react'
 import { gql } from 'apollo-boost'
 import { useLazyQuery } from '@apollo/client'
 import { useEffect, useState } from 'react';
-import { useWallet } from '../services/providers/MintbaseWalletContext';
 import DropDown from '../components/Dropdown-Filters'
 import NFT from '../components/NFT'
 import { Store } from '../interfaces/wallet.interface';
@@ -24,9 +23,9 @@ const FETCH_STORE = gql`
 `
 
 const FETCH_TOKENS = gql`
-  query FetchTokensByStoreId($storeId: String!, $lt: numeric, $type:[String!], $gt: numeric, $limit: Int, $offset: Int) {
+  query FetchTokensByStoreId($storeId: String!, $order: order_by!, $type:[String!], $lt: numeric, $gt: numeric, $limit: Int, $offset: Int) {
     token(
-      order_by: { thingId: asc }
+      order_by: { thingId: $order }
       where: {
          storeId: { _eq: $storeId },
           burnedAt: { _is_null: true },
@@ -37,7 +36,7 @@ const FETCH_TOKENS = gql`
           thing: {
             metadata: {
               animation_type: {
-              #  _in: $type
+                _in: $type
               }
             }
           }
@@ -75,7 +74,6 @@ const FETCH_TOKENS = gql`
 `
 const explore = () => {
 
-    const { wallet } = useWallet()
     const [store, setStore] = useState<Store | null>(null)
     // const [things, setThings] = useState<any>([])
     const [tokens, setTokens] = useState<any>([])
@@ -96,9 +94,11 @@ const explore = () => {
        variables: {
          storeId: '',
          limit: 15,
+         order: '',
          offset: 0,
          lt: 0,
-         gt: 0
+         gt: 0,
+         type: []
        },
      })
  
@@ -127,8 +127,10 @@ const explore = () => {
          storeId: storeName,
          limit: 15,
          offset: 0,
+         order: filterParams.orders,
          lt: filterParams.prices.lt.toString(),
-         gt: filterParams.prices.gt.toString()
+         gt: filterParams.prices.gt.toString(),
+         type: filterParams.types
        },
      })
     //  console.log(filterParams.prices);
@@ -151,12 +153,13 @@ const explore = () => {
      
    }, [tokensData])
 
-   const setFilters = (filters: any) => {
-
-    const {order} = filters;
+   const setFilters = (filters: {range: string, type: string, order: string}) => {  
     
     const res = QueryFilters(filters);
-    setFilterParams({...res, order});
+    
+    setFilterParams({...res});
+    console.log(res);
+    
    }
 
   return (
