@@ -154,7 +154,7 @@ const explore = () => {
             <div>
                 <DropDown setFilters={setFilters} />
             </div>
-            <div className='xl:flex block justify-around'>
+            <div className="xl:flex block justify-around">
                 {/* <div className=" order-last pt-4 col-span-1">
                     <div className="hidden lg:block w-full">
                         <Categories />

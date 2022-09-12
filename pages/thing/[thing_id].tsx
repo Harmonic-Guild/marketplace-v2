@@ -5,7 +5,7 @@ import { FiLayers } from "react-icons/fi";
 import { BsChevronLeft, BsHeart, BsArrowsAngleExpand } from "react-icons/bs";
 import { CgArrowsExpandRight } from "react-icons/cg";
 import { BiShareAlt } from "react-icons/bi";
-import { AiOutlineExpandAlt } from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlineExpandAlt } from "react-icons/ai";
 // import SimilarNft from "../../components/SimilarNft";
 import Vector_back from "../../icons/Vector_back.svg";
 import { gql } from "apollo-boost";
@@ -243,7 +243,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
 
                     <div className="flex flex-col-reverse lg:flex-col">
-                    <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                        <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
                             {/* <div className={styles["history-cont"]}>
                                 <p className={styles.header}>
                                     <p>History of NFT</p>
@@ -314,15 +314,20 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                 </div> */}
                             </div>
                         </div>
-                        
-                        
+
                         <div>
                             {things?.tokens[0]?.lists[0]?.autotransfer ? (
                                 <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
                             ) : (
-                                <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} bidder={tokens[0]?.lists[0]?.offer?.from} owner={tokens[0]?.ownerId}/>
+                                <MakeOffer
+                                    buy={buy}
+                                    isConnected={isConnected}
+                                    latestBid={tokens[0]?.lists[0]?.offer?.price}
+                                    bidder={tokens[0]?.lists[0]?.offer?.from}
+                                    owner={tokens[0]?.ownerId}
+                                />
                             )}
-                        </div>   
+                        </div>
                     </div>
                 </div>
             </div>

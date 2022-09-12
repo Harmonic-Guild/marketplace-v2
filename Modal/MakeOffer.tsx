@@ -4,7 +4,7 @@ import Near from "../icons/near.svg";
 import NotConnected from "./NotConnected";
 import { formatNearAmount } from "near-api-js/lib/utils/format";
 
-const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner}: any) => {
+const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
     const [showModal, setShowModal] = useState(false);
     const [bid, setBid] = useState("0");
     const [showNotConnectedModal, setShowNotConnectedModal] = useState(false);
@@ -62,7 +62,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner}: any) => {
                 </div>
 
                 <div className="text-center flex flex-col lg:flex-row justify-center items-center mt-3">
-                    <p className="font-bold">Owned by - @ {owner? owner: 'None'}</p>
+                    <p className="font-bold">Owned by - @ {owner ? owner : "None"}</p>
                     <div className="flex">
                         {/* <img
                             className="h-5 w-5 rounded-full mx-2"
