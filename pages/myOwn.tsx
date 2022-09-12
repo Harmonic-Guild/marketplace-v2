@@ -284,6 +284,7 @@ const MyOwn = () => {
         if (!tokensData) return;
 
         setMetaData(tokensData.metadata);
+        console.log(tokensData.metadata);
 
         console.log(tokensData, "*-*-*--*-*-");
     }, [tokensData]);
@@ -306,8 +307,11 @@ const MyOwn = () => {
                     </div>
                 </div>
             )}
-            {loadingTokensData && "Loading..."}
-            {!loadingTokensData && (
+            {loadingTokensData ? (
+                <div className="flex justify-center items-center py-60">
+                    <div className="h-5 w-5 bg-primary animate-pulse rounded-full"></div>
+                </div>
+            ) : (
                 <>
                     <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8">
                         {/* {wallet?.activeAccount?.accountId}  */}
@@ -316,35 +320,35 @@ const MyOwn = () => {
                     <div className="pb-24 w-full mx-auto ">
                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
                             {/* {metaData.map((meta: MetaData) => (
-                                <NFT
-                                    key={meta.id}
-                                    tokenId={meta.thing.tokens[0].id}
-                                    media={meta.media}
-                                    title={meta.title}
-                                    animation_url={meta.animation_url}
-                                    animation_type={meta.animation_type}
-                                    lists={meta.thing.tokens[0].lists}
-                                    toggle={toggle}
-                                />
-                            ))} */}
+                                    <NFT
+                                        key={meta.id}
+                                        tokenId={meta.thing.tokens[0].id}
+                                        media={meta.media}
+                                        title={meta.title}
+                                        animation_url={meta.animation_url}
+                                        animation_type={meta.animation_type}
+                                        lists={meta.thing.tokens[0].lists}
+                                        toggle={toggle}
+                                    />
+                                ))} */}
                         </div>
                         <Slider {...settings}>
-                            {nftExamples.map(({ image, title, description }: any, index: number) => (
+                            {metaData.map((meta: MetaData, index: number) => (
                                 <div
                                     className={`${styles.nft} ${
                                         index === slideIndex ? "slide:active" : index < slideIndex ? "slide lower" : "slide higher"
                                     }
-                                        ${index == nftExamples.length - 1 ? styles.last : ""}
-                                    `}
+                                            ${index == metaData.length - 1 ? styles.last : ""}
+                                        `}
                                     key={image}
                                 >
                                     <div className={styles["image-cont"]}>
-                                        <Image src={image} layout="fill" objectFit="cover" />
+                                        <Image src={meta.media} layout="fill" objectFit="cover" />
                                     </div>
                                     {index === slideIndex && (
                                         <>
-                                            <p className={styles.title}>{title}</p>
-                                            <p className={styles.description}>{description}</p>
+                                            <p className={styles.title}>{meta.title}</p>
+                                            {/* <p className={styles.description}>{description}</p> */}
                                         </>
                                     )}
                                 </div>
@@ -355,24 +359,24 @@ const MyOwn = () => {
                     </div>
 
                     {/* <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 pb-4">
-          your tokens from Other stores
-        </h1>
-        <div className="pb-24 w-full mx-auto ">
-          <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
-            {metaData.map((meta: MetaData) => (
-                <NFT
-                key={meta.id}
-                  tokenId={meta.thing.tokens[0].id}
-                  media={meta.media}
-                  title={meta.title}
-                  animation_url={meta.animation_url}
-                  animation_type={meta.animation_type}
-                  lists={meta.thing.tokens[0].lists}
-                  toggle={toggle}
-                />
-            ))}
-          </div>
-        </div> */}
+                        your tokens from Other stores
+                        </h1>
+                        <div className="pb-24 w-full mx-auto ">
+                        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
+                            {metaData.map((meta: MetaData) => (
+                                <NFT
+                                key={meta.id}
+                                tokenId={meta.thing.tokens[0].id}
+                                media={meta.media}
+                                title={meta.title}
+                                animation_url={meta.animation_url}
+                                animation_type={meta.animation_type}
+                                lists={meta.thing.tokens[0].lists}
+                                toggle={toggle}
+                                />
+                            ))}
+                        </div>
+                        </div> */}
                 </>
             )}
         </div>
