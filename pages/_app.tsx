@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
             <NextProgress options={{ showSpinner: false }} color={"#0F172A"} />
             <Head>
-                <title>MarketPlace Version_2</title>
+                <title>MarketPlace</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <WalletProvider apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""}>

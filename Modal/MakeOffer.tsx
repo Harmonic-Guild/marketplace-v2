@@ -4,7 +4,7 @@ import Near from "../icons/near.svg";
 import NotConnected from "./NotConnected";
 import { formatNearAmount } from "near-api-js/lib/utils/format";
 
-const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
+const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner}: any) => {
     const [showModal, setShowModal] = useState(false);
     const [bid, setBid] = useState("0");
     const [showNotConnectedModal, setShowNotConnectedModal] = useState(false);
@@ -17,12 +17,13 @@ const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
         <div className="border border-purple-border border-solid bg-purple-bg rounded-lg px-6 py-6 mt-8 flex flex-col lg:flex-row justify-between lg:gap-10">
             <div className="flex flex-col justify-center items-center w-full lg:w-1/2">
                 <div className="flex items-center gap-2">
-                    <img
+                    {/* <img
                         className="inline-block h-10 w-10 rounded-full"
                         src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
-                    />
-                    <span className="font-bold text-lg">@Latest bidder</span>
+                    /> */}
+                    <span className="font-bold text-lg">Latest bidder - </span>
+                    <span className="font-bold text-lg">{bidder}</span>
                 </div>
 
                 <div className="flex flex-row gap-2 mt-3 mb-3 lg:mb-0">
@@ -61,14 +62,14 @@ const MakeOffer = ({ buy, isConnected, latestBid }: any) => {
                 </div>
 
                 <div className="text-center flex flex-col lg:flex-row justify-center items-center mt-3">
-                    <p className="font-bold">Owned by:</p>
+                    <p className="font-bold">Owned by - @ {owner? owner: 'None'}</p>
                     <div className="flex">
-                        <img
+                        {/* <img
                             className="h-5 w-5 rounded-full mx-2"
                             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             alt=""
                         />
-                        <span>@owner</span>
+                        <span>@owner</span> */}
                     </div>
                 </div>
             </div>

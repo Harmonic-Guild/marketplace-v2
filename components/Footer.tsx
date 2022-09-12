@@ -41,7 +41,7 @@ const Footer = () => {
                     <span className="font-bold ">LEARN MORE</span>
                     <ul className="leading-loose capitalize">
                         <li>About</li>
-                        <li>Merchat</li>
+                        <li>Merchant</li>
                         <li>Partners</li>
                         <li>Contact</li>
                     </ul>

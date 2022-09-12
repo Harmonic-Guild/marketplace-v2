@@ -50,7 +50,7 @@ function DropDown({ setFilters }: { setFilters: (param: any) => void }) {
                         </div>
                         {!!pop && (
                             <ul className="dropdown-content w-40 sm:w-40 md:w-48 lg:w-48 xl:w-56">
-                                <li className="dropdown-item " onClick={() => handleSelection(setPop, setOrder, { text: "ascending", value: "asc" })}>
+                                <li className="dropdown-item " onClick={() => handleSelection(setPop, setOrder, { text: "Ascending", value: "asc" })}>
                                     Ascending
                                 </li>
                                 <li

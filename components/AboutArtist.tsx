@@ -93,7 +93,7 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
         <div className={styles.container}>
             <div className="text-center">
                 <p className="text-secondary mb-2">
-                    Lorem <GiStarShuriken className="inline w-6 h-5" />
+                    <GiStarShuriken className="inline w-6 h-5" />
                 </p>
                 <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> About Artist </h2>
             </div>

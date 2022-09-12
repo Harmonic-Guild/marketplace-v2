@@ -31,7 +31,7 @@ const NFT: FC<Props> = ({ token }) => {
                         // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
                         //     <source src={metadata.animation_url} ></source>
                         // </video>
-                        <div className="object-contain mx-auto rounded-lg">
+                        <div className="object-contain mx-auto rounded-lg relative">
                             <Image
                                 className="object-contain mx-auto rounded-lg"
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}

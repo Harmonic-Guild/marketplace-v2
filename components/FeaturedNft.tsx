@@ -117,7 +117,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
         <div className={styles.container}>
             <div className=" text-center  font-bold text-gray-900 mb-6">
                 <p className="text-secondary mb-2">
-                    Hot <GiStarShuriken className="inline w-6 h-5" />
+                     <GiStarShuriken className="inline w-6 h-5" />
                 </p>
                 <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
                 <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
@@ -130,7 +130,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
                             {index === slideIndex && (
                                 <div className="absolute bottom-5 text-center font-semibold w-full">
                                     <p className="text-white">{token.thing.metadata.title}</p>
-                                    <button className={styles["bid-button"]}>Bid &rarr;</button>
+                                    {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
                                 </div>
                             )}
                         </div>

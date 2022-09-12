@@ -31,9 +31,11 @@ const FETCH_TOKENS = gql`
                     autotransfer
                     offer {
                         price
+                        from
                     }
                     createdAt
                     tokenKey
+                    ownerId
                 }
                 txId
                 minter
@@ -81,6 +83,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         lists: [List?];
         createdAt: string | number;
         tokenKey: string | number;
+        ownerId: string;
         txId: string;
         minter: string;
     }
@@ -90,6 +93,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         autotransfer: boolean;
         offer: {
             price: number;
+            from: string;
         };
         createdAt: string | number;
     }
@@ -239,16 +243,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
 
                     <div className="flex flex-col-reverse lg:flex-col">
-                        <div>
-                            {things?.tokens[0]?.lists[0]?.autotransfer ? (
-                                <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
-                            ) : (
-                                <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} />
-                            )}
-                        </div>
-
-                        <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
-                            <div className={styles["history-cont"]}>
+                    <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                            {/* <div className={styles["history-cont"]}>
                                 <p className={styles.header}>
                                     <p>History of NFT</p>
                                     <TbExternalLink color="#342AAA" className="w-6 h-6" />
@@ -277,7 +273,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         </div>
                                     ))}
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="">
                                 <div className="flex items-center justify-between gap-3">
                                     <p className="text-2xl font-bold">Details</p>
@@ -300,13 +296,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     </div>
                                 </div>
 
-                                {/* <div className="bg-yellow-100 rounded-lg my-8 py-2">
+                                <div className="bg-yellow-100 rounded-lg my-8 py-2">
                                     <p className="lg:hidden text-center text-gray-500 text-lg">
                                         {tokens.length}/{allTokens.length} Tokens available
                                     </p>
-                                </div> */}
+                                </div>
 
-                                <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-10 mt-4">
+                                {/* <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-10 mt-4">
                                     <div className="border-b border-primary lg:border-0 w-full lg:w-1/4 pb-2 lg:pb-0">
                                         <p className="text-2xl font-bold">Perks</p>
                                     </div>
@@ -315,9 +311,18 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         <li>Second Perk</li>
                                         <li>Exclusive access to comunity</li>
                                     </span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
+                        
+                        
+                        <div>
+                            {things?.tokens[0]?.lists[0]?.autotransfer ? (
+                                <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
+                            ) : (
+                                <MakeOffer buy={buy} isConnected={isConnected} latestBid={tokens[0]?.lists[0]?.offer?.price} bidder={tokens[0]?.lists[0]?.offer?.from} owner={tokens[0]?.ownerId}/>
+                            )}
+                        </div>   
                     </div>
                 </div>
             </div>

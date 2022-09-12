@@ -146,16 +146,16 @@ const explore = () => {
     return (
         <div className="px-8 w-full xl:w-5/6 mx-auto">
             <div className="text-center">
-                <p className="text-mp-orange-1">
+                {/* <p className="text-secondary">
                     NFTs <GiStarShuriken className="inline w-6 h-5" />
-                </p>
+                </p> */}
                 <h2 className="text-mp-dark-2 text-4xl font-bold">Explore</h2>
             </div>
             <div>
                 <DropDown setFilters={setFilters} />
             </div>
-            <div className="xl:grid grid-cols-4 gap-4 block justify-around">
-                <div className=" order-last pt-4 col-span-1">
+            <div className='xl:flex block justify-around'>
+                {/* <div className=" order-last pt-4 col-span-1">
                     <div className="hidden lg:block w-full">
                         <Categories />
                         <Artists />
@@ -174,7 +174,7 @@ const explore = () => {
                             <Artists />
                         </span>
                     </div>
-                </div>
+                </div> */}
                 <div className="grid grid-cols-2 lg:grid-cols-3 w-full pt-4 gap-y-5 gap-x-2 col-span-3">
                     {tokens.map((token: any) => (
                         <NFT token={token} baseUri={store?.baseUri} key={token.thing.id} />
