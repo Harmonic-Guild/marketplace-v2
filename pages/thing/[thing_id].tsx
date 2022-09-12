@@ -19,6 +19,7 @@ import Link from "next/link";
 import Arweave from "../../public/images/ARWEAVE.png";
 
 import styles from "../../styles/Thing.module.scss";
+import { GiCancel } from "react-icons/gi";
 
 const FETCH_TOKENS = gql`
     query MyQuery($thing_id: String!) {
@@ -114,6 +115,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     const [allTokens, setAllTokens] = useState<[id?: string]>([]);
     const { wallet, isConnected } = useWallet();
     const [hide, setHide] = useState<boolean>(false);
+    const [enlarge, setEnlarge] = useState(false);
 
     const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] = useLazyQuery(FETCH_TOKENS, {
         variables: {
@@ -173,6 +175,18 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
     return (
         <div className={`container ${styles.container}`}>
+            {enlarge && (
+                <div className={styles.enlarged}>
+                    <div className={styles["cancel-cont"]} onClick={() => setEnlarge(false)}>
+                        <GiCancel color="white" size={30} />
+                    </div>
+                    {things && (
+                        <div className={styles["image-cont"]}>
+                            <Image src={things.metadata.media} layout="fill" objectFit="cover" />
+                        </div>
+                    )}
+                </div>
+            )}
             <Link href="/explore" passHref>
                 <a className="hidden lg:inline-block cursor-pointer bg-black text-white rounded-full p-2 my-4">
                     <BsChevronLeft />
@@ -204,7 +218,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         alt={"alt"}
                                     />
                                     <div className="flex gap-5 justify-end py-4">
-                                        <div className="bg-primary p-2 rounded-full cursor-pointer">
+                                        <div className="bg-primary p-2 rounded-full cursor-pointer" onClick={() => setEnlarge(true)}>
                                             <CgArrowsExpandRight color="white" />
                                         </div>
                                     </div>
@@ -296,8 +310,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     </div>
                                 </div>
 
-                                <div className="bg-yellow-100 rounded-lg my-8 py-2">
-                                    <p className="lg:hidden text-center text-gray-500 text-lg">
+                                <div className="bg-primary rounded-lg my-8 py-2">
+                                    <p className="text-center text-white text-lg">
                                         {tokens.length}/{allTokens.length} Tokens available
                                     </p>
                                 </div>
@@ -315,19 +329,21 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             </div>
                         </div>
 
-                        <div>
-                            {things?.tokens[0]?.lists[0]?.autotransfer ? (
-                                <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
-                            ) : (
-                                <MakeOffer
-                                    buy={buy}
-                                    isConnected={isConnected}
-                                    latestBid={tokens[0]?.lists[0]?.offer?.price}
-                                    bidder={tokens[0]?.lists[0]?.offer?.from}
-                                    owner={tokens[0]?.ownerId}
-                                />
-                            )}
-                        </div>
+                        {things && (
+                            <div>
+                                {things.tokens[0]?.lists[0]?.autotransfer ? (
+                                    <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
+                                ) : (
+                                    <MakeOffer
+                                        buy={buy}
+                                        isConnected={isConnected}
+                                        latestBid={tokens[0]?.lists[0]?.offer?.price}
+                                        bidder={tokens[0]?.lists[0]?.offer?.from}
+                                        owner={tokens[0]?.ownerId}
+                                    />
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
