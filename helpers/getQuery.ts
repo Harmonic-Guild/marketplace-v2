@@ -3,13 +3,13 @@ import {parseNearAmount} from 'near-api-js/lib/utils/format'
 function QueryFilters(filters: {range: string, type: string, order: string}) {
     
     const {range, type, order} = filters;
-
+    
     const prices = handlePriceRange(range)
     const types =  handleTypeFilter(type)
-    
-        
+
+
     return {prices, types, orders: order === "desc"? "desc": "asc"};
-    }
+}
 
 const handlePriceRange = (range: string) => {
     let priceRangeFilter = {};
