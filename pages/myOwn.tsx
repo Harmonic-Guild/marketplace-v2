@@ -338,7 +338,7 @@ const MyOwn = () => {
                         </Slider>
                     </div>
 
-                    <div className="pb-24 w-full mx-auto ">
+                    <div className="pb-24 w-full mx-auto px-10">
                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
                             {metaData.map((meta: MetaData) => (
                                 <NFT
