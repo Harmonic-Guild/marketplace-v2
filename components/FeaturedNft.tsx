@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Link from 'next/link';
 import Slider from "react-slick";
 import { GiStarShuriken } from "react-icons/gi";
 
@@ -124,17 +125,19 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
             </div>
             <Slider {...settings}>
                 {tokens.map((token: Token, index) => (
-                    <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
-                        <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
-                            <Image src={token.thing.metadata.media} alt="" objectFit="cover" layout="fill" />
-                            {index === slideIndex && (
-                                <div className="absolute bottom-5 text-center font-semibold w-full">
-                                    <p className="text-white">{token.thing.metadata.title}</p>
-                                    {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
-                                </div>
-                            )}
+                    <Link href={`/thing/${token.thing.id}`}>
+                        <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
+                            <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
+                                <Image src={token.thing.metadata.media} alt="" objectFit="cover" layout="fill" />
+                                {index === slideIndex && (
+                                    <div className="absolute bottom-5 text-center font-semibold w-full">
+                                        <p className="text-white">{token.thing.metadata.title}</p>
+                                        {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </Slider>
         </div>
