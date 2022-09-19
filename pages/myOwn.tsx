@@ -133,7 +133,7 @@ const NFT = ({
     };
 
     return (
-        <div className="w-full h-auto border border-mp-brown-2 rounded-2xl bg-mp-peach-2">
+        <div className="w-full h-auto border border-purple-border rounded-2xl bg-purple-bg">
             <div className="p-4">
                 {sellModal && <MintNft closeModal={() => showSellModal(false)} tokenId={tokenId} title={title} />}
                 <div>
@@ -151,7 +151,7 @@ const NFT = ({
                                     alt={title}
                                     className="object-contain mx-auto rounded-lg"
                                 />
-                                <div className="absolute bottom-2 z-10 right-2 text-yellow-500" onClick={() => toggleFullScreen(media)}>
+                                <div className="absolute bottom-2 z-10 right-2 text-primary" onClick={() => toggleFullScreen(media)}>
                                     <BsCircle className="relative h-8 w-8" />
                                     <AiOutlineExpandAlt title="full screen" className="w-4 h-4 absolute -mt-6 ml-2" />
                                 </div>
@@ -300,7 +300,7 @@ const MyOwn = () => {
                 <div className="h-screen w-screen bg-gray-900 z-50 fixed left-0 top-0 ">
                     <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
                         <Image src={image} layout="fill" objectFit="contain" />
-                        <div className="absolute bottom-2 right-8 text-yellow-500" onClick={() => setFullScreen(false)}>
+                        <div className="absolute bottom-2 right-8 text-primary" onClick={() => setFullScreen(false)}>
                             <BsCircle className="relative h-8 w-8" />
                             <AiOutlineExpandAlt title="close screen" className="w-4 h-4 absolute -mt-6 ml-2" />
                         </div>
@@ -318,20 +318,6 @@ const MyOwn = () => {
                         your tokens from this store
                     </h1>
                     <div className="pb-24 w-full mx-auto ">
-                        <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
-                            {/* {metaData.map((meta: MetaData) => (
-                                    <NFT
-                                        key={meta.id}
-                                        tokenId={meta.thing.tokens[0].id}
-                                        media={meta.media}
-                                        title={meta.title}
-                                        animation_url={meta.animation_url}
-                                        animation_type={meta.animation_type}
-                                        lists={meta.thing.tokens[0].lists}
-                                        toggle={toggle}
-                                    />
-                                ))} */}
-                        </div>
                         <Slider {...settings}>
                             {metaData.map((meta: MetaData, index: number) => (
                                 <div
@@ -345,12 +331,6 @@ const MyOwn = () => {
                                     <div className={styles["image-cont"]}>
                                         <Image src={meta.media} layout="fill" objectFit="cover" />
                                     </div>
-                                    {index === slideIndex && (
-                                        <>
-                                            <p className={styles.title}>{meta.title}</p>
-                                            {/* <p className={styles.description}>{description}</p> */}
-                                        </>
-                                    )}
                                 </div>
                             ))}
                             <div></div>
@@ -358,25 +338,22 @@ const MyOwn = () => {
                         </Slider>
                     </div>
 
-                    {/* <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 pb-4">
-                        your tokens from Other stores
-                        </h1>
-                        <div className="pb-24 w-full mx-auto ">
+                    <div className="pb-24 w-full mx-auto ">
                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
                             {metaData.map((meta: MetaData) => (
                                 <NFT
-                                key={meta.id}
-                                tokenId={meta.thing.tokens[0].id}
-                                media={meta.media}
-                                title={meta.title}
-                                animation_url={meta.animation_url}
-                                animation_type={meta.animation_type}
-                                lists={meta.thing.tokens[0].lists}
-                                toggle={toggle}
+                                    key={meta.id}
+                                    tokenId={meta.thing.tokens[0].id}
+                                    media={meta.media}
+                                    title={meta.title}
+                                    animation_url={meta.animation_url}
+                                    animation_type={meta.animation_type}
+                                    lists={meta.thing.tokens[0].lists}
+                                    toggle={toggle}
                                 />
                             ))}
                         </div>
-                        </div> */}
+                    </div>
                 </>
             )}
         </div>
