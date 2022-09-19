@@ -25,9 +25,9 @@ const FETCH_STORE = gql`
 `;
 
 const FETCH_TOKENS = gql`
-    query FetchTokensByStoreId($storeId: String!, $lt: numeric, $type: [String!], $gt: numeric, $limit: Int, $offset: Int) {
+    query FetchTokensByStoreId($storeId: String!, $lt: numeric, $type: [String!], $order: order_by!, $gt: numeric, $limit: Int, $offset: Int) {
         token(
-            order_by: { thingId: asc }
+            order_by: { thingId: $order }
             where: {
                 storeId: { _eq: $storeId }
                 burnedAt: { _is_null: true }
@@ -87,6 +87,7 @@ const explore = () => {
             lt: 0,
             gt: 0,
             type: [],
+            order: ''
         },
     });
 
@@ -117,6 +118,7 @@ const explore = () => {
                 lt: filterParams.prices.lt.toString(),
                 gt: filterParams.prices.gt.toString(),
                 type: filterParams.types,
+                order: filterParams.orders
             },
         });
         //  console.log(filterParams.prices);
@@ -137,10 +139,10 @@ const explore = () => {
     }, [tokensData]);
 
     const setFilters = (filters: any) => {
-        const { order } = filters;
-
+        
         const res = QueryFilters(filters);
-        setFilterParams({ ...res, order });
+        setFilterParams({ ...res });
+        console.log(filterParams);
     };
 
     return (
