@@ -88,6 +88,7 @@ function NFT({token}: any) {
                                 <button className='flex justify-between items-center rounded-lg gap-3 bg-gradient-to-r from-actionBtn-Yellow-1 to-actionBtn-Orange-1 px-5 py-3 font-semibold text-md'>
                                     <div className=''>
                                         {
+
                                         list? !list?.autotransfer ? 'Bid': 'Get Details' : 'N/A' 
                                         }
                                     </div> 
@@ -105,7 +106,7 @@ function NFT({token}: any) {
                                 <button className='text-yellow-500'>
                                     <BiShareAlt className='w-6 h-6 absolute ml-2 mt-2'/>
                                     <BsCircle className='w-10 h-10'/>
-                                </button>
+                                </button> 
                             </div>
                         </div>
                 </div>

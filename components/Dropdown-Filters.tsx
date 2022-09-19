@@ -42,7 +42,7 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
     return ( <>
          <div className='grid xs:w-full  lg:w-4/5 mt-4 pt-4'>
                     <div className="grid grid-cols-4 sm:grid-cols-7 gap-3 mx-3">
-                        <div className='p-2 text-mp-gray-4 col-span-1'>Sort by:</div>
+                        <div className='p-2 text-mp-gray-4 col-span-1'>Sort By</div>
                         <div className="w-full pb-2 col-span-2 ">
                             <div className={`dropdown ${pop? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setPop(!pop)}> 
                                 <p className='w-full'>{order? order.text: 'Order'}</p>
@@ -62,7 +62,7 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                         </div>
                         <div className="w-full pb-2 col-span-2">
                             <div className={`dropdown ${showType? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setShowType(!showType)}>
-                                <p className='w-full'>{type? type.text: 'Type of nft'}</p> 
+                                <p className='w-full'>{type? type.text: 'Type'}</p> 
                                 {showType? (
                                     <AiOutlineUp className="h-6 w-full py-1 px-2 text-indigo-400"/>
                                 ) : (
@@ -74,16 +74,16 @@ function DropDown({setFilters}: {setFilters: (param: any)=> void}) {
                             {!!showType && (
                                 <ul className='dropdown-content w-40 sm:w-40 md:w-48 lg:w-48 xl:w-56'>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'All', value: 'all'})}>All</li>
-                                <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'Video', value: 'video'})}>Video</li>
-                                <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'Audio', value: 'audio'})}>Audio</li>
-                                <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'GIF', value: 'gif'})}>GIF</li>
                                 <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'Image', value: 'image'})}>Image</li>
+                                <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'Audio', value: 'audio'})}>Audio</li>
+                                <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'Video', value: 'video'})}>Video</li>
+                                {/* <li className='dropdown-item' onClick={()=> handleSelection(setShowType, setType, {text: 'GIF', value: 'gif'})}>GIF</li> */}
                             </ul>
                             )}
                         </div>
                         <div className="w-full pb-2 col-span-2">
                             <div className={`dropdown ${showRange? 'bg-mp-gray-2': 'bg-white'}`} onClick={()=> setShowRange(!showRange)}>
-                                <p className='w-full'>{range? range?.text: 'Price Range'}</p>
+                                <p className='w-full'>{range? range?.text: 'Price'}</p>
                                 {showRange? (
                                     <AiOutlineUp className="h-6 w-12 py-1 px-2 text-indigo-400"/>
                                 ) : (

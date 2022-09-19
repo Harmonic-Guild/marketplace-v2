@@ -91,4 +91,3 @@ query MyQuery($storeId: String!) {
   }
 
 export default WeeklyNft;
-
