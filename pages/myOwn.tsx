@@ -53,232 +53,6 @@ const images = [
     "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
 ];
 
-const nftExamples: MetaData[] = [
-    {
-        id: "21ioikdflka",
-        media: images[0],
-        animation_url: images[0],
-        title: "Dope NFT",
-        animation_type: "image/jpeg",
-        thing_id: "one_thing",
-        thing: {
-            id: "one_thing",
-            metaId: "the_thing_id",
-            memo: "memo",
-            tokens: [
-                {
-                    id: "token1",
-                    ownerId: "babagee",
-                    lists: [
-                        {
-                            autotransfer: true,
-                            offer: {
-                                price: 4,
-                            },
-                            price: 4,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-    {
-        id: "21ioikdflka2",
-        media: images[0],
-        animation_url: images[0],
-        title: "Dope NFT",
-        animation_type: "image/jpeg",
-        thing_id: "one_thing",
-        thing: {
-            id: "one_thing",
-            metaId: "the_thing_id",
-            memo: "memo",
-            tokens: [
-                {
-                    id: "token1",
-                    ownerId: "babagee",
-                    lists: [
-                        {
-                            autotransfer: true,
-                            offer: {
-                                price: 4,
-                            },
-                            price: 4,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-    {
-        id: "21ioikdflka3",
-        media: images[0],
-        animation_url: images[0],
-        title: "Dope NFT",
-        animation_type: "image/jpeg",
-        thing_id: "one_thing",
-        thing: {
-            id: "one_thing",
-            metaId: "the_thing_id",
-            memo: "memo",
-            tokens: [
-                {
-                    id: "token1",
-                    ownerId: "babagee",
-                    lists: [
-                        {
-                            autotransfer: true,
-                            offer: {
-                                price: 4,
-                            },
-                            price: 4,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-    {
-        id: "21ioikdflka4",
-        media: images[0],
-        animation_url: images[0],
-        title: "Dope NFT",
-        animation_type: "image/jpeg",
-        thing_id: "one_thing",
-        thing: {
-            id: "one_thing",
-            metaId: "the_thing_id",
-            memo: "memo",
-            tokens: [
-                {
-                    id: "token1",
-                    ownerId: "babagee",
-                    lists: [
-                        {
-                            autotransfer: true,
-                            offer: {
-                                price: 4,
-                            },
-                            price: 4,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-    {
-        id: "21ioikdflka5",
-        media: images[0],
-        animation_url: images[0],
-        title: "Dope NFT",
-        animation_type: "image/jpeg",
-        thing_id: "one_thing",
-        thing: {
-            id: "one_thing",
-            metaId: "the_thing_id",
-            memo: "memo",
-            tokens: [
-                {
-                    id: "token1",
-                    ownerId: "babagee",
-                    lists: [
-                        {
-                            autotransfer: true,
-                            offer: {
-                                price: 4,
-                            },
-                            price: 4,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-    {
-        id: "21ioikdflka6",
-        media: images[0],
-        animation_url: images[0],
-        title: "Dope NFT",
-        animation_type: "image/jpeg",
-        thing_id: "one_thing",
-        thing: {
-            id: "one_thing",
-            metaId: "the_thing_id",
-            memo: "memo",
-            tokens: [
-                {
-                    id: "token1",
-                    ownerId: "babagee",
-                    lists: [
-                        {
-                            autotransfer: true,
-                            offer: {
-                                price: 4,
-                            },
-                            price: 4,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-    {
-        id: "21ioikdflka7",
-        media: images[0],
-        animation_url: images[0],
-        title: "Dope NFT",
-        animation_type: "image/jpeg",
-        thing_id: "one_thing",
-        thing: {
-            id: "one_thing",
-            metaId: "the_thing_id",
-            memo: "memo",
-            tokens: [
-                {
-                    id: "token1",
-                    ownerId: "babagee",
-                    lists: [
-                        {
-                            autotransfer: true,
-                            offer: {
-                                price: 4,
-                            },
-                            price: 4,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-    {
-        id: "21ioikdflka8",
-        media: images[0],
-        animation_url: images[0],
-        title: "Dope NFT",
-        animation_type: "image/jpeg",
-        thing_id: "one_thing",
-        thing: {
-            id: "one_thing",
-            metaId: "the_thing_id",
-            memo: "memo",
-            tokens: [
-                {
-                    id: "token1",
-                    ownerId: "babagee",
-                    lists: [
-                        {
-                            autotransfer: true,
-                            offer: {
-                                price: 4,
-                            },
-                            price: 4,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-];
 
 // const FETCH_Others = gql`
 // query FetchTokensByStoreId($ownerId: String!, $storeId: String!, $limit: Int, $offset: Int) {
@@ -310,7 +84,6 @@ const NFT = ({
     title,
     animation_url,
     animation_type,
-    lists,
 }: {
     toggle: any;
     tokenId: string;
@@ -318,7 +91,6 @@ const NFT = ({
     title: string;
     animation_url: string;
     animation_type: string;
-    lists: any;
 }) => {
     const [sellModal, showSellModal] = useState(false);
 
@@ -335,25 +107,21 @@ const NFT = ({
                     animation_type === "image/jpeg" ||
                     animation_type === "image/png" ||
                     animation_type === "image/gif" ? (
-                        <div className="object-contain mx-auto rounded">
-                            <div className="object-contain mx-auto rounded-lg relative">
-                                <Image
-                                    height={500}
-                                    width={500}
-                                    objectFit="cover"
-                                    src={media}
-                                    alt={title}
-                                    className="object-contain mx-auto rounded-lg"
-                                />
-                                <div className="absolute bottom-2 z-10 right-2 text-primary" onClick={() => toggleFullScreen(media)}>
-                                    <BsCircle className="relative h-8 w-8" />
-                                    <AiOutlineExpandAlt title="full screen" className="w-4 h-4 absolute -mt-6 ml-2" />
-                                </div>
+                        <div className="relative mx-auto rounded-lg overflow-hidden w-full aspect-square">
+                            <Image
+                                src={media}
+                                layout='fill'
+                                objectFit="cover"
+                                alt={title}
+                            />
+                            <div className="absolute bottom-2 z-10 right-2 text-primary" onClick={() => toggleFullScreen(media)}>
+                                <BsCircle className="relative h-8 w-8" />
+                                <AiOutlineExpandAlt title="full screen" className="w-4 h-4 absolute -mt-6 ml-2" />
                             </div>
                         </div>
                     ) : (
-                        <div className="lg:h-80 h-64 mx-auto flex items-center">
-                            <video poster={media} controls className="object-contain mx-auto rounded-lg" controlsList="nodownload" loop muted>
+                        <div className="w-full aspect-square rounded-lg overflow-hidden mx-auto flex items-center">
+                            <video poster={media} controls controlsList="nodownload" loop muted>
                                 <source src={animation_url}></source>
                             </video>
                         </div>
@@ -408,49 +176,6 @@ const MyOwn = () => {
     const [metaData, setMetaData] = useState<any>([]);
     const [fullScreen, setFullScreen] = useState(false);
     const [image, setImage] = useState<any>(null);
-    const [slideIndex, setSlideIndex] = useState(0);
-
-    const settings: Settings = {
-        dots: false,
-        arrows: false,
-        // className: "center",
-        infinite: false,
-        centerPadding: "8px",
-        centerMode: true,
-        slidesToShow: 3,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        pauseOnHover: true,
-        slidesToScroll: 1,
-        initialSlide: 0,
-        beforeChange: (current: any, next: any) => setSlideIndex(next),
-        // nextArrow: <SampleNextArrow/>,
-        // prevArrow: <SamplePrevArrow/>,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                },
-            },
-            {
-                breakpoint: 800,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    initialSlide: 3,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-        ],
-    };
 
     const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery(FETCH_TOKENS, {
         variables: {
@@ -461,15 +186,13 @@ const MyOwn = () => {
         },
     });
 
-    console.log(slideIndex);
-
     useEffect(() => {
         getTokens({
             variables: {
-                ownerId: "jass.near",
+                ownerId: wallet?.activeAccount?.accountId!,
                 limit: 20,
                 offset: 0,
-                storeId: "mintingmusic.mintbase1.near",
+                storeId: process.env.NEXT_PUBLIC_STORE_NAME!,
             },
         });
     }, [wallet?.activeAccount?.accountId]);
@@ -508,29 +231,8 @@ const MyOwn = () => {
             ) : (
                 <>
                     <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8">
-                        {/* {wallet?.activeAccount?.accountId}  */}
                         your tokens from this store
                     </h1>
-                    <div className="pb-24 w-full mx-auto ">
-                        <Slider {...settings}>
-                            {metaData.map((meta: MetaData, index: number) => (
-                                <div
-                                    className={`${styles.nft} ${
-                                        index === slideIndex ? "slide:active" : index < slideIndex ? "slide lower" : "slide higher"
-                                    }
-                                            ${index == metaData.length - 1 ? styles.last : ""}
-                                        `}
-                                    key={image}
-                                >
-                                    <div className={styles["image-cont"]}>
-                                        <Image src={meta.media} layout="fill" objectFit="cover" />
-                                    </div>
-                                </div>
-                            ))}
-                            <div></div>
-                            <div></div>
-                        </Slider>
-                    </div>
 
                     <div className="pb-24 w-full mx-auto px-10">
                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
@@ -542,7 +244,6 @@ const MyOwn = () => {
                                     title={meta.title}
                                     animation_url={meta.animation_url}
                                     animation_type={meta.animation_type}
-                                    lists={meta.thing.tokens[0].lists}
                                     toggle={toggle}
                                 />
                             ))}
