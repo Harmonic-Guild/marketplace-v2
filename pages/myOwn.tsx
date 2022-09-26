@@ -53,36 +53,230 @@ const images = [
     "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
 ];
 
-const nftExamples = [
+const nftExamples: MetaData[] = [
     {
-        image: images[0],
+        id: "21ioikdflka",
+        media: images[0],
+        animation_url: images[0],
         title: "Dope NFT",
-        description: "Lorem ipsum dolor sit amet,  adipiscing elit. Aliquam lobortis feugiat purus varius magnis purus quam.",
+        animation_type: "image/jpeg",
+        thing_id: "one_thing",
+        thing: {
+            id: "one_thing",
+            metaId: "the_thing_id",
+            memo: "memo",
+            tokens: [
+                {
+                    id: "token1",
+                    ownerId: "babagee",
+                    lists: [
+                        {
+                            autotransfer: true,
+                            offer: {
+                                price: 4,
+                            },
+                            price: 4,
+                        },
+                    ],
+                },
+            ],
+        },
     },
     {
-        image: images[1],
-        title: "Classic NFT",
-        description: "Lorem ipsum dolor sit amet,  adipiscing elit. Aliquam lobortis feugiat purus varius magnis purus quam.",
-    },
-    {
-        image: images[2],
-        title: "Magestic NFT",
-        description: "Lorem ipsum dolor sit amet,  adipiscing elit. Aliquam lobortis feugiat purus varius magnis purus quam.",
-    },
-    {
-        image: images[0],
+        id: "21ioikdflka2",
+        media: images[0],
+        animation_url: images[0],
         title: "Dope NFT",
-        description: "Lorem ipsum dolor sit amet,  adipiscing elit. Aliquam lobortis feugiat purus varius magnis purus quam.",
+        animation_type: "image/jpeg",
+        thing_id: "one_thing",
+        thing: {
+            id: "one_thing",
+            metaId: "the_thing_id",
+            memo: "memo",
+            tokens: [
+                {
+                    id: "token1",
+                    ownerId: "babagee",
+                    lists: [
+                        {
+                            autotransfer: true,
+                            offer: {
+                                price: 4,
+                            },
+                            price: 4,
+                        },
+                    ],
+                },
+            ],
+        },
     },
     {
-        image: images[1],
-        title: "Classic NFT",
-        description: "Lorem ipsum dolor sit amet,  adipiscing elit. Aliquam lobortis feugiat purus varius magnis purus quam.",
+        id: "21ioikdflka3",
+        media: images[0],
+        animation_url: images[0],
+        title: "Dope NFT",
+        animation_type: "image/jpeg",
+        thing_id: "one_thing",
+        thing: {
+            id: "one_thing",
+            metaId: "the_thing_id",
+            memo: "memo",
+            tokens: [
+                {
+                    id: "token1",
+                    ownerId: "babagee",
+                    lists: [
+                        {
+                            autotransfer: true,
+                            offer: {
+                                price: 4,
+                            },
+                            price: 4,
+                        },
+                    ],
+                },
+            ],
+        },
     },
     {
-        image: images[2],
-        title: "Magestic NFT",
-        description: "Lorem ipsum dolor sit amet,  adipiscing elit. Aliquam lobortis feugiat purus varius magnis purus quam.",
+        id: "21ioikdflka4",
+        media: images[0],
+        animation_url: images[0],
+        title: "Dope NFT",
+        animation_type: "image/jpeg",
+        thing_id: "one_thing",
+        thing: {
+            id: "one_thing",
+            metaId: "the_thing_id",
+            memo: "memo",
+            tokens: [
+                {
+                    id: "token1",
+                    ownerId: "babagee",
+                    lists: [
+                        {
+                            autotransfer: true,
+                            offer: {
+                                price: 4,
+                            },
+                            price: 4,
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        id: "21ioikdflka5",
+        media: images[0],
+        animation_url: images[0],
+        title: "Dope NFT",
+        animation_type: "image/jpeg",
+        thing_id: "one_thing",
+        thing: {
+            id: "one_thing",
+            metaId: "the_thing_id",
+            memo: "memo",
+            tokens: [
+                {
+                    id: "token1",
+                    ownerId: "babagee",
+                    lists: [
+                        {
+                            autotransfer: true,
+                            offer: {
+                                price: 4,
+                            },
+                            price: 4,
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        id: "21ioikdflka6",
+        media: images[0],
+        animation_url: images[0],
+        title: "Dope NFT",
+        animation_type: "image/jpeg",
+        thing_id: "one_thing",
+        thing: {
+            id: "one_thing",
+            metaId: "the_thing_id",
+            memo: "memo",
+            tokens: [
+                {
+                    id: "token1",
+                    ownerId: "babagee",
+                    lists: [
+                        {
+                            autotransfer: true,
+                            offer: {
+                                price: 4,
+                            },
+                            price: 4,
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        id: "21ioikdflka7",
+        media: images[0],
+        animation_url: images[0],
+        title: "Dope NFT",
+        animation_type: "image/jpeg",
+        thing_id: "one_thing",
+        thing: {
+            id: "one_thing",
+            metaId: "the_thing_id",
+            memo: "memo",
+            tokens: [
+                {
+                    id: "token1",
+                    ownerId: "babagee",
+                    lists: [
+                        {
+                            autotransfer: true,
+                            offer: {
+                                price: 4,
+                            },
+                            price: 4,
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        id: "21ioikdflka8",
+        media: images[0],
+        animation_url: images[0],
+        title: "Dope NFT",
+        animation_type: "image/jpeg",
+        thing_id: "one_thing",
+        thing: {
+            id: "one_thing",
+            metaId: "the_thing_id",
+            memo: "memo",
+            tokens: [
+                {
+                    id: "token1",
+                    ownerId: "babagee",
+                    lists: [
+                        {
+                            autotransfer: true,
+                            offer: {
+                                price: 4,
+                            },
+                            price: 4,
+                        },
+                    ],
+                },
+            ],
+        },
     },
 ];
 
@@ -272,10 +466,10 @@ const MyOwn = () => {
     useEffect(() => {
         getTokens({
             variables: {
-                ownerId: wallet?.activeAccount?.accountId!,
+                ownerId: "jass.near",
                 limit: 20,
                 offset: 0,
-                storeId: process.env.NEXT_PUBLIC_STORE_NAME!,
+                storeId: "mintingmusic.mintbase1.near",
             },
         });
     }, [wallet?.activeAccount?.accountId]);
