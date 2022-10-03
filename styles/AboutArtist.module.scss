@@ -98,7 +98,7 @@
                     }
 
                     .mini-text {
-                        @apply text-xs lg:text-[.9rem];
+                        @apply lg:text-[.9rem] text-xs;
                     }
                 }
 
@@ -112,7 +112,7 @@
                             @apply text-center;
 
                             &-name {
-                                @apply text-xs text-[#AAB8C2];
+                                @apply text-[#AAB8C2] text-xs;
                             }
 
                             .near-logo {

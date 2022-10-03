@@ -77,7 +77,7 @@
                     @apply flex justify-between border border-indigo-900 opacity-70 text-base xs:text-sm font-normal rounded-lg px-4 py-2;
 
                     span {
-                        @apply mb-[1px];
+                        margin-bottom: 1px;
                     }
                 }
             }
