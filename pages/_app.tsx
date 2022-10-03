@@ -5,9 +5,10 @@ import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
 import { WalletProvider } from "../services/providers/MintbaseWalletContext";
 import { useApollo } from "../services/apolloClient";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import * as Fathom from "fathom-client";
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import * as Fathom from 'fathom-client';
+import { Network } from 'mintbase'
 
 const Header = dynamic(() => import("../components/Header"));
 const Footer = dynamic(() => import("../components/Footer"));
@@ -49,7 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <title>MarketPlace</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <WalletProvider apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""}>
+            <WalletProvider apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""} network={Network[process.env.NEXT_PUBLIC_NETWORK as keyof typeof Network]}>
                 <ApolloProvider client={apolloClient}>
                     <Header />
                     <Component {...pageProps} />
