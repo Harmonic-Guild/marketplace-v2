@@ -4,6 +4,8 @@ import Near from "../icons/near.svg";
 import NotConnected from "./NotConnected";
 import { formatNearAmount } from "near-api-js/lib/utils/format";
 
+import styles from '../styles/MakeOffer.module.scss';
+
 const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
     const [showModal, setShowModal] = useState(false);
     const [bid, setBid] = useState("0");
@@ -14,7 +16,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
     };
 
     return (
-        <div className="border border-purple-border border-solid bg-purple-bg rounded-lg px-6 py-6 mt-8 flex flex-col lg:flex-row justify-between lg:gap-10">
+        <div className={styles.container}>
             <div className="flex flex-col justify-center items-center w-full lg:w-1/2">
                 <div className="flex items-center gap-2">
                     {/* <img
@@ -74,8 +76,8 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                 </div>
             </div>
             {showModal ? (
-                <div className="h-screen w-screen glass-morphism fixed top-0 left-0 z-40">
-                    <div className="align-middle mx-auto md:w-2/5 w-5/6 relative top-80 lg:top-52 rounded-xl p-8 bg-white">
+                <div className={`${styles['modal-cont']} glass-morphism`}>
+                    <div className={`mx-auto w-4/5 relative top-80 lg:top-52 rounded-xl bg-white ${styles['inner-cont']}`}>
                         <div className="flex w-full justify-between">
                             <p className="text-xl font-bold">Buster character color</p>
                             <span
@@ -85,14 +87,14 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                                 <AiOutlineClose />
                             </span>
                         </div>
-                        <div className="flex font-bold justify-between w-full lg:w-3/5">
+                        <div className="flex font-bold justify-between w-full lg:w-3/5 my-4">
                             <div className="bg-gray-900 text-white rounded-md px-2 py-1">16:12:56 hrs</div>
                             <span className="lg:text-sm text-lg">Time remaining</span>
                         </div>
-                        <div className="my-2 flex justify-between w-full lg:w-3/5 border border-gray-400 rounded-lg">
-                            <input type="number" className="w-full outline-none" value={bid} onChange={handleChange} />
+                        <div className="flex my-4 justify-between w-full lg:w-3/5 border border-gray-400 rounded-lg">
+                            <input type="number" className="w-full outline-none" min={0} value={bid} onChange={handleChange} />
                             <span className="border-l border-gray-400 p-2">
-                                <Near className="w-4 h-4" />
+                                <Near className="w-4 h-4" fill='black' />
                             </span>
                         </div>
 

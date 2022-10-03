@@ -45,7 +45,7 @@ const Header = () => {
 
     return (
         <header className={styles.header} id="nav">
-            <div className="w-full max-w-7xl flex mt-1 mx-auto justify-between items-center">
+            <div className={styles['inner-nav-cont']}>
                 <Link href="/" passHref>
                     <a className="py-6 relative w-24 lg:w-40 h-20 inline-block">
                         <Image src={logo.src} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
