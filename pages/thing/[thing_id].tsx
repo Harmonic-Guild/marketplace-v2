@@ -153,9 +153,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         const token_Id = things?.tokens[0]?.id!;
 
         if (things?.tokens[0]?.lists[0]?.autotransfer) {
-            wallet?.makeOffer(token_Id, tokenPrice);
+            wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress } );
         } else {
-            wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString());
+            wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress: process.env.NEXT_PUBLIC_marketAddress });
         }
     };
     // console.log(wallet);
