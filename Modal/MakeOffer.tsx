@@ -45,22 +45,13 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
 
             {/* <span className="border-b border-mp-brown-1 lg:hidden flex py-2 "></span> */}
             <div className="flex flex-col flex-grow w-full lg:w-1/2">
-                <div>
-                    {isConnected ? (
-                        <button
-                            onClick={() => setShowModal(true)}
-                            className={`tracking-wider text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 btnColor`}
-                        >
-                            Make an offer
-                        </button>
-                    ) : (
-                        <button
-                            onClick={() => setShowNotConnectedModal(true)}
-                            className={`tracking-wider text-lg py-2 rounded-md font-bold text-gray-900 w-full sm:px-20 px-5 border border-mp-brown-1 cursor-not-allowed`}
-                        >
-                            Make an offer
-                        </button>
-                    )}
+                <div className={styles['button-cont']}>
+                    <button
+                        onClick={() => isConnected ? setShowModal(true) : setShowNotConnectedModal(true)}
+                        className={isConnected ? styles['connected-btn'] : styles['not-connected-btn']}
+                    >
+                        Make an offer
+                    </button>
                 </div>
 
                 <div className="text-center flex flex-col lg:flex-row justify-center items-center mt-3">
@@ -76,8 +67,8 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                 </div>
             </div>
             {showModal ? (
-                <div className={`${styles['modal-cont']} glass-morphism`}>
-                    <div className={`mx-auto w-4/5 relative top-80 lg:top-52 rounded-xl bg-white ${styles['inner-cont']}`}>
+                <div className={`${styles["modal-cont"]} glass-morphism`}>
+                    <div className={`mx-auto w-4/5 relative top-80 lg:top-52 rounded-xl bg-white ${styles["inner-cont"]}`}>
                         <div className="flex w-full justify-between">
                             <p className="text-xl font-bold">Buster character color</p>
                             <span
@@ -94,7 +85,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                         <div className="flex my-4 justify-between w-full lg:w-3/5 border border-gray-400 rounded-lg">
                             <input type="number" className="w-full outline-none" min={0} value={bid} onChange={handleChange} />
                             <span className="border-l border-gray-400 p-2">
-                                <Near className="w-4 h-4" fill='black' />
+                                <Near className="w-4 h-4" fill="black" />
                             </span>
                         </div>
 
