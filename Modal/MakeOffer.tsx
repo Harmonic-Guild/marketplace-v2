@@ -33,7 +33,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                     <div className="font-bold text-xl flex items-center gap-2">
                         {latestBid ? (
                             <div className="flex items-center gap-1">
-                                {latestBid}
+                                {formatNearAmount(Number(latestBid || 0).toLocaleString("fullwide", { useGrouping: false }), 5)}
                                 <Near className="w-4 h-4" fill="black" />
                             </div>
                         ) : (
@@ -45,10 +45,10 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
 
             {/* <span className="border-b border-mp-brown-1 lg:hidden flex py-2 "></span> */}
             <div className="flex flex-col flex-grow w-full lg:w-1/2">
-                <div className={styles['button-cont']}>
+                <div className={styles["button-cont"]}>
                     <button
-                        onClick={() => isConnected ? setShowModal(true) : setShowNotConnectedModal(true)}
-                        className={isConnected ? styles['connected-btn'] : styles['not-connected-btn']}
+                        onClick={() => (isConnected ? setShowModal(true) : setShowNotConnectedModal(true))}
+                        className={isConnected ? styles["connected-btn"] : styles["not-connected-btn"]}
                     >
                         Make an offer
                     </button>
