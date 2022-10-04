@@ -339,7 +339,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         isConnected={isConnected}
                                         latestBid={tokens[0]?.lists[0]?.offer?.price}
                                         bidder={tokens[0]?.lists[0]?.offer?.from}
-                                        owner={tokens[0]?.ownerId}
+                                        owner={things?.store.name}
                                     />
                                 )}
                             </div>

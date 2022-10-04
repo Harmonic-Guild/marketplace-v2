@@ -6,11 +6,11 @@
     .button-cont {
         .connected-btn {
             @include buttonColor;
-            @apply tracking-wider text-lg py-2 rounded-md font-bold text-white w-full sm:px-20 px-5;
+            @apply tracking-wider text-lg py-2 rounded-md font-bold text-white w-full;
         }
 
         .not-connected-btn {
-            @apply tracking-wider text-lg py-2 rounded-md font-bold text-gray-500 w-full sm:px-20 px-5 border border-gray-300 bg-gray-300 cursor-not-allowed;
+            @apply tracking-wider text-lg py-2 rounded-md font-bold text-gray-500 w-full border border-gray-300 bg-gray-300 cursor-not-allowed;
         }
     }
 
