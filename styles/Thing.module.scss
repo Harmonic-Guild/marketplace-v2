@@ -1,0 +1,57 @@
+@import "./variables";
+
+.container {
+    @apply mx-auto mt-10 text-gray-700;
+
+    .enlarged {
+        @apply fixed w-full h-screen bg-black bg-opacity-80 z-30 top-0 left-0 flex flex-col justify-center items-center;
+
+        .cancel-cont {
+            @apply absolute right-4 top-4 cursor-pointer;
+        }
+
+        .image-cont {
+            @apply relative max-w-3xl w-4/5 aspect-square;
+        }
+    }
+
+    .history-cont {
+        @apply bg-purple-bg p-4 rounded-xl w-full lg:min-w-[20rem] mt-8 lg:mt-0;
+
+        .inner-cont {
+            @apply max-h-40 overflow-y-auto pr-2;
+
+            &::-webkit-scrollbar {
+                @apply w-1 m-2;
+            }
+
+            &::-webkit-scrollbar-track {
+                @apply bg-transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                @apply bg-primary rounded-lg border-none;
+            }
+        }
+
+        .header {
+            @apply text-2xl font-bold flex items-center gap-2;
+        }
+
+        .info-cont {
+            @apply flex items-center gap-2 my-2;
+
+            .image-cont {
+                @apply relative w-6 h-6 rounded-full overflow-hidden;
+            }
+        }
+
+        .col-name {
+            @apply flex justify-between items-center border-b border-purple-border border-solid p-1;
+
+            p {
+                @apply font-semibold;
+            }
+        }
+    }
+}

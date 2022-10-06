@@ -3,13 +3,13 @@ import {parseNearAmount} from 'near-api-js/lib/utils/format'
 function QueryFilters(filters: {range: string, type: string, order: string}) {
     
     const {range, type, order} = filters;
-
+    
     const prices = handlePriceRange(range)
     const types =  handleTypeFilter(type)
-    
-        
+
+
     return {prices, types, orders: order === "desc"? "desc": "asc"};
-    }
+}
 
 const handlePriceRange = (range: string) => {
     let priceRangeFilter = {};
@@ -61,7 +61,7 @@ const handleTypeFilter = (type:string)=> {
 
             break;
         default: 
-            typeFilter= ["video/mp4", "video/ogg", "audio/mpeg", "audio/mp3", "audio/ogg", "image/gif", "image/jpeg", "image/png", "image/gif"];
+            typeFilter= ["video/mp4", "video/ogg", "audio/mpeg", "audio/mp3", "audio/ogg", "image/gif", "image/jpeg", "image/png", "image/gif", "text/html; charset=utf-8",];
     }
 
     return typeFilter;  

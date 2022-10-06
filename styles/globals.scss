@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-behavior: smooth;
+}
+@layer utilities {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.screenTest {
+    @apply xl:bg-yellow-300 lg:bg-green-300 md:bg-purple-300 sm:bg-red-800 xs:bg-pink-300;
+}
+.btnColor {
+    @apply text-white;
+    background: linear-gradient(to right, rgba(81, 116, 166, 1), rgba(35, 50, 71, 1));
+}
+
+.btnColor svg {
+    @apply text-white;
+}
+
+.glass-morphism {
+    background: rgba(99, 96, 96, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+.nft_height {
+    height: fit-content;
+}
+
+body {
+    @apply bg-mp-peach-1 outline-none;
+}
+
+.dropdown {
+    @apply p-2 mx-auto rounded-md border w-full text-mp-dark-1 flex justify-between items-center text-sm font-semibold cursor-pointer select-none;
+}
+.dropdown-content {
+    @apply border mt-1 p-2 rounded bg-white z-10 absolute;
+}
+.dropdown-item {
+    @apply font-light my-2 px-2 hover:bg-mp-gray-2 cursor-pointer select-none md:w-full;
+}
+button {
+    @apply outline-none;
+}
+.chip {
+    @apply flex px-3 py-1 border-2 rounded-full my-2 mx-1 cursor-pointer font-light;
+}
+.timer {
+    @apply absolute text-white rounded-md px-2 py-1 -top-3 left-5;
+    background: rgba(15, 15, 28, 0.7);
+    backdrop-filter: blur(4px);
+}
+.artist {
+    @apply flex py-2 justify-between font-semibold text-mp-gray-5 hover:text-mp-gray-7 cursor-pointer;
+}
+.action-btn {
+    background: radial-gradient(62.1% 62.79% at 32.81% 20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%),
+        linear-gradient(84.42deg, #ffd12f 0%, #ffb038 100%);
+    @apply px-5 pt-3  rounded-full font-semibold -ml-2;
+}
+
+.slick-arrow.slick-next {
+    @apply rounded-full bg-primary p-3  -right-10 opacity-100 md:opacity-100;
+}
+.slick-arrow.slick-prev {
+    width: 20px;
+    height: 20px;
+    @apply rounded-full bg-primary p-3  -left-10 opacity-100 md:opacity-100;
+}
+
+.slick-arrow {
+    &.slick-prev,
+    &.slick-next {
+        background: radial-gradient(50% 50% at 50% 50%, #5174a6 0%, rgba(254, 254, 254, 0) 100%);
+    }
+
+    &::before {
+        @apply w-full h-full rounded-full absolute top-[3px] left-0;
+    }
+}
+
+.slick-slider {
+    .slick-list {
+        @apply overflow-hidden;
+    }
+}
+.slide {
+    transform: scale(0.7);
+    transition: 0.5s;
+
+    @screen md {
+        &.lower {
+            perspective: 10vw;
+
+            & > div {
+                transform: rotateY(-10deg);
+            }
+        }
+
+        &.higher {
+            perspective: 10vw;
+
+            & > div {
+                transform: rotateY(10deg);
+            }
+        }
+    }
+}
+.slide.active {
+    filter: blur(0);
+    opacity: 1;
+    transform: scale(1.1);
+    /* color: red; */
+}
+
+.slick-dots {
+    li {
+        button {
+            @apply bg-[#9E94DA] rounded-full w-3 h-3 transition-all duration-150 ease-in-out;
+
+            &::before {
+                @apply text-transparent;
+            }
+        }
+
+        &.slick-active {
+            button {
+                @apply bg-[#6E61BF] w-6;
+                transform: translateX(-7px);
+
+                &::before {
+                    @apply text-transparent;
+                }
+            }
+        }
+    }
+}

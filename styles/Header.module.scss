@@ -1,0 +1,105 @@
+@import "./variables";
+
+.header {
+    @apply w-full px-6 text-gray-700;
+    
+    .inner-nav-cont {
+        @apply w-full max-w-[100rem] flex mt-1 mx-auto justify-between items-center;
+    }
+
+    .mobile-nav-cont {
+        @apply flex lg:hidden cursor-pointer;
+
+        .mobile-nav {
+            @apply flex gap-4;
+
+            button {
+                @apply rounded-md font-semibold p-2 px-4 flex;
+            }
+
+            .connect-btn {
+                @include buttonColor;
+            }
+
+            .menu-btn {
+                @apply bg-black;
+            }
+        }
+
+        .nav-content {
+            @apply bg-[#F8F5FF] text-gray-900 absolute top-0 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-20 h-screen w-4/5 z-10;
+
+            .connection-cont {
+                @apply border border-solid border-purple-border bg-purple-bg rounded-lg p-4;
+
+                .info-cont {
+                    @apply flex items-center gap-4;
+
+                    .avatar {
+                        @apply relative w-16 h-16 overflow-hidden rounded-full;
+                    }
+
+                    .big-text {
+                        @apply font-semibold text-lg;
+                    }
+
+                    .address {
+                        @apply font-normal text-sm text-gray-400;
+                    }
+                }
+
+                p {
+                    @apply m-0;
+                }
+            }
+
+            .nav-link {
+                @apply my-5 border-b-2 border-solid w-fit;
+            }
+
+            .nav-bottom {
+                @apply absolute bottom-0 mb-20 w-full;
+
+                .inner-cont {
+                    @apply flex items-center justify-between w-4/5 border-t border-solid border-gray-300 pt-4;
+                }
+
+                .toggle-light-dark {
+                    @apply w-20 h-10 bg-gray-400 rounded-full bg-cover bg-no-repeat bg-center;
+                    background-image: url("../assets/light-mode.png");
+
+                    .ball {
+                        @apply w-8 h-8 m-1 rounded-full bg-white transition-all duration-200 ease-in-out;
+
+                        &.active {
+                            translate: 2.5rem 0;
+                        }
+                    }
+                }
+
+                .update-cont {
+                    @apply flex justify-between border border-indigo-900 opacity-70 text-base xs:text-sm font-normal rounded-lg px-4 py-2;
+
+                    span {
+                        margin-bottom: 1px;
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-cont {
+        @apply mt-2 flex justify-end mx-4 text-lg font-bold w-full;
+
+        .nav-item {
+            @apply cursor-pointer border-b-2 hover:border-black mx-6 whitespace-nowrap;
+        }
+    }
+
+    .button-cont {
+        button {
+            @include buttonColor;
+            @apply rounded-full font-semibold p-2 px-4 flex;
+        }
+    }
+}
