@@ -6,6 +6,7 @@ import DropDown from '../components/Dropdown-Filters'
 import NFT from '../components/NFT'
 import { Store } from '../interfaces/wallet.interface';
 import QueryFilters from '../helpers/getQuery';
+import { fetchTokens } from '../gql/FetchTokens'
 import { GiStarShuriken } from 'react-icons/gi';
 
 
