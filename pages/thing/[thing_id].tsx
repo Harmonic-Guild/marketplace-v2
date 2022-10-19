@@ -20,7 +20,8 @@ const FETCH_TOKENS = gql`
 query MyQuery($thing_id: String!) {
   thing(where: {id: {_eq: $thing_id}}) {
     id
-    tokens(distinct_on: id, where: {list: {removedAt: {_is_null: true}}}) {
+    tokens(distinct_on: id, where: {burnedAt: { _is_null: true }}
+       ) {
       id
       lists(order_by: {createdAt: desc}, limit: 1) {
         price
