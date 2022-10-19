@@ -17,11 +17,12 @@ function NFT({token}: any) {
                 {/* purpose of w full and nft height? */}
                 <div className="">
                     
-                        {(thing.metadata.animation_type !== null && thing.metadata.animation_type !== 'image/jpeg' && thing.metadata.animation_type !== 'image/png'&& thing.metadata.animation_type !== 'image/gif' ) ? (
+                        {!thing.metadata? (<p>NFT Has no Metadata</p>) :
+                        //  (thing.metadata.animation_type !== null || thing.metadata.animation_type !== 'image/jpeg' || thing.metadata.animation_type !== 'image/png' || thing.metadata.animation_type !== 'image/gif' ) ? (
                             // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
                             //     <source src={metadata.animation_url} ></source>
                             // </video>
-                            <div className="object-contain mx-auto rounded-lg relative">
+                            (<div className="object-contain mx-auto rounded-lg relative">
                                 <Image
                                 className='object-contain mx-auto rounded-lg'
                                 // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
@@ -32,20 +33,21 @@ function NFT({token}: any) {
                                 alt={'alt'} />
                                 
                                 <div style={{top:'40%', left:'45%'}} className='absolute text-white cursor-pointer'><BsPlayCircle className='w-10 h-10'/></div>
-                            </div>
-                        ) : (
-                            <div className="object-contain mx-auto">
-                                <Image
-                                className='object-contain mx-auto rounded-lg'
-                                // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
-                                height={500}
-                                width={500}
-                                objectFit="cover"
-                                src={thing.metadata.media}
-                                alt={'alt'} 
-                                />
-                            </div>
-                        )}
+                            </div>)
+                        // ) : (
+                        //     <div className="object-contain mx-auto">
+                        //         <Image
+                        //         className='object-contain mx-auto rounded-lg'
+                        //         // src="https://coldcdn.com/api/cdn/bronil/HM9kQpGaqbzqugnArmkC0Dej5U5yKYT4RPvw6r1SELQ"//{media}
+                        //         height={500}
+                        //         width={500}
+                        //         objectFit="cover"
+                        //         src={thing.metadata.media}
+                        //         alt={'alt'} 
+                        //         />
+                        //     </div>
+                        // )
+                        }
                         <div className="text-sm py-2 text-mp-dark-3 relative">
                             {list?.autoTransfer && <div className="timer sm:flex hidden">timeout :{new Date(list?.offer?.timeout).toLocaleDateString()}
                             </div>}
@@ -54,7 +56,7 @@ function NFT({token}: any) {
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div> */}
-                            <div className="font-bold mt-4 mb-1 text-xl">{thing.metadata.title}</div>
+                            <div className="font-bold mt-4 mb-1 text-xl">{thing?.metadata?.title}</div>
                             <div>
                                 
                                 <div className='flex gap-2 items-center text-lg'>
