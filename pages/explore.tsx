@@ -24,29 +24,19 @@ const FETCH_STORE = gql`
 `
 
 const FETCH_TOKENS = gql`
-  query FetchTokensByStoreId($storeId: String!, $lt: numeric, $type:[String!], $gt: numeric, $limit: Int, $offset: Int) {
-    token(
-      order_by: { thingId: asc }
-      where: {
-         storeId: { _eq: $storeId },
-          burnedAt: { _is_null: true },
-          list: {_or: {
-             price: {_gte: $gt, _lte: $lt},
-             removedAt: {_is_null: true}
-          }},
-          thing: {
-            metadata: {
-              animation_type: {
-               _in: $type
-              }
-            }
-          }
-        }
-      limit: $limit
-      offset: $offset
-      distinct_on: thingId
-    ) {
+  query FetchStore($storeId: String!, $limit: Int = 20, $offset: Int = 0) {
+    store(where: { id: { _eq: $storeId } }) {
       id
+      baseUri
+      owner
+      tokens(
+        order_by: { thingId: asc }
+        where: { storeId: { _eq: $storeId }, burnedAt: { _is_null: true } }
+        limit: $limit
+        offset: $offset
+        distinct_on: thingId
+      ) {
+        id
       lists(
         order_by: {createdAt: desc}, limit: 1
       ){
@@ -69,6 +59,7 @@ const FETCH_TOKENS = gql`
           animation_url
           animation_type
         }
+      }
       }
     }
   }
@@ -95,11 +86,11 @@ const explore = () => {
      useLazyQuery(FETCH_TOKENS, {
        variables: {
          storeId: '',
-         limit: 15,
+         limit: 18,
          offset: 0,
-         lt: 0,
-         gt: 0,
-         type: []
+        //  lt: 0,
+        //  gt: 0,
+        //  type: []
        },
      })
  
@@ -128,9 +119,9 @@ const explore = () => {
          storeId: storeName,
          limit: 15,
          offset: 0,
-         lt: filterParams.prices.lt.toString(),
-         gt: filterParams.prices.gt.toString(),
-         type: filterParams.types
+      //    lt: filterParams.prices.lt.toString(),
+      //    gt: filterParams.prices.gt.toString(),
+      //    type: filterParams.types
        },
      })
     //  console.log(filterParams.prices);
@@ -144,8 +135,8 @@ const explore = () => {
     //  const things = tokensData.token.map((token: any) => token.thing)
  
     //  setThings(things)
- 
-     const tokens = tokensData.token.map((token: any)=> {
+    
+     const tokens = tokensData.store[0].tokens.map((token: any)=> {
        return token
      }) 
  
@@ -168,7 +159,7 @@ const explore = () => {
             <h2 className='text-mp-dark-2 text-4xl font-bold'>Explore</h2>
         </div>
         <div>
-            <DropDown setFilters={setFilters}/>  
+            {/* <DropDown setFilters={setFilters}/>   */}
         </div>    
         <div className='xl:flex block justify-around'>
             {/* <div className=' order-last pt-4'>
