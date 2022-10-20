@@ -2,24 +2,26 @@ import React, { useState } from 'react'
 import Connect_Line from '../icons/connect_Line.svg'
 import Near from '../icons/near.svg'
 import { FiX } from 'react-icons/fi'
-import { useWallet } from '../services/providers/MintbaseWalletContext'
+import { useWallet } from '../services/providers/MintbaseWalletContext';
+
+import styles from '../styles/NotConnected.module.scss';
 
 const NotConnected = () => {   
 
-    const [cancleModal, setCancleModal] = useState(true)
+    const [cancelModal, setCancelModal] = useState(true)
     const { wallet, isConnected} = useWallet()
     
     setTimeout(() => {
-        setCancleModal(false)
+        setCancelModal(false)
     }, 5000);
 
   return (
     <div>
-        {cancleModal && 
-            <div className="h-screen w-screen glass-morphism fixed top-0 left-0 z-40">
-                <div className="align-middle mx-auto md:w-2/5 w-5/6 relative top-80 lg:top-52 rounded-xl p-8 bg-white">
+        {cancelModal && 
+            <div className={`${styles.container} glass-morphism`}>
+                <div className={`mx-auto w-4/5 relative top-80 lg:top-52 rounded-xl bg-white ${styles['inner-cont']}`}>
                     <div className='w-full text-right'>
-                        {cancleModal && <span onClick={() => setCancleModal(false) } className='absolute top-1 z-10 -ml-2 text-yellow-500 bg-gray-900 p-2 rounded-full'><FiX className='w-4 h-4'/></span>}
+                        {cancelModal && <span onClick={() => setCancelModal(false) } className='absolute top-1 z-10 -ml-2 text-yellow-500 bg-gray-900 p-2 rounded-full'><FiX className='w-4 h-4'/></span>}
                     </div>
                     <div className="text-xl font-bold">
                         To continue connect to a <span className='flex'><p>wallet</p><span className='mt-2 px-2'><Near/></span></span>

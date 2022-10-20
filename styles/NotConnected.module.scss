@@ -1,0 +1,7 @@
+.container {
+    @apply h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-center;
+
+    .inner-cont {
+        @apply max-w-md p-8;
+    }
+}

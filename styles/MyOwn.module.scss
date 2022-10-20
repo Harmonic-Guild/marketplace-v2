@@ -1,0 +1,21 @@
+@import "./variables";
+
+.container {
+    @apply bg-fixed bg-gradient-to-r from-slate-50 to-slate-100 w-full px-0 relative;
+
+    .nft {
+        @apply text-center;
+
+        .image-cont {
+            @apply w-full aspect-video relative rounded-xl overflow-hidden;
+        }
+
+        .title {
+            @apply text-3xl font-semibold mt-10;
+        }
+
+        &.last {
+            margin-right: 30vw;
+        }
+    }
+}
