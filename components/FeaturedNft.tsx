@@ -125,7 +125,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
             </div>
             <Slider {...settings}>
                 {tokens.map((token: Token, index) => (
-                    <Link href={`/thing/${token.thing.id}`}>
+                    <Link href={`/thing/${token.thing.id}`} key={token.thing.id}>
                         <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
                             <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
                                 <Image src={token.thing.metadata.media} alt="" objectFit="cover" layout="fill" />
