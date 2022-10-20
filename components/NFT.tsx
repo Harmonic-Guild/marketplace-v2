@@ -6,7 +6,7 @@ import Image from "next/image";
 import { AiOutlineRight } from "react-icons/ai";
 import { BiShareAlt } from "react-icons/bi";
 import { BsCircle, BsPlayCircle } from "react-icons/bs";
-import { Token } from "../constants/interfaces";
+import { Token, MetaData } from '../constants/interfaces';
 
 import styles from "../styles/NFT.module.scss";
 
@@ -23,10 +23,10 @@ const NFT: FC<Props> = ({ token }) => {
         <Link href={`/thing/${thing.id}`} passHref>
             <a className={`${styles.container} nft_height`}>
                 <div className="">
-                    {thing.metadata.animation_type !== null ||
-                    thing.metadata.animation_type !== "image/jpeg" ||
-                    thing.metadata.animation_type !== "image/png" ||
-                    thing.metadata.animation_type !== "image/gif" ? (
+                    {!thing.metadata ? 'NFT has no Metadata': (thing.metadata.animation_type !== null &&
+                    thing.metadata.animation_type !== "image/jpeg" &&
+                    thing.metadata.animation_type !== "image/png" &&
+                    thing.metadata.animation_type !== "image/gif") ? (
                         // <video controls className='object-contain mx-auto rounded-lg' poster={metadata.media} controlsList="nodownload" muted>
                         //     <source src={metadata.animation_url} ></source>
                         // </video>
@@ -67,7 +67,7 @@ const NFT: FC<Props> = ({ token }) => {
                                 <div className='bg-blue-700 rounded-full h-7 w-7 absolute right-7 text-white p-1'>RR</div>
                                 <div className='bg-green-700 rounded-full h-7 w-7 absolute right-2 text-white p-1'>SM</div>
                             </div> */}
-                        <div className={styles.title}>{thing.metadata.title}</div>
+                        <div className={styles.title}>{thing.metadata?.title}</div>
                         <div>
                             <div className="flex gap-2 items-center text-lg">
                                 {list ? (
