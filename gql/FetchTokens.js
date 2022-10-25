@@ -1,43 +1,21 @@
 import { gql } from "apollo-boost";
 
 export const fetchTokens = gql`
-query FetchStore($storeId: String!, $limit: Int = 20, $offset: Int = 0){
-    store(where: { id: { _eq: $storeId } }){
-        id
-        baseUri
-        owner
-        tokens(
-            order_by: { thingId: asc }
-            where: { storeId: { _eq: $storeId }, burnedAt: { _is_null: true } }
-            limit: $limit
-            offset: $offset
-            distinct_on: thingId
-          ){
-              id
-              lists(
-                order_by: {createdAt: desc}, limit: 1
-              ){
-                  price
-                  autotransfer
-                  offer{
-                    price
-                    timeout
-                  }
-              }
-              txId
-              thingId
-              thing{
-                id
-                metaId
-                metadata{
-                    title
-                    media
-                    media_type
-                    animation_url
-                    animation_type
-                }
-              }
-          }
+query GetStoreNfts($offset: Int = 0, $condition: mb_views_nft_metadata_unburned_bool_exp) @cached {
+  mb_views_nft_metadata_unburned(offset: $offset, limit: 20, order_by: {minted_timestamp: desc}, where: $condition) {
+    createdAt: minted_timestamp
+    listed: price
+    media
+    storeId: nft_contract_id
+    metadataId: metadata_id
+    title
+    base_uri
+    description
+  }
+  mb_views_nft_metadata_unburned_aggregate(where: $condition) {
+    aggregate {
+      count
     }
+  }
 }
 `
