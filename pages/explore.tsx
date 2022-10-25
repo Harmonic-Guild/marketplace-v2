@@ -31,75 +31,83 @@ const explore = () => {
     // const [things, setThings] = useState<any>([])
     const [tokens, setTokens] = useState<any>([]);
     const [filterParams, setFilterParams] = useState<any>(null);
+    const [showAll, setShowAll] = useState(true)
 
     const storeName = process.env.NEXT_PUBLIC_STORE_NAME!;
 
     // fetching
-    const [getStore, { loading: loadingStoreData, data: storeData }] = useLazyQuery(FETCH_STORE, {
-        variables: {
-            storeId: "",
-        },
-    });
 
     const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery(FETCH_TOKENS, {
         variables: {
-            storeId: "",
-            limit: 15,
-            offset: 0,
-            // lt: 0,
-            // gt: 0,
-            // type: [],
-            // order: ''
+            condition: {
+                nft_contract_id: {
+                    _in: ""
+                },
+            }
+        },
+    });
+
+    const [getListedTokens, { loading: loadingListedTokensData, data: listedTokensData }] = useLazyQuery(FETCH_TOKENS, {
+        variables: {
+            condition: {
+                nft_contract_id: {
+                    _in: ""
+                },
+                price: {_is_null: false}
+            }
         },
     });
 
     useEffect(() => {
-        getStore({
-            variables: {
-                storeId: storeName,
-            },
-        });
-    }, []);
-
-    useEffect(() => {
-        // console.log(storeData);
-
-        if (!storeData) return;
-
-        if (storeData?.store.length === 0) return;
-
-        setStore({
-            ...storeData.store[0],
-        });
-
-        getTokens({
-            variables: {
-                storeId: storeName,
-                limit: 15,
-                offset: 0,
-                // lt: filterParams.prices.lt.toString(),
-                // gt: filterParams.prices.gt.toString(),
-                // type: filterParams.types,
-                // order: filterParams.orders
-            },
-        });
+        
+        if(showAll === true){
+            
+            getTokens({
+                variables: {
+                    condition: {
+                        nft_contract_id: { _in: storeName } 
+                    }
+                },
+            })
+        } else{
+            getListedTokens({
+                variables: {
+                    condition: {
+                        nft_contract_id: { _in: storeName },
+                        price: {_is_null: false}
+                    }
+                },
+            })
+        }
+        ;
         //  console.log(filterParams.prices);
-    }, [storeData, filterParams]);
+    }, [showAll]);
 
     useEffect(() => {
-        if (!store || !tokensData) return;
+        if (!tokensData && !listedTokensData) return;
+        let tokens: any = []
 
         //  const things = tokensData.token.map((token: any) => token.thing)
 
         //  setThings(things)
-
-        const tokens = tokensData.store[0].tokens.map((token: any)=> {
+        const allTokens = tokensData?.mb_views_nft_metadata_unburned.map((token: any)=> {
+            return token;
+        });
+        
+        const listedTokens  = listedTokensData?.mb_views_nft_metadata_unburned.map((token: any)=> {
             return token;
         });
 
+
+        if(showAll == true) tokens = allTokens
+        else tokens = listedTokens
+
+        console.log(tokens, 'mnmnnmnnmnnmnmnmnmnmnmn');
+        
+
         setTokens(tokens);
         
-    }, [tokensData]);
+    }, [tokensData, listedTokensData, showAll]);
 
     const setFilters = (filters: any) => {
         
@@ -119,8 +127,12 @@ const explore = () => {
             <div>
                 {/* <DropDown setFilters={setFilters} /> */}
             </div>
+            <div className="flex w-1/3 mx-auto justify-around mt-4">
+                    <button className={`border rounded-md px-3 text-white py-2 w-2/5 ${showAll? 'bg-mp-gray-7': 'text-mp-gray-7'}`} onClick={()=> setShowAll(true)}>All</button>
+                    <button className={`border rounded-md px-3 text-white py-2 w-2/5 ${!showAll? 'bg-mp-gray-7': 'text-mp-gray-7'}`} onClick={()=> setShowAll(false)}>On Sale</button>
+                </div>
             <div className="xl:flex block justify-around">
-                {/* <div className=" order-last pt-4 col-span-1">
+                {/* <div className=" order-last pt-4 col-span-1">()
                     <div className="hidden lg:block w-full">
                         <Categories />
                         <Artists />
@@ -140,9 +152,10 @@ const explore = () => {
                         </span>
                     </div>
                 </div> */}
+                
                 <div className="grid grid-cols-2 lg:grid-cols-3 w-full pt-4 gap-y-5 gap-x-2 col-span-3">
-                    {tokens.map((token: any) => (
-                        <NFT token={token} baseUri={store?.baseUri} key={token.thing.id} />
+                    {tokens?.map((token: any) => (
+                        <NFT token={token} baseUri={token?.baseUri} key={token.metadataId} />
                     ))}
                 </div>
             </div>
