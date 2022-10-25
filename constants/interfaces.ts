@@ -1,10 +1,12 @@
 export interface Token {
-    id: string;
-    thingId: string;
-    txId: string;
-    thing: Thing;
-    lists: List[];
-    __typename: string;
+    metadataId: string;
+    createdAt: string;
+    listed: string;
+    media: string;
+    storeId: string;
+    base_uri: string;
+    description: string;
+    title: string;
 }
 
 export interface Thing {
