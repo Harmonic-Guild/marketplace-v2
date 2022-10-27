@@ -8,38 +8,31 @@ import { useLazyQuery } from "@apollo/client";
 import Image from "next/image";
 
 import styles from "../styles/FeaturedNfts.module.scss";
+import { Token } from "../constants/interfaces";
 
 const FETCH_WEEKLY = gql`
-    query MyQuery($storeId: String!) {
-        token(where: { storeId: { _eq: $storeId }, burnedAt: { _is_null: true } }, limit: 5, distinct_on: thingId, order_by: { thingId: asc }) {
-            id
-            thing {
-                id
-                metaId
-                metadata {
-                    media
-                    media_type
-                    animation_url
-                    animation_type
-                    title
-                }
-            }
-        }
+query GetStoreNfts($offset: Int = 0, $condition: mb_views_nft_metadata_unburned_bool_exp) @cached {
+    mb_views_nft_metadata_unburned(offset: $offset, limit: 5, order_by: {minted_timestamp: desc}, where: $condition) {
+      createdAt: minted_timestamp
+      listed: price
+      media
+      storeId: nft_contract_id
+      metadataId: metadata_id
+      media_hash:reference_blob(path: "$.media_hash")
+      title
+      base_uri
+      description
     }
+    mb_views_nft_metadata_unburned_aggregate(where: $condition) {
+      aggregate {
+        count
+      }
+    }
+  }
 `;
 
 const FeaturedNft = ({ storeId }: { storeId: string }) => {
-    interface Token {
-        id: string;
-        thing: {
-            id: string;
-            metaId: string;
-            metadata: {
-                media: string;
-                title: string;
-            };
-        };
-    }
+  
 
     const [tokens, setTokens] = useState<[]>([]);
     const [slideIndex, setSlideIndex] = useState(0);
@@ -90,14 +83,18 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
 
     const [getTokens, { loading: loadingtokensData, data: tokensData }] = useLazyQuery(FETCH_WEEKLY, {
         variables: {
-            storeId: "",
+            condition: {
+                nft_contract_id: { _in: "" } 
+            }
         },
     });
 
     useEffect(() => {
         getTokens({
             variables: {
-                storeId,
+                condition: {
+                    nft_contract_id: { _in: storeId } 
+                }
             },
         });
     }, []);
@@ -105,13 +102,10 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
     useEffect(() => {
         if (!tokensData) return;
 
-        if (tokensData?.token.length === 0) return;
-
-        const weeklyTokens = tokensData.token.map((token: Token) => token);
+        const weeklyTokens = tokensData?.mb_views_nft_metadata_unburned.map((token: Token) => token);
 
         setTokens(weeklyTokens);
 
-        // console.log(tokens);
     }, [tokensData]);
 
     return (
@@ -125,13 +119,13 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
             </div>
             <Slider {...settings}>
                 {tokens.map((token: Token, index) => (
-                    <Link href={`/thing/${token.thing.id}`} key={token.thing.id}>
+                    <Link href={`/thing/${token.metadataId}`} key={token.metadataId}>
                         <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
                             <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
-                                <Image src={token.thing.metadata.media} alt="" objectFit="cover" layout="fill" />
+                                <Image src={`${token.base_uri}/${token.media_hash}`}  alt="" objectFit="cover" layout="fill" />
                                 {index === slideIndex && (
                                     <div className="absolute bottom-5 text-center font-semibold w-full">
-                                        <p className="text-white">{token.thing.metadata.title}</p>
+                                        <p className="text-white">{token.title}</p>
                                         {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
                                     </div>
                                 )}
