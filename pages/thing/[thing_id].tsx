@@ -22,62 +22,57 @@ import styles from "../../styles/Thing.module.scss";
 import { GiCancel } from "react-icons/gi";
 
 const FETCH_TOKENS = gql`
-    query MyQuery($thing_id: String!) {
-        thing(where: { id: { _eq: $thing_id } }) {
-            id
-            tokens(distinct_on: id, where: {burnedAt: { _is_null: true }}
-              ) {
-                id
-                lists(order_by: { createdAt: desc }, limit: 1) {
-                    price
-                    autotransfer
-                    offer {
-                        price
-                        from
-                    }
-                    createdAt
-                    tokenKey
-                    ownerId
-                }
-                txId
-                minter
-            }
-            allTokens: tokens(distinct_on: id) {
-                id
-                # txId
-                # minter
-            }
-            storeId
-            store {
-                name
-                owner
-            }
-            metadata {
-                animation_type
-                animation_url
-                media
-                title
-                description
-                external_url
-                category
-                tags
-                youtube_url
-            }
-        }
+query fetchMeta($metadataId: String!) {
+    metadata: nft_metadata(where: {id: {_eq: $metadataId}}) {
+      contract: nft_contracts {
+        id
+        baseUri: base_uri
+        created_at
+      }
+      title
+      description
+      media
+      animationUrl: reference_blob(path: "$.animation_url")
     }
+    listings: mb_views_active_listings(where: {metadata_id: {_eq: $metadataId}}, limit: 1, order_by: {price: desc}) {
+      kind
+      price
+      market_id
+      token {
+        id: token_id
+        minter
+        nft_contract_id
+        ownerId: owner
+      }
+      offers(order_by: {offer_price: asc})  {
+        offer_price
+        offered_by
+      }
+    }
+   
+    all: mb_views_nft_tokens_aggregate(where: {metadata_id: {_eq: $metadataId}}) {
+        aggregate {
+          count
+        }
+      }
+  }
+  
+  
 `;
 
 const thing_id = ({ thing_id }: { thing_id: string }) => {
+    
     interface Thing {
-        id: string;
-        tokens: [Tokens?];
-        allTokens: [id: string];
-        storeId: string;
-        store: {
-            name: string;
-            owner: string;
-        };
-        metadata: MetaData;
+        contract: {
+            id: string;
+            baseUri: string;
+            created_at: string
+        }
+        title: string
+        description: string
+        media: string
+        animationUrl?: string
+
     }
 
     interface Tokens {
@@ -120,30 +115,30 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
     const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] = useLazyQuery(FETCH_TOKENS, {
         variables: {
-            thing_id: "",
+            metadataId: "",
         },
     });
 
     useEffect(() => {
         getTokens({
             variables: {
-                thing_id,
+                metadataId: thing_id,
             },
         });
     }, []);
 
     useEffect(() => {
         if (!tokensData) return;
-        setThing(tokensData.thing[0]);
+        setThing(tokensData.metadata[0]);
 
-        const tokens = tokensData.thing[0].tokens.map((token: Tokens) => {
-            return token;
-        });
-        const allTokens = tokensData.thing[0].allTokens.map((token: any) => {
-            return token;
-        });
-        setTokens(tokens);
-        setAllTokens(allTokens);
+        // const tokens = tokensData.metadata[0].tokens.map((token: Tokens) => {
+        //     return token;
+        // });
+        // const allTokens = tokensData.thing[0].allTokens.map((token: any) => {
+        //     return token;
+        // });
+        // setTokens(tokens);
+        // setAllTokens(allTokens);
     }, [tokensData]);
 
     const toggleDiscription = () => {
@@ -151,9 +146,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     };
 
     const buy = (bid: number) => {
-        const token_Id = things?.tokens[0]?.id!;
+        const token_Id = tokensData.listings[0]?.token.id!;
 
-        if (things?.tokens[0]?.lists[0]?.autotransfer) {
+        if (tokensData.listings[0]?.kind === 'simple') {
             wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress } );
         } else {
             wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress: process.env.NEXT_PUBLIC_marketAddress });
@@ -161,17 +156,18 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     };
     // console.log(wallet);
 
-    const tokenPriceNumber = Number(things?.tokens[0]?.lists[0]?.price);
-    const price = things?.tokens[0]?.lists[0] && formatNearAmount(tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }), 2);
+    const tokenPriceNumber = Number(tokensData?.listings[0].price);
+    const stringPrice = (tokenPriceNumber!== null && !Number.isNaN(tokenPriceNumber) )? tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }) : '0'
+    const price = formatNearAmount(stringPrice, 2);
     const tokenPrice = tokenPriceNumber.toLocaleString("fullwide", {
         useGrouping: false,
     });
 
     let currentBid;
-    if (things?.tokens[0]?.lists[0]?.offer == null) {
+    if (!tokensData?.listings[0].offers[0]) {
         currentBid = "0";
     } else {
-        currentBid = formatNearAmount(Number(things?.tokens[0]?.lists[0]?.offer?.price).toLocaleString("fullwide", { useGrouping: false }), 5);
+        currentBid = formatNearAmount(Number(tokensData?.listings[0]?.offers[0]?.price).toLocaleString("fullwide", { useGrouping: false }), 5);
     }
 
     return (
@@ -183,7 +179,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
                     {things && (
                         <div className={styles["image-cont"]}>
-                            <Image src={things.metadata.media} layout="fill" objectFit="cover" />
+                            <Image src={things.media} layout="fill" objectFit="cover" />
                         </div>
                     )}
                 </div>
@@ -195,22 +191,19 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             </Link>
             <div className="lg:flex gap-4 justify-between w-4/5 lg:w-full mx-auto">
                 <div className="mx-auto w-full">
-                    {things?.metadata.animation_type !== null &&
-                    things?.metadata.animation_type !== "image/jpeg" &&
-                    things?.metadata.animation_type !== "image/png" &&
-                    things?.metadata.animation_type !== "image/gif" ? (
+                    {(things?.animationUrl !== null && things?.animationUrl !== undefined) ? (
                         <div className="w-full mx-auto flex align-middle">
-                            <video controls className="" poster={things?.metadata.media} controlsList="nodownload" muted>
-                                <source src={things?.metadata.animation_url}></source>
+                            <video controls className="" poster={things?.media} controlsList="nodownload" muted>
+                                <source src={things?.animationUrl!}></source>
                             </video>
                             <br />
                         </div>
                     ) : (
                         <div className=" w-full xl:w-4/5 mx-auto">
-                            {things?.metadata.media && (
+                            {things?.media && (
                                 <div className="">
                                     <Image
-                                        src={things?.metadata.media}
+                                        src={things?.media}
                                         objectFit="cover"
                                         className="w-4/5 lg:w-2/5 rounded-lg shadow-xl"
                                         width={600}
@@ -229,14 +222,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     )}
                 </div>
                 <div className="w-full">
-                    <div className="text-4xl font-bold mb-5">{things?.metadata.title}</div>
+                    <div className="text-4xl font-bold mb-5">{things?.title}</div>
 
                     <div className="text-lg">
-                        {things?.tokens[0]?.lists[0]?.createdAt! === undefined ? (
-                            `Mint date is not available`
+                        {!things?.contract.created_at ? (
+                            `_`
                         ) : (
                             <div className="flex gap-3">
-                                {`Minted On: ` + new Date(things?.tokens[0]?.lists[0]?.createdAt!).toDateString()}{" "}
+                                {`Minted On: ` + new Date(things?.contract.created_at!).toDateString()}{" "}
                                 <TbExternalLink color="#AA5F2A" className="w-6 h-6" />
                             </div>
                         )}
@@ -248,7 +241,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                 <span className="text-3xl font-bold">Description</span>
                             </div>
 
-                            <p className={hide ? "" : "line-clamp-3"}>{things?.metadata.description}</p>
+                            <p className={hide ? "" : "line-clamp-3"}>{things?.description}</p>
                             <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
                                 {" "}
                                 {!hide ? ".....see more" : "see less"}
@@ -295,7 +288,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
                                     <div className="border-2 border-primary rounded-full p-2 px-3">
                                         <a
-                                            href={`https://explorer.testnet.near.org/transactions/${things?.tokens[0]?.txId}`}
+                                            href={`https://explorer.testnet.near.org/transactions/${things?.title}`}
                                             target="_blank"
                                             rel="noreferrer"
                                         >
@@ -313,7 +306,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
                                 <div className="bg-primary rounded-lg my-8 py-2">
                                     <p className="text-center text-white text-lg">
-                                        {tokens.length}/{allTokens.length} Tokens available
+                                        {tokensData?.all.aggregate.count} Tokens available
                                     </p>
                                 </div>
 
@@ -332,15 +325,15 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
                         {things && (
                             <div>
-                                {things.tokens[0]?.lists[0]?.autotransfer ? (
+                                {tokensData.listings[0].kind === 'simple' ? (
                                     <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
                                 ) : (
                                     <MakeOffer
                                         buy={buy}
                                         isConnected={isConnected}
                                         latestBid={tokens[0]?.lists[0]?.offer?.price}
-                                        bidder={tokens[0]?.lists[0]?.offer?.from}
-                                        owner={things?.store.name}
+                                        bidder={tokensData?.listings[0].offers[0]?.offered_by}
+                                        owner={tokensData?.listings[0].token.ownerId}
                                     />
                                 )}
                             </div>
@@ -354,8 +347,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 };
 export default thing_id;
 
-export function getServerSideProps({ query }: any) {
-    const thing_id = query.thing_id;
+export function getServerSideProps({ params }: any) {
+    
+    const thing_id = params.thing_id
     return {
         props: {
             thing_id,
