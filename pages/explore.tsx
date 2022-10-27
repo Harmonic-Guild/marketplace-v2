@@ -102,7 +102,6 @@ const explore = () => {
         if(showAll == true) tokens = allTokens
         else tokens = listedTokens
 
-        console.log(tokens, 'mnmnnmnnmnnmnmnmnmnmnmn');
         
 
         setTokens(tokens);
