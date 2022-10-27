@@ -31,11 +31,10 @@ const NFT: FC<Props> = ({ token }) => {
                                 height={500}
                                 width={500}
                                 objectFit="cover"
-                                src={token.media}
+                                src={`${token.base_uri}/${token.media_hash}`} 
                                 alt={"alt"}
                             />
                         </div>
-                        {/* {token.media} */}
 
                     <div className="text-sm py-2 text-mp-dark-3 relative">
                         {/* {list?.autotransfer && (
