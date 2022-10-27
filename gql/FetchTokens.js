@@ -8,6 +8,7 @@ query GetStoreNfts($offset: Int = 0, $condition: mb_views_nft_metadata_unburned_
     media
     storeId: nft_contract_id
     metadataId: metadata_id
+    media_hash:reference_blob(path: "$.media_hash")
     title
     base_uri
     description
