@@ -9,38 +9,24 @@ import { Token } from "../constants/interfaces";
 import styles from "../styles/WeeklyNft.module.scss";
 
 const FETCH_WEEKLY = gql`
-    query MyQuery($storeId: String!) {
-        token(
-            where: { storeId: { _eq: $storeId }, list: { price: { _is_null: false } }, burnedAt: { _is_null: true } }
-            limit: 20
-            offset: 3
-            distinct_on: thingId
-            order_by: { thingId: desc }
-        ) {
-            id
-            lists(order_by: { createdAt: desc }, limit: 1) {
-                price
-                autotransfer
-                offer {
-                    price
-                    timeout
-                }
-            }
-            txId
-            thingId
-            thing {
-                id
-                metaId
-                metadata {
-                    title
-                    media
-                    media_type
-                    animation_url
-                    animation_type
-                }
-            }
-        }
+query GetStoreNfts($offset: Int = 0, $condition: mb_views_nft_metadata_unburned_bool_exp) @cached {
+    mb_views_nft_metadata_unburned(offset: $offset, limit: 5, order_by: {minted_timestamp: asc}, where: $condition) {
+      createdAt: minted_timestamp
+      listed: price
+      media
+      storeId: nft_contract_id
+      metadataId: metadata_id
+      media_hash: reference_blob(path: "$.media_hash")
+      title
+      base_uri
+      description
     }
+    mb_views_nft_metadata_unburned_aggregate(where: $condition) {
+      aggregate {
+        count
+      }
+    }
+  }
 `;
 
 const WeeklyNft = ({ storeId }: { storeId: string }) => {
@@ -85,14 +71,18 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
 
     const [getTokens, { loading: loadingtokensData, data: tokensData }] = useLazyQuery(FETCH_WEEKLY, {
         variables: {
-            storeId: "",
+            condition: {
+                nft_contract_id: { _in: "" } 
+            }
         },
     });
 
     useEffect(() => {
         getTokens({
             variables: {
-                storeId,
+                condition: {
+                    nft_contract_id: { _in: storeId } 
+                }
             },
         });
         console.log(storeId);
@@ -103,13 +93,10 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
 
         if (!tokensData) return;
 
-        if (tokensData?.token.length === 0) return;
 
-        const weeklyTokens = tokensData.token.map((token: any) => token);
+        const weeklyTokens = tokensData?.mb_views_nft_metadata_unburned.map((token: any) => token);
 
         setTokens(weeklyTokens);
-
-        console.log(tokensData, "*/*//*/*//+896");
     }, [tokensData]);
 
     return (
@@ -125,7 +112,7 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
                 {/* <div className={styles["nfts-cont"]}> */}
                 <Slider {...settings} className={styles["nfts-cont"]}>
                     {tokens.map((token) => (
-                        <NFT token={token} key={token.id} />
+                        <NFT token={token} key={token.metadataId} />
                     ))}
                 </Slider>
                 {/* </div> */}
