@@ -3,6 +3,7 @@ export interface Token {
     createdAt: string;
     listed: string;
     media: string;
+    media_hash: string;
     storeId: string;
     base_uri: string;
     description: string;
