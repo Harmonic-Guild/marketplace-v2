@@ -28,10 +28,13 @@ query fetchMeta($metadataId: String!) {
         id
         baseUri: base_uri
         created_at
+
       }
       title
       description
       media
+      media_hash: reference_blob(path: "$.media_hash")
+      animation_hash: reference_blob(path: "$.animation_hash")
       animationUrl: reference_blob(path: "$.animation_url")
     }
     listings: mb_views_active_listings(where: {metadata_id: {_eq: $metadataId}}, limit: 1, order_by: {price: desc}) {
@@ -71,7 +74,10 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         title: string
         description: string
         media: string
+        media_hash: string
         animationUrl?: string
+        animation_hash: string
+
 
     }
 
@@ -146,7 +152,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     };
 
     const buy = (bid: number) => {
-        const token_Id = tokensData.listings[0]?.token.id!;
+        // const token_Id = tokensData.listings[0]?.token.id!;
+        const token_Id = thing_id;
 
         if (tokensData.listings[0]?.kind === 'simple') {
             wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress } );
@@ -194,7 +201,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     {(things?.animationUrl !== null && things?.animationUrl !== undefined) ? (
                         <div className="w-full mx-auto flex align-middle">
                             <video controls className="" poster={things?.media} controlsList="nodownload" muted>
-                                <source src={things?.animationUrl!}></source>
+                                <source src={`${things?.contract.baseUri}/${things.media_hash}`}></source>
                             </video>
                             <br />
                         </div>
@@ -203,7 +210,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             {things?.media && (
                                 <div className="">
                                     <Image
-                                        src={things?.media}
+                                        src={`${things?.contract.baseUri}/${things.media_hash}`}
                                         objectFit="cover"
                                         className="w-4/5 lg:w-2/5 rounded-lg shadow-xl"
                                         width={600}
