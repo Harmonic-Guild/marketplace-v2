@@ -7,7 +7,7 @@ import { CgArrowsExpandRight } from "react-icons/cg";
 import { BiShareAlt } from "react-icons/bi";
 import { AiOutlineCloseCircle, AiOutlineExpandAlt } from "react-icons/ai";
 // import SimilarNft from "../../components/SimilarNft";
-import Vector_back from "../../icons/Vector_back.svg";
+// import Vector_back from "../../icons/Vector_back.svg";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import Image from "next/image";
@@ -37,7 +37,7 @@ query fetchMeta($metadataId: String!) {
       animation_hash: reference_blob(path: "$.animation_hash")
       animationUrl: reference_blob(path: "$.animation_url")
     }
-    listings: mb_views_active_listings(where: {metadata_id: {_eq: $metadataId}}, limit: 1, order_by: {price: desc}) {
+    listings: mb_views_active_listings(where: {metadata_id: {_eq: $metadataId}}, limit: 1, order_by: {price: asc}) {
       kind
       price
       market_id
@@ -50,6 +50,7 @@ query fetchMeta($metadataId: String!) {
       offers(order_by: {offer_price: asc})  {
         offer_price
         offered_by
+        
       }
     }
    
@@ -161,11 +162,10 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress: process.env.NEXT_PUBLIC_marketAddress });
         }
     };
-    // console.log(wallet);
 
     const tokenPriceNumber = Number(tokensData?.listings[0].price);
     const stringPrice = (tokenPriceNumber!== null && !Number.isNaN(tokenPriceNumber) )? tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }) : '0'
-    const price = formatNearAmount(stringPrice, 2);
+    const price = formatNearAmount(stringPrice, 5);
     const tokenPrice = tokenPriceNumber.toLocaleString("fullwide", {
         useGrouping: false,
     });
@@ -174,7 +174,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     if (!tokensData?.listings[0].offers[0]) {
         currentBid = "0";
     } else {
-        currentBid = formatNearAmount(Number(tokensData?.listings[0]?.offers[0]?.price).toLocaleString("fullwide", { useGrouping: false }), 5);
+        currentBid = formatNearAmount(Number(tokensData?.listings[0]?.offers[0]?.offer_price).toLocaleString("fullwide", { useGrouping: false }), 5);
     }
 
     return (
@@ -338,7 +338,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     <MakeOffer
                                         buy={buy}
                                         isConnected={isConnected}
-                                        latestBid={tokens[0]?.lists[0]?.offer?.price}
+                                        latestBid={tokensData?.listings[0]?.offers[0]?.offer_price}
                                         bidder={tokensData?.listings[0].offers[0]?.offered_by}
                                         owner={tokensData?.listings[0].token.ownerId}
                                     />
