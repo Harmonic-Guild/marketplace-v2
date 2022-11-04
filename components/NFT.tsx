@@ -31,7 +31,7 @@ const NFT: FC<Props> = ({ token }) => {
                                 height={500}
                                 width={500}
                                 objectFit="cover"
-                                src={`${token.base_uri}/${token.media_hash}`} 
+                                src={`https://arweave.net/${token.media_hash}`} 
                                 alt={"alt"}
                             />
                         </div>

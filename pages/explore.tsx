@@ -41,7 +41,7 @@ const explore = () => {
         variables: {
             condition: {
                 nft_contract_id: {
-                    _in: ""
+                    _regex: ""
                 },
             }
         },
@@ -51,7 +51,7 @@ const explore = () => {
         variables: {
             condition: {
                 nft_contract_id: {
-                    _in: ""
+                    _regex: ""
                 },
                 price: {_is_null: false}
             }
@@ -65,7 +65,7 @@ const explore = () => {
             getTokens({
                 variables: {
                     condition: {
-                        nft_contract_id: { _in: storeName } 
+                        nft_contract_id: { _regex:storeName } 
                     }
                 },
             })
@@ -73,7 +73,7 @@ const explore = () => {
             getListedTokens({
                 variables: {
                     condition: {
-                        nft_contract_id: { _in: storeName },
+                        nft_contract_id: { _regex: storeName },
                         price: {_is_null: false}
                     }
                 },

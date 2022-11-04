@@ -84,7 +84,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
     const [getTokens, { loading: loadingtokensData, data: tokensData }] = useLazyQuery(FETCH_WEEKLY, {
         variables: {
             condition: {
-                nft_contract_id: { _in: "" } 
+                nft_contract_id: { _regex: "" } 
             }
         },
     });
@@ -93,7 +93,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
         getTokens({
             variables: {
                 condition: {
-                    nft_contract_id: { _in: storeId } 
+                    nft_contract_id: { _regex: storeId } 
                 }
             },
         });
@@ -122,7 +122,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
                     <Link href={`/thing/${token.metadataId}`} key={token.metadataId}>
                         <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
                             <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
-                                <Image src={`${token.base_uri}/${token.media_hash}`}  alt="" objectFit="cover" layout="fill" />
+                                <Image src={`https://arweave.net/${token.media_hash}`}  alt="" objectFit="cover" layout="fill" />
                                 {index === slideIndex && (
                                     <div className="absolute bottom-5 text-center font-semibold w-full">
                                         <p className="text-white">{token.title}</p>

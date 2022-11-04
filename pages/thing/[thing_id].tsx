@@ -163,7 +163,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         }
     };
 
-    const tokenPriceNumber = Number(tokensData?.listings[0].price);
+    const tokenPriceNumber = Number(tokensData?.listings[0]?.price);
     const stringPrice = (tokenPriceNumber!== null && !Number.isNaN(tokenPriceNumber) )? tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }) : '0'
     const price = formatNearAmount(stringPrice, 5);
     const tokenPrice = tokenPriceNumber.toLocaleString("fullwide", {
@@ -171,7 +171,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     });
 
     let currentBid;
-    if (!tokensData?.listings[0].offers[0]) {
+    if (!tokensData?.listings[0]?.offers[0]) {
         currentBid = "0";
     } else {
         currentBid = formatNearAmount(Number(tokensData?.listings[0]?.offers[0]?.offer_price).toLocaleString("fullwide", { useGrouping: false }), 5);
@@ -201,7 +201,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     {(things?.animationUrl !== null && things?.animationUrl !== undefined) ? (
                         <div className="w-full mx-auto flex align-middle">
                             <video controls className="" poster={things?.media} controlsList="nodownload" muted>
-                                <source src={`${things?.contract.baseUri}/${things.media_hash}`}></source>
+                                <source src={`https://arweave.net/${things.media_hash}`}></source>
                             </video>
                             <br />
                         </div>
@@ -210,7 +210,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             {things?.media && (
                                 <div className="">
                                     <Image
-                                        src={`${things?.contract.baseUri}/${things.media_hash}`}
+                                        src={`https://arweave.net/${things.media_hash}`}
                                         objectFit="cover"
                                         className="w-4/5 lg:w-2/5 rounded-lg shadow-xl"
                                         width={600}
@@ -313,7 +313,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
                                 <div className="bg-primary rounded-lg my-8 py-2">
                                     <p className="text-center text-white text-lg">
-                                        {tokensData?.all.aggregate.count} Tokens available
+                                        {tokensData?.all.aggregate.count} Tokens Minted
                                     </p>
                                 </div>
 
@@ -332,15 +332,15 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
                         {things && (
                             <div>
-                                {tokensData.listings[0].kind === 'simple' ? (
+                                {tokensData?.listings[0]?.kind === 'simple' ? (
                                     <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
                                 ) : (
                                     <MakeOffer
                                         buy={buy}
                                         isConnected={isConnected}
                                         latestBid={tokensData?.listings[0]?.offers[0]?.offer_price}
-                                        bidder={tokensData?.listings[0].offers[0]?.offered_by}
-                                        owner={tokensData?.listings[0].token.ownerId}
+                                        bidder={tokensData?.listings[0]?.offers[0]?.offered_by}
+                                        owner={tokensData?.listings[0]?.token.ownerId}
                                     />
                                 )}
                             </div>

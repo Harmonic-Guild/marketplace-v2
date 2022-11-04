@@ -72,7 +72,7 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
     const [getTokens, { loading: loadingtokensData, data: tokensData }] = useLazyQuery(FETCH_WEEKLY, {
         variables: {
             condition: {
-                nft_contract_id: { _in: "" } 
+                nft_contract_id: { _regex: "" } 
             }
         },
     });
@@ -81,7 +81,7 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
         getTokens({
             variables: {
                 condition: {
-                    nft_contract_id: { _in: storeId } 
+                    nft_contract_id: { _regex: storeId } 
                 }
             },
         });
