@@ -8,43 +8,28 @@ import Image from "next/image";
 import MintNft from "../Modal/MintNft";
 import { BsCircle } from "react-icons/bs";
 import { AiOutlineExpandAlt } from "react-icons/ai";
-import { formatNearAmount } from "near-api-js/lib/utils/format";
+// import { formatNearAmount } from "near-api-js/lib/utils/format";
 // import dynamic from 'next/dynamic';
 
 import styles from "../styles/MyOwn.module.scss";
 
 const FETCH_TOKENS = gql`
-    query FetchTokensByStoreId($ownerId: String!, $storeId: String!, $limit: Int, $offset: Int) {
-        metadata(
-            order_by: { thing_id: asc }
-            where: { thing: { tokens: { ownerId: { _eq: $ownerId } }, storeId: { _eq: $storeId } } }
-            limit: $limit
-            offset: $offset
-            distinct_on: thing_id
-        ) {
-            id
-            media
-            animation_url
+    query FetchTokensByStoreId($ownerId: String!) {
+        mb_views_nft_tokens(
+            where: {owner: {_eq: $ownerId}}
+            order_by: {metadata_id: asc}
+            distinct_on: metadata_id
+          ) {
+            metadata_id
             title
-            thing_id
-            animation_type
-            thing {
-                id
-                metaId
-                memo
-                tokens(where: { burnedAt: { _is_null: true }, ownerId: { _eq: $ownerId } }) {
-                    id
-                    ownerId
-                    lists(order_by: { createdAt: desc }) {
-                        autotransfer
-                        offer {
-                            price
-                        }
-                        price
-                    }
-                }
-            }
-        }
+            token_id
+            media_hash
+            media
+            base_uri
+            description
+            animation_type: reference_blob(path: "$.animation_type")
+            animation_hash :reference_blob(path: "$.animation_hash")
+          }
     }
 `;
 const images = [
@@ -53,34 +38,37 @@ const images = [
     "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
 ];
 
+const resolveUrl = (media: string, media_hash: string ): string => {
+    if(media) {
+        return `${media.startsWith('https://')? media : `https://arweave.net/${media}`}`
+    } 
+    else {
+        return `${media_hash.startsWith('https://')? media_hash : `https://arweave.net/${media_hash}`}`
+    }
+}
 
-// const FETCH_Others = gql`
-// query FetchTokensByStoreId($ownerId: String!, $storeId: String!, $limit: Int, $offset: Int) {
-//   metadata(
-//     order_by: { thing_id: asc }
-//     where: {thing: {tokens: {ownerId: {_eq: $ownerId}}, storeId: {_eq: $storeId}}}
-//     limit: $limit
-//     offset: $offset
-//     distinct_on: thing_id
-//   ) {
-//     id
-//     media
-//     animation_url
-//     title
-//     thing_id
-//     animation_type
-//     thing {
-//       id
-//       metaId
-//       memo
-//     }
-//   }
-// }`
+
+
+/**
+ * 
+ * query MyQuery {
+  mb_views_nft_tokens(where: {owner: {_eq: "codeslayer.testnet"}}) {
+    metadata_id
+    title
+    token_id
+    listings {
+      price
+    }
+  }
+}
+
+ */
 
 const NFT = ({
     toggle,
     tokenId,
     media,
+    media_hash,
     title,
     animation_url,
     animation_type,
@@ -89,6 +77,7 @@ const NFT = ({
     tokenId: string;
     media: string;
     title: string;
+    media_hash: string;
     animation_url: string;
     animation_type: string;
 }) => {
@@ -109,19 +98,19 @@ const NFT = ({
                     animation_type === "image/gif" ? (
                         <div className="relative mx-auto rounded-lg overflow-hidden w-full aspect-square">
                             <Image
-                                src={media}
+                                src={resolveUrl(media, media_hash)}
                                 layout='fill'
                                 objectFit="cover"
                                 alt={title}
                             />
-                            <div className="absolute bottom-2 z-10 right-2 text-primary" onClick={() => toggleFullScreen(media)}>
+                            <div className="absolute bottom-2 z-10 right-2 text-primary" onClick={() => toggleFullScreen(resolveUrl(media, media_hash))}>
                                 <BsCircle className="relative h-8 w-8" />
                                 <AiOutlineExpandAlt title="full screen" className="w-4 h-4 absolute -mt-6 ml-2" />
                             </div>
                         </div>
                     ) : (
                         <div className="w-full aspect-square rounded-lg overflow-hidden mx-auto flex items-center">
-                            <video poster={media} controls controlsList="nodownload" loop muted>
+                            <video poster={resolveUrl(media, media_hash)} controls controlsList="nodownload" loop muted>
                                 <source src={animation_url}></source>
                             </video>
                         </div>
@@ -143,25 +132,18 @@ const NFT = ({
 };
 
 type MetaData = {
-    id: string;
+    metadata_id: string;
+    token_id: string;
     media: string;
+    media_hash: string;
     animation_url: string;
     title: string;
     animation_type: string;
-    thing_id: string;
-    thing: {
-        id: string;
-        metaId: string;
-        memo: string;
-        tokens: Tokens[];
-    };
+    base_uri: string;
+    description: string;
 };
 
-interface Tokens {
-    id: string;
-    ownerId: string;
-    lists: List[];
-}
+
 
 interface List {
     autotransfer: boolean;
@@ -180,9 +162,6 @@ const MyOwn = () => {
     const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery(FETCH_TOKENS, {
         variables: {
             ownerId: "",
-            limit: 10,
-            offset: 0,
-            storeId: "",
         },
     });
 
@@ -190,9 +169,6 @@ const MyOwn = () => {
         getTokens({
             variables: {
                 ownerId: wallet?.activeAccount?.accountId!,
-                limit: 20,
-                offset: 0,
-                storeId: process.env.NEXT_PUBLIC_STORE_NAME!,
             },
         });
     }, [wallet?.activeAccount?.accountId]);
@@ -200,8 +176,7 @@ const MyOwn = () => {
     useEffect(() => {
         if (!tokensData) return;
 
-        setMetaData(tokensData.metadata);
-        console.log(tokensData.metadata);
+        setMetaData(tokensData.mb_views_nft_tokens);
 
         console.log(tokensData, "*-*-*--*-*-");
     }, [tokensData]);
@@ -238,9 +213,10 @@ const MyOwn = () => {
                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
                             {metaData.map((meta: MetaData) => (
                                 <NFT
-                                    key={meta.id}
-                                    tokenId={meta.thing.tokens[0].id}
+                                    key={meta.metadata_id}
+                                    tokenId={meta.token_id}
                                     media={meta.media}
+                                    media_hash={meta.media_hash}
                                     title={meta.title}
                                     animation_url={meta.animation_url}
                                     animation_type={meta.animation_type}
