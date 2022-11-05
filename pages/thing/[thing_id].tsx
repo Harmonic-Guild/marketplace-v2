@@ -330,7 +330,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             </div>
                         </div>
 
-                        {things && (
+                        {tokensData?.listings.length ? (
                             <div>
                                 {tokensData?.listings[0]?.kind === 'simple' ? (
                                     <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
@@ -344,7 +344,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     />
                                 )}
                             </div>
-                        )}
+                        ): <div className="bg-slate-800 text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
                     </div>
                 </div>
             </div>
