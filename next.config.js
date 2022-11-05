@@ -12,6 +12,7 @@ module.exports = {
             "source.unsplash.com",
             "abs.twimg.com",
             "images.unsplash.com",
+            "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net"
         ],
     },
     webpack(config) {
