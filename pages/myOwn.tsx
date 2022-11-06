@@ -39,43 +39,6 @@ const images = [
     "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
 ];
 
-<<<<<<< HEAD
-const resolveUrl = (media: string, media_hash: string ): string => {
-    if(media) {
-        return `${media.startsWith('https://')? media : `https://arweave.net/${media}`}`
-    } 
-    else {
-        return `${media_hash?.startsWith('https://')? media_hash : `https://arweave.net/${media_hash}`}`
-    }
-}
-=======
-// const resolveUrl = (media: string, media_hash: string ): string => {
-//     if(media) {
-//         return `${media.startsWith('https://')? media : `https://arweave.net/${media}`}`
-//     } 
-//     else {
-//         return `${media_hash.startsWith('https://')? media_hash : `https://arweave.net/${media_hash}`}`
-//     }
-// }
->>>>>>> 1cbd3c5e3f3d4aa1d4067d187a5d56e01f4e7a42
-
-
-
-/**
- * 
- * query MyQuery {
-  mb_views_nft_tokens(where: {owner: {_eq: "codeslayer.testnet"}}) {
-    metadata_id
-    title
-    token_id
-    listings {
-      price
-    }
-  }
-}
-
- */
-
 const NFT = ({
     toggle,
     tokenId,
