@@ -3,7 +3,7 @@ import { useWallet } from "../services/providers/MintbaseWalletContext";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import React from "react";
-import Slider, { Settings } from "react-slick";
+// import Slider, { Settings } from "react-slick";
 import Image from "next/image";
 import MintNft from "../Modal/MintNft";
 import { BsCircle } from "react-icons/bs";
@@ -12,6 +12,7 @@ import { AiOutlineExpandAlt } from "react-icons/ai";
 // import dynamic from 'next/dynamic';
 
 import styles from "../styles/MyOwn.module.scss";
+import { resolveUrl } from "../helpers/resolveUrl";
 
 const FETCH_TOKENS = gql`
     query FetchTokensByStoreId($ownerId: String!) {
@@ -38,14 +39,14 @@ const images = [
     "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
 ];
 
-const resolveUrl = (media: string, media_hash: string ): string => {
-    if(media) {
-        return `${media.startsWith('https://')? media : `https://arweave.net/${media}`}`
-    } 
-    else {
-        return `${media_hash.startsWith('https://')? media_hash : `https://arweave.net/${media_hash}`}`
-    }
-}
+// const resolveUrl = (media: string, media_hash: string ): string => {
+//     if(media) {
+//         return `${media.startsWith('https://')? media : `https://arweave.net/${media}`}`
+//     } 
+//     else {
+//         return `${media_hash.startsWith('https://')? media_hash : `https://arweave.net/${media_hash}`}`
+//     }
+// }
 
 
 
