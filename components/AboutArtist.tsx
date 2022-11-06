@@ -131,8 +131,7 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
                         <button>Find out more &rarr;</button>
                     </div>
                     <p className={styles["artist-info"]}>
-                        About artist, Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur perferendis unde architecto totam esse
-                        reiciendis! Laboriosam enim eos aperiam dolor ducimus recusandae dignissimos nam, rerum animi, ullam consequuntur sint quo.
+                        About artist, Information about the artist who owns the marketplace. You can have any relevent information about your project provided here.
                     </p>
                 </div>
             </div>
@@ -153,16 +152,16 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
                             <Image src={logo.src} layout="fill" objectFit="contain" />
                         </div>
                     </div>
-                    <div className={styles["more-org-info"]}>
+                    <div className={styles["more-info"]}>
+                        <div className="mt-2">
                         <div className={styles["text-cont"]}>
-                            <p className={styles.name}>Harmonic Guild</p>
-                            <p className={styles["mini-text"]}>
-                                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse hic ut eum. Non cumque laudantium similique,
-                                voluptatem accusamus iste nostrum veritatis tenetur minus deleniti. Quibusdam mollitia nobis corrupti facilis
-                                inventore."
+                            {/* <p className={styles.name}>Harmonic Guild</p> */}
+                            <p className={styles["artist-info"]}>
+                                We are an NFT Development Collective. We build smoother onboarding experiences and engagement products for your community using the power of NFTs. Contact us to get a custom marketplace deployed for your project.
                             </p>
                         </div>
-                        <div className={styles["info-cont"]}>
+                        </div>
+                        {/* <div className={styles["info-cont"]}>
                             <div className={styles["the-info"]}>
                                 <div className={styles["property"]}>
                                     <p className={styles["property-name"]}>Items</p>
@@ -187,7 +186,7 @@ const AboutArtist: FC<Props> = ({ storeId }) => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

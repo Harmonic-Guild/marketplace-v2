@@ -33,7 +33,7 @@ const Footer = () => {
                         </Link>
                         <div className="leading-loose">
                             <span>support@harmonicguild.io</span> <br />
-                            <span>+2343878472983</span>
+                            {/* <span>+2343878472983</span> */}
                         </div>
                     </div>
                 </div>
