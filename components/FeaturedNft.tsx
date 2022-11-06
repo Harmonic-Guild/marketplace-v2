@@ -9,6 +9,7 @@ import Image from "next/image";
 
 import styles from "../styles/FeaturedNfts.module.scss";
 import { Token } from "../constants/interfaces";
+import { resolveUrl } from '../helpers/resolveUrl';
 
 const FETCH_WEEKLY = gql`
 query GetStoreNfts($offset: Int = 0, $condition: mb_views_nft_metadata_unburned_bool_exp) @cached {
@@ -122,7 +123,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
                     <Link href={`/thing/${token.metadataId}`} key={token.metadataId}>
                         <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
                             <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
-                                <Image src={`https://arweave.net/${token.media_hash}`}  alt="" objectFit="cover" layout="fill" />
+                                <Image src={resolveUrl(token.media, token.media_hash)}  alt="" objectFit="cover" layout="fill" />
                                 {index === slideIndex && (
                                     <div className="absolute bottom-5 text-center font-semibold w-full">
                                         <p className="text-white">{token.title}</p>
