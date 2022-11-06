@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useWallet } from "../../services/providers/MintbaseWalletContext";
 import { TbExternalLink } from "react-icons/tb";
-import { FiLayers } from "react-icons/fi";
-import { BsChevronLeft, BsHeart, BsArrowsAngleExpand } from "react-icons/bs";
+// import { FiLayers } from "react-icons/fi";
+import { BsChevronLeft } from "react-icons/bs";
 import { CgArrowsExpandRight } from "react-icons/cg";
-import { BiShareAlt } from "react-icons/bi";
-import { AiOutlineCloseCircle, AiOutlineExpandAlt } from "react-icons/ai";
+// import { BiShareAlt } from "react-icons/bi";
+// import { AiOutlineCloseCircle, AiOutlineExpandAlt } from "react-icons/ai";
 // import SimilarNft from "../../components/SimilarNft";
 // import Vector_back from "../../icons/Vector_back.svg";
 import { gql } from "apollo-boost";
@@ -20,6 +20,7 @@ import Arweave from "../../public/images/ARWEAVE.png";
 
 import styles from "../../styles/Thing.module.scss";
 import { GiCancel } from "react-icons/gi";
+import { resolveUrl } from '../../helpers/resolveUrl';
 
 const FETCH_TOKENS = gql`
 query fetchMeta($metadataId: String!) {
@@ -200,8 +201,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                 <div className="mx-auto w-full">
                     {(things?.animationUrl !== null && things?.animationUrl !== undefined) ? (
                         <div className="w-full mx-auto flex align-middle">
-                            <video controls className="" poster={things?.media} controlsList="nodownload" muted>
-                                <source src={`https://arweave.net/${things.media_hash}`}></source>
+                            <video controls className="" poster={resolveUrl(things?.media, things?.media_hash)} controlsList="nodownload" muted>
+                                <source src={resolveUrl(things?.animationUrl, things?.animation_hash)}></source>
                             </video>
                             <br />
                         </div>
@@ -210,7 +211,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             {things?.media && (
                                 <div className="">
                                     <Image
-                                        src={`https://arweave.net/${things.media_hash}`}
+                                        src={resolveUrl(things.media, things.media_hash)}
                                         objectFit="cover"
                                         className="w-4/5 lg:w-2/5 rounded-lg shadow-xl"
                                         width={600}

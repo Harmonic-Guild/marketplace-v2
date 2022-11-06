@@ -3,12 +3,13 @@ import Link from "next/link";
 import Near from "../icons/near.svg";
 import { formatNearAmount } from "near-api-js/lib/utils/format";
 import Image from "next/image";
-import { AiOutlineRight } from "react-icons/ai";
-import { BiShareAlt } from "react-icons/bi";
-import { BsCircle, BsPlayCircle } from "react-icons/bs";
+// import { AiOutlineRight } from "react-icons/ai";
+// import { BiShareAlt } from "react-icons/bi";
+// import { BsCircle, BsPlayCircle } from "react-icons/bs";
 import { Token, MetaData } from '../constants/interfaces';
 
 import styles from "../styles/NFT.module.scss";
+import { resolveUrl } from '../helpers/resolveUrl';
 
 interface Props {
     token: Token;
@@ -31,7 +32,7 @@ const NFT: FC<Props> = ({ token }) => {
                                 height={500}
                                 width={500}
                                 objectFit="cover"
-                                src={`https://arweave.net/${token.media_hash}`} 
+                                src={resolveUrl(token.media, token.media_hash)} 
                                 alt={"alt"}
                             />
                         </div>
