@@ -3,6 +3,8 @@ import Image from "next/image";
 import { BsArrowUp } from "react-icons/bs";
 import logo from "../assets/harmonic-logo.png";
 import { FiUsers } from "react-icons/fi";
+import config from '../config/config.json'
+
 
 const Footer = () => {
     const scrollToTop = () => {
@@ -28,7 +30,7 @@ const Footer = () => {
                     <div>
                         <Link href="/" passHref>
                             <a className="py-6 relative w-40 h-20 inline-block">
-                                <Image src={logo.src} layout="fill" objectFit="contain" alt="logo" className="cursor-pointer mb-5" />
+                                <Image src={config.logo1} layout="fill" objectFit="contain" alt="logo" className="cursor-pointer mb-5" />
                             </a>
                         </Link>
                         <div className="leading-loose">
@@ -68,7 +70,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="text-center">
-                <span>&copy; {new Date().getFullYear()} HarmonicGuild. All right reserved.</span>
+                <span>&copy; {new Date().getFullYear()} {config.title}. All right reserved. <br /> Powered by Harmonic Guild</span>
             </div>
         </footer>
     );
