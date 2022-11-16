@@ -12,6 +12,8 @@ module.exports = {
             "source.unsplash.com",
             "abs.twimg.com",
             "images.unsplash.com",
+            "harmonicguild-my.sharepoint.com",
+            "centralindia1-mediap.svc.ms",
             "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net"
         ],
     },
