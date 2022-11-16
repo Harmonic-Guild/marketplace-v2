@@ -27,58 +27,39 @@ const FETCH_TOKENS = gql`
             media_hash
             media
             base_uri
+            nft_contract_id
             description
             animation_type: reference_blob(path: "$.animation_type")
             animation_hash :reference_blob(path: "$.animation_hash")
           }
     }
 `;
-const images = [
-    "https://pbs.twimg.com/media/FbpyI7oUcAAJtWy?format=jpg&name=small",
-    "https://pbs.twimg.com/media/Fbpz9sVXkAA6l2h?format=jpg&name=small",
-    "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
-];
-
-// const resolveUrl = (media: string, media_hash: string ): string => {
-//     if(media) {
-//         return `${media.startsWith('https://')? media : `https://arweave.net/${media}`}`
-//     } 
-//     else {
-//         return `${media_hash.startsWith('https://')? media_hash : `https://arweave.net/${media_hash}`}`
-//     }
-// }
+// const images = [
+//     "https://pbs.twimg.com/media/FbpyI7oUcAAJtWy?format=jpg&name=small",
+//     "https://pbs.twimg.com/media/Fbpz9sVXkAA6l2h?format=jpg&name=small",
+//     "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
+// ];
 
 
-
-/**
- * 
- * query MyQuery {
-  mb_views_nft_tokens(where: {owner: {_eq: "codeslayer.testnet"}}) {
-    metadata_id
-    title
-    token_id
-    listings {
-      price
-    }
-  }
-}
-
- */
 
 const NFT = ({
+    metadata_id,
     toggle,
     tokenId,
     media,
     media_hash,
     title,
+    nft_contract_id,
     animation_url,
     animation_type,
 }: {
     toggle: any;
+    metadata_id: string;
     tokenId: string;
     media: string;
     title: string;
     media_hash: string;
+    nft_contract_id: string;
     animation_url: string;
     animation_type: string;
 }) => {
@@ -91,20 +72,20 @@ const NFT = ({
     return (
         <div className="w-full h-auto border border-purple-border rounded-2xl bg-purple-bg">
             <div className="p-4">
-                {sellModal && <MintNft closeModal={() => showSellModal(false)} tokenId={tokenId} title={title} />}
+                {sellModal && <MintNft closeModal={() => showSellModal(false)} tokenId={tokenId} title={title} contract_name={nft_contract_id} metaId={metadata_id} />}
                 <div>
                     {animation_type === null ||
                     animation_type === "image/jpeg" ||
                     animation_type === "image/png" ||
                     animation_type === "image/gif" ? (
-                        <div className="relative mx-auto rounded-lg overflow-hidden w-full aspect-square">
+                        <div className="relative mx-auto rounded-lg overflow-hidden w-full aspect-square z-0">
                             <Image
                                 src={resolveUrl(media, media_hash)}
                                 layout='fill'
                                 objectFit="cover"
                                 alt={title}
                             />
-                            <div className="absolute bottom-2 z-10 right-2 text-primary" onClick={() => toggleFullScreen(resolveUrl(media, media_hash))}>
+                            <div className="absolute bottom-2 right-2 text-primary" onClick={() => toggleFullScreen(resolveUrl(media, media_hash))}>
                                 <BsCircle className="relative h-8 w-8" />
                                 <AiOutlineExpandAlt title="full screen" className="w-4 h-4 absolute -mt-6 ml-2" />
                             </div>
@@ -139,6 +120,7 @@ type MetaData = {
     media_hash: string;
     animation_url: string;
     title: string;
+    nft_contract_id: string;
     animation_type: string;
     base_uri: string;
     description: string;
@@ -178,8 +160,6 @@ const MyOwn = () => {
         if (!tokensData) return;
 
         setMetaData(tokensData.mb_views_nft_tokens);
-
-        console.log(tokensData, "*-*-*--*-*-");
     }, [tokensData]);
 
     const toggle = (image: any) => {
@@ -190,7 +170,7 @@ const MyOwn = () => {
     return (
         <div className={styles.container}>
             {fullScreen && (
-                <div className="h-screen w-screen bg-gray-900 z-50 fixed left-0 top-0 ">
+                <div className="h-screen w-screen bg-gray-900 fixed left-0 top-0 ">
                     <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
                         <Image src={image} layout="fill" objectFit="contain" />
                         <div className="absolute bottom-2 right-8 text-primary" onClick={() => setFullScreen(false)}>
@@ -221,7 +201,9 @@ const MyOwn = () => {
                                     title={meta.title}
                                     animation_url={meta.animation_url}
                                     animation_type={meta.animation_type}
+                                    nft_contract_id={meta.nft_contract_id}
                                     toggle={toggle}
+                                    metadata_id={meta.metadata_id}
                                 />
                             ))}
                         </div>
