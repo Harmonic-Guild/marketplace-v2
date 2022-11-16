@@ -10,7 +10,7 @@
             @apply w-full relative h-40 lg:h-60;
 
             .header-image-cont {
-                @apply relative h-full rounded-xl overflow-hidden;
+                @apply relative rounded-xl overflow-hidden h-32;
             }
 
             .mini-cont {
@@ -45,12 +45,12 @@
                 }
 
                 button {
-                    @apply border border-solid border-[#9E94DA] bg-[#F8F5FF] px-4 py-2 text-base lg:text-lg rounded-xl;
+                    @apply border border-solid border-[#9E94DA] bg-[#f8fff5] px-4 py-2 text-base lg:text-lg rounded-xl;
                 }
             }
 
             .artist-info {
-                @apply text-[#94A3B8] w-full max-w-lg text-xs;
+                @apply text-[#28052b] w-full max-w-lg text-xs mt-2;
             }
         }
     }
