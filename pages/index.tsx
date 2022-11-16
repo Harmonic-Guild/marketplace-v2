@@ -3,6 +3,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 // import AboutArtist from "../components/AboutArtist";
 import Gleap from 'gleap';
+import config from '../config/config.json'
 import { useEffect } from 'react';
 
 const FeaturedNft = dynamic(() => import("../components/FeaturedNft"));
@@ -20,8 +21,8 @@ const Home: NextPage = () => {
     return (
         <div className="flex min-h-screen flex-col items-center justify-center py-2">
             <Head>
-                <title>MarketPlace</title>
-                <link rel="icon" href="/favicon.ico" />
+                <title>{config.title}</title>
+                <link rel="icon" href={config.logo2} />
             </Head>
             <FeaturedNft storeId={storeName} />
             <WeeklyNft storeId={storeName} />
