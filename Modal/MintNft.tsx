@@ -8,16 +8,6 @@ import { useLazyQuery } from '@apollo/client';
 
 import styles from '../styles/MintNft.module.scss';
 
-const FETCH_LISTING = gql`
-query FetchActiveListings($metaId: String!) {
-    mb_views_active_listings(
-      where: {metadata_id: {_eq: $metaId}}
-    ) {
-      price
-      title
-    }
-  }
-`
     
     
     
@@ -25,31 +15,7 @@ const MintNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
     const { wallet } = useWallet();
     const [price, setPrice] = useState<string|undefined>('0')
 
-    const [metaData, setMetaData] = useState([])
-
-    const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery(FETCH_LISTING, {
-        variables: {
-            metaId: "",
-        },
-    });
-
-    useEffect(() => {
-        if(!metaId) return
-        
-        getTokens({
-            variables: {
-                metaId: metaId
-            },
-        });
-    }, [metaId]);
-
-    useEffect(() => {
-        if (!tokensData) return;
-
-        setMetaData(tokensData.mb_views_active_listings);
-    }, [tokensData]);
-
-
+  
     const cancel = () =>  closeModal()
     
     const sellNFT = () => {
@@ -77,14 +43,10 @@ const MintNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
                     </div>
         
                     <div className="flex mt-3">
-                        {!metaData.length && <span className='outline-none flex text-gray-800 w-full'>
-                            <input type='number' placeholder='enter price' className='outline-none h-12 mx-3 w-1/3 appearance-none' onChange={(e)=> setPrice(e.target.value)}/><span className='mt-4 px-2'><Near/></span></span>}
-                            
-                        {metaData.length? (
-                            <button className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming soon)</button>  
-                        ): (
-                            <button className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-4 w-2/3 text-gray-800" onClick={sellNFT}>Place</button>  
-                        )}              
+                        <span className='outline-none flex text-gray-800 w-full'>
+                            <input type='number' placeholder='enter price' className='outline-none h-12 mx-3 w-2/3 appearance-none border px-3 rounded-lg' onChange={(e)=> setPrice(e.target.value)}/><span className='mt-4 px-2'><Near/></span></span>
+                         
+                            <button className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-4 w-2/3 text-gray-800" onClick={sellNFT}>Sell</button>            
                     </div>
                 </div>
             </div>
