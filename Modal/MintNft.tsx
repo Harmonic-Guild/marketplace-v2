@@ -9,7 +9,7 @@ import { useLazyQuery } from '@apollo/client';
 import styles from '../styles/MintNft.module.scss';
 
 const FETCH_LISTING = gql`
-query FetchTokensByStoreId($metaId: String!) {
+query FetchActiveListings($metaId: String!) {
     mb_views_active_listings(
       where: {metadata_id: {_eq: $metaId}}
     ) {
@@ -18,12 +18,13 @@ query FetchTokensByStoreId($metaId: String!) {
     }
   }
 `
+    
+    
+    
+const MintNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
+    const { wallet } = useWallet();
+    const [price, setPrice] = useState<string|undefined>('0')
 
-const MintNft = ({closeModal, tokenId, title, contract_id, metaId}: any) => {
-    console.log(metaId,'jujujjjiujiujuijju');
-    
-    
-    
     const [metaData, setMetaData] = useState([])
 
     const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery(FETCH_LISTING, {
@@ -48,20 +49,16 @@ const MintNft = ({closeModal, tokenId, title, contract_id, metaId}: any) => {
         setMetaData(tokensData.mb_views_active_listings);
     }, [tokensData]);
 
-    const { wallet } = useWallet();
-    const [price, setPrice] = useState<string|undefined>('0')
 
     const cancel = () =>  closeModal()
     
     const sellNFT = () => {
         if(!price) return;
-        // const contractName = process.env.NEXT_PUBLIC_STORE_NAME!
+        //const contractName = process.env.NEXT_PUBLIC_STORE_NAME!
+        const contractName = thingId.split(":")[0]
         const amount = parseNearAmount(price)!
 
-        const token_id = tokenId.split(":"+process.env.NEXT_PUBLIC_STORE_NAME)[0]
-        
-
-        wallet?.list(token_id, contract_id ,amount).then(res=> {
+        wallet?.list(tokenId, contractName ,amount).then(res=> {
         }).catch(e=> console.log(e)
         )
 
