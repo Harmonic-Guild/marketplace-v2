@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { useWallet } from '../services/providers/MintbaseWalletContext';
 import {parseNearAmount} from 'near-api-js/lib/utils/format'
 
-const MintNft = ({closeModal, tokenId, title}: any) => {
+const MintNft = ({closeModal, thingId, tokenId, title}: any) => {
     const { wallet } = useWallet();
     const [price, setPrice] = useState<string|undefined>('0')
 
@@ -12,13 +12,11 @@ const MintNft = ({closeModal, tokenId, title}: any) => {
     
     const sellNFT = () => {
         if(!price) return;
-        const contractName = process.env.NEXT_PUBLIC_STORE_NAME!
+        //const contractName = process.env.NEXT_PUBLIC_STORE_NAME!
+        const contractName = thingId.split(":")[0]
         const amount = parseNearAmount(price)!
 
-        const token_id = tokenId.split(":"+process.env.NEXT_PUBLIC_STORE_NAME)[0]
-        
-
-        wallet?.list(token_id, contractName ,amount).then(res=> {
+        wallet?.list(tokenId, contractName ,amount).then(res=> {
             console.log(res, '=*****-0--*-***--*-*--===-=-****');
         }).catch(e=> console.log(e)
         )

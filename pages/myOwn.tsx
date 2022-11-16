@@ -16,7 +16,7 @@ import { resolveUrl } from "../helpers/resolveUrl";
 
 const FETCH_TOKENS = gql`
     query FetchTokensByStoreId($ownerId: String!) {
-        mb_views_nft_tokens(
+        mb_views_nft_owned_tokens(
             where: {owner: {_eq: $ownerId}}
             order_by: {metadata_id: asc}
             distinct_on: metadata_id
@@ -33,13 +33,9 @@ const FETCH_TOKENS = gql`
           }
     }
 `;
-const images = [
-    "https://pbs.twimg.com/media/FbpyI7oUcAAJtWy?format=jpg&name=small",
-    "https://pbs.twimg.com/media/Fbpz9sVXkAA6l2h?format=jpg&name=small",
-    "https://pbs.twimg.com/media/FbpAEs8VEAAlXCB?format=jpg&name=small",
-];
 
 const NFT = ({
+    thing_id,
     toggle,
     tokenId,
     media,
@@ -48,6 +44,7 @@ const NFT = ({
     animation_url,
     animation_type,
 }: {
+    thing_id: string;
     toggle: any;
     tokenId: string;
     media: string;
@@ -65,7 +62,7 @@ const NFT = ({
     return (
         <div className="w-full h-auto border border-purple-border rounded-2xl bg-purple-bg">
             <div className="p-4">
-                {sellModal && <MintNft closeModal={() => showSellModal(false)} tokenId={tokenId} title={title} />}
+                {sellModal && <MintNft closeModal={() => showSellModal(false)} thingId={thing_id} tokenId={tokenId} title={title} />}
                 <div>
                     {animation_type === null ||
                     animation_type === "image/jpeg" ||
@@ -151,7 +148,7 @@ const MyOwn = () => {
     useEffect(() => {
         if (!tokensData) return;
 
-        setMetaData(tokensData.mb_views_nft_tokens);
+        setMetaData(tokensData.mb_views_nft_owned_tokens);
 
         console.log(tokensData, "*-*-*--*-*-");
     }, [tokensData]);
@@ -189,13 +186,14 @@ const MyOwn = () => {
                             {metaData.map((meta: MetaData) => (
                                 <NFT
                                     key={meta.metadata_id}
+                                    thing_id={meta.metadata_id}
+                                    toggle={toggle}
                                     tokenId={meta.token_id}
                                     media={meta.media}
                                     media_hash={meta.media_hash}
                                     title={meta.title}
                                     animation_url={meta.animation_url}
                                     animation_type={meta.animation_type}
-                                    toggle={toggle}
                                 />
                             ))}
                         </div>
