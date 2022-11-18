@@ -2,7 +2,6 @@ import { FC, } from "react";
 import { GiStarShuriken } from "react-icons/gi";
 import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
-import Near from "../icons/near.svg";
 import config from '../config/config.json'
 
 
@@ -60,8 +59,7 @@ const AboutArtist: FC<Props> = () => {
                         <button>Find out more &rarr;</button>
                     </div>
                     <p className={styles["artist-info"]}>
-                        About artist, Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur perferendis unde architecto totam esse
-                        reiciendis! Laboriosam enim eos aperiam dolor ducimus recusandae dignissimos nam, rerum animi, ullam consequuntur sint quo.
+                        About artist, Information about the artist who owns the marketplace. You can have any relevent information about your project provided here.
                     </p>
                 </div>
             </div>
@@ -82,14 +80,16 @@ const AboutArtist: FC<Props> = () => {
                             <Image src={config.logo2} layout="fill" objectFit="contain" />
                         </div>
                     </div>
-                    <div className={styles["more-org-info"]}>
+                    <div className={styles["more-info"]}>
+                        <div className="mt-2">
                         <div className={styles["text-cont"]}>
                             <p className={styles.name}>{config.title}</p>
                             <p className={styles["mini-text"]}>
                                 {config.description}
                             </p>
                         </div>
-                        <div className={styles["info-cont"]}>
+                        </div>
+                        {/* <div className={styles["info-cont"]}>
                             <div className={styles["the-info"]}>
                                 <div className={styles["property"]}>
                                     <p className={styles["property-name"]}>Items</p>
@@ -114,7 +114,7 @@ const AboutArtist: FC<Props> = () => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
