@@ -70,7 +70,7 @@ const NFT = ({
     };
 
     return (
-        <div className="w-full h-auto border border-purple-border rounded-2xl bg-purple-bg">
+        <div className="w-full h-auto border border-bd-color rounded-2xl bg-bg-color">
             <div className="p-4">
                 {sellModal && <MintNft closeModal={() => showSellModal(false)} tokenId={tokenId} title={title} contract_name={nft_contract_id} metaId={metadata_id} />}
                 <div>

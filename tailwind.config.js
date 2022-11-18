@@ -22,10 +22,10 @@ module.exports = {
         },
         extend: {
             colors: {
-                primary: "rgba(35, 50, 71, 1)",
-                secondary: "rgba(81, 116, 166, 1)",
-                "purple-border": "#9E94DA",
-                "purple-bg": "#ECE1FF",
+                primary: "#ea6230",
+                secondary: "#fbc026",
+                "bd-color": "#ea6230",
+                "bg-color": "#fbc026",
                 "mp-dark": {
                     1: "#252B42",
                     2: "#161621",
