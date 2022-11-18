@@ -24,8 +24,6 @@ module.exports = {
             colors: {
                 primary: "#ea6230",
                 secondary: "#fbc026",
-                "bd-color": "#ea6230",
-                "bg-color": "#fbc026",
                 "mp-dark": {
                     1: "#252B42",
                     2: "#161621",

@@ -16,7 +16,7 @@
     }
 
     .history-cont {
-        @apply bg-bg-color p-4 rounded-xl w-full lg:min-w-[20rem] mt-8 lg:mt-0;
+        @apply bg-secondary p-4 rounded-xl w-full lg:min-w-[20rem] mt-8 lg:mt-0;
 
         .inner-cont {
             @apply max-h-40 overflow-y-auto pr-2;
@@ -47,7 +47,7 @@
         }
 
         .col-name {
-            @apply flex justify-between items-center border-b border-bd-color border-solid p-1;
+            @apply flex justify-between items-center border-b border-primary border-solid p-1;
 
             p {
                 @apply font-semibold;
