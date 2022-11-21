@@ -73,7 +73,7 @@ const NFT = ({
         toggle(media);
     };
 
-    const [metaData, setMetaData] = useState([])
+    const [metaData, setMetaData] = useState<any>([])
 
     const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery(FETCH_LISTING, {
         variables: {
@@ -99,7 +99,7 @@ const NFT = ({
     }, [tokensData]);
 
     return (
-        <div className="w-full h-auto border border-purple-border rounded-2xl bg-purple-bg">
+        <div className="w-full h-auto border border-secondary rounded-2xl bg-card">
             <div className="p-4">
                 {sellModal && <MintNft closeModal={() => showSellModal(false)} thingId={thing_id} tokenId={tokenId} title={title} />}
                 <div>
@@ -131,9 +131,12 @@ const NFT = ({
                         <div className="text-center font-bold text-lg">{title}</div>
                         <div className="w-full flex justify-center mt-6">
                         {metaData.length? (
-                            <button className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming&nbsp;soon)</button>  
+                            <>
+                                {metaData.price}
+                                <button className="border hover:bg-primary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming&nbsp;soon)</button> 
+                            </> 
                         ): (
-                            <button className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-4 w-2/3 text-gray-800" onClick={()=> showSellModal(true)}>list on sale</button>  
+                            <button className="border hover:bg-primary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" onClick={()=> showSellModal(true)}>List on sale</button>  
                         )} 
                         </div>
                         {/* {lists.length && <div className="text-center mt-2 text-gray-600">Currently on sale at {formatNearAmount(Number(lists[0]?.price).toLocaleString('fullwide', { useGrouping: false }),5)} Near</div>} */}

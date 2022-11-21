@@ -127,8 +127,8 @@ const explore = () => {
                 {/* <DropDown setFilters={setFilters} /> */}
             </div>
             <div className="flex w-1/3 mx-auto justify-around mt-4">
-                    <button className={`border rounded-md px-3 text-white py-2 w-2/5 ${showAll? 'bg-mp-gray-7': 'text-mp-gray-7'}`} onClick={()=> setShowAll(true)}>All</button>
-                    <button className={`border rounded-md px-3 text-white py-2 w-2/5 ${!showAll? 'bg-mp-gray-7': 'text-mp-gray-7'}`} onClick={()=> setShowAll(false)}>On Sale</button>
+                    <button className={`border-secondary border rounded-md px-3 py-2 w-2/5 ${showAll? 'bg-secondary text-white': 'text-secondary'}`} onClick={()=> setShowAll(true)}>All</button>
+                    <button className={`border-secondary border rounded-md px-3 py-2 w-2/5 ${!showAll? 'bg-secondary text-white': 'text-secondary'}`} onClick={()=> setShowAll(false)}>On Sale</button>
                 </div>
             <div className="xl:flex block justify-around">
                 {/* <div className=" order-last pt-4 col-span-1">()
