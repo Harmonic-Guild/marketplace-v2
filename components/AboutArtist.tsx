@@ -3,6 +3,7 @@ import { GiStarShuriken } from "react-icons/gi";
 import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
 import config from '../config/config.json'
+import logo from '../assets/harmonic-logo.png'
 
 
 import styles from "../styles/AboutArtist.module.scss";
@@ -77,13 +78,13 @@ const AboutArtist: FC<Props> = () => {
                 <div className={styles["org-info"]}>
                     <div className={styles["org-name-logo"]}>
                         <div className={styles["inner-logo-cont"]}>
-                            <Image src={config.logo2} layout="fill" objectFit="contain" />
+                            <Image src={logo} layout="fill" objectFit="contain" />
                         </div>
                     </div>
                     <div className={styles["more-info"]}>
                         <div className="mt-2">
                         <div className={styles["text-cont"]}>
-                            <p className={styles.name}>{config.title}</p>
+                            <p className={styles.name}>Harmonic Guild</p>
                             <p className={styles["mini-text"]}>
                                 {config.description}
                             </p>
