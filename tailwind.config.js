@@ -24,6 +24,7 @@ module.exports = {
             colors: {
                 primary: "rgba(35, 50, 71, 1)",
                 secondary: "rgba(81, 116, 166, 1)",
+                 card: "#F5F4FB",
                 "purple-border": "#9E94DA",
                 "purple-bg": "#ECE1FF",
                 "mp-dark": {

@@ -133,10 +133,10 @@ const NFT = ({
                         {metaData.length? (
                             <>
                                 {metaData.price}
-                                <button className="border hover:bg-primary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming&nbsp;soon)</button> 
+                                <button className="border hover:text-primary hover:bg-secondary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming&nbsp;soon)</button> 
                             </> 
                         ): (
-                            <button className="border hover:bg-primary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" onClick={()=> showSellModal(true)}>List on sale</button>  
+                            <button className="border hover:text-primary hover:bg-secondary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" onClick={()=> showSellModal(true)}>List on sale</button>  
                         )} 
                         </div>
                         {/* {lists.length && <div className="text-center mt-2 text-gray-600">Currently on sale at {formatNearAmount(Number(lists[0]?.price).toLocaleString('fullwide', { useGrouping: false }),5)} Near</div>} */}
