@@ -22,9 +22,9 @@ module.exports = {
         },
         extend: {
             colors: {
-                primary: "rgba(35, 50, 71, 1)",
-                secondary: "rgba(81, 116, 166, 1)",
-                card: "#c5bdf0",
+                primary: "#fc9f0b",
+                secondary: "#420687",
+                card: "#ffe2bd",
                 "mp-dark": {
                     1: "#252B42",
                     2: "#161621",
