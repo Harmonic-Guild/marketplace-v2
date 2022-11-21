@@ -15,9 +15,10 @@ module.exports = {
             // "harmonicguild-my.sharepoint.com",
             "ik.imagekit.io",
             "p7rdszi5bvgkupb4feipmcni36rul4l2k2h6qtrvimymwtobg3ba.arweave.net",
+            "randomuser.me",
             // "centralindia1-mediap.svc.ms",
             "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net"
-        ],
+        ]
     },
     webpack(config) {
         config.module.rules.push({
