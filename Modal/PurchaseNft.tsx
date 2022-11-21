@@ -14,7 +14,7 @@ const PurchaseNft = ({ buy, price, isConnected }: { buy: any; price: string; isC
             <div className="w-full lg:w-3/5">
                 <button
                     onClick={buy}
-                    className={`w-full py-2 rounded-md text-lg font-bold text-gray-900 px-5 border border-secondary ${
+                    className={`w-full py-2 rounded-md text-lg font-bold text-gray-900 px-5 border border-card ${
                         isConnected ? "bg-card hover:bg-primary" : "border border-secondary py-2 cursor-not-allowed"
                     }`}
                 >
