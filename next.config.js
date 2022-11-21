@@ -12,8 +12,10 @@ module.exports = {
             "source.unsplash.com",
             "abs.twimg.com",
             "images.unsplash.com",
-            "harmonicguild-my.sharepoint.com",
-            "centralindia1-mediap.svc.ms",
+            // "harmonicguild-my.sharepoint.com",
+            "ik.imagekit.io",
+            "p7rdszi5bvgkupb4feipmcni36rul4l2k2h6qtrvimymwtobg3ba.arweave.net",
+            // "centralindia1-mediap.svc.ms",
             "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net"
         ],
     },
