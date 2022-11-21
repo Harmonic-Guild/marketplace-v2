@@ -99,7 +99,7 @@ const NFT = ({
     }, [tokensData]);
 
     return (
-        <div className="w-full h-auto border border-secondary rounded-2xl bg-card">
+        <div className="w-full h-auto border border-primary rounded-2xl bg-secondary bg-opacity-10">
             <div className="p-4">
                 {sellModal && <MintNft closeModal={() => showSellModal(false)} thingId={thing_id} tokenId={tokenId} title={title} />}
                 <div>

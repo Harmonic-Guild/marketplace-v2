@@ -345,7 +345,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     />
                                 )}
                             </div>
-                        ): <div className="bg-slate-800 text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
+                        ): <div className="bg-primary text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
                     </div>
                 </div>
             </div>

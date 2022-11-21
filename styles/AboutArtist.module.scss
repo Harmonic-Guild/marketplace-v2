@@ -4,7 +4,7 @@
     @apply my-10 w-full;
 
     .social-box {
-        @apply bg-card border border-solid border-secondary rounded-2xl w-[90%] max-w-3xl mx-auto p-8 my-8;
+        @apply bg-secondary bg-opacity-10 border border-solid border-primary rounded-2xl w-[90%] max-w-3xl mx-auto p-8 my-8;
 
         .header {
             @apply w-full relative h-40 lg:h-60;
@@ -45,7 +45,7 @@
                 }
 
                 button {
-                    @apply border border-solid border-secondary bg-card px-4 py-2 text-base lg:text-lg rounded-xl;
+                    @apply border border-solid border-primary bg-secondary bg-opacity-10 px-4 py-2 text-base lg:text-lg rounded-xl;
                 }
             }
 
@@ -56,7 +56,7 @@
     }
 
     .org-cont {
-        @apply bg-card border border-solid border-secondary rounded-2xl w-[90%] max-w-3xl mx-auto my-8;
+        @apply bg-secondary bg-opacity-10 border border-solid border-primary rounded-2xl w-[90%] max-w-3xl mx-auto my-8;
 
         .outer-image-cont {
             @apply overflow-hidden rounded-xl m-8;
@@ -72,7 +72,7 @@
         }
 
         .org-info {
-            @apply border-t border-solid bg-gray-100 border-[#94a3b8] rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
+            @apply border-t border-solid bg-secondary bg-opacity-20 border-primary rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
             clip-path: polygon(68% 9.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 9.5%);
 
             @screen lg {
