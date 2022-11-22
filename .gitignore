@@ -5,6 +5,11 @@
 /.pnp
 .pnp.js
 
+#custom
+# config.json
+tailwind.config.js
+_variables.scss
+
 # testing
 /coverage
 
