@@ -40,7 +40,7 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["mini-cont"]}>
                         <div className={styles.avatar}>
                             <Image
-                                src={config.images[1]}
+                                src={config.profile}
                                 layout="fill"
                                 objectFit="contain"
                                 alt={"avatar"}
