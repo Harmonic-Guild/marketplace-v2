@@ -84,7 +84,7 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["more-info"]}>
                         <div className="mt-2">
                         <div className={styles["text-cont"]}>
-                            
+
                             <p className={styles["mini-text"]}>
                             We are an NFT Development Collective. We build smoother onboarding experiences and engagement products for your community using the power of NFTs. Contact us to get a custom marketplace deployed for your project.
                             </p>
