@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 $primary: #c20d0d;
 $secondary: #661313;
-=======
-$primary: #ea6230;
-$secondary: #fbc026;
->>>>>>> c473b727e94ada111bbf1bd0a2a212ea9b5631fd
 
 @mixin buttonColor {
     @apply text-white bg-gradient-to-r from-secondary to-primary;
