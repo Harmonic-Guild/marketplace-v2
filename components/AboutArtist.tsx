@@ -40,15 +40,15 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["mini-cont"]}>
                         <div className={styles.avatar}>
                             <Image
-                                src={config.images[1]}
+                                src={config.profile}
                                 layout="fill"
                                 objectFit="contain"
                                 alt={"avatar"}
                             />
                         </div>
                         <div className={styles["icons-cont"]}>
-                            <AiFillInstagram />
-                            <AiOutlineTwitter />
+                            <a href={config.igLink}><AiFillInstagram /></a>
+                            <a href={config.twitterLink}><AiOutlineTwitter /></a>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ const AboutArtist: FC<Props> = () => {
                         <p>
                             {config.title} <MdVerified color="#1D9BF0" />
                         </p>
-                        <button>Find out more &rarr;</button>
+                        <a href={config.infoLink}><button>Find out more &rarr;</button></a>
                     </div>
                     <p className={styles["artist-info"]}>
                         {config.description}
@@ -70,7 +70,7 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["images-cont"]}>
                         {images.map((image, i: number) => (
                             <div key={i} className={styles["image-cont"]}>
-                                <Image src={image} layout="fill" objectFit="cover" alt={`organiztion's nft number ${i + 1}`} />
+                                <Image src={image} layout="fill" objectFit="contain" alt={`organiztion's nft number ${i + 1}`} />
                             </div>
                         ))}
                     </div>
@@ -84,7 +84,7 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["more-info"]}>
                         <div className="mt-2">
                         <div className={styles["text-cont"]}>
-                            
+
                             <p className={styles["mini-text"]}>
                             We are an NFT Development Collective. We build smoother onboarding experiences and engagement products for your community using the power of NFTs. Contact us to get a custom marketplace deployed for your project.
                             </p>

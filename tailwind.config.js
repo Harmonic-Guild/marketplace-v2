@@ -26,7 +26,7 @@ module.exports = {
             colors: {
                 primary: config["primary-color"],
                 secondary: config["secondary-color"],
-                card: "#c5bdf0",
+                card: config["card-color"],
                 "mp-dark": {
                     1: "#252B42",
                     2: "#161621",

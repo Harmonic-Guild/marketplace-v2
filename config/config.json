@@ -1,16 +1,20 @@
 {
-    "title": "C1",
+    "title": "Muti",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse hic ut eum. Non cumque laudantium similique, voluptatem accusamus iste nostrum veritatis tenetur minus deleniti. Quibusdam mollitia nobis corrupti facilis inventore.",
     "logo1": "https://ik.imagekit.io/epyh88t15/c1-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669132295591",
     "logo2": "https://ik.imagekit.io/epyh88t15/c1-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669132295591",
     "logo3": "https://res.cloudinary.com/techsyndicate/image/upload/v1668780611/Harmonic%20Guild/C1%20assets/c1-logo-removebg-preview_ucsyxm.png",
+    "infoLink": "",
+    "igLink": "",
+    "twitterLink": "",
 
     "images": [
-        "https://ik.imagekit.io/epyh88t15/Muti/Muti_Profile_Pic_02.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669021677644",
-        "https://ik.imagekit.io/epyh88t15/Muti/Muti_Profile_Pic_01.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669021677378",
-        "https://ik.imagekit.io/epyh88t15/Muti/Muti_Profile_Pic_04.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669021675218"
+        "https://ik.imagekit.io/epyh88t15/governance.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132293511",
+        "https://ik.imagekit.io/epyh88t15/nft.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132293116",
+        "https://ik.imagekit.io/epyh88t15/we-build.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132292846"
     ],
 
-    "primary-color": "#ea6230",
-    "secondary-color": "#fbc026"
+    "primary-color": "#fc9f0b",
+    "secondary-color": "#420687",
+    "card-color": "#ffe2bd"
 }
