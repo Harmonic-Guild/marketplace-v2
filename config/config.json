@@ -9,5 +9,8 @@
         "https://ik.imagekit.io/epyh88t15/Muti/Muti_Profile_Pic_02.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669021677644",
         "https://ik.imagekit.io/epyh88t15/Muti/Muti_Profile_Pic_01.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669021677378",
         "https://ik.imagekit.io/epyh88t15/Muti/Muti_Profile_Pic_04.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669021675218"
-    ]
+    ],
+
+    "primary-color": "#ea6230",
+    "secondary-color": "#fbc026"
 }

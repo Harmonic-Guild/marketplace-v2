@@ -1,3 +1,5 @@
+const config = require('./config/config.json')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
@@ -22,8 +24,8 @@ module.exports = {
         },
         extend: {
             colors: {
-                primary: "rgba(35, 50, 71, 1)",
-                secondary: "rgba(81, 116, 166, 1)",
+                primary: config["primary-color"],
+                secondary: config["secondary-color"],
                 card: "#c5bdf0",
                 "mp-dark": {
                     1: "#252B42",
@@ -64,6 +66,9 @@ module.exports = {
                 "actionBtn-Orange": {
                     1: "#FFB038",
                 },
+            },
+            backgroundImage: {
+                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
             },
         },
     },
