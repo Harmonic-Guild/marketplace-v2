@@ -6,7 +6,7 @@
 .pnp.js
 
 #custom
-# config.json
+config.json
 tailwind.config.js
 _variables.scss
 
