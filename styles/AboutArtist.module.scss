@@ -21,10 +21,11 @@
                 }
 
                 .icons-cont {
-                    @apply z-10 flex border border-solid bg-card border-secondary py-2 px-1 rounded-xl mt-1 lg:mt-0;
+                    @include buttonColor;
+                    @apply z-10 flex border border-solid  border-secondary py-2 px-1 rounded-xl mt-1 lg:mt-0;
 
                     svg {
-                        @apply text-[#64748B] w-8 h-8 mx-2;
+                        @apply relative text-[#d4c9c9] w-8 h-8 mx-2;
                     }
                 }
             }
@@ -45,6 +46,7 @@
                 }
 
                 button {
+                    @include buttonColor;
                     @apply border border-solid border-primary bg-card bg-opacity-10 px-4 py-2 text-base lg:text-lg rounded-xl;
                 }
             }
@@ -72,6 +74,7 @@
         }
 
         .org-info {
+            @include buttonColor;
             @apply border-t border-solid bg-card  border-primary rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
             clip-path: polygon(68% 9.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 9.5%);
 
