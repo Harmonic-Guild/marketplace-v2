@@ -2,6 +2,12 @@
 module.exports = {
     reactStrictMode: true,
     images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "*.arweave.net",
+            },
+        ],
         domains: [
             "arweave.net",
             "coldcdn.com",
@@ -21,7 +27,7 @@ module.exports = {
             "harmonicguild-my.sharepoint.com",
             "centralindia1-mediap.svc.ms",
             "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net",
-            "res.cloudinary.com"
+            "res.cloudinary.com",
         ],
     },
     webpack(config) {

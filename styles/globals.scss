@@ -18,8 +18,7 @@ html {
     @apply xl:bg-yellow-300 lg:bg-green-300 md:bg-purple-300 sm:bg-red-800 xs:bg-pink-300;
 }
 .btnColor {
-    @apply text-white;
-    background: linear-gradient(to right, $secondary, $primary);
+    @apply text-white bg-gradient-to-r from-secondary to-primary;
 }
 
 .btnColor svg {
@@ -81,7 +80,7 @@ button {
 .slick-arrow {
     &.slick-prev,
     &.slick-next {
-        background: radial-gradient(50% 50% at 50% 50%, $secondary 0%, $primary 100%);
+        @apply bg-gradient-radial from-secondary to-primary;
     }
 
     &::before {
