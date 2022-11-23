@@ -1,5 +1,5 @@
 {
-    "title": "Muti",
+    "title": "Seven Dead Stars",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse hic ut eum. Non cumque laudantium similique, voluptatem accusamus iste nostrum veritatis tenetur minus deleniti. Quibusdam mollitia nobis corrupti facilis inventore.",
     "infoLink": "",
     "igLink": "",
@@ -15,7 +15,7 @@
         "https://ik.imagekit.io/epyh88t15/we-build.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132292846"
     ],
 
-    "primary-color": "#fc9f0b",
-    "secondary-color": "#420687",
-    "card-color": "#ffe2bd"
+    "primary-color": "#ffcc00",
+    "secondary-color": "#be8c0c",
+    "card-color": "#eed8a0"
 }
