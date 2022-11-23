@@ -66,13 +66,13 @@
                 transform: translateX(-17%);
 
                 .image-cont {
-                    @apply mx-4 relative w-[45%] h-40 lg:h-[20rem] rounded-xl overflow-hidden;
+                    @apply mx-4 relative w-[150%] h-[18rem] lg:h-[20rem] rounded-xl overflow-hidden items-center;
                 }
             }
         }
 
         .org-info {
-            @apply border-t border-solid bg-card  border-primary rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
+            @apply border-t border-solid bg-white  border-primary rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
             clip-path: polygon(68% 9.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 9.5%);
 
             @screen lg {
