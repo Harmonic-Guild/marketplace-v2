@@ -1,13 +1,13 @@
 {
     "title": "Muti",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse hic ut eum. Non cumque laudantium similique, voluptatem accusamus iste nostrum veritatis tenetur minus deleniti. Quibusdam mollitia nobis corrupti facilis inventore.",
+    "description": "We are a creative collective and cultural association that organises multi-disciplinary events in Portugal, which combine various different art forms. muti blends the digital with the physical in a positive way and incentivises a cultural movement in rural areas of Portugal.",
     "infoLink": "",
-    "igLink": "",
-    "twitterLink": "",
+    "igLink": "https://www.instagram.com/muti.collective/",
+    "twitterLink": "https://twitter.com/CollectiveMuti",
     "logo1": "https://ik.imagekit.io/epyh88t15/Muti/Muti_Logo_Orange.png?ik-sdk-version=javascript-1.4.3&updatedAt=1668778437230",
     "logo2": "https://ik.imagekit.io/epyh88t15/Muti/Muti_Logo_Black.png?ik-sdk-version=javascript-1.4.3&updatedAt=1668778432935",
     "logo3": "https://ik.imagekit.io/epyh88t15/Muti/Muti_Logo_Purple.png?ik-sdk-version=javascript-1.4.3&updatedAt=1668778435040",
-    "profile":"https://ik.imagekit.io/epyh88t15/Muti/Muti_Profile_Pic_02.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669021677644",
+    "profile":"https://ik.imagekit.io/epyh88t15/Muti/Muti_Profile_Pic_01.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1669021677378",
 
     "images": [
         "https://ik.imagekit.io/epyh88t15/we-build.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132292846"
