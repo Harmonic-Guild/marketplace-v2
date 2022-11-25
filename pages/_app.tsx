@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <NextProgress options={{ showSpinner: false }} color={"#0F172A"} />
             <Head>
                 <title>{config.title}</title>
-                <link rel="icon" href={config.logo2} />
+                <link rel="icon" href={config.favicon} />
             </Head>
             <WalletProvider apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""} network={Network[process.env.NEXT_PUBLIC_NETWORK as keyof typeof Network]}>
                 <ApolloProvider client={apolloClient}>

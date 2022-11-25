@@ -7,21 +7,21 @@
         @apply bg-card bg-opacity-10 border border-solid border-primary-color rounded-2xl w-[90%] max-w-3xl mx-auto p-8 my-8;
 
         .header {
-            @apply w-full relative h-40 lg:h-60;
+            @apply w-full relative h-40 lg: h-60;
 
             .header-image-cont {
                 @apply relative rounded-xl overflow-hidden h-32;
             }
 
             .mini-cont {
-                @apply flex flex-col lg:flex-row justify-between items-center lg:items-end w-full mx-auto px-10 absolute -bottom-20 lg:-bottom-6 z-20;
+                @apply flex flex-col lg: flex-row justify-between items-center lg:items-end w-full mx-auto px-10 absolute -bottom-20 lg:-bottom-6 z-20;
 
                 .avatar {
                     @apply relative w-24 h-24 rounded-full overflow-hidden;
                 }
 
                 .icons-cont {
-                    @apply z-10 flex border border-solid bg-card border-secondary-color py-2 px-1 rounded-xl mt-1 lg:mt-0;
+                    @apply z-10 flex border border-solid bg-card border-secondary-color py-2 px-1 rounded-xl mt-1 lg: mt-0;
 
                     svg {
                         @apply text-[#64748B] w-8 h-8 mx-2;
@@ -31,13 +31,13 @@
         }
 
         .more-info {
-            @apply mt-24 lg:mt-8 lg:px-10;
+            @apply mt-24 lg: mt-8 lg:px-10;
 
             .top {
                 @apply flex justify-between items-center;
 
                 p {
-                    @apply text-xl lg:text-5xl font-bold;
+                    @apply text-xl lg: text-5xl font-bold;
 
                     svg {
                         @apply inline;
@@ -45,7 +45,7 @@
                 }
 
                 button {
-                    @apply border border-solid border-primary-color bg-card bg-opacity-10 px-4 py-2 text-base lg:text-lg rounded-xl;
+                    @apply border border-solid border-primary-color bg-card bg-opacity-10 px-4 py-2 text-base lg: text-lg rounded-xl;
                 }
             }
 
@@ -66,13 +66,13 @@
                 transform: translateX(-17%);
 
                 .image-cont {
-                    @apply mx-4 relative w-[45%] h-40 lg:h-[20rem] rounded-xl overflow-hidden;
+                    @apply mx-4 relative w-[150%] h-[18rem] lg: h-[20rem] rounded-xl overflow-hidden;
                 }
             }
         }
 
         .org-info {
-            @apply border-t border-solid bg-card  border-primary-color rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
+            @apply border-t border-solid bg-card border-primary-color rounded-2xl p-8 -mt-32 lg: -mt-24 z-10;
             clip-path: polygon(68% 9.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 9.5%);
 
             @screen lg {
@@ -88,22 +88,22 @@
             }
 
             .more-org-info {
-                @apply flex flex-col lg:flex-row justify-between items-center mt-4;
+                @apply flex flex-col lg: flex-row justify-between items-center mt-4;
 
                 .text-cont {
-                    @apply w-full mb-2 lg:mb-0 lg:w-[55%] flex gap-6 lg:gap-0 lg:block justify-between items-center;
+                    @apply w-full mb-2 lg: mb-0 lg:w-[55%] flex gap-6 lg:gap-0 lg:block justify-between items-center;
 
                     .name {
-                        @apply text-xl lg:text-4xl font-bold mb-2;
+                        @apply text-xl lg: text-4xl font-bold mb-2;
                     }
 
                     .mini-text {
-                        @apply lg:text-[.9rem] text-xs;
+                        @apply lg: text-[.9rem] text-xs;
                     }
                 }
 
                 .info-cont {
-                    @apply w-full lg:w-2/5;
+                    @apply w-full lg: w-2/5;
 
                     .the-info {
                         @apply bg-[#1E293B] rounded-xl flex justify-between items-center p-4 text-white;
