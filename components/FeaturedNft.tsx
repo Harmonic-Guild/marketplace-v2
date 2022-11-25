@@ -112,7 +112,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
     return (
         <div className={styles.container}>
             <div className=" text-center  font-bold text-gray-900 mb-6">
-                <p className="text-secondary mb-2">
+                <p className="text-secondary-color mb-2">
                     <GiStarShuriken className="inline w-6 h-5" />
                 </p>
                 <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>

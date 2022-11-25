@@ -24,8 +24,8 @@ module.exports = {
         },
         extend: {
             colors: {
-                primary: config["primary-color"],
-                secondary: config["secondary-color"],
+                'primary-color': config['primary-color'],
+                'secondary-color': config['secondary-color'],
                 card: config["card-color"],
                 "mp-dark": {
                     1: "#252B42",

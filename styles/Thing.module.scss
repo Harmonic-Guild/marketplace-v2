@@ -16,7 +16,7 @@
     }
 
     .history-cont {
-        @apply bg-secondary p-4 rounded-xl w-full lg:min-w-[20rem] mt-8 lg:mt-0;
+        @apply bg-secondary-color p-4 rounded-xl w-full lg:min-w-[20rem] mt-8 lg:mt-0;
 
         .inner-cont {
             @apply max-h-40 overflow-y-auto pr-2;
@@ -30,7 +30,7 @@
             }
 
             &::-webkit-scrollbar-thumb {
-                @apply bg-primary rounded-lg border-none;
+                @apply bg-primary-color rounded-lg border-none;
             }
         }
 
@@ -47,7 +47,7 @@
         }
 
         .col-name {
-            @apply flex justify-between items-center border-b border-primary border-solid p-1;
+            @apply flex justify-between items-center border-b border-primary-color border-solid p-1;
 
             p {
                 @apply font-semibold;

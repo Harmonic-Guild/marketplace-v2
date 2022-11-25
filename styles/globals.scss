@@ -18,7 +18,7 @@ html {
     @apply xl:bg-yellow-300 lg:bg-green-300 md:bg-purple-300 sm:bg-red-800 xs:bg-pink-300;
 }
 .btnColor {
-    @apply text-white bg-gradient-to-r from-secondary to-primary;
+    @apply text-white bg-gradient-to-r from-secondary-color to-primary-color;
 }
 
 .btnColor svg {
@@ -69,18 +69,18 @@ button {
 }
 
 .slick-arrow.slick-next {
-    @apply rounded-full bg-primary p-3  -right-10 opacity-100 md:opacity-100;
+    @apply rounded-full bg-primary-color p-3  -right-10 opacity-100 md:opacity-100;
 }
 .slick-arrow.slick-prev {
     width: 20px;
     height: 20px;
-    @apply rounded-full bg-primary p-3  -left-10 opacity-100 md:opacity-100;
+    @apply rounded-full bg-primary-color p-3  -left-10 opacity-100 md:opacity-100;
 }
 
 .slick-arrow {
     &.slick-prev,
     &.slick-next {
-        @apply bg-gradient-radial from-secondary to-primary;
+        @apply bg-gradient-radial from-secondary-color to-primary-color;
     }
 
     &::before {
@@ -125,7 +125,7 @@ button {
 .slick-dots {
     li {
         button {
-            @apply bg-secondary rounded-full w-3 h-3 transition-all duration-150 ease-in-out;
+            @apply bg-secondary-color rounded-full w-3 h-3 transition-all duration-150 ease-in-out;
 
             &::before {
                 @apply text-transparent;
@@ -134,7 +134,7 @@ button {
 
         &.slick-active {
             button {
-                @apply bg-primary w-6;
+                @apply bg-primary-color w-6;
                 transform: translateX(-7px);
 
                 &::before {

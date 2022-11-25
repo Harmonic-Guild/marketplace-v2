@@ -1,10 +1,10 @@
-$primary: #ea6230;
-$secondary: #fbc026;
+// $primary-color: #ea6230;
+// $secondary-color: #fbc026;
 
 @mixin buttonColor {
-    @apply text-white bg-gradient-to-r from-secondary to-primary;
+    @apply text-white bg-gradient-to-l from-primary-color to-secondary-color;
 
     &:hover {
-        @apply bg-gradient-to-l from-secondary to-primary;
+        @apply bg-gradient-to-l from-secondary-color to-primary-color;
     }
 }

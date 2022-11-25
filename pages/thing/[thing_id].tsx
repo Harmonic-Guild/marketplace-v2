@@ -220,7 +220,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         alt={"alt"}
                                     />
                                     <div className="flex gap-5 justify-end py-4">
-                                        <div className="bg-primary p-2 rounded-full cursor-pointer" onClick={() => setEnlarge(true)}>
+                                        <div className="bg-primary-color p-2 rounded-full cursor-pointer" onClick={() => setEnlarge(true)}>
                                             <CgArrowsExpandRight color="white" />
                                         </div>
                                     </div>
@@ -244,8 +244,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
                     {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
                     <div className="">
-                        <div className="mt-10 border-b md:border-b-0 border-primary pb-4">
-                            <div className="border-b border-primary mb-3 pb-3">
+                        <div className="mt-10 border-b md:border-b-0 border-primary-color pb-4">
+                            <div className="border-b border-primary-color mb-3 pb-3">
                                 <span className="text-3xl font-bold">Description</span>
                             </div>
 
@@ -294,7 +294,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                 <div className="flex items-center justify-between gap-3">
                                     <p className="text-2xl font-bold">Details</p>
                                     <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                                    <div className="border-2 border-primary rounded-full p-2 px-3">
+                                    <div className="border-2 border-primary-color rounded-full p-2 px-3">
                                         <a
                                             href={`https://explorer.testnet.near.org/transactions/${things?.title}`}
                                             target="_blank"
@@ -303,7 +303,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                             <Near className="w-4 h-4" fill="black" />
                                         </a>
                                     </div>
-                                    <div className="border-2 border-primary rounded-full p-1 px-3">
+                                    <div className="border-2 border-primary-color rounded-full p-1 px-3">
                                         <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
                                             <div className="w-6 h-6">
                                                 <Image src={Arweave} className="" />
@@ -312,14 +312,14 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     </div>
                                 </div>
 
-                                <div className="bg-primary rounded-lg my-8 py-2">
+                                <div className="bg-primary-color rounded-lg my-8 py-2">
                                     <p className="text-center text-white text-lg">
                                         {tokensData?.all.aggregate.count} Tokens Minted
                                     </p>
                                 </div>
 
                                 {/* <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-10 mt-4">
-                                    <div className="border-b border-primary lg:border-0 w-full lg:w-1/4 pb-2 lg:pb-0">
+                                    <div className="border-b border-primary-color lg:border-0 w-full lg:w-1/4 pb-2 lg:pb-0">
                                         <p className="text-2xl font-bold">Perks</p>
                                     </div>
                                     <span className="text-lg w-4/5 lg:w-3/4">
@@ -345,7 +345,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     />
                                 )}
                             </div>
-                        ): <div className="bg-primary text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
+                        ): <div className="bg-primary-color text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
                     </div>
                 </div>
             </div>

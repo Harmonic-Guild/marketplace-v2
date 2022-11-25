@@ -99,7 +99,7 @@ const NFT = ({
     }, [tokensData]);
 
     return (
-        <div className="w-full h-auto border border-primary rounded-2xl bg-card bg-opacity-10">
+        <div className="w-full h-auto border border-primary-color rounded-2xl bg-card bg-opacity-10">
             <div className="p-4">
                 {sellModal && <MintNft closeModal={() => showSellModal(false)} thingId={thing_id} tokenId={tokenId} title={title} />}
                 <div>
@@ -114,7 +114,7 @@ const NFT = ({
                                 objectFit="cover"
                                 alt={title}
                             />
-                            <div className="absolute bottom-2 right-2 text-primary" onClick={() => toggleFullScreen(resolveUrl(media, media_hash))}>
+                            <div className="absolute bottom-2 right-2 text-primary-color" onClick={() => toggleFullScreen(resolveUrl(media, media_hash))}>
                                 <BsCircle className="relative h-8 w-8" />
                                 <AiOutlineExpandAlt title="full screen" className="w-4 h-4 absolute -mt-6 ml-2" />
                             </div>
@@ -133,10 +133,10 @@ const NFT = ({
                         {metaData.length? (
                             <>
                                 {metaData.price}
-                                <button className="border hover:text-primary hover:bg-secondary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming&nbsp;soon)</button> 
+                                <button className="border hover:text-primary-color hover:bg-secondary-color rounded-xl outline-none bg-card border-secondary-color py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming&nbsp;soon)</button> 
                             </> 
                         ): (
-                            <button className="border hover:text-primary hover:bg-secondary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" onClick={()=> showSellModal(true)}>List on sale</button>  
+                            <button className="border hover:text-primary-color hover:bg-secondary-color rounded-xl outline-none bg-card border-secondary-color py-2 font-medium px-4 w-2/3 text-gray-800" onClick={()=> showSellModal(true)}>List on sale</button>  
                         )} 
                         </div>
                         {/* {lists.length && <div className="text-center mt-2 text-gray-600">Currently on sale at {formatNearAmount(Number(lists[0]?.price).toLocaleString('fullwide', { useGrouping: false }),5)} Near</div>} */}
@@ -208,7 +208,7 @@ const MyOwn = () => {
                 <div className="h-screen w-screen bg-gray-900 fixed left-0 top-0 ">
                     <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
                         <Image src={image} layout="fill" objectFit="contain" />
-                        <div className="absolute bottom-2 right-8 text-primary" onClick={() => setFullScreen(false)}>
+                        <div className="absolute bottom-2 right-8 text-primary-color" onClick={() => setFullScreen(false)}>
                             <BsCircle className="relative h-8 w-8" />
                             <AiOutlineExpandAlt title="close screen" className="w-4 h-4 absolute -mt-6 ml-2" />
                         </div>
@@ -217,7 +217,7 @@ const MyOwn = () => {
             )}
             {loadingTokensData ? (
                 <div className="flex justify-center items-center py-60">
-                    <div className="h-5 w-5 bg-primary animate-pulse rounded-full"></div>
+                    <div className="h-5 w-5 bg-primary-color animate-pulse rounded-full"></div>
                 </div>
             ) : (
                 <>
