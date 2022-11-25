@@ -3,7 +3,7 @@ import Near from "../icons/near.svg";
 
 const PurchaseNft = ({ buy, price, isConnected }: { buy: any; price: string; isConnected: boolean }) => {
     return (
-        <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary bg-secondary rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
+        <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary-color bg-secondary-color rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
             <div className="flex items-center justify-between gap-2 mb-3 lg:mb-0 font-medium text-lg">
                 <div>Get it at:</div>
                 <div className="font-bold text-xl">{price}</div>
@@ -15,7 +15,7 @@ const PurchaseNft = ({ buy, price, isConnected }: { buy: any; price: string; isC
                 <button
                     onClick={buy}
                     className={`w-full py-2 rounded-md text-lg font-bold text-gray-900 px-5 border border-card ${
-                        isConnected ? "bg-card hover:bg-primary" : "border border-secondary py-2 cursor-not-allowed"
+                        isConnected ? "bg-card hover:bg-primary-color" : "border border-secondary-color py-2 cursor-not-allowed"
                     }`}
                 >
                     Purchase
