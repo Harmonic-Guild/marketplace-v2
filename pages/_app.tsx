@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         //  - This must be an exact match of your domain.
         //  - If you're using www. for your domain, make sure you include that here.
         Fathom.load(process.env.NEXT_PUBLIC_YOUR_FATHOM_TRACKING_CODE!, {
-            includedDomains: ["testnet.harmonicguild.io"],
+            includedDomains: [process.env.NEXT_PUBLIC_DOMAIN_NAME!],
         });
 
         function onRouteChangeComplete() {
