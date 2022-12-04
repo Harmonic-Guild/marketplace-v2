@@ -31,9 +31,9 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["header-image-cont"]}>
                         <Image
                             src={config.logo3}
-                            className="object-contain mx-auto rounded-lg"
+                            className="mx-auto rounded-lg"
                             layout="fill"
-                            objectFit="contain"
+                            objectFit="cover"
                             alt={"header"}
                         />
                     </div>
