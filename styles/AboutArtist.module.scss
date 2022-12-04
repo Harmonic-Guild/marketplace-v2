@@ -10,7 +10,7 @@
             @apply w-full relative h-40 lg:h-60;
 
             .header-image-cont {
-                @apply relative rounded-xl overflow-hidden h-32;
+                @apply relative rounded-xl overflow-hidden h-full;
             }
 
             .mini-cont {
