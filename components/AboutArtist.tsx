@@ -20,13 +20,13 @@ const AboutArtist: FC<Props> = () => {
 
     return (
         <div className={styles.container}>
-            <div className="text-center">
+            {/* <div className="text-center">
                 <p className="text-secondary mb-2">
                     <GiStarShuriken className="inline w-6 h-5" />
                 </p>
-                <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> About Artist </h2>
-            </div>
-            <div className={styles["social-box"]}>
+                <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> </h2>
+            </div> */}
+            {/* <div className={styles["social-box"]}>
                 <div className={styles.header}>
                     <div className={styles["header-image-cont"]}>
                         <Image
@@ -63,7 +63,7 @@ const AboutArtist: FC<Props> = () => {
                         {config.description}
                     </p>
                 </div>
-            </div>
+            </div> */}
 
             <div className={styles["org-cont"]}>
                 <div className={styles["outer-image-cont"]}>
