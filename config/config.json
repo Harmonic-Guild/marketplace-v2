@@ -4,18 +4,16 @@
     "infoLink": "",
     "igLink": "",
     "twitterLink": "",
-    "logo1": "https://ik.imagekit.io/epyh88t15/7ds-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1670146525975",
-    "logo2": "https://ik.imagekit.io/epyh88t15/7ds-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1670146525975",
-    "logo3": "https://ik.imagekit.io/epyh88t15/7ds-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1670146525975",
-    "profile":"https://ik.imagekit.io/epyh88t15/7ds-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1670146525975",
+    "logo1": "https://ik.imagekit.io/epyh88t15/harmonic-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669053507785",
+    "logo2": "https://ik.imagekit.io/epyh88t15/harmonic-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669053507785",
+    "logo3": "https://ik.imagekit.io/epyh88t15/harmonic-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669053507785",
+    "profile":"https://ik.imagekit.io/epyh88t15/harmonic-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669053507785",
 
     "images": [
-        "https://ik.imagekit.io/epyh88t15/governance.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132293511",
-        "https://ik.imagekit.io/epyh88t15/nft.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132293116",
         "https://ik.imagekit.io/epyh88t15/we-build.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132292846"
     ],
 
     "primary-color": "rgba(35, 50, 71, 1)",
     "secondary-color": "rgba(81, 116, 166, 1)",
-    "card-color": "199, 214, 255"
+    "card-color": "rgb(199, 214, 255)"
 }
