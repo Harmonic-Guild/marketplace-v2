@@ -27,6 +27,7 @@ const FETCH_TOKENS = gql`
             media_hash
             media
             base_uri
+            nft_contract_id
             description
             animation_type: reference_blob(path: "$.animation_type")
             animation_hash :reference_blob(path: "$.animation_hash")
@@ -34,8 +35,20 @@ const FETCH_TOKENS = gql`
     }
 `;
 
+const FETCH_LISTING = gql`
+query FetchActiveListings($metaId: String!) {
+    mb_views_active_listings(
+      where: {metadata_id: {_eq: $metaId}}
+    ) {
+      price
+      title
+    }
+  }
+`
+
 const NFT = ({
     thing_id,
+    metadata_id,
     toggle,
     tokenId,
     media,
@@ -46,6 +59,7 @@ const NFT = ({
 }: {
     thing_id: string;
     toggle: any;
+    metadata_id: string;
     tokenId: string;
     media: string;
     title: string;
@@ -59,8 +73,33 @@ const NFT = ({
         toggle(media);
     };
 
+    const [metaData, setMetaData] = useState<any>([])
+
+    const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery(FETCH_LISTING, {
+        variables: {
+            metaId: "",
+        },
+    });
+
+    useEffect(() => {
+        if(!metadata_id) return
+        
+        getTokens({
+            variables: {
+                metaId: metadata_id
+            },
+        });
+    }, [metadata_id]);
+
+    useEffect(() => {
+        if (!tokensData) return;
+
+        setMetaData(tokensData.mb_views_active_listings);
+        
+    }, [tokensData]);
+
     return (
-        <div className="w-full h-auto border border-purple-border rounded-2xl bg-purple-bg">
+        <div className="w-full h-auto border border-primary rounded-2xl bg-card bg-opacity-10">
             <div className="p-4">
                 {sellModal && <MintNft closeModal={() => showSellModal(false)} thingId={thing_id} tokenId={tokenId} title={title} />}
                 <div>
@@ -68,14 +107,14 @@ const NFT = ({
                     animation_type === "image/jpeg" ||
                     animation_type === "image/png" ||
                     animation_type === "image/gif" ? (
-                        <div className="relative mx-auto rounded-lg overflow-hidden w-full aspect-square">
+                        <div className="relative mx-auto rounded-lg overflow-hidden w-full aspect-square z-0">
                             <Image
                                 src={resolveUrl(media, media_hash)}
                                 layout='fill'
                                 objectFit="cover"
                                 alt={title}
                             />
-                            <div className="absolute bottom-2 z-10 right-2 text-primary" onClick={() => toggleFullScreen(resolveUrl(media, media_hash))}>
+                            <div className="absolute bottom-2 right-2 text-primary" onClick={() => toggleFullScreen(resolveUrl(media, media_hash))}>
                                 <BsCircle className="relative h-8 w-8" />
                                 <AiOutlineExpandAlt title="full screen" className="w-4 h-4 absolute -mt-6 ml-2" />
                             </div>
@@ -91,9 +130,14 @@ const NFT = ({
                     <div className="px-30 py-2">
                         <div className="text-center font-bold text-lg">{title}</div>
                         <div className="w-full flex justify-center mt-6">
-                            <button className="btnColor px-4 py-2 rounded-lg mx-center w-4/5" onClick={() => showSellModal(true)}>
-                                Sell NFT
-                            </button>
+                        {metaData.length? (
+                            <>
+                                {metaData.price}
+                                <button className="border hover:text-primary hover:bg-secondary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming&nbsp;soon)</button> 
+                            </> 
+                        ): (
+                            <button className="border hover:text-primary hover:bg-secondary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" onClick={()=> showSellModal(true)}>List on sale</button>  
+                        )} 
                         </div>
                         {/* {lists.length && <div className="text-center mt-2 text-gray-600">Currently on sale at {formatNearAmount(Number(lists[0]?.price).toLocaleString('fullwide', { useGrouping: false }),5)} Near</div>} */}
                     </div>
@@ -110,6 +154,7 @@ type MetaData = {
     media_hash: string;
     animation_url: string;
     title: string;
+    nft_contract_id: string;
     animation_type: string;
     base_uri: string;
     description: string;
@@ -150,7 +195,6 @@ const MyOwn = () => {
 
         setMetaData(tokensData.mb_views_nft_owned_tokens);
 
-        console.log(tokensData, "*-*-*--*-*-");
     }, [tokensData]);
 
     const toggle = (image: any) => {
@@ -161,7 +205,7 @@ const MyOwn = () => {
     return (
         <div className={styles.container}>
             {fullScreen && (
-                <div className="h-screen w-screen bg-gray-900 z-50 fixed left-0 top-0 ">
+                <div className="h-screen w-screen bg-gray-900 fixed left-0 top-0 ">
                     <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
                         <Image src={image} layout="fill" objectFit="contain" />
                         <div className="absolute bottom-2 right-8 text-primary" onClick={() => setFullScreen(false)}>
@@ -194,6 +238,7 @@ const MyOwn = () => {
                                     title={meta.title}
                                     animation_url={meta.animation_url}
                                     animation_type={meta.animation_type}
+                                    metadata_id={meta.metadata_id}
                                 />
                             ))}
                         </div>

@@ -1,0 +1,7 @@
+.container {
+    @apply h-screen w-screen fixed top-0 left-0 z-50 flex justify-center items-center;
+
+    .modal {
+        @apply align-middle mx-auto w-[90%] max-w-2xl relative rounded-xl p-8 bg-white;
+    }
+}

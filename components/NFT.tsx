@@ -6,7 +6,7 @@ import Image from "next/image";
 // import { AiOutlineRight } from "react-icons/ai";
 // import { BiShareAlt } from "react-icons/bi";
 // import { BsCircle, BsPlayCircle } from "react-icons/bs";
-import { Token, MetaData } from '../constants/interfaces';
+import { Token } from '../constants/interfaces';
 
 import styles from "../styles/NFT.module.scss";
 import { resolveUrl } from '../helpers/resolveUrl';

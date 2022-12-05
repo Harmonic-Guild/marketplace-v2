@@ -2,6 +2,12 @@
 module.exports = {
     reactStrictMode: true,
     images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "*.arweave.net",
+            },
+        ],
         domains: [
             "arweave.net",
             "coldcdn.com",
@@ -12,7 +18,16 @@ module.exports = {
             "source.unsplash.com",
             "abs.twimg.com",
             "images.unsplash.com",
-            "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net"
+            // "harmonicguild-my.sharepoint.com",
+            "ik.imagekit.io",
+            "p7rdszi5bvgkupb4feipmcni36rul4l2k2h6qtrvimymwtobg3ba.arweave.net",
+            "randomuser.me",
+            // "centralindia1-mediap.svc.ms",
+            "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net",
+            "harmonicguild-my.sharepoint.com",
+            "centralindia1-mediap.svc.ms",
+            "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net",
+            "res.cloudinary.com",
         ],
     },
     webpack(config) {

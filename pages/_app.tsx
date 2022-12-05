@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
 import { Network } from 'mintbase'
+import config from '../config/config.json'
 
 const Header = dynamic(() => import("../components/Header"));
 const Footer = dynamic(() => import("../components/Footer"));
@@ -47,8 +48,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <>
             <NextProgress options={{ showSpinner: false }} color={"#0F172A"} />
             <Head>
-                <title>MarketPlace</title>
-                <link rel="icon" href="/favicon.ico" />
+                <title>{config.title}</title>
+                <link rel="icon" href={config.logo2} />
             </Head>
             <WalletProvider apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""} network={Network[process.env.NEXT_PUBLIC_NETWORK as keyof typeof Network]}>
                 <ApolloProvider client={apolloClient}>

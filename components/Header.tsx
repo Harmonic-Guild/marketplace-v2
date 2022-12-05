@@ -3,11 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
 import { useWallet } from "../services/providers/MintbaseWalletContext";
-import { BsMoonStars, BsSun, BsDot, BsLayoutTextSidebarReverse } from "react-icons/bs";
-import { FiMenu, FiX, FiUsers } from "react-icons/fi";
+import { BsLayoutTextSidebarReverse } from "react-icons/bs";
+import { FiMenu, FiX } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
 import Near from "../icons/near.svg";
-import logo from "../assets/harmonic-logo.png";
+import config from '../config/config.json'
 
 import styles from "../styles/Header.module.scss";
 
@@ -22,7 +22,7 @@ const Header = () => {
     const router = useRouter();
 
     const [toggleMenu, setToggleMenu] = useState<boolean>(true);
-    const [darkMode, setDarkMode] = useState<boolean>(true);
+    // const [darkMode, setDarkMode] = useState<boolean>(true);
     const [toggleIcons, setToggleIcons] = useState<boolean>();
     const [currentPath, setCurrentPath] = useState<string>();
     const { wallet, isConnected } = useWallet();
@@ -48,9 +48,11 @@ const Header = () => {
             <div className={styles['inner-nav-cont']}>
                 <Link href="/" passHref>
                     <a className="py-6 relative w-24 lg:w-40 h-20 inline-block">
-                        <Image src={logo.src} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
+                        <Image src={config.logo1} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
                     </a>
                 </Link>
+
+                {/* <Image src={config.logo1} layout="fill" objectFit="contain" alt="" className="cursor-pointer" /> */}
 
                 <div className={styles["mobile-nav-cont"]}>
                     {toggleMenu ? (

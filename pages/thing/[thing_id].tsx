@@ -154,8 +154,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     };
 
     const buy = (bid: number) => {
-        // const token_Id = tokensData.listings[0]?.token.id!;
-        const token_Id = thing_id;
+        const token_Id = tokensData.listings[0]?.token.id! + ":" + thing_id.split(":")[0];
+        //const token_Id = thing_id;
 
         if (tokensData.listings[0]?.kind === 'simple') {
             wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress } );
@@ -345,7 +345,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     />
                                 )}
                             </div>
-                        ): <div className="bg-slate-800 text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
+                        ): <div className="bg-primary text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
                     </div>
                 </div>
             </div>

@@ -4,13 +4,13 @@
     @apply my-10 w-full;
 
     .social-box {
-        @apply bg-[#f8f5ff] border border-solid border-[#94a3b8] rounded-2xl w-[90%] max-w-3xl mx-auto p-8 my-8;
+        @apply bg-card bg-opacity-10 border border-solid border-primary rounded-2xl w-[90%] max-w-3xl mx-auto p-8 my-8;
 
         .header {
             @apply w-full relative h-40 lg:h-60;
 
             .header-image-cont {
-                @apply relative h-full rounded-xl overflow-hidden;
+                @apply relative rounded-xl overflow-hidden h-32;
             }
 
             .mini-cont {
@@ -21,7 +21,7 @@
                 }
 
                 .icons-cont {
-                    @apply z-10 flex border border-solid bg-white border-[#E2E8F0] py-2 px-1 rounded-xl mt-1 lg:mt-0;
+                    @apply z-10 flex border border-solid bg-card border-secondary py-2 px-1 rounded-xl mt-1 lg:mt-0;
 
                     svg {
                         @apply text-[#64748B] w-8 h-8 mx-2;
@@ -45,18 +45,18 @@
                 }
 
                 button {
-                    @apply border border-solid border-[#9E94DA] bg-[#F8F5FF] px-4 py-2 text-base lg:text-lg rounded-xl;
+                    @apply border border-solid border-primary bg-card bg-opacity-10 px-4 py-2 text-base lg:text-lg rounded-xl;
                 }
             }
 
             .artist-info {
-                @apply text-[#94A3B8] w-full max-w-lg text-xs;
+                @apply text-[#28052b] w-full max-w-lg text-xs mt-2;
             }
         }
     }
 
     .org-cont {
-        @apply bg-[#f8f5ff] border border-solid border-[#94a3b8] rounded-2xl w-[90%] max-w-3xl mx-auto my-8;
+        @apply bg-card bg-opacity-10 border border-solid border-primary rounded-2xl w-[90%] max-w-3xl mx-auto my-8;
 
         .outer-image-cont {
             @apply overflow-hidden rounded-xl m-8;
@@ -66,13 +66,13 @@
                 transform: translateX(-17%);
 
                 .image-cont {
-                    @apply mx-4 relative w-[45%] h-40 lg:h-[20rem] rounded-xl overflow-hidden;
+                    @apply mx-4 relative w-[150%] h-[18rem] lg:h-[20rem] rounded-xl overflow-hidden items-center;
                 }
             }
         }
 
         .org-info {
-            @apply border-t border-solid bg-[#ede8fb] border-[#94a3b8] rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
+            @apply border-t border-solid bg-card  border-primary rounded-2xl p-8 -mt-32 lg:-mt-24 z-10;
             clip-path: polygon(68% 9.51%, 72.13% 30.88%, 100% 30.88%, 100% 100%, 0px 100%, -1px 31.89%, 25.91% 31.89%, 31.04% 9.5%);
 
             @screen lg {
