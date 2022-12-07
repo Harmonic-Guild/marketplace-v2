@@ -13,7 +13,7 @@
         "https://ik.imagekit.io/epyh88t15/we-build.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132292846"
     ],
 
-    "primary-color": "rgba(35, 50, 71, 1)",
-    "secondary-color": "rgba(81, 116, 166, 1)",
-    "card-color": "rgb(199, 214, 255)"
+    "primary-color": "#233247",
+    "secondary-color": "#5174a6",
+    "card-color": "#c7d6ff"
 }
