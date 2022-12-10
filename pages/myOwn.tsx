@@ -205,7 +205,7 @@ const MyOwn = () => {
     return (
         <div className={styles.container}>
             {fullScreen && (
-                <div className="h-screen w-screen bg-gray-900 fixed left-0 top-0 ">
+                <div className="h-screen w-screen bg-gray-900 fixed left-0 top-0 z-50">
                     <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
                         <Image src={image} layout="fill" objectFit="contain" />
                         <div className="absolute bottom-2 right-8 text-primary" onClick={() => setFullScreen(false)}>
