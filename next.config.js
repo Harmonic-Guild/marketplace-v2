@@ -18,7 +18,7 @@ module.exports = {
             "source.unsplash.com",
             "abs.twimg.com",
             "images.unsplash.com",
-            // "harmonicguild-my.sharepoint.com",
+            "deep-skills-p-dev-images.s3.eu-central-1.amazonaws.com",
             "ik.imagekit.io",
             "p7rdszi5bvgkupb4feipmcni36rul4l2k2h6qtrvimymwtobg3ba.arweave.net",
             "randomuser.me",

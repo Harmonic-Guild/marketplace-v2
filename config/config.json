@@ -1,19 +1,19 @@
 {
-    "title": "C1",
-    "description": "C1 started in 2021 through a collaborative project between artists from Nigeria, Cameroon, and Canada. What started as a collaboration track under DAO Records and the NxM guild, quickly shifted gears when learning of each other’s passion for philanthropy and community. A group of artists wanting to help other artists.",
-    "logo1": "https://ik.imagekit.io/epyh88t15/c1-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669132295591",
-    "logo2": "https://ik.imagekit.io/epyh88t15/c1-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669132295591",
-    "logo3": "https://ik.imagekit.io/epyh88t15/c1-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669132295591",
-    "infoLink": "https://www.c1foundation.io/",
-    "igLink": "https://instagram.com/Dum_unu",
-    "twitterLink": "https://twitter.com/dum_unu",
-    "profile":"https://ik.imagekit.io/epyh88t15/c1-logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1669132295591",
+    "title": "Podlabs",
+    "description": "Lorem Ipsum dolor sit amet",
+    "logo1": "https://ik.imagekit.io/epyh88t15/podlabs/Color_logo_-_no_background_-_Copy.png?ik-sdk-version=javascript-1.4.3&updatedAt=1670939215455",
+    "logo2": "https://ik.imagekit.io/epyh88t15/podlabs/Black_logo_-_no_background.png?ik-sdk-version=javascript-1.4.3&updatedAt=1670939215812",
+    "logo3": "https://ik.imagekit.io/epyh88t15/podlabs/Color_logo_-_no_background_-_Copy.png?ik-sdk-version=javascript-1.4.3&updatedAt=1670939215455",
+    "infoLink": "",
+    "igLink": "",
+    "twitterLink": "",
+    "profile":"https://ik.imagekit.io/epyh88t15/podlabs/82817062_padded_logo.png?ik-sdk-version=javascript-1.4.3&updatedAt=1670939705523",
     "favicon":"https://gjd626.p3cdn1.secureserver.net/wp-content/uploads/2021/08/cropped-C1FoundationLogo-150x150.png",
     "images": [
         "https://ik.imagekit.io/epyh88t15/we-build.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132292846"
     ],
 
-    "primary-color": "#ea6230",
-    "secondary-color": "#fbc026",
+    "primary-color": "#8DC63F",
+    "secondary-color": "#BE1E2D",
     "card-color": "#ffe2bd"
 }
