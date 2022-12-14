@@ -115,8 +115,8 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
                 <p className="text-secondary-color mb-2">
                     <GiStarShuriken className="inline w-6 h-5" />
                 </p>
-                <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
-                <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
+                <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2">Featured NFTs</h2>
+                <p className="lg:text-2xl text-lg text-mp-dark-2">New Arrivals</p>
             </div>
             <Slider {...settings}>
                 {tokens.map((token: Token, index) => (
