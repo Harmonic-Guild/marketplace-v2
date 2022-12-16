@@ -332,7 +332,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             </div>
                         </div>
 
-                        {tokensData?.listings.length ? (
+                        {tokensData?.listings.length && (tokensData.listings[0].market_id === process.env.NEXT_PUBLIC_marketAddress) ? (
                             <div>
                                 {tokensData?.listings[0]?.kind === 'simple' ? (
                                     <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
