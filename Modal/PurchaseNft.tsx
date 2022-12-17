@@ -25,7 +25,7 @@ const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: an
 
 
     
-    const tokenId = tokensData.listings[0]?.token.id! + ":" + thingId.split(":")[0];
+    const tokenId = tokensData.listings[0]?.token.id! //+ ":" + thingId.split(":")[0];
 
     const newBuy = useCallback(async () => {
     
