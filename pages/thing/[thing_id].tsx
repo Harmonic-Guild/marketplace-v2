@@ -158,9 +158,10 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         const marketAddress = tokensData.listings[0]?.market_id;
 
         if (tokensData.listings[0]?.kind === 'simple') {
-            wallet?.makeOffer(token_Id, tokenPrice, { marketAddress } );
+            //wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: process.env.NEXT_PUBLIC_marketAddress } );
+            wallet?.makeOffer(token_Id, tokenPrice, { marketAddress: tokensData.listings[0].market_id } );
         } else {
-            wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress });
+            wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress: tokensData.listings[0].market_id });
         }
     };
 

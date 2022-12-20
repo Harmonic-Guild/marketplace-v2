@@ -66,7 +66,7 @@
                 transform: translateX(-17%);
 
                 .image-cont {
-                    @apply mx-4 relative w-[150%] h-[18rem] lg:h-[20rem] rounded-xl overflow-hidden;
+                    @apply mx-4 relative w-[150%] h-[18rem] lg:h-[20rem] rounded-xl overflow-hidden items-center;
                 }
             }
         }
