@@ -138,15 +138,6 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     useEffect(() => {
         if (!tokensData) return;
         setThing(tokensData.metadata[0]);
-
-        // const tokens = tokensData.metadata[0].tokens.map((token: Tokens) => {
-        //     return token;
-        // });
-        // const allTokens = tokensData.thing[0].allTokens.map((token: any) => {
-        //     return token;
-        // });
-        // setTokens(tokens);
-        // setAllTokens(allTokens);
     }, [tokensData]);
 
     const toggleDiscription = () => {
@@ -318,24 +309,24 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         {tokensData?.all.aggregate.count} Tokens Minted
                                     </p>
                                 </div>
-
-                                {/* <div className="flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-10 mt-4">
-                                    <div className="border-b border-primary-color lg:border-0 w-full lg:w-1/4 pb-2 lg:pb-0">
-                                        <p className="text-2xl font-bold">Perks</p>
-                                    </div>
-                                    <span className="text-lg w-4/5 lg:w-3/4">
-                                        <li>First Perk</li>
-                                        <li>Second Perk</li>
-                                        <li>Exclusive access to comunity</li>
-                                    </span>
-                                </div> */}
                             </div>
                         </div>
-
-                        {tokensData?.listings.length ? (
+                        {tokensData?.listings.length 
+                        //&& (tokensData.listings[0].market_id === process.env.NEXT_PUBLIC_marketAddress) 
+                        ? (
                             <div>
                                 {tokensData?.listings[0]?.kind === 'simple' ? (
-                                    <PurchaseNft buy={buy} price={price!} isConnected={isConnected} />
+                                    <PurchaseNft
+                                     buy={buy} 
+                                     ids={{
+                                            tokenId:tokensData.listings[0]?.token.id!,
+                                            marketId: tokensData.listings[0]?.market_id,
+                                            contractId: tokensData.metadata[0]?.contract.id
+                                        }} 
+                                     thingId={thing_id} 
+                                     price={price!} 
+                                     isConnected={isConnected} 
+                                    />
                                 ) : (
                                     <MakeOffer
                                         buy={buy}
