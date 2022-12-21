@@ -51,7 +51,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <title>{config.title}</title>
                 <link rel="icon" href={config.logo2} />
             </Head>
-            <WalletProvider apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""} network={Network[process.env.NEXT_PUBLIC_NETWORK as keyof typeof Network]}>
+            <WalletProvider 
+                apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""}
+                network={Network[process.env.NEXT_PUBLIC_NETWORK as keyof typeof Network]}
+            >
                 <ApolloProvider client={apolloClient}>
                     <Header />
                     <Component {...pageProps} />
