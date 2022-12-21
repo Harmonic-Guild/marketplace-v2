@@ -36,9 +36,9 @@ const FETCH_TOKENS = gql`
 `;
 
 const FETCH_LISTING = gql`
-query FetchActiveListings($metaId: String!) {
+query FetchActiveListings($metaId: String!, $ownerId: String!) {
     mb_views_active_listings(
-      where: {metadata_id: {_eq: $metaId}}
+      where: {metadata_id: {_eq: $metaId}, listed_by: {_eq: $ownerId}}
     ) {
       price
       title
@@ -74,10 +74,12 @@ const NFT = ({
     };
 
     const [metaData, setMetaData] = useState<any>([])
+    const {wallet} = useWallet()
 
     const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery(FETCH_LISTING, {
         variables: {
             metaId: "",
+            ownerId: ""
         },
     });
 
@@ -86,7 +88,8 @@ const NFT = ({
         
         getTokens({
             variables: {
-                metaId: metadata_id
+                metaId: metadata_id,
+                ownerId: wallet?.activeAccount?.accountId!,
             },
         });
     }, [metadata_id]);
