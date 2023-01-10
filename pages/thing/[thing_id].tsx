@@ -172,8 +172,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     return (
         <div className={`container ${styles.container}`}>
             {enlarge && (
-                <div className={styles.enlarged}>
-                    <div className={styles["cancel-cont"]} onClick={() => setEnlarge(false)}>
+                <div className={styles.enlarged} onClick={() => setEnlarge(false)}>
+                    <div className={styles["cancel-cont"]}>
                         <GiCancel color="white" size={30} />
                     </div>
                     {things && (
@@ -285,26 +285,24 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                 <div className="flex items-center justify-between gap-3">
                                     <p className="text-2xl font-bold">Details</p>
                                     <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                                    <div className="border-2 border-primary-color rounded-full p-2 px-3">
-                                        <a
-                                            href={`https://explorer.testnet.near.org/transactions/${things?.title}`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
+                                    <a href={`https://explorer.testnet.near.org/transactions/${things?.title}`} target="_blank" rel="noreferrer">
+                                        <div className="border-2 border-primary-color rounded-full p-2 px-3">
+                                            
                                             <Near className="w-4 h-4" fill="black" />
-                                        </a>
-                                    </div>
-                                    <div className="border-2 border-primary-color rounded-full p-1 px-3">
-                                        <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
+                                            
+                                        </div>
+                                    </a>
+                                    <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
+                                        <div className="border-2 border-primary-color rounded-full p-1 px-3">
                                             <div className="w-6 h-6">
-                                                <Image src={Arweave} className="" />
+                                            <Image src={Arweave} className="" />
                                             </div>
-                                        </a>
-                                    </div>
+                                        </div>
+                                    </a>
                                 </div>
 
-                                <div className="bg-primary-color rounded-lg my-8 py-2">
-                                    <p className="text-center text-white text-lg">
+                                <div className="border-2 border-dotted border-primary-color rounded-lg my-8 py-2">
+                                    <p className="text-center text-black text-lg">
                                         {tokensData?.all.aggregate.count} Tokens Minted
                                     </p>
                                 </div>
