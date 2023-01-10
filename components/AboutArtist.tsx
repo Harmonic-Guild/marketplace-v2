@@ -4,6 +4,7 @@ import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
 import config from '../config/config.json'
 import logo from '../assets/harmonic-logo.png'
+import bellLogo from '../assets/just-logo.jpg'
 
 
 import styles from "../styles/AboutArtist.module.scss";
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const images = config.images
+const c1Site = config.c1Site
+const harmonicSite = config.harmonicSite
 
 const AboutArtist: FC<Props> = () => {
    
@@ -29,22 +32,26 @@ const AboutArtist: FC<Props> = () => {
             <div className={styles["social-box"]}>
                 <div className={styles.header}>
                     <div className={styles["header-image-cont"]}>
-                        <Image
-                            src={config.logo3}
-                            className="object-contain mx-auto rounded-lg"
-                            layout="fill"
-                            objectFit="contain"
-                            alt={"header"}
-                        />
+                        <a href={c1Site} target="_blank">
+                            <Image
+                                src={config.logo3}
+                                className="object-contain mx-auto rounded-lg"
+                                layout="fill"
+                                objectFit="contain"
+                                alt={"header"}
+                            />
+                        </a>
                     </div>
                     <div className={styles["mini-cont"]}>
                         <div className={styles.avatar}>
-                            <Image
-                                src={config.profile}
-                                layout="fill"
-                                objectFit="contain"
-                                alt={"avatar"}
-                            />
+                            <a href={c1Site} target="_blank">
+                                <Image
+                                    src={config.profile}
+                                    layout="fill"
+                                    objectFit="contain"
+                                    alt={"avatar"}
+                                />
+                            </a>
                         </div>
                         <div className={styles["icons-cont"]}>
                             <a href={config.igLink}><AiFillInstagram /></a>
@@ -57,7 +64,7 @@ const AboutArtist: FC<Props> = () => {
                         <p>
                             {config.title} <MdVerified color="#1D9BF0" />
                         </p>
-                        <a href={config.infoLink}><button>Find out more &rarr;</button></a>
+                        <a href={config.infoLink} target="_blank"><button>Find out more &rarr;</button></a>
                     </div>
                     <p className={styles["artist-info"]}>
                         {config.description}
@@ -70,15 +77,18 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["images-cont"]}>
                         {images.map((image, i: number) => (
                             <div key={i} className={styles["image-cont"]}>
-                                <Image src={image} layout="fill" objectFit="contain" alt={`organiztion's nft number ${i + 1}`} />
+                                <a href={harmonicSite} target="_blank">
+                                    <Image src={bellLogo} layout="fill" objectFit="contain" alt={`Harmonic Guild`} />
+                                </a>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className={styles["org-info"]}>
                     <div className={styles["org-name-logo"]}>
-                        <div className={styles["inner-logo-cont"]}>
-                            <Image src={logo} layout="fill" objectFit="contain" />
+                        <div className="w-full">
+                            {/* <Image src={logo} layout="fill" objectFit="contain" /> */}
+                            <h1 className="md:text-2xl text-md mt-12 md:mt-4 text-center font-extrabold">Harmonic Guild</h1>
                         </div>
                     </div>
                     <div className={styles["more-info"]}>
@@ -90,32 +100,6 @@ const AboutArtist: FC<Props> = () => {
                             </p>
                         </div>
                         </div>
-                        {/* <div className={styles["info-cont"]}>
-                            <div className={styles["the-info"]}>
-                                <div className={styles["property"]}>
-                                    <p className={styles["property-name"]}>Items</p>
-                                    <p className={styles["property-value"]}>5.6k</p>
-                                </div>
-                                <div className={styles["property"]}>
-                                    <p className={styles["property-name"]}>Owners</p>
-                                    <p className={styles["property-value"]}>3.7k</p>
-                                </div>
-                                <div className={styles["property"]}>
-                                    <p className={styles["property-name"]}>Floor Price</p>
-                                    <p className={styles["property-value"]}>
-                                        <Near className={styles["near-logo"]} fill="white" />
-                                        200.4k
-                                    </p>
-                                </div>
-                                <div className={styles["property"]}>
-                                    <p className={styles["property-name"]}>Volume Trade</p>
-                                    <p className={styles["property-value"]}>
-                                        <Near className={styles["near-logo"]} fill="white" />
-                                        36,3k
-                                    </p>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </div>
