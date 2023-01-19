@@ -40,7 +40,7 @@ const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: an
                 args: {
                   nft_contract_id: process.env.NEXT_PUBLIC_STORE_NAME,
                   token_id: tokenId,
-                //   referrer_id:
+                  referrer_id: process.env.NEXT_PUBLIC_REFERRAL_ID
                 //     process.env.NEXT_PUBLIC_REFERRAL_ID || TESTNET_CONFIG.referral,
                 },
                 deposit: parseNearAmount(price.toString()),
