@@ -110,7 +110,7 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
 
     return (
         <div className={styles.container}>
-            <div className=" text-center  font-bold text-gray-900 mb-6">
+            <div className=" text-center  font-bold text-gray-900 mb-6 headerFont">
                 <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
                 <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
             </div>

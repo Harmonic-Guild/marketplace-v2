@@ -5,7 +5,7 @@ const PurchaseNft = ({ buy, price, isConnected }: { buy: any; price: string; isC
     return (
         <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary bg-secondary rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
             <div className="flex items-center text-primary justify-between gap-2 mb-3 lg:mb-0 font-medium text-lg">
-                <div>Get it at:</div>
+                <div className="headerFont">Get it at:</div>
                 <div className="font-bold text-xl">{price}</div>
                 <div>
                     <Near className="w-4 h-4" fill="white" />

@@ -103,7 +103,7 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
         <>
             {loadingtokensData && <div className="h-5 w-5 bg-primary animate-pulse rounded-full"></div>}
             <div className={styles.container}>
-                <div className=" text-center  font-bold text-gray-900 mb-4">
+                <div className=" text-center  font-bold text-gray-900 mb-4 headerFont">
                     <p className="text-secondary mb-2">Hot</p>
                     <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
                 </div>

@@ -47,13 +47,13 @@ const AboutArtist: FC<Props> = () => {
                     </div>
                 </div>
                 <div className={styles["more-info"]}>
-                    <div className={styles.top}>
+                    <div className={`headerFont ${styles.top}`}>
                         <p>
                             {config.title} <MdVerified color="#1D9BF0" />
                         </p>
                         <a href={config.infoLink}><button>Find out more &rarr;</button></a>
                     </div>
-                    <p className={styles["artist-info"]}>
+                    <p className={`text-font ${styles["artist-info"]}`}>
                         {config.description}
                     </p>
                 </div>
@@ -79,7 +79,7 @@ const AboutArtist: FC<Props> = () => {
                         <div className="mt-2">
                         <div className={styles["text-cont"]}>
 
-                            <p className={styles["mini-text"]}>
+                            <p className={`text-font ${styles["mini-text"]}`}>
                             We are an NFT Development Collective. We build smoother onboarding experiences and engagement products for your community using the power of NFTs. Contact us to get a custom marketplace deployed for your project.
                             </p>
                         </div>

@@ -92,7 +92,7 @@ const Header = () => {
                                 </div>
                                 {navTitles.map((item, index) => (
                                     <Link key={index} href={item.href} passHref>
-                                        <div className={`${styles["nav-link"]} ${currentPath == item.href ? "border-black" : "border-white"}`}>
+                                        <div className={`headerFont ${styles["nav-link"]} ${currentPath == item.href ? "border-black" : "border-white"}`}>
                                             {item.title}
                                         </div>
                                     </Link>
@@ -118,11 +118,11 @@ const Header = () => {
                     <div className={styles["nav-cont"]}>
                         {navTitles.map((item, index) => (
                             <Link key={index} href={item.href} passHref>
-                                <a className={`${styles["nav-item"]} ${currentPath == item.href ? "border-black" : "border-white"}`}>{item.title}</a>
+                                <a className={`headerFont ${styles["nav-item"]} ${currentPath == item.href ? "border-black" : "border-white"}`}>{item.title}</a>
                             </Link>
                         ))}
                     </div>
-                    <div className={styles["button-cont"]}>
+                    <div className={`headerFont ${styles["button-cont"]}`}>
                         {/* <div onClick={() => setToggleIcons(!toggleIcons)}></div> */}
                         <button onClick={walletAction}>
                             {isConnected ? "Disconnect" : "Connect"}
