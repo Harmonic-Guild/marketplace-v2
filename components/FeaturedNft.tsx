@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from 'next/link';
 import Slider from "react-slick";
-import { GiStarShuriken } from "react-icons/gi";
 
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
@@ -112,9 +111,6 @@ const FeaturedNft = ({ storeId }: { storeId: string }) => {
     return (
         <div className={styles.container}>
             <div className=" text-center  font-bold text-gray-900 mb-6">
-                <p className="text-secondary mb-2">
-                    <GiStarShuriken className="inline w-6 h-5" />
-                </p>
                 <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
                 <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
             </div>
