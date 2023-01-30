@@ -128,15 +128,15 @@ const NFT = ({
                     )}
 
                     <div className="px-30 py-2">
-                        <div className="text-center font-bold text-lg">{title}</div>
+                        <div className="text-center font-bold text-lg text-font">{title}</div>
                         <div className="w-full flex justify-center mt-6">
                         {metaData.length? (
                             <>
                                 {metaData.price}
-                                <button className="border hover:text-primary hover:bg-secondary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" >Unlist (coming&nbsp;soon)</button> 
+                                <button className="border bg-secondary rounded-xl outline-none border-secondary py-2 font-medium px-4 w-2/3 text-primary headerFont" >Unlist (coming&nbsp;soon)</button> 
                             </> 
                         ): (
-                            <button className="border hover:text-primary hover:bg-secondary rounded-xl outline-none bg-card border-secondary py-2 font-medium px-4 w-2/3 text-gray-800" onClick={()=> showSellModal(true)}>List on sale</button>  
+                            <button className="border bg-secondary rounded-xl outline-none border-secondary py-2 font-medium px-4 w-2/3 text-primary headerFont" onClick={()=> showSellModal(true)}>List on sale</button>  
                         )} 
                         </div>
                         {/* {lists.length && <div className="text-center mt-2 text-gray-600">Currently on sale at {formatNearAmount(Number(lists[0]?.price).toLocaleString('fullwide', { useGrouping: false }),5)} Near</div>} */}
@@ -221,7 +221,7 @@ const MyOwn = () => {
                 </div>
             ) : (
                 <>
-                    <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8">
+                    <h1 className="drop-shadow-lg text-xl headerFont text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8">
                         your tokens from this store
                     </h1>
 
