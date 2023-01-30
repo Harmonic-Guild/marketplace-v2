@@ -1,5 +1,4 @@
 import { FC, } from "react";
-import { GiStarShuriken } from "react-icons/gi";
 import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
 import config from '../config/config.json'
@@ -20,12 +19,7 @@ const AboutArtist: FC<Props> = () => {
 
     return (
         <div className={styles.container}>
-            <div className="text-center">
-                <p className="text-secondary mb-2">
-                    <GiStarShuriken className="inline w-6 h-5" />
-                </p>
-                <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> About Artist </h2>
-            </div>
+            <div className="text-center"></div>
             <div className={styles["social-box"]}>
                 <div className={styles.header}>
                     <div className={styles["header-image-cont"]}>
