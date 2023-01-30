@@ -3,7 +3,6 @@ import { GiStarShuriken } from "react-icons/gi";
 import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
 import config from '../config/config.json'
-import logo from '../assets/harmonic-logo.png'
 import bellLogo from '../assets/just-logo.jpg'
 
 
@@ -75,13 +74,11 @@ const AboutArtist: FC<Props> = () => {
             <div className={styles["org-cont"]}>
                 <div className={styles["outer-image-cont"]}>
                     <div className={styles["images-cont"]}>
-                        {images.map((image, i: number) => (
-                            <div key={i} className={styles["image-cont"]}>
-                                <a href={harmonicSite} target="_blank">
-                                    <Image src={bellLogo} layout="fill" objectFit="contain" alt={`Harmonic Guild`} />
-                                </a>
-                            </div>
-                        ))}
+                        <div className={styles["image-cont"]}>
+                            <a href={harmonicSite} target="_blank">
+                                <Image src={bellLogo} layout="fill" objectFit="contain" alt={`Harmonic Guild`} />
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div className={styles["org-info"]}>
