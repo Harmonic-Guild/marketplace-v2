@@ -2,7 +2,7 @@ import { FC, } from "react";
 import { GiStarShuriken } from "react-icons/gi";
 import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
-import config from '../config/config.json'
+import config from '../config/config'
 import bellLogo from '../assets/just-logo.jpg'
 
 

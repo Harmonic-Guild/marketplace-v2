@@ -7,7 +7,7 @@ import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
 import Near from "../icons/near.svg";
-import config from '../config/config.json'
+import config from '../config/config'
 
 import styles from "../styles/Header.module.scss";
 

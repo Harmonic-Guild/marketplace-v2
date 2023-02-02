@@ -1,4 +1,4 @@
-import config from '../config/config.json'
+import config from '../config/config'
 import C1Footer from "./C1Footer";
 import HarmonicFooter from "./HarmonicFooter";
 

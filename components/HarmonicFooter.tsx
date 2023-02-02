@@ -3,7 +3,7 @@ import Image from "next/image";
 import { BsArrowUp } from "react-icons/bs";
 import logo from "../assets/harmonic-logo.png";
 import { FiUsers } from "react-icons/fi";
-import config from '../config/config.json'
+import config from '../config/config'
 
 
 const Footer = () => {

@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
 import { Network } from 'mintbase'
-import config from '../config/config.json'
+import config from '../config/config'
 
 const Header = dynamic(() => import("../components/Header"));
 const Footer = dynamic(() => import("../components/Footer"));

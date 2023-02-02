@@ -3,7 +3,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 // import AboutArtist from "../components/AboutArtist";
 import Gleap from 'gleap';
-import config from '../config/config.json'
+import config from '../config/config'
 import { useEffect } from 'react';
 
 const FeaturedNft = dynamic(() => import("../components/FeaturedNft"));
