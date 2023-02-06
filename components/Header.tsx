@@ -7,7 +7,7 @@ import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
 import Near from "../icons/near.svg";
-import config from '../config/config.json'
+import config from '../config/config'
 
 import styles from "../styles/Header.module.scss";
 
@@ -48,7 +48,7 @@ const Header = () => {
             <div className={styles['inner-nav-cont']}>
                 <Link href="/" passHref>
                     <a className="py-6 relative w-24 lg:w-40 h-20 inline-block">
-                        <Image src={config.logo1} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
+                        <Image src={config.logo1!} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
                     </a>
                 </Link>
 

@@ -1,4 +1,3 @@
-const config = require('./config/config.json')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -24,9 +23,9 @@ module.exports = {
         },
         extend: {
             colors: {
-                'primary-color': config['primary-color'],
-                'secondary-color': config['secondary-color'],
-                card: config["card-color"],
+                'primary-color': process.env.NEXT_PUBLIC_PRIMARY_COLOR,
+                'secondary-color': process.env.NEXT_PUBLIC_SECONDARY_COLOR,
+                card: process.env.NEXT_PUBLIC_CARD_COLOR,
                 "mp-dark": {
                     1: "#252B42",
                     2: "#161621",
