@@ -7,46 +7,7 @@ import { BsCircle } from "react-icons/bs";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import Image from 'next/image';
-
-const FETCH_WEEKLY = gql`
-query MyQuery($storeId: String!) {
-  token(where: {storeId: {_eq: $storeId}, burnedAt: {_is_null: true}}, limit: 5, distinct_on: thingId, order_by: {thingId: desc}) {
-    id
-    thing {
-      id
-      metaId
-      metadata {
-        media
-      }
-    }
-  }
-}
-`
-
-
-// function SampleNextArrow(props: any) {
-//     const { className, style, onClick } = props;
-//     return (
-//       <div
-//         className={className}
-//         style={{ ...style, display: "block", background: "red" }}
-//         onClick={onClick}
-//       >
-        
-//       </div>
-//     );
-// }
-
-// function SamplePrevArrow(props: any) {
-//     const { className, style, onClick } = props;
-//     return (
-//       <div
-//         className={className}
-//         style={{ ...style, display: "block", background: "green" }}
-//         onClick={onClick}
-//       />
-//     );
-//   }
+import { FETCH_WEEKLY } from "../queries/similarNfts";
 
  const  SimilarNft = () => {
 

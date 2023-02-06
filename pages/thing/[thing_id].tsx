@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useWallet } from "../../services/providers/MintbaseWalletContext";
 import { TbExternalLink } from "react-icons/tb";
-// import { FiLayers } from "react-icons/fi";
 import { BsChevronLeft } from "react-icons/bs";
 import { CgArrowsExpandRight } from "react-icons/cg";
-// import { BiShareAlt } from "react-icons/bi";
-// import { AiOutlineCloseCircle, AiOutlineExpandAlt } from "react-icons/ai";
-// import SimilarNft from "../../components/SimilarNft";
-// import Vector_back from "../../icons/Vector_back.svg";
 import { gql } from "apollo-boost";
 import { useLazyQuery } from "@apollo/client";
 import Image from "next/image";
@@ -17,53 +12,12 @@ import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from "../../icons/near.svg";
 import Link from "next/link";
 import Arweave from "../../public/images/ARWEAVE.png";
+import { FETCH_TOKENS } from "../../queries/thing_id";
 
-import styles from "../../styles/Thing.module.scss";
 import { GiCancel } from "react-icons/gi";
 import { resolveUrl } from '../../helpers/resolveUrl';
 
-const FETCH_TOKENS = gql`
-query fetchMeta($metadataId: String!) {
-    metadata: nft_metadata(where: {id: {_eq: $metadataId}}) {
-      contract: nft_contracts {
-        id
-        baseUri: base_uri
-        created_at
-
-      }
-      title
-      description
-      media
-      media_hash: reference_blob(path: "$.media_hash")
-      animation_hash: reference_blob(path: "$.animation_hash")
-      animationUrl: reference_blob(path: "$.animation_url")
-    }
-    listings: mb_views_active_listings(where: {metadata_id: {_eq: $metadataId}}, limit: 1, order_by: {price: asc}) {
-      kind
-      price
-      market_id
-      token {
-        id: token_id
-        minter
-        nft_contract_id
-        ownerId: owner
-      }
-      offers(order_by: {offer_price: asc})  {
-        offer_price
-        offered_by
-        
-      }
-    }
-   
-    all: mb_views_nft_tokens_aggregate(where: {metadata_id: {_eq: $metadataId}}) {
-        aggregate {
-          count
-        }
-      }
-  }
-  
-  
-`;
+import styles from "../../styles/Thing.module.scss";
 
 const thing_id = ({ thing_id }: { thing_id: string }) => {
     

@@ -30,7 +30,7 @@ const AboutArtist: FC<Props> = () => {
                 <div className={styles.header}>
                     <div className={styles["header-image-cont"]}>
                         <Image
-                            src={config.logo3}
+                            src={config.logo3!}
                             className="object-contain mx-auto rounded-lg"
                             layout="fill"
                             objectFit="contain"
@@ -40,7 +40,7 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["mini-cont"]}>
                         <div className={styles.avatar}>
                             <Image
-                                src={config.profile}
+                                src={config.profile!}
                                 layout="fill"
                                 objectFit="contain"
                                 alt={"avatar"}
@@ -70,7 +70,7 @@ const AboutArtist: FC<Props> = () => {
                     <div className={styles["images-cont"]}>
                         {images.map((image, i: number) => (
                             <div key={i} className={styles["image-cont"]}>
-                                <Image src={image} layout="fill" objectFit="contain" alt={`organiztion's nft number ${i + 1}`} />
+                                <Image src={image!} layout="fill" objectFit="contain" alt={`organiztion's nft number ${i + 1}`} />
                             </div>
                         ))}
                     </div>

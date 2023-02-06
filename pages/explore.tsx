@@ -12,18 +12,7 @@ import QueryFilters from "../helpers/getQuery";
 // import Artists from "../components/category/Artists";
 // import Color from "../components/category/Color";
 import { fetchTokens } from '../gql/FetchTokens'
-
-const FETCH_STORE = gql`
-    query FetchStore($storeId: String!) {
-        store(where: { id: { _eq: $storeId } }) {
-            id
-            name
-            symbol
-            baseUri
-            owner
-        }
-    }
-`;
+import { FETCH_STORE } from "../queries/explore";
 
 const FETCH_TOKENS = fetchTokens
 const explore = () => {
