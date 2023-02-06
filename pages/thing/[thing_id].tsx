@@ -140,9 +140,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         setThing(tokensData.metadata[0]);
     }, [tokensData]);
 
-    const toggleDiscription = () => {
-        setHide(!hide);
-    };
+    // const toggleDiscription = () => {
+    //     setHide(!hide);
+    // };
 
     const buy = (bid: number) => {
         const token_Id = tokensData.listings[0]?.token.id! + ":" + thing_id.split(":")[0];
@@ -154,6 +154,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress });
         }
     };
+    let description : any = things?.description;
 
     const tokenPriceNumber = Number(tokensData?.listings[0]?.price);
     const stringPrice = (tokenPriceNumber!== null && !Number.isNaN(tokenPriceNumber) )? tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }) : '0'
@@ -234,19 +235,21 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                         )}
                     </div>
                     {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
-                    <div className="">
-                        <div className="mt-10 border-b md:border-b-0 border-primary-color pb-4">
-                            <div className="border-b border-primary-color mb-3 pb-3">
-                                <span className="text-3xl font-bold">Description</span>
-                            </div>
-
-                            <p className={hide ? "" : "line-clamp-3"}>{things?.description}</p>
-                            <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
-                                {" "}
-                                {!hide ? ".....see more" : "see less"}
-                            </span>
-                            {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
+                    <div className="mt-10 border-b md:border-b-0 border-primary pb-4">
+                        <div className="border-b border-primary mb-3 pb-3">
+                            <span className="text-3xl font-bold">Description</span>
                         </div>
+                        <p>
+                            {description ? (hide ? description : description.substring(0, 200) + '...'): null}
+                        </p>
+                        {description && description.length > 200 && (
+                            <span id="span" onClick={() => setHide(!hide)} className="cursor-pointer text-blue-400 hover:underline">
+                                {" "}
+                                {hide ? "Show Less" : "...Show More"}
+                            </span>
+                        )}
+                        
+                        {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
                     </div>
 
                     <div className="flex flex-col-reverse lg:flex-col">
