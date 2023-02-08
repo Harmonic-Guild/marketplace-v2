@@ -23,8 +23,8 @@ module.exports = {
         },
         extend: {
             colors: {
-                'primary-color': process.env.NEXT_PUBLIC_PRIMARY_COLOR,
-                'secondary-color': process.env.NEXT_PUBLIC_SECONDARY_COLOR,
+                'primary-color': process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#233247',
+                'secondary-color': process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#5174a6',
                 card: process.env.NEXT_PUBLIC_CARD_COLOR,
                 "mp-dark": {
                     1: "#252B42",
