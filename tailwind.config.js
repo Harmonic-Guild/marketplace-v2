@@ -70,6 +70,10 @@ module.exports = {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
             },
         },
+        fontFamily: {
+            header: process.env.NEXT_PUBLIC_HEADER_FONT,
+            text: process.env.NEXT_PUBLIC_TEXT_FONT
+        }
     },
     plugins: [require("@tailwindcss/line-clamp"), require("postcss-import"), require("tailwindcss"), require("autoprefixer")],
 };
