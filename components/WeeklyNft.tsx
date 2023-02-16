@@ -87,7 +87,7 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
                     <p className="text-secondary-color mb-2">
                         Hot <GiStarShuriken className="inline w-6 h-5" />
                     </p>
-                    <h2 className="text-mp-dark-2 text-4xl font-bold">NFTs of the week </h2>
+                    <h2 className="text-mp-dark-2 text-4xl font-bold font-header">NFTs of the week </h2>
                 </div>
                 {/* <div className={styles["nfts-cont"]}> */}
                 <Slider {...settings} className={styles["nfts-cont"]}>

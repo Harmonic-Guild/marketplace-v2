@@ -71,8 +71,8 @@ module.exports = {
             },
         },
         fontFamily: {
-            header: process.env.NEXT_PUBLIC_HEADER_FONT,
-            text: process.env.NEXT_PUBLIC_TEXT_FONT
+            'header': process.env.NEXT_PUBLIC_HEADER_FONT ? [process.env.NEXT_PUBLIC_HEADER_FONT, 'sans-serif'] : ['Helvetica Neue', 'sans-serif'],
+            'text': process.env.NEXT_PUBLIC_TEXT_FONT ? [process.env.NEXT_PUBLIC_TEXT_FONT, 'sans-serif'] : ['Helvetica Neue', 'sans-serif']
         }
     },
     plugins: [require("@tailwindcss/line-clamp"), require("postcss-import"), require("tailwindcss"), require("autoprefixer")],

@@ -16,7 +16,7 @@ const BidSucess = () => {
       {cancleModal && 
         <div className="h-screen w-screen glass-morphism fixed top-0 left-0 z-40">
           <div className="align-middle mx-auto md:w-2/5 w-5/6 relative top-80 lg:top-52 rounded-xl p-8 bg-white">
-              <div className='flex w-full justify-between'>
+              <div className='flex w-full justify-between font-header'>
                   <p className='text-xl font-bold bg-red-300 w-1/2 mx-auto '>Bid is placed sucessfully</p>
                   {cancleModal && <span className='text-gray-400 border border-mp-brown-1 rounded-full p-2 cursor-pointer' onClick={cancle}><AiOutlineClose/></span>}
               </div>
