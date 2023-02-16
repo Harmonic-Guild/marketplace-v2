@@ -71,7 +71,7 @@ const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: an
     return (
         <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary-color bg-secondary-color rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
             <div className="flex items-center justify-between gap-2 mb-3 lg:mb-0 font-medium text-lg">
-                <div>Get it at:</div>
+                <div className="font-header">Get it at:</div>
                 <div className="font-bold text-xl">{price}</div>
                 <div>
                     <Near className="w-4 h-4" fill="black" />

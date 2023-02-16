@@ -13,7 +13,7 @@ export const Connect = () => {
                 <span className='absolute w-12 h-12 top-3'><Ellipse_x/></span>
                 <span className='absolute w-12 h-12 top-5 z-10'><Vector_x/></span>
             </div>
-            <div className="text-xl font-bold">
+            <div className="text-xl font-bold font-text">
                 To continue create a <span className='flex'><p>wallet</p><span className='mt-2 px-2'><Near/></span></span>
             </div>
 

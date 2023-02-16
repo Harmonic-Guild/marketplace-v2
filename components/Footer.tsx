@@ -40,8 +40,8 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="lg:text-xl text-sm">
-                    <span className="font-bold ">LEARN MORE</span>
-                    <ul className="leading-loose capitalize">
+                    <span className="font-bold font-header">LEARN MORE</span>
+                    <ul className="leading-loose capitalize font-text">
                         <li>About</li>
                         <li>Merchant</li>
                         <li>Partners</li>
@@ -49,16 +49,16 @@ const Footer = () => {
                     </ul>
                 </div>
                 <div className="lg:text-xl text-sm">
-                    <span className="font-bold ">LEGAL</span>
-                    <ul className="leading-loose capitalize ">
+                    <span className="font-bold font-header">LEGAL</span>
+                    <ul className="leading-loose capitalize font-text">
                         <li>General Info</li>
                         <li>Privacy Policy</li>
                         <li>Terms of Service</li>
                     </ul>
                 </div>
                 <div className="lg:text-xl text-sm">
-                    <span className="font-bold ">TALK TO US</span>
-                    <ul className="leading-loose capitalize ">
+                    <span className="font-bold font-header">TALK TO US</span>
+                    <ul className="leading-loose capitalize font-text">
                         <li>Contact us</li>
                         <li>Facebook</li>
                         <li>LinkedIn</li>

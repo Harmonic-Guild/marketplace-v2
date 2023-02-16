@@ -23,7 +23,7 @@ const NotConnected = () => {
                     <div className='w-full text-right'>
                         {cancelModal && <span onClick={() => setCancelModal(false) } className='absolute top-1 z-10 -ml-2 text-yellow-500 bg-gray-900 p-2 rounded-full'><FiX className='w-4 h-4'/></span>}
                     </div>
-                    <div className="text-xl font-bold">
+                    <div className="text-xl font-bold font-header">
                         To continue connect to a <span className='flex'><p>wallet</p><span className='mt-2 px-2'><Near/></span></span>
                     </div>
                     <div className='flex'>

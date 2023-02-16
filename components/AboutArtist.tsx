@@ -53,13 +53,13 @@ const AboutArtist: FC<Props> = () => {
                     </div>
                 </div>
                 <div className={styles["more-info"]}>
-                    <div className={styles.top}>
+                    <div className={`font-header ${styles.top}`}>
                         <p>
                             {config.title} <MdVerified color="#1D9BF0" />
                         </p>
                         <a href={config.infoLink}><button>Find out more &rarr;</button></a>
                     </div>
-                    <p className={styles["artist-info"]}>
+                    <p className={`font-text ${styles["artist-info"]}`}>
                         {config.description}
                     </p>
                 </div>
