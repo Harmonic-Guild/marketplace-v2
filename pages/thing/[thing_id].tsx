@@ -149,9 +149,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         // setAllTokens(allTokens);
     }, [tokensData]);
 
-    const toggleDiscription = () => {
-        setHide(!hide);
-    };
+    // const toggleDiscription = () => {
+    //     setHide(!hide);
+    // };
 
     const buy = (bid: number) => {
         const token_Id = tokensData.listings[0]?.token.id! + ":" + thing_id.split(":")[0];
@@ -177,6 +177,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     } else {
         currentBid = formatNearAmount(Number(tokensData?.listings[0]?.offers[0]?.offer_price).toLocaleString("fullwide", { useGrouping: false }), 5);
     }
+    let description : any = things?.description;
 
     return (
         <div className={`container ${styles.container}`}>
@@ -248,12 +249,16 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             <div className="border-b border-primary mb-3 pb-3">
                                 <span className="text-3xl font-bold">Description</span>
                             </div>
-
-                            <p className={hide ? "" : "line-clamp-3"}>{things?.description}</p>
-                            <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
-                                {" "}
-                                {!hide ? ".....see more" : "see less"}
-                            </span>
+                            <p>
+                                {description ? (hide ? description : description.substring(0, 200) + '...'): null}
+                            </p>
+                            {description && description.length > 200 && (
+                                <span id="span" onClick={() => setHide(!hide)} className="cursor-pointer text-blue-400 hover:underline">
+                                    {" "}
+                                    {hide ? "Show Less" : "...Show More"}
+                                </span>
+                            )}
+                            
                             {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
                         </div>
                     </div>

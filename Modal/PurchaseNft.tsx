@@ -4,11 +4,11 @@ import Near from "../icons/near.svg";
 const PurchaseNft = ({ buy, price, isConnected }: { buy: any; price: string; isConnected: boolean }) => {
     return (
         <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary bg-secondary rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
-            <div className="flex items-center justify-between gap-2 mb-3 lg:mb-0 font-medium text-lg">
-                <div>Get it at:</div>
+            <div className="flex items-center text-primary justify-between gap-2 mb-3 lg:mb-0 font-medium text-lg">
+                <div className="headerFont">Get it at:</div>
                 <div className="font-bold text-xl">{price}</div>
                 <div>
-                    <Near className="w-4 h-4" fill="black" />
+                    <Near className="w-4 h-4" fill="white" />
                 </div>
             </div>
             <div className="w-full lg:w-3/5">

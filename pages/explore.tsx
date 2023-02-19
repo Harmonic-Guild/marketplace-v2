@@ -121,14 +121,14 @@ const explore = () => {
                 {/* <p className="text-secondary">
                     NFTs <GiStarShuriken className="inline w-6 h-5" />
                 </p> */}
-                <h2 className="text-mp-dark-2 text-4xl font-bold">Explore</h2>
+                <h2 className="text-mp-dark-2 text-4xl font-bold headerFont">Explore</h2>
             </div>
             <div>
                 {/* <DropDown setFilters={setFilters} /> */}
             </div>
             <div className="flex w-1/3 mx-auto justify-around mt-4">
-                    <button className={`border-secondary border rounded-md px-3 py-2 w-2/5 ${showAll? 'bg-secondary text-white': 'text-secondary'}`} onClick={()=> setShowAll(true)}>All</button>
-                    <button className={`border-secondary border rounded-md px-3 py-2 w-2/5 ${!showAll? 'bg-secondary text-white': 'text-secondary'}`} onClick={()=> setShowAll(false)}>On Sale</button>
+                    <button className={`border-secondary border rounded-md px-3 py-2 w-2/5 headerFont ${showAll? 'bg-secondary text-white': 'text-secondary'}`} onClick={()=> setShowAll(true)}>All</button>
+                    <button className={`border-secondary border rounded-md px-3 py-2 w-2/5 headerFont ${!showAll? 'bg-secondary text-white': 'text-secondary'}`} onClick={()=> setShowAll(false)}>On Sale</button>
                 </div>
             <div className="xl:flex block justify-around">
                 {/* <div className=" order-last pt-4 col-span-1">()

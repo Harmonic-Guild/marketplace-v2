@@ -70,7 +70,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                 <div className={`${styles["modal-cont"]} glass-morphism`}>
                     <div className={`mx-auto w-4/5 relative top-80 lg:top-52 rounded-xl bg-white ${styles["inner-cont"]}`}>
                         <div className="flex w-full justify-between">
-                            <p className="text-xl font-bold">Buster character color</p>
+                            <p className="text-xl font-bold headerFont">Buster character color</p>
                             <span
                                 className="text-gray-400 border border-mp-brown-1 rounded-full p-2 cursor-pointer"
                                 onClick={() => setShowModal(false)}
@@ -79,8 +79,8 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                             </span>
                         </div>
                         <div className="flex font-bold justify-between w-full lg:w-3/5 my-4">
-                            <div className="bg-gray-900 text-white rounded-md px-2 py-1">16:12:56 hrs</div>
-                            <span className="lg:text-sm text-lg">Time remaining</span>
+                            <div className="bg-gray-900 text-white rounded-md px-2 py-1 text-font">16:12:56 hrs</div>
+                            <span className="lg:text-sm text-lg text-font">Time remaining</span>
                         </div>
                         <div className="flex my-4 justify-between w-full lg:w-3/5 border border-gray-400 rounded-lg">
                             <input type="number" className="w-full outline-none" min={0} value={bid} onChange={handleChange} />

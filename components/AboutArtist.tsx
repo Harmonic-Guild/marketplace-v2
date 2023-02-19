@@ -1,5 +1,4 @@
 import { FC, } from "react";
-import { GiStarShuriken } from "react-icons/gi";
 import { AiFillInstagram, AiOutlineTwitter } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
 import config from '../config/config.json'
@@ -20,12 +19,7 @@ const AboutArtist: FC<Props> = () => {
 
     return (
         <div className={styles.container}>
-            <div className="text-center">
-                <p className="text-secondary mb-2">
-                    <GiStarShuriken className="inline w-6 h-5" />
-                </p>
-                <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> About Artist </h2>
-            </div>
+            <div className="text-center"></div>
             <div className={styles["social-box"]}>
                 <div className={styles.header}>
                     <div className={styles["header-image-cont"]}>
@@ -53,13 +47,13 @@ const AboutArtist: FC<Props> = () => {
                     </div>
                 </div>
                 <div className={styles["more-info"]}>
-                    <div className={styles.top}>
+                    <div className={`headerFont ${styles.top}`}>
                         <p>
                             {config.title} <MdVerified color="#1D9BF0" />
                         </p>
                         <a href={config.infoLink}><button>Find out more &rarr;</button></a>
                     </div>
-                    <p className={styles["artist-info"]}>
+                    <p className={`text-font ${styles["artist-info"]}`}>
                         {config.description}
                     </p>
                 </div>
@@ -85,7 +79,7 @@ const AboutArtist: FC<Props> = () => {
                         <div className="mt-2">
                         <div className={styles["text-cont"]}>
 
-                            <p className={styles["mini-text"]}>
+                            <p className={`text-font ${styles["mini-text"]}`}>
                             We are an NFT Development Collective. We build smoother onboarding experiences and engagement products for your community using the power of NFTs. Contact us to get a custom marketplace deployed for your project.
                             </p>
                         </div>

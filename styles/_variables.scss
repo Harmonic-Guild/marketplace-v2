@@ -2,11 +2,13 @@ $primary: #ea6230;
 $secondary: #fbc026;
 
 @mixin buttonColor {
-    @apply text-white;
-    background-image: linear-gradient(to right, #420687 , #fc9f0b);
+    @apply text-[#fbc026];
+    background-color: #420687;
+    // background-image: linear-gradient(to right, #420687 , #fc9f0b);
 
     &:hover {
-        background-image: linear-gradient(to left, #420687 , #fc9f0b)
+        background-color: #3b0579;
+        // background-image: linear-gradient(to left, #420687 , #fc9f0b)
 
     }
 }
