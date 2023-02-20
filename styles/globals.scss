@@ -15,6 +15,11 @@ html {
     }
 }
 
+@font-face {
+    font-family: "Agandir";
+    src: url('../fonts/agrandir-wide-medium.ttf') format('truetype');
+}
+
 .screenTest {
     @apply xl:bg-yellow-300 lg:bg-green-300 md:bg-purple-300 sm:bg-red-800 xs:bg-pink-300;
 }
