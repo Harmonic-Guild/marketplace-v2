@@ -17,11 +17,13 @@ html {
     }
 }
 
-.text-font {
-    font-family: 'DM Sans', sans-serif;
+@font-face {
+    font-family: 'Agandir';
+    src: url('../fonts/agrandir-wide-medium.ttf');
 }
-.headerFont {
-    font-family: 'Montserrat', sans-serif;
+
+* {
+    font-family: 'Agandir';
 }
 
 .screenTest {
