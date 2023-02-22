@@ -3,15 +3,18 @@ import Head from "next/head";
 import NextProgress from "next-progress";
 import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
-import { WalletProvider } from "../services/providers/MintbaseWalletContext";
+// import { WalletProvider } from "../services/providers/MintbaseWalletContext";
 import { useApollo } from "../services/apolloClient";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
-import { Network } from 'mintbase'
+import {WalletContextProvider} from '@mintbase-js/react'
+import '@near-wallet-selector/modal-ui/styles.css'
+// import { Network } from 'mintbase'
 import config from '../config/config'
+import {mbjs} from '@mintbase-js/sdk'
 
-const Header = dynamic(() => import("../components/Header"));
+const Header = dynamic(() => import("../components/newHeader"));
 const Footer = dynamic(() => import("../components/Footer"));
 
 import "slick-carousel/slick/slick.css";
@@ -23,6 +26,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     const router = useRouter();
 
     useEffect(() => {
+        const network = process.env.NEXT_PUBLIC_NETWORK
+
+        mbjs.config({network})
         // Initialize Fathom when the app loads
         // Example: yourdomain.com
         //  - Do not include https://
@@ -51,13 +57,13 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <title>{config.title}</title>
                 <link rel="icon" href={config.favicon} />
             </Head>
-            <WalletProvider apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""} network={Network[process.env.NEXT_PUBLIC_NETWORK as keyof typeof Network]}>
+            <WalletContextProvider>
                 <ApolloProvider client={apolloClient}>
                     <Header />
                     <Component {...pageProps} />
                     <Footer />
                 </ApolloProvider>
-            </WalletProvider>
+            </WalletContextProvider>
         </>
     );
 }
