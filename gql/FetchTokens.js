@@ -2,7 +2,7 @@ import { gql } from "apollo-boost";
 
 export const fetchTokens = gql`
 query GetStoreNfts($offset: Int = 0, $condition: mb_views_nft_metadata_unburned_bool_exp) @cached {
-  mb_views_nft_metadata_unburned(offset: $offset, limit: 2, order_by: {minted_timestamp: desc}, where: $condition) {
+  mb_views_nft_metadata_unburned(offset: $offset, limit: 10, order_by: {minted_timestamp: desc}, where: $condition) {
     createdAt: minted_timestamp
     listed: price
     media
