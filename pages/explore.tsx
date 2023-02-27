@@ -70,7 +70,7 @@ const explore = () => {
     useEffect(() => {
         if (!tokensData && !listedTokensData) return;
         let tokens: any = []
-        console.log('//////////////', tokensData);
+        
         setTotalNfts(tokensData?.mb_views_nft_metadata_unburned_aggregate.aggregate.count || 0);
         
         const allTokens = tokensData?.mb_views_nft_metadata_unburned.map((token: any)=> {
@@ -81,17 +81,16 @@ const explore = () => {
             return token;
         });
 
+        console.log(listedTokensData);
 
         if(showAll == true) tokens = allTokens
-        else tokens = listedTokens
+        else tokens = listedTokens;
 
         console.log(tokens);
 
-        if (!tokens) {
-            setTokens(tokens);
-        } else {
-            setTokens((prevState: any[]) => prevState.concat(tokens));
-        }
+        setTokens((prevState: any[]) => {
+            return showAll ? prevState.concat(tokens) : tokens
+        })
         
     }, [tokensData, listedTokensData, showAll]);
 
@@ -102,25 +101,30 @@ const explore = () => {
         console.log(filterParams);
     };
 
+    const selectTab = (bool: boolean) => {
+        setTokens([]);
+        setShowAll(bool);
+    }
+
     return (
         <div className="px-8 w-full xl:w-5/6 mx-auto">
             <div className="text-center">
                 <h2 className="text-mp-dark-2 text-4xl font-bold">Explore</h2>
             </div>
             <div className="flex w-1/3 mx-auto justify-around mt-4">
-                <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> setShowAll(true)}>All</button>
-                <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> setShowAll(false)}>On Sale</button>
+                <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(true)}>All</button>
+                <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(false)}>On Sale</button>
             </div>
             <div className="xl:flex block justify-around">
                 <div className="grid grid-cols-2 lg:grid-cols-3 w-full pt-4 gap-y-5 gap-x-2 col-span-3">
                     {tokens?.map((token: any, i: number) => (
-                        <NFT token={token} baseUri={token?.baseUri} key={token.metadataId} />
+                        <NFT token={token} baseUri={token?.baseUri} key={i} />
                     ))}
                 </div>
             </div>
             <div className="flex justify-center items-center my-4">
                 {
-                    tokens.length < totalNfts && (
+                    (showAll && tokens?.length < totalNfts) && (
                         <button 
                             className="rounded-lg bg-gradient-to-l hover:bg-gradient-to-r from-primary-color to-secondary-color text-white px-4 py-2"
                             onClick={() => setIndex(index + 10)}
