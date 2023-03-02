@@ -30,6 +30,7 @@ const Header = () => {
     useEffect(() => {
         setCurrentPath(router.pathname);
         console.log("wallet", wallet);
+        console.log(config.logo1);
     }, [router.pathname]);
 
     const walletAction = () => {
@@ -48,7 +49,11 @@ const Header = () => {
             <div className={styles['inner-nav-cont']}>
                 <Link href="/" passHref>
                     <a className="py-6 relative w-24 lg:w-40 h-20 inline-block">
-                        <Image src={config.logo1!} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
+                        {
+                            config.logo1 && (
+                                <Image src={config.logo1} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
+                            )
+                        }
                     </a>
                 </Link>
 

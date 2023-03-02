@@ -10,7 +10,7 @@ export default {
     "profile": process.env.NEXT_PUBLIC_PROFILE,
     "favicon": process.env.NEXT_PUBLIC_FAVICON,
     "images": [
-        process.env.NEXT_PUBLIC_IMAGE_1
+        'https://ik.imagekit.io/epyh88t15/we-build.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132292846'
     ],
 
     "primary-color": process.env.NEXT_PUBLIC_PRIMARY_COLOR,
