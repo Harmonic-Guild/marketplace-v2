@@ -3,10 +3,14 @@ import { useCallback } from 'react';
 import Near from "../icons/near.svg";
 import {parseNearAmount } from "near-api-js/lib/utils/format";
 import { useWallet } from "../services/providers/MintbaseWalletContext";
+// import {useWallet } from '@mintbase-js/react'
 
 
 const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
     
+
+  // const { selector }  = useWallet();
+  // const wallet = selector.wallet();
 
     const { wallet } = useWallet();
 
