@@ -16,6 +16,7 @@ module.exports = {
             "pbs.twimg.com",
             "lh3.googleusercontent.com",
             "twitter.com",
+            "ipfs.near.social",
             "source.unsplash.com",
             "abs.twimg.com",
             "images.unsplash.com",
