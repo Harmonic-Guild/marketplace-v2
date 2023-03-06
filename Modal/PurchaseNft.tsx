@@ -2,28 +2,27 @@ import React from "react";
 import { useCallback } from 'react';
 import Near from "../icons/near.svg";
 import {parseNearAmount } from "near-api-js/lib/utils/format";
-import { useWallet } from "../services/providers/MintbaseWalletContext";
-// import {useWallet } from '@mintbase-js/react'
+// import { useWallet } from "../services/providers/MintbaseWalletContext";
+import {useWallet } from '@mintbase-js/react'
+import { buy, execute } from '@mintbase-js/sdk'
 
 
 const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
-    
 
-  // const { selector }  = useWallet();
-  // const wallet = selector.wallet();
+  const { selector }  = useWallet();
 
-    const { wallet } = useWallet();
+  // const { wallet } = useWallet();
 
-    const marketId = tokensData.listings[0]?.market_id;
+  const marketId = tokensData.listings[0]?.market_id;
 
     // handler function to call the wallet methods to proceed the buy.
     const handleBuy = async () => {
-        if(marketId === process.env.NEXT_PUBLIC_marketAddress){
-            await buy();
-        }   
-        else{
-            await newBuy();
-        }
+        // if(marketId === process.env.NEXT_PUBLIC_marketAddress){
+        //     await buy();
+        // }   
+        // else{
+          await newBuy();
+        // }
         
     };
 
@@ -31,42 +30,52 @@ const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: an
     
     const tokenId = tokensData.listings[0]?.token.id! //+ ":" + thingId.split(":")[0];
 
-    const newBuy = useCallback(async () => {
+    const newBuy = async () => {
+      
+      const wallet = await selector.wallet();
+
+      const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME, tokenId, marketId, price: parseNearAmount(price.toString()),}
+      
+      await execute({wallet}, buy(buyArgs));
+
+    }
+
+    // const newBuy = useCallback(async () => {
     
-        const txns = [
-          {
-            receiverId: marketId,
-            functionCalls: [
-              {
-                methodName: 'buy',
-                receiverId: marketId,
-                gas: '200000000000000',
-                args: {
-                  nft_contract_id: process.env.NEXT_PUBLIC_STORE_NAME,
-                  token_id: tokenId,
-                  referrer_id: process.env.NEXT_PUBLIC_REFERRAL_ID
-                //     process.env.NEXT_PUBLIC_REFERRAL_ID || TESTNET_CONFIG.referral,
-                },
-                deposit: parseNearAmount(price.toString()),
-              },
-            ],
-          },
-        ];
+    //     const txns = [
+    //       {
+    //         receiverId: marketId,
+    //         functionCalls: [
+    //           {
+    //             methodName: 'buy',
+    //             receiverId: marketId,
+    //             gas: '200000000000000',
+    //             args: {
+    //               nft_contract_id: process.env.NEXT_PUBLIC_STORE_NAME,
+    //               token_id: tokenId,
+    //               referrer_id: process.env.NEXT_PUBLIC_REFERRAL_ID
+    //             //     process.env.NEXT_PUBLIC_REFERRAL_ID || TESTNET_CONFIG.referral,
+    //             },
+    //             deposit: parseNearAmount(price.toString()),
+    //           },
+    //         ],
+    //       },
+    //     ];
     
-        await wallet!.executeMultipleTransactions({
-          transactions: txns as never,
-          options: {
-            //callbackUrl: `${window.location.origin}/wallet-callback`,
-            meta: JSON.stringify({
-              type: 'make-offer',
-              args: {
-                tokenId,
-                price: parseNearAmount(price.toString()),
-              },
-            }),
-          },
-        });
-      }, [price, tokenId, wallet]);
+    //     await wallet!.executeMultipleTransactions({
+    //       transactions: txns as never,
+    //       options: {
+    //         //callbackUrl: `${window.location.origin}/wallet-callback`,
+    //         meta: JSON.stringify({
+    //           type: 'make-offer',
+    //           args: {
+    //             tokenId,
+    //             price: parseNearAmount(price.toString()),
+    //           },
+    //         }),
+    //       },
+    //     });
+    //   }, [price, tokenId, wallet]);
     
 
     
