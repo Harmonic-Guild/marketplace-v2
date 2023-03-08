@@ -4,25 +4,24 @@ import Near from "../icons/near.svg";
 import {parseNearAmount } from "near-api-js/lib/utils/format";
 // import { useWallet } from "../services/providers/MintbaseWalletContext";
 import {useWallet } from '@mintbase-js/react'
-import { buy, execute } from '@mintbase-js/sdk'
+import { NearContractCall, buy, execute } from '@mintbase-js/sdk'
 
 
-const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
-
+const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
   const { selector }  = useWallet();
 
   // const { wallet } = useWallet();
-
+  
   const marketId = tokensData.listings[0]?.market_id;
 
     // handler function to call the wallet methods to proceed the buy.
     const handleBuy = async () => {
-        // if(marketId === process.env.NEXT_PUBLIC_marketAddress){
-        //     await buy();
-        // }   
-        // else{
+        if(marketId === process.env.NEXT_PUBLIC_marketAddress){
+            await oldBuy();
+        }   
+        else{
           await newBuy();
-        // }
+        }
         
     };
 
@@ -30,13 +29,30 @@ const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: an
     
     const tokenId = tokensData.listings[0]?.token.id! //+ ":" + thingId.split(":")[0];
 
-    const newBuy = async () => {
-      
-      const wallet = await selector.wallet();
+    const oldBuyParams = {
+        contractAddress: args.marketAddress,
+        methodName: 'make_offer',
+        args: {token_id: args.token_id, price: args.price}
+    }
 
-      const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME, tokenId, marketId, price: parseNearAmount(price.toString()),}
+    const oldBuy = async () => {
+        const wallet = await selector.wallet();
+
+        const sign = {
+            wallet
+        }
+
+        return await execute(oldBuyParams, sign);
+    }
+    
+    const newBuy = async () => {
+        
+        const wallet = await selector.wallet();
+    
       
-      await execute({wallet}, buy(buyArgs));
+        const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!, tokenId: tokenId!, marketId: marketId!, price: parseNearAmount(price.toString())!,}
+      
+        await execute({wallet}, buy(buyArgs));
 
     }
 
