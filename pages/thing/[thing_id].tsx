@@ -98,6 +98,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         setHide(!hide);
     };
 
+    
+
     const buy = (bid: number) => {
         const token_Id = tokensData.listings[0]?.token.id! + ":" + thing_id.split(":")[0];
         const marketAddress = tokensData.listings[0]?.market_id;
@@ -121,6 +123,12 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         currentBid = "0";
     } else {
         currentBid = formatNearAmount(Number(tokensData?.listings[0]?.offers[0]?.offer_price).toLocaleString("fullwide", { useGrouping: false }), 5);
+    }
+
+    const args = {
+        token_Id : tokensData.listings[0]?.token.id! + ":" + thing_id.split(":")[0],
+        marketAddress : tokensData.listings[0]?.market_id,
+        tokenPrice
     }
 
     return (
@@ -269,7 +277,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                         ? (
                             <div>
                                 {tokensData?.listings[0]?.kind === 'simple' ? (
-                                    <PurchaseNft buy={buy} tokensData={tokensData} thingId={thing_id} price={price!} isConnected={isConnected} />
+                                    <PurchaseNft args={args} tokensData={tokensData} thingId={thing_id} price={price!} isConnected={isConnected} />
                                 ) : (
                                     <MakeOffer
                                         buy={buy}
