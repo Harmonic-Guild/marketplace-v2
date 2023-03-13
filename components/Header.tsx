@@ -27,6 +27,15 @@ const Header = () => {
     const [currentPath, setCurrentPath] = useState<string>();
     const { wallet, isConnected } = useWallet();
 
+    const primaryColor = process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#233247';
+    const secondaryColor = process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#5174a6';
+
+    const buttonStyles = {
+        backgroundImage: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
+        borderRadius: '100%',
+        color: 'white'
+    }
+
     useEffect(() => {
         setCurrentPath(router.pathname);
         console.log("wallet", wallet);
@@ -127,7 +136,7 @@ const Header = () => {
                             </Link>
                         ))}
                     </div>
-                    <div className={`font-header ${styles["button-cont"]}`}>
+                    <div style={buttonStyles} className={`font-header ${styles["button-cont"]}`}>
                         {/* <div onClick={() => setToggleIcons(!toggleIcons)}></div> */}
                         <button onClick={walletAction}>
                             {isConnected ? "Disconnect" : "Connect"}
