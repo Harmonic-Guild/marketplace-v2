@@ -10,7 +10,7 @@ import * as Fathom from 'fathom-client';
 import {WalletContextProvider} from '@mintbase-js/react'
 import '@near-wallet-selector/modal-ui/styles.css'
 import config from '../config/config'
-import {mbjs} from '@mintbase-js/sdk'
+import { mbjs } from '@mintbase-js/sdk'
 
 const Header = dynamic(() => import("../components/Header"));
 const Footer = dynamic(() => import("../components/Footer"));
@@ -24,8 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     const router = useRouter();
 
     const network = process.env.NEXT_PUBLIC_NETWORK
+    const contractAddress = process.env.NEXT_PUBLIC_STORE_NAME 
 
-        mbjs.config({network})
+        mbjs.config({network, contractAddress})
 
     useEffect(() => {
         
