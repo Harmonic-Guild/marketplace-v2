@@ -15,6 +15,12 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
         setBid(e.target.value);
     };
 
+    // const oldBuyParams: any = {
+    //     contractAddress: args.marketAddress,
+    //     methodName: 'make_offer',
+    //     args: {token_id: args.token_id, price: args.price},
+    // }
+
     return (
         <div className={styles.container}>
             <div className="flex flex-col justify-center items-center w-full lg:w-1/2">
