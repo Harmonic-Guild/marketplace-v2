@@ -4,7 +4,7 @@ import Near from "../icons/near.svg";
 import {parseNearAmount } from "near-api-js/lib/utils/format";
 // import { useWallet } from "../services/providers/MintbaseWalletContext";
 import {useWallet } from '@mintbase-js/react'
-import { NearContractCall, buy, execute } from '@mintbase-js/sdk'
+import { ContractCall, NearContractCall, NearExecuteOptions, buy, execute } from '@mintbase-js/sdk'
 
 
 const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
@@ -12,11 +12,12 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
 
   // const { wallet } = useWallet();
   
-  const marketId = tokensData.listings[0]?.market_id;
+  const marketId = tokensData.listings &&  tokensData.listings[0]?.market_id;
 
     // handler function to call the wallet methods to proceed the buy.
     const handleBuy = async () => {
         if(marketId === process.env.NEXT_PUBLIC_marketAddress){
+            
             await oldBuy();
         }   
         else{
@@ -27,28 +28,28 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
 
 
     
-    const tokenId = tokensData.listings[0]?.token.id! //+ ":" + thingId.split(":")[0];
+    const tokenId = tokensData && tokensData[0].token.token_id! //+ ":" + thingId.split(":")[0];
 
-    const oldBuyParams = {
+    const oldBuyParams: any = {
         contractAddress: args.marketAddress,
         methodName: 'make_offer',
-        args: {token_id: args.token_id, price: args.price}
+        args: {token_id: args.token_id, price: args.price},
     }
 
     const oldBuy = async () => {
+        console.log('old');
+        
         const wallet = await selector.wallet();
 
-        const sign = {
-            wallet
-        }
-
-        return await execute(oldBuyParams, sign);
+        return await execute({wallet}, oldBuyParams);
     }
     
     const newBuy = async () => {
         
         const wallet = await selector.wallet();
     
+        console.log('new', tokenId);
+        
       
         const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!, tokenId: tokenId!, marketId: marketId!, price: parseNearAmount(price.toString())!,}
       
