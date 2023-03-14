@@ -1,7 +1,6 @@
 
 import React from "react";
 import { useEffect, useState } from "react";
-import DropDown from "../components/Dropdown-Filters";
 import NFT from "../components/NFT";
 import QueryFilters from "../helpers/getQuery";
 import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
@@ -62,7 +61,6 @@ const explore = () => {
 
     // fetching
 
-
     const setFilters = (filters: any) => {
         
         const res = QueryFilters(filters);
@@ -70,21 +68,20 @@ const explore = () => {
         console.log(filterParams);
     };
 
+    const selectTab = (bool: boolean) => {
+        setTokens([]);
+        setShowAll(bool);
+    }
+
     return (
         <div className="px-8 w-full xl:w-5/6 mx-auto">
             <div className="text-center">
-                {/* <p className="text-secondary-color">
-                    NFTs <GiStarShuriken className="inline w-6 h-5" />
-                </p> */}
                 <h2 className="text-mp-dark-2 text-4xl font-bold">Explore</h2>
             </div>
-            <div>
-                {/* <DropDown setFilters={setFilters} /> */}
-            </div>
             <div className="flex w-1/3 mx-auto justify-around mt-4">
-                    <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> setShowAll(true)}>All</button>
-                    <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> setShowAll(false)}>On Sale</button>
-                </div>
+                <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(true)}>All</button>
+                <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(false)}>On Sale</button>
+            </div>
             <div className="xl:flex block justify-around">
                 
                 
@@ -94,6 +91,18 @@ const explore = () => {
                     ))}
                 </div>
             </div>
+            {/* <div className="flex justify-center items-center my-4">
+                {
+                    (showAll && tokens?.length < totalNfts) && (
+                        <button 
+                            className="rounded-lg bg-gradient-to-l hover:bg-gradient-to-r from-primary-color to-secondary-color text-white px-4 py-2"
+                            onClick={() => setIndex(index + 10)}
+                        >
+                            {loadingTokensData ? 'Loading...' : 'Load More'}
+                        </button>
+                    )
+                }
+            </div> */}
         </div>
     );
 };
