@@ -1,20 +1,14 @@
 import React from "react";
-import { useCallback } from 'react';
 import Near from "../icons/near.svg";
 import {parseNearAmount } from "near-api-js/lib/utils/format";
-// import { useWallet } from "../services/providers/MintbaseWalletContext";
 import {useWallet } from '@mintbase-js/react'
-import { ContractCall, NearContractCall, NearExecuteOptions, buy, execute } from '@mintbase-js/sdk'
-
+import {buy, execute } from '@mintbase-js/sdk'
 
 const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
   const { selector }  = useWallet();
-
-  // const { wallet } = useWallet();
   
   const marketId = tokensData.listings &&  tokensData.listings[0]?.market_id;
 
-    // handler function to call the wallet methods to proceed the buy.
     const handleBuy = async () => {
         if(marketId === process.env.NEXT_PUBLIC_marketAddress){
             
@@ -26,8 +20,6 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
         
     };
 
-
-    
     const tokenId = tokensData && tokensData[0].token.token_id! //+ ":" + thingId.split(":")[0];
 
     const oldBuyParams: any = {
@@ -49,54 +41,12 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
         const wallet = await selector.wallet();
     
         console.log('new', tokenId);
-        
       
         const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!, tokenId: tokenId!, marketId: marketId!, price: parseNearAmount(price.toString())!,}
       
         await execute({wallet}, buy(buyArgs));
 
     }
-
-    // const newBuy = useCallback(async () => {
-    
-    //     const txns = [
-    //       {
-    //         receiverId: marketId,
-    //         functionCalls: [
-    //           {
-    //             methodName: 'buy',
-    //             receiverId: marketId,
-    //             gas: '200000000000000',
-    //             args: {
-    //               nft_contract_id: process.env.NEXT_PUBLIC_STORE_NAME,
-    //               token_id: tokenId,
-    //               referrer_id: process.env.NEXT_PUBLIC_REFERRAL_ID
-    //             //     process.env.NEXT_PUBLIC_REFERRAL_ID || TESTNET_CONFIG.referral,
-    //             },
-    //             deposit: parseNearAmount(price.toString()),
-    //           },
-    //         ],
-    //       },
-    //     ];
-    
-    //     await wallet!.executeMultipleTransactions({
-    //       transactions: txns as never,
-    //       options: {
-    //         //callbackUrl: `${window.location.origin}/wallet-callback`,
-    //         meta: JSON.stringify({
-    //           type: 'make-offer',
-    //           args: {
-    //             tokenId,
-    //             price: parseNearAmount(price.toString()),
-    //           },
-    //         }),
-    //       },
-    //     });
-    //   }, [price, tokenId, wallet]);
-    
-
-    
-    
     
     return (
         <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary-color bg-secondary-color rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
