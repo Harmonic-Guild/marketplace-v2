@@ -1,98 +1,65 @@
 
 import React from "react";
-import { useLazyQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import NFT from "../components/NFT";
 import QueryFilters from "../helpers/getQuery";
-import { fetchTokens } from '../gql/FetchTokens';
-import { NftMetadata } from "../interfaces/nft-metadata.interface";
+import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
+import { mbjs } from '@mintbase-js/sdk';
+import { ResponseType, Token } from '../constants/interfaces';
 
-const FETCH_TOKENS = fetchTokens
 const explore = () => {
-    
-    const [index, setIndex] = useState(0);
-    const [totalNfts, setTotalNfts] = useState(0);
-    const [tokens, setTokens] = useState<any[]>([]);
+    const [tokens, setTokens] = useState<any>([]);
     const [filterParams, setFilterParams] = useState<any>(null);
     const [showAll, setShowAll] = useState(true)
 
-    const storeName = process.env.NEXT_PUBLIC_STORE_NAME!;
+
+
+    const fetchAll = async () => {
+        const { data, error } = await fetchGraphQl<ResponseType>({
+          query: QUERIES.storeNftsQuery,
+          variables: {
+            condition: {
+              nft_contract_id: { _in: mbjs.keys.contractAddress },
+            //   ...(showOnlyListed && { price: { _is_null: false } }),
+            },
+            limit: 20,
+            offset:  0,
+          }
+        });
+        return data?.mb_views_nft_metadata_unburned;
+      }
+
+      const fetchListed = async () => {
+        const { data, error } = await fetchGraphQl<any>({
+          query: QUERIES.storeNftsQuery,
+          variables: {
+            condition: {
+              nft_contract_id: { _in: mbjs.keys.contractAddress },
+               price: { _is_null: false },
+            },
+            limit: 20,
+            offset:  0,
+          }
+        });
+        return data?.mb_views_nft_metadata_unburned;
+      }
+
+      useEffect( ()=> {
+        async function handleFetchTokens () {
+            let myTokens;
+            if(showAll){
+                myTokens = await fetchAll()
+            }else{
+                myTokens = await fetchListed()
+            }
+            setTokens(myTokens)
+
+        }
+        handleFetchTokens()
+        
+      }, [showAll])
 
     // fetching
-    const [getTokens, { loading: loadingTokensData, data: tokensData }] = useLazyQuery<NftMetadata>(FETCH_TOKENS, {
-        variables: {
-            condition: {
-                nft_contract_id: {
-                    _regex: ""
-                },
-            },
-            offset: 0,
-        },
-    });
-
-    const [getListedTokens, { loading: loadingListedTokensData, data: listedTokensData }] = useLazyQuery(FETCH_TOKENS, {
-        variables: {
-            condition: {
-                nft_contract_id: {
-                    _regex: ""
-                },
-                price: {_is_null: false}
-            },
-        },
-    });
-
-    useEffect(() => {
-        
-        if(showAll === true){
-            
-            getTokens({
-                variables: {
-                    condition: {
-                        nft_contract_id: { _regex:storeName } 
-                    },
-                    offset: index
-                },
-            })
-        } else{
-            getListedTokens({
-                variables: {
-                    condition: {
-                        nft_contract_id: { _regex: storeName },
-                        price: {_is_null: false}
-                    },
-                },
-            })
-        }
-        ;
-        //  console.log(filterParams.prices);
-    }, [showAll, index]);
-
-    useEffect(() => {
-        if (!tokensData && !listedTokensData) return;
-        let tokens: any = []
-        
-        setTotalNfts(tokensData?.mb_views_nft_metadata_unburned_aggregate.aggregate.count || 0);
-        
-        const allTokens = tokensData?.mb_views_nft_metadata_unburned.map((token: any)=> {
-            return token;
-        });
-        
-        const listedTokens  = listedTokensData?.mb_views_nft_metadata_unburned.map((token: any)=> {
-            return token;
-        });
-
-        console.log(listedTokensData);
-
-        if(showAll == true) tokens = allTokens
-        else tokens = listedTokens;
-
-        console.log(tokens);
-
-        setTokens((prevState: any[]) => {
-            return showAll ? prevState.concat(tokens) : tokens
-        })
-        
-    }, [tokensData, listedTokensData, showAll]);
 
     const setFilters = (filters: any) => {
         
@@ -116,13 +83,15 @@ const explore = () => {
                 <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(false)}>On Sale</button>
             </div>
             <div className="xl:flex block justify-around">
+                
+                
                 <div className="grid grid-cols-2 lg:grid-cols-3 w-full pt-4 gap-y-5 gap-x-2 col-span-3">
-                    {tokens?.map((token: any, i: number) => (
-                        <NFT token={token} baseUri={token?.baseUri} key={i} />
+                    {tokens?.map((token: Token) => (
+                        <NFT token={token}  key={token.metadata_id} />
                     ))}
                 </div>
             </div>
-            <div className="flex justify-center items-center my-4">
+            {/* <div className="flex justify-center items-center my-4">
                 {
                     (showAll && tokens?.length < totalNfts) && (
                         <button 
@@ -133,7 +102,7 @@ const explore = () => {
                         </button>
                     )
                 }
-            </div>
+            </div> */}
         </div>
     );
 };

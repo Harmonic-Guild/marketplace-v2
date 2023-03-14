@@ -2,67 +2,97 @@ import React from "react";
 import { useCallback } from 'react';
 import Near from "../icons/near.svg";
 import {parseNearAmount } from "near-api-js/lib/utils/format";
-import { useWallet } from "../services/providers/MintbaseWalletContext";
+// import { useWallet } from "../services/providers/MintbaseWalletContext";
+import {useWallet } from '@mintbase-js/react'
+import { ContractCall, NearContractCall, NearExecuteOptions, buy, execute } from '@mintbase-js/sdk'
 
 
-const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
-    
+const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
+  const { selector }  = useWallet();
 
-    const { wallet } = useWallet();
-
-    const marketId = tokensData.listings[0]?.market_id;
+  // const { wallet } = useWallet();
+  
+  const marketId = tokensData.listings &&  tokensData.listings[0]?.market_id;
 
     // handler function to call the wallet methods to proceed the buy.
     const handleBuy = async () => {
         if(marketId === process.env.NEXT_PUBLIC_marketAddress){
-            await buy();
+            
+            await oldBuy();
         }   
         else{
-            await newBuy();
+          await newBuy();
         }
         
     };
 
 
     
-    const tokenId = tokensData.listings[0]?.token.id! //+ ":" + thingId.split(":")[0];
+    const tokenId = tokensData && tokensData[0].token.token_id! //+ ":" + thingId.split(":")[0];
 
-    const newBuy = useCallback(async () => {
+    const oldBuyParams: any = {
+        contractAddress: args.marketAddress,
+        methodName: 'make_offer',
+        args: {token_id: args.token_id, price: args.price},
+    }
+
+    const oldBuy = async () => {
+        console.log('old');
+        
+        const wallet = await selector.wallet();
+
+        return await execute({wallet}, oldBuyParams);
+    }
     
-        const txns = [
-          {
-            receiverId: marketId,
-            functionCalls: [
-              {
-                methodName: 'buy',
-                receiverId: marketId,
-                gas: '200000000000000',
-                args: {
-                  nft_contract_id: process.env.NEXT_PUBLIC_STORE_NAME,
-                  token_id: tokenId,
-                  referrer_id: process.env.NEXT_PUBLIC_REFERRAL_ID
-                //     process.env.NEXT_PUBLIC_REFERRAL_ID || TESTNET_CONFIG.referral,
-                },
-                deposit: parseNearAmount(price.toString()),
-              },
-            ],
-          },
-        ];
+    const newBuy = async () => {
+        
+        const wallet = await selector.wallet();
     
-        await wallet!.executeMultipleTransactions({
-          transactions: txns as never,
-          options: {
-            //callbackUrl: `${window.location.origin}/wallet-callback`,
-            meta: JSON.stringify({
-              type: 'make-offer',
-              args: {
-                tokenId,
-                price: parseNearAmount(price.toString()),
-              },
-            }),
-          },
-        });
-      }, [price, tokenId, wallet]);
+        console.log('new', tokenId);
+        
+      
+        const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!, tokenId: tokenId!, marketId: marketId!, price: parseNearAmount(price.toString())!,}
+      
+        await execute({wallet}, buy(buyArgs));
+
+    }
+
+    // const newBuy = useCallback(async () => {
+    
+    //     const txns = [
+    //       {
+    //         receiverId: marketId,
+    //         functionCalls: [
+    //           {
+    //             methodName: 'buy',
+    //             receiverId: marketId,
+    //             gas: '200000000000000',
+    //             args: {
+    //               nft_contract_id: process.env.NEXT_PUBLIC_STORE_NAME,
+    //               token_id: tokenId,
+    //               referrer_id: process.env.NEXT_PUBLIC_REFERRAL_ID
+    //             //     process.env.NEXT_PUBLIC_REFERRAL_ID || TESTNET_CONFIG.referral,
+    //             },
+    //             deposit: parseNearAmount(price.toString()),
+    //           },
+    //         ],
+    //       },
+    //     ];
+    
+    //     await wallet!.executeMultipleTransactions({
+    //       transactions: txns as never,
+    //       options: {
+    //         //callbackUrl: `${window.location.origin}/wallet-callback`,
+    //         meta: JSON.stringify({
+    //           type: 'make-offer',
+    //           args: {
+    //             tokenId,
+    //             price: parseNearAmount(price.toString()),
+    //           },
+    //         }),
+    //       },
+    //     });
+    //   }, [price, tokenId, wallet]);
     
 
     

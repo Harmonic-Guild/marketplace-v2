@@ -3,13 +3,14 @@ import Head from "next/head";
 import NextProgress from "next-progress";
 import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
-import { WalletProvider } from "../services/providers/MintbaseWalletContext";
 import { useApollo } from "../services/apolloClient";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
-import { Network } from 'mintbase'
+import {WalletContextProvider} from '@mintbase-js/react'
+import '@near-wallet-selector/modal-ui/styles.css'
 import config from '../config/config'
+import { mbjs } from '@mintbase-js/sdk'
 
 const Header = dynamic(() => import("../components/Header"));
 const Footer = dynamic(() => import("../components/Footer"));
@@ -22,7 +23,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     const apolloClient = useApollo(pageProps);
     const router = useRouter();
 
+    const network = process.env.NEXT_PUBLIC_NETWORK
+    const contractAddress = process.env.NEXT_PUBLIC_STORE_NAME 
+
+        mbjs.config({network, contractAddress})
+
     useEffect(() => {
+        
         // Initialize Fathom when the app loads
         // Example: yourdomain.com
         //  - Do not include https://
@@ -51,13 +58,14 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <title>{config.title}</title>
                 <link rel="icon" href={config.favicon} />
             </Head>
-            <WalletProvider apiKey={process.env.NEXT_PUBLIC_MINTBASEJS_API_KEY || ""} network={Network[process.env.NEXT_PUBLIC_NETWORK as keyof typeof Network]}>
+
+            <WalletContextProvider>
                 <ApolloProvider client={apolloClient}>
                     <Header />
                     <Component {...pageProps} />
                     <Footer />
                 </ApolloProvider>
-            </WalletProvider>
+            </WalletContextProvider>
         </>
     );
 }

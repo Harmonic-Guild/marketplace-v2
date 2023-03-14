@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/dist/client/router";
-import { useWallet } from "../services/providers/MintbaseWalletContext";
+import { useWallet } from "@mintbase-js/react";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
@@ -25,7 +25,9 @@ const Header = () => {
     // const [darkMode, setDarkMode] = useState<boolean>(true);
     const [toggleIcons, setToggleIcons] = useState<boolean>();
     const [currentPath, setCurrentPath] = useState<string>();
-    const { wallet, isConnected } = useWallet();
+    const {
+        isConnected, connect, disconnect, activeAccountId,
+      } = useWallet();
 
     const primaryColor = process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#233247';
     const secondaryColor = process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#5174a6';
@@ -38,20 +40,9 @@ const Header = () => {
 
     useEffect(() => {
         setCurrentPath(router.pathname);
-        console.log("wallet", wallet);
-        console.log(config.logo1);
     }, [router.pathname]);
 
-    const walletAction = () => {
-        if (isConnected) {
-            wallet?.disconnect();
-            window.location.reload();
-        } else {
-            wallet?.connect({
-                requestSignIn: true,
-            });
-        }
-    };
+    const walletAction  = isConnected ? disconnect : connect;
 
     return (
         <header className={styles.header} id="nav">
@@ -97,7 +88,7 @@ const Header = () => {
                                             </div>
                                             <div className={styles["info-text"]}>
                                                 <p className={styles["big-text"]}>Email</p>
-                                                <p className={styles.address}>Address: {wallet?.activeAccount?.accountId}</p>
+                                                <p className={styles.address}>Address: {activeAccountId}</p>
                                             </div>
                                         </div>
                                     ) : (

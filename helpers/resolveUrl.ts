@@ -1,4 +1,4 @@
-export const resolveUrl = (media: string, media_hash: string ): string => {
+export const resolveUrl = (media: string, media_hash?: string ): string => {
     if(!media && !media_hash) null
     if(media) {
         return `${media?.startsWith('https://')? media : `https://arweave.net/${media}`}`
