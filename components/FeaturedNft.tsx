@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import Link from 'next/link';
 import Slider from "react-slick";
 import { GiStarShuriken } from "react-icons/gi";
+import Image from "next/image";
 
 import { QUERIES, fetchGraphQl } from '@mintbase-js/data'
 import { mbjs } from '@mintbase-js/sdk'
 
-import Image from "next/image";
-
-import styles from "../styles/FeaturedNfts.module.scss";
 import { Token, ResponseType } from '../constants/interfaces';
 import { resolveUrl } from '../helpers/resolveUrl';
+
+import styles from "../styles/FeaturedNfts.module.scss";
 
 const FeaturedNft = () => {
   

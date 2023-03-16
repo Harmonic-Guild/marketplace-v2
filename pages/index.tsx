@@ -24,8 +24,8 @@ const Home: NextPage = () => {
                 <title>{config.title}</title>
                 <link rel="icon" href={config.logo2} />
             </Head>
-            <FeaturedNft storeId={storeName} />
-            <WeeklyNft storeId={storeName} />
+            <FeaturedNft />
+            <WeeklyNft />
             {/* <AboutArtist storeId={storeName} /> */}
         </div>
     );
