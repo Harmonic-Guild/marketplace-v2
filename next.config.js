@@ -10,11 +10,13 @@ module.exports = {
         ],
         domains: [
             "arweave.net",
+            "www.deeptropics.org",
             "coldcdn.com",
             "firebasestorage.googleapis.com",
             "pbs.twimg.com",
             "lh3.googleusercontent.com",
             "twitter.com",
+            "ipfs.near.social",
             "source.unsplash.com",
             "abs.twimg.com",
             "images.unsplash.com",

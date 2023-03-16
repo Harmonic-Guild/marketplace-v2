@@ -1,14 +1,16 @@
 export interface Token {
-    metadataId: string;
-    createdAt: string;
-    listed: string;
-    media: string;
-    media_hash: string;
-    storeId: string;
     base_uri: string;
-    description: string;
-    title: string;
-}
+    media: string
+    metadata_id: string;
+    minted_timestamp: string
+    nft_contract_id: string
+    price: number |null
+    title: string
+    }
+ export interface ResponseType {
+        mb_views_nft_metadata_unburned: Token[] | [];
+        mb_views_nft_metadata_unburned_aggregate: {aggregate: {count: number}}
+    }
 
 export interface Thing {
     id: string;

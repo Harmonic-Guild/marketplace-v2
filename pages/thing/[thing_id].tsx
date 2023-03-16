@@ -12,12 +12,13 @@ import PurchaseNft from "../../Modal/PurchaseNft";
 import Near from "../../icons/near.svg";
 import Link from "next/link";
 import Arweave from "../../public/images/ARWEAVE.png";
-import { FETCH_TOKENS } from "../../queries/thing_id";
 
 import { GiCancel } from "react-icons/gi";
 import { resolveUrl } from '../../helpers/resolveUrl';
 
 import styles from "../../styles/Thing.module.scss";
+import { metadataByMetadataId } from "@mintbase-js/data";
+import { mbjs } from "@mintbase-js/sdk";
 
 const thing_id = ({ thing_id }: { thing_id: string }) => {
     
@@ -56,236 +57,208 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
         };
         createdAt: string | number;
     }
-    interface MetaData {
-        animation_type: string;
-        animation_url: string;
-        media: string;
-        title: string;
-        description: string;
-        external_url: string;
-        category: string;
-        tags: any;
-        youtube_url: string;
-    }
 
-    const [things, setThing] = useState<Thing | null>(null);
-    const [tokens, setTokens] = useState<[Tokens?]>([]);
-    const [allTokens, setAllTokens] = useState<[id?: string]>([]);
+
+    const [listings, setListings] = useState<any>([]);
+    const [metadata, setMetadata] = useState<any>([]);
+    const [tokenCount, setTokenCount] = useState<number>(0);
+    const [tokens, setTokens] = useState<any>(null);
     const { wallet, isConnected } = useWallet();
     const [hide, setHide] = useState<boolean>(false);
     const [enlarge, setEnlarge] = useState(false);
 
-    const [getTokens, { loading: loadingTokensData, data: tokensData, fetchMore }] = useLazyQuery(FETCH_TOKENS, {
-        variables: {
-            metadataId: "",
-        },
-    });
 
-    useEffect(() => {
-        getTokens({
-            variables: {
-                metadataId: thing_id,
-            },
-        });
-    }, []);
+    const  myFetchMethod = async () => {
+        const { data, error } = await metadataByMetadataId(thing_id);
+        console.log(data);
+        setMetadata(data?.metadata)
+        setTokenCount(data?.tokenCount.aggregate.count!)
+        setListings(data?.listings)
+        return data;
+    }
 
-    useEffect(() => {
-        if (!tokensData) return;
-        setThing(tokensData.metadata[0]);
-    }, [tokensData]);
+    useEffect( ()=> {
+        myFetchMethod()
+    }, [])
+
 
     const toggleDiscription = () => {
         setHide(!hide);
     };
 
-    const buy = (bid: number) => {
-        const token_Id = tokensData.listings[0]?.token.id! + ":" + thing_id.split(":")[0];
-        const marketAddress = tokensData.listings[0]?.market_id;
+    
 
-        if (tokensData.listings[0]?.kind === 'simple') {
+    const buy = (bid: number) => {
+        const token_Id =listings[0]?.token?.token.id! + ":" + thing_id.split(":")[0];
+        const marketAddress =listings[0]?.market_id;
+
+        if (listings[0]?.kind === 'simple') {
             wallet?.makeOffer(token_Id, tokenPrice, { marketAddress } );
         } else {
             wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress });
         }
     };
+        const tokenPriceNumber = Number(listings && listings[0]?.price) || 0;
+        const stringPrice = (tokenPriceNumber!== null && !Number.isNaN(tokenPriceNumber) )? tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }) : '0'
+        const price = formatNearAmount(stringPrice, 5);
+        const tokenPrice = tokenPriceNumber.toLocaleString("fullwide", {
+            useGrouping: false,
+        });
 
-    const tokenPriceNumber = Number(tokensData?.listings[0]?.price);
-    const stringPrice = (tokenPriceNumber!== null && !Number.isNaN(tokenPriceNumber) )? tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }) : '0'
-    const price = formatNearAmount(stringPrice, 5);
-    const tokenPrice = tokenPriceNumber.toLocaleString("fullwide", {
-        useGrouping: false,
-    });
+        let currentBid;
+        if (listings && !listings[0]?.offers) {
+            currentBid = "0";
+        } else {
+            currentBid =listings && formatNearAmount(Number(listings[0]?.offers[0]?.offer_price).toLocaleString("fullwide", { useGrouping: false }), 5) || 0;
+        }
 
-    let currentBid;
-    if (!tokensData?.listings[0]?.offers[0]) {
-        currentBid = "0";
-    } else {
-        currentBid = formatNearAmount(Number(tokensData?.listings[0]?.offers[0]?.offer_price).toLocaleString("fullwide", { useGrouping: false }), 5);
-    }
+        const args = {
+            token_Id :listings && listings[0]?.token.id! + ":" + thing_id.split(":")[0],
+            marketAddress :listings && listings[0]?.market_id,
+            tokenPrice
+        }
+
+    
+
+    
 
     return (
-        <div className={`container ${styles.container}`}>
-            {enlarge && (
-                <div className={styles.enlarged}>
-                    <div className={styles["cancel-cont"]} onClick={() => setEnlarge(false)}>
-                        <GiCancel color="white" size={30} />
-                    </div>
-                    {things && (
-                        <div className={styles["image-cont"]}>
-                            <Image src={things.media} layout="fill" objectFit="cover" />
+        <>
+            {metadata &&
+                <div className={`container ${styles.container}`}>
+                {enlarge && (
+                    <div className={styles.enlarged}>
+                        <div className={styles["cancel-cont"]} onClick={() => setEnlarge(false)}>
+                            <GiCancel color="white" size={30} />
                         </div>
-                    )}
-                </div>
-            )}
-            <Link href="/explore" passHref>
-                <a className="hidden lg:inline-block cursor-pointer bg-black text-white rounded-full p-2 my-4">
-                    <BsChevronLeft />
-                </a>
-            </Link>
-            <div className="lg:flex gap-4 justify-between w-4/5 lg:w-full mx-auto">
-                <div className="mx-auto w-full">
-                    {(things?.animationUrl !== null && things?.animationUrl !== undefined) ? (
-                        <div className="w-full mx-auto flex align-middle">
-                            <video controls className="" poster={resolveUrl(things?.media, things?.media_hash)} controlsList="nodownload" muted>
-                                <source src={resolveUrl(things?.animationUrl, things?.animation_hash)}></source>
-                            </video>
-                            <br />
-                        </div>
-                    ) : (
-                        <div className=" w-full xl:w-4/5 mx-auto">
-                            {things?.media && (
-                                <div className="">
-                                    <Image
-                                        src={resolveUrl(things.media, things.media_hash)}
-                                        objectFit="cover"
-                                        className="w-4/5 lg:w-2/5 rounded-lg shadow-xl"
-                                        width={600}
-                                        height={600}
-                                        // layout="fill"
-                                        alt={"alt"}
-                                    />
-                                    <div className="flex gap-5 justify-end py-4">
-                                        <div className="bg-primary-color p-2 rounded-full cursor-pointer" onClick={() => setEnlarge(true)}>
-                                            <CgArrowsExpandRight color="white" />
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
-                <div className="w-full">
-                    <div className="text-4xl font-bold mb-5">{things?.title}</div>
-
-                    <div className="text-lg">
-                        {!things?.contract.created_at ? (
-                            `_`
-                        ) : (
-                            <div className="flex gap-3">
-                                {`Minted On: ` + new Date(things?.contract.created_at!).toDateString()}{" "}
-                                <TbExternalLink color="#AA5F2A" className="w-6 h-6" />
+                        {metadata && (
+                            <div className={styles["image-cont"]}>
+                                <Image src={metadata[0].media} layout="fill" objectFit="cover" />
                             </div>
                         )}
                     </div>
-                    {/* <div className="timer pb-4">ongoing : 16:32:24 hrs</div> */}
-                    <div className="">
-                        <div className="mt-10 border-b md:border-b-0 border-primary-color pb-4">
-                            <div className="border-b border-primary-color mb-3 pb-3">
-                                <span className="text-3xl font-bold">Description</span>
+                )}
+                <Link href="/explore" passHref>
+                    <a className="hidden lg:inline-block cursor-pointer bg-black text-white rounded-full p-2 my-4">
+                        <BsChevronLeft />
+                    </a>
+                </Link>
+                <div className="lg:flex gap-4 justify-between w-4/5 lg:w-full mx-auto">
+                    <div className="mx-auto w-full">
+                        {(metadata[0]?.animationUrl !== null && metadata[0]?.animationUrl !== undefined) ? (
+                            <div className="w-full mx-auto flex align-middle">
+                                <video controls className="" poster={resolveUrl(metadata[0]?.media)} controlsList="nodownload" muted>
+                                    <source src={resolveUrl(metadata[0]?.animationUrl)}></source>
+                                </video>
+                                <br />
                             </div>
-
-                            <p className={hide ? "" : "line-clamp-3"}>{things?.description}</p>
-                            <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
-                                {" "}
-                                {!hide ? ".....see more" : "see less"}
-                            </span>
-                            {/* <span className="border-b border-yellow-600 py-2 w-full px-44"></span> */}
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col-reverse lg:flex-col">
-                        <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
-                            {/* <div className={styles["history-cont"]}>
-                                <p className={styles.header}>
-                                    <p>History of NFT</p>
-                                    <TbExternalLink color="#342AAA" className="w-6 h-6" />
-                                </p>
-                                <div className={styles["inner-cont"]}>
-                                    {[1, 1, 1].map((item, i: number) => (
-                                        <div key={i}>
-                                            <div className={styles["info-cont"]}>
-                                                <p className="font-semibold">Owned by:</p>
-                                                <div className={styles["image-cont"]}>
-                                                    <Image
-                                                        src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                        layout="fill"
-                                                        objectFit="cover"
-                                                    />
-                                                </div>
-                                                <p>@Latest bidder</p>
+                        ) : (
+                            <div className=" w-full xl:w-4/5 mx-auto">
+                                {metadata[0]?.media && (
+                                    <div className="">
+                                        <Image
+                                            src={resolveUrl(metadata[0].media)}
+                                            objectFit="cover"
+                                            className="w-4/5 lg:w-2/5 rounded-lg shadow-xl"
+                                            width={600}
+                                            height={600}
+                                            // layout="fill"
+                                            alt={"alt"}
+                                        />
+                                        <div className="flex gap-5 justify-end py-4">
+                                            <div className="bg-primary-color p-2 rounded-full cursor-pointer" onClick={() => setEnlarge(true)}>
+                                                <CgArrowsExpandRight color="white" />
                                             </div>
-                                            {i < 2 && (
-                                                <div className={styles["col-name"]}>
-                                                    <p>Address.......</p>
-                                                    <p>Date</p>
-                                                    <p>Time</p>
-                                                </div>
-                                            )}
                                         </div>
-                                    ))}
-                                </div>
-                            </div> */}
-                            <div className="">
-                                <div className="flex items-center justify-between gap-3">
-                                    <p className="text-2xl font-bold">Details</p>
-                                    <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                                    <div className="border-2 border-primary-color rounded-full p-2 px-3">
-                                        <a
-                                            href={`https://explorer.testnet.near.org/transactions/${things?.title}`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            <Near className="w-4 h-4" fill="black" />
-                                        </a>
                                     </div>
-                                    <div className="border-2 border-primary-color rounded-full p-1 px-3">
-                                        <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
-                                            <div className="w-6 h-6">
-                                                <Image src={Arweave} className="" />
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div className="bg-primary-color rounded-lg my-8 py-2">
-                                    <p className="text-center text-white text-lg">
-                                        {tokensData?.all.aggregate.count} Tokens Minted
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        {tokensData?.listings.length 
-                        //&& (tokensData.listings[0].market_id === process.env.NEXT_PUBLIC_marketAddress) 
-                        ? (
-                            <div>
-                                {tokensData?.listings[0]?.kind === 'simple' ? (
-                                    <PurchaseNft buy={buy} tokensData={tokensData} thingId={thing_id} price={price!} isConnected={isConnected} />
-                                ) : (
-                                    <MakeOffer
-                                        buy={buy}
-                                        isConnected={isConnected}
-                                        latestBid={tokensData?.listings[0]?.offers[0]?.offer_price}
-                                        bidder={tokensData?.listings[0]?.offers[0]?.offered_by}
-                                        owner={tokensData?.listings[0]?.token.ownerId}
-                                    />
                                 )}
                             </div>
-                        ): <div className="bg-primary-color text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
+                        )}
+                    </div>
+                    <div className="w-full">
+                        <div className="text-4xl font-bold mb-5">{metadata[0]?.title}</div>
+        
+                        <div className="text-lg">
+                            {metadata[0]?.contract?.created_at ? (
+                                `_`
+                            ) : (
+                                <div className="flex gap-3">
+                                    {`Minted On: ` + new Date(metadata[0]?.contract?.created_at!).toDateString()}{" "}
+                                    <TbExternalLink color="#AA5F2A" className="w-6 h-6" />
+                                </div>
+                            )}
+                        </div>
+                        
+                        <div className="">
+                            <div className="mt-10 border-b md:border-b-0 border-primary-color pb-4">
+                                <div className="border-b border-primary-color mb-3 pb-3">
+                                    <span className="text-3xl font-bold">Description</span>
+                                </div>
+        
+                                <p className={hide ? "" : "line-clamp-3"}>{metadata[0]?.description}</p>
+                                <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
+                                    {" "}
+                                    {!hide ? ".....see more" : "see less"}
+                                </span>
+                            </div>
+                        </div>
+        
+                        <div className="flex flex-col-reverse lg:flex-col">
+                            <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                                <div className="">
+                                    <div className="flex items-center justify-between gap-3">
+                                        <p className="text-2xl font-bold">Details</p>
+                                        <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
+                                        <div className="border-2 border-primary-color rounded-full p-2 px-3">
+                                            <a
+                                                href={`https://explorer.testnet.near.org/transactions/${metadata[0]?.title}`}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                            >
+                                                <Near className="w-4 h-4" fill="black" />
+                                            </a>
+                                        </div>
+                                        <div className="border-2 border-primary-color rounded-full p-1 px-3">
+                                            <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
+                                                <div className="w-6 h-6">
+                                                    <Image src={Arweave} className="" />
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+        
+                                    <div className="bg-primary-color rounded-lg my-8 py-2">
+                                        <p className="text-center text-white text-lg">
+                                            {tokenCount} Tokens Minted
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {listings && listings.length 
+                            //&& (tokensData.listings[0].market_id === process.env.NEXT_PUBLIC_marketAddress) 
+                            ? (
+                                <div>
+                                    {listings && listings[0]?.kind === 'simple' ? (
+                                        <PurchaseNft args={args} tokensData={listings} thingId={thing_id} price={price!} isConnected={isConnected} />
+                                    ) : (
+                                        <MakeOffer
+                                            buy={buy}
+                                            isConnected={isConnected}
+                                            latestBid={listings[0]?.offers[0]?.offer_price}
+                                            bidder={listings[0]?.offers[0]?.offered_by}
+                                            owner={listings[0]?.token.ownerId}
+                                        />
+                                    )}
+                                </div>
+                            ): <div className="bg-primary-color text-white text-center w-fit rounded-lg p-3">Not Listed</div>}
+                        </div>
                     </div>
                 </div>
+                {/* <SimilarNft /> */}
+                stoopid
             </div>
-            {/* <SimilarNft /> */}
-        </div>
+            }
+        </>
     );
 };
 export default thing_id;

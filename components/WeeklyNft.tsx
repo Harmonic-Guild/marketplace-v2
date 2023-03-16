@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { gql } from "apollo-boost";
-import { useLazyQuery } from "@apollo/client";
 import { GiStarShuriken } from "react-icons/gi";
 import Slider from "react-slick";
 import NFT from "./NFT";
-import { Token } from "../constants/interfaces";
-import { FETCH_WEEKLY } from "../queries/weeklyNfts";
+import { ResponseType, Token } from "../constants/interfaces";
 
 import styles from "../styles/WeeklyNft.module.scss";
+import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
+import { mbjs } from "@mintbase-js/sdk";
 
-const WeeklyNft = ({ storeId }: { storeId: string }) => {
+const WeeklyNft = () => {
+
+    const [tokens, setTokens] = useState<Token[]>([]);
+    
     const settings = {
         dots: true,
         infinite: true,
@@ -47,41 +49,29 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
         ],
     };
 
-    const [tokens, setTokens] = useState<Token[]>([]);
-
-    const [getTokens, { loading: loadingtokensData, data: tokensData }] = useLazyQuery(FETCH_WEEKLY, {
-        variables: {
+   async function myFetchMethod  () {
+        const { data, error } = await fetchGraphQl<ResponseType>({
+          query: QUERIES.storeNftsQuery,
+          variables: {
             condition: {
-                nft_contract_id: { _regex: "" } 
-            }
-        },
-    });
-
-    useEffect(() => {
-        getTokens({
-            variables: {
-                condition: {
-                    nft_contract_id: { _regex: storeId } 
-                }
+              nft_contract_id: { _in: mbjs.keys.contractAddress },
+            //   ...(showOnlyListed && { price: { _is_null: false } }),
             },
+            limit: 5,
+            offset: 3,
+          }
         });
-        console.log(storeId);
-    }, []);
+        setTokens(data?.mb_views_nft_metadata_unburned!)    
+      }
 
-    useEffect(() => {
-        // console.log(storeData);
+    useEffect( ()=> {
+        myFetchMethod()
+    }, [])
 
-        if (!tokensData) return;
-
-
-        const weeklyTokens = tokensData?.mb_views_nft_metadata_unburned.map((token: any) => token);
-
-        setTokens(weeklyTokens);
-    }, [tokensData]);
 
     return (
         <>
-            {loadingtokensData && <div className="h-5 w-5 bg-primary-color animate-pulse rounded-full"></div>}
+            {/* {loadingtokensData && <div className="h-5 w-5 bg-primary-color animate-pulse rounded-full"></div>} */}
             <div className={styles.container}>
                 <div className=" text-center  font-bold text-gray-900 mb-4">
                     <p className="text-secondary-color mb-2">
@@ -91,8 +81,8 @@ const WeeklyNft = ({ storeId }: { storeId: string }) => {
                 </div>
                 {/* <div className={styles["nfts-cont"]}> */}
                 <Slider {...settings} className={styles["nfts-cont"]}>
-                    {tokens.map((token) => (
-                        <NFT token={token} key={token.metadataId} />
+                    {tokens.map((token, id) => (
+                        <NFT token={token} key={id} />
                     ))}
                 </Slider>
                 {/* </div> */}
