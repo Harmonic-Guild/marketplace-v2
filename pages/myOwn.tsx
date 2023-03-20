@@ -33,6 +33,16 @@ const NFT = ({
         toggle(media);
     };
 
+    async function fetchedData () {
+        const NFTMetadata = await fetch('');
+        // set metadata with results gotten from the wire
+
+    }
+
+    useEffect(() => {
+        fetchedData()
+    } , [])
+
     return (
         <div className="w-full h-auto border border-primary-color rounded-2xl bg-card bg-opacity-10">
             <div className="p-4">
