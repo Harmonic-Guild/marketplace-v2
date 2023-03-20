@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { useLazyQuery } from "@apollo/client";
 import React from "react";
 import Image from "next/image";
 import MintNft from "../Modal/MintNft";
 import { BsCircle } from "react-icons/bs";
 import { AiOutlineExpandAlt } from "react-icons/ai";
-import { FETCH_TOKENS, FETCH_LISTING } from "../queries/myown";
 
 import styles from "../styles/MyOwn.module.scss";
 import { resolveUrl } from "../helpers/resolveUrl";
@@ -34,7 +32,6 @@ const NFT = ({
     const toggleFullScreen = (media: any) => {
         toggle(media);
     };
-
 
     return (
         <div className="w-full h-auto border border-primary-color rounded-2xl bg-card bg-opacity-10">
@@ -115,9 +112,6 @@ const MyOwn = () => {
     const fetchOwnedTokens = async () => {
         if(activeAccountId) {
             const {data, error} = await ownedTokens(activeAccountId, {limit: 20})
-            console.log('banana',error);
-
-            console.log('banana',data);
             setTokens(data);
             
         }
@@ -126,7 +120,6 @@ const MyOwn = () => {
     useEffect(() => {
         fetchOwnedTokens()
     }, [])
-
 
     const toggle = (image: any) => {
         setFullScreen(true);
