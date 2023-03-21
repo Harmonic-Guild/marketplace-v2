@@ -3,8 +3,6 @@ import { useWallet } from "../../services/providers/MintbaseWalletContext";
 import { TbExternalLink } from "react-icons/tb";
 import { BsChevronLeft } from "react-icons/bs";
 import { CgArrowsExpandRight } from "react-icons/cg";
-import { gql } from "apollo-boost";
-import { useLazyQuery } from "@apollo/client";
 import Image from "next/image";
 import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format";
 import MakeOffer from "../../Modal/MakeOffer";
@@ -88,16 +86,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
 
     
 
-    const buy = (bid: number) => {
-        const token_Id =listings[0]?.token?.token.id! + ":" + thing_id.split(":")[0];
-        const marketAddress =listings[0]?.market_id;
-
-        if (listings[0]?.kind === 'simple') {
-            wallet?.makeOffer(token_Id, tokenPrice, { marketAddress } );
-        } else {
-            wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress });
-        }
-    };
+    
         const tokenPriceNumber = Number(listings && listings[0]?.price) || 0;
         const stringPrice = (tokenPriceNumber!== null && !Number.isNaN(tokenPriceNumber) )? tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }) : '0'
         const price = formatNearAmount(stringPrice, 5);
@@ -242,7 +231,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         <PurchaseNft args={args} tokensData={listings} thingId={thing_id} price={price!} isConnected={isConnected} />
                                     ) : (
                                         <MakeOffer
-                                            buy={buy}
+                                            args = {args}
                                             isConnected={isConnected}
                                             latestBid={listings[0]?.offers[0]?.offer_price}
                                             bidder={listings[0]?.offers[0]?.offered_by}
