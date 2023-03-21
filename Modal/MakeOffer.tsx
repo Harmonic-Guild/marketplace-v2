@@ -2,24 +2,36 @@ import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Near from "../icons/near.svg";
 import NotConnected from "./NotConnected";
-import { formatNearAmount } from "near-api-js/lib/utils/format";
+import { formatNearAmount, parseNearAmount } from 'near-api-js/lib/utils/format';
 
 import styles from '../styles/MakeOffer.module.scss';
+import { execute } from "@mintbase-js/sdk";
+import { useWallet } from "@mintbase-js/react";
+// import { useWallet } from '../services/providers/MintbaseWalletContext';
 
-const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
+const MakeOffer = ({ args, isConnected, latestBid, bidder, owner }: any) => {
     const [showModal, setShowModal] = useState(false);
     const [bid, setBid] = useState("0");
     const [showNotConnectedModal, setShowNotConnectedModal] = useState(false);
+
+    const { selector } = useWallet();
 
     const handleChange = (e: any) => {
         setBid(e.target.value);
     };
 
-    // const oldBuyParams: any = {
-    //     contractAddress: args.marketAddress,
-    //     methodName: 'make_offer',
-    //     args: {token_id: args.token_id, price: args.price},
-    // }
+    const oldBuyParams: any = {
+        contractAddress: args.marketAddress,
+        methodName: 'make_offer',
+        args: {token_id: args.token_id},
+    }
+
+    const oldBid = async (bid: string) => {
+        
+        const wallet = await selector.wallet();
+
+        return await execute({wallet}, { ...oldBuyParams, price: bid });
+    }
 
     return (
         <div className={styles.container}>
@@ -97,7 +109,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
 
                         <div className="">
                             <button
-                                onClick={() => buy(bid)}
+                                onClick={() => oldBid(parseNearAmount(bid.toString())!.toString())}
                                 className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800"
                             >
                                 Place bid
