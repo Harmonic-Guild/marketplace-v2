@@ -8,7 +8,7 @@ import styles from "../styles/WeeklyNft.module.scss";
 import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
 import { mbjs } from "@mintbase-js/sdk";
 
-const WeeklyNft = () => {
+const WeeklyNft = (storeId : any) => {
 
     const [tokens, setTokens] = useState<Token[]>([]);
     

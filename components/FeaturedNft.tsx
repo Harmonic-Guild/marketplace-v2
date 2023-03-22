@@ -12,7 +12,7 @@ import styles from "../styles/FeaturedNfts.module.scss";
 import { Token, ResponseType } from '../constants/interfaces';
 import { resolveUrl } from '../helpers/resolveUrl';
 
-const FeaturedNft = () => {
+const FeaturedNft = (storeId: any) => {
   
 
     const [tokens, setTokens] = useState<Token[]| []>([]);
