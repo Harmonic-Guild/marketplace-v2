@@ -5,7 +5,7 @@ module.exports = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "*.arweave.net",
+                hostname: "**",
             },
         ],
         domains: [
@@ -30,7 +30,8 @@ module.exports = {
             "centralindia1-mediap.svc.ms",
             "q2iuajmnbtnet5j53fjfip45sd7mdboxkdd6rqjllxhd563lfgeq.arweave.net",
             "res.cloudinary.com",
-            "www.deeptropics.org"
+            "www.deeptropics.org",
+            "www.harmonicguild.io"
         ],
     },
     webpack(config) {
