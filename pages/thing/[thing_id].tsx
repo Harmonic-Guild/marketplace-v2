@@ -136,7 +136,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     <div className="mx-auto w-full">
                         {(metadata[0]?.animationUrl !== null && metadata[0]?.animationUrl !== undefined) ? (
                             <div className="w-full mx-auto flex align-middle">
-                                <video controls className="" poster={resolveUrl(metadata[0]?.media)} controlsList="nodownload" muted>
+                                <video controls className="w-5/6 mx-auto" poster={resolveUrl(metadata[0]?.media)} controlsList="nodownload" muted>
                                     <source src={resolveUrl(metadata[0]?.animationUrl)}></source>
                                 </video>
                                 <br />
@@ -244,7 +244,6 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
                 </div>
                 {/* <SimilarNft /> */}
-                stoopid
             </div>
             }
         </>
