@@ -45,8 +45,8 @@ const NFT = ({
             query: 'query MyQuery { mb_views_active_listings_by_contract(limit: 100, order_by: {created_at: desc}, where: {market_id: {_eq: "simple.market.mintbase1.near"}, nft_contract_id: {_eq: "${contractId}"}}) { listed_by created_at price nft_contract_id token_id metadata_id } },'
             }),
             });
-        // set metadata with results gotten from the wire
-
+        return data
+            // set the netadata 
     }
 
     useEffect(() => {
