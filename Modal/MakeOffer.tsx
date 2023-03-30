@@ -29,8 +29,9 @@ const MakeOffer = ({ args, isConnected, latestBid, bidder, owner }: any) => {
     const oldBid = async (bid: string) => {
         
         const wallet = await selector.wallet();
+        oldBuyParams['price'] = bid;
 
-        return await execute({wallet}, { ...oldBuyParams, price: bid });
+        return await execute({wallet}, { ...oldBuyParams });
     }
 
     return (
