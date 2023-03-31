@@ -1,77 +1,39 @@
-import Link from "next/link";
-import Image from "next/image";
-import { BsArrowUp } from "react-icons/bs";
-import logo from "../assets/harmonic-logo.png";
-import { FiUsers } from "react-icons/fi";
+import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 import config from '../config/config'
+import { useState } from "react";
 
 
 const Footer = () => {
-    const scrollToTop = () => {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    };
+    const [footerTitles, setFooterTitles] = useState([
+        {name: "Contact us", href: ''},
+        {name: "Faqs", href: ''},
+        {name: "Terms", href: ''},
+        {name: "Privacy", href: ''},
+        {name: "Cookie choices", href: '#'}
+    ])
 
     return (
-        <footer className="w-full max-w-screen-2xl mx-auto px-6 py-10 text-gray-700 mt-20">
-            {/* <div className="flex justify-center items-center my-10">
-                <button className="lg:flex lg:gap-10 text-center no-underline bg-yellow-500 px-10 py-3 font-bold rounded-md text-gray-900 text-lg">
-                <div className="flex items-center justify-center gap-3">
-                    <div>Community</div>
-                    <div>
-                    <FiUsers />
-                    </div>
+        <footer className="text-center uppercase md:text-xs text-xss font-medium w-full mx-auto mt-20">
+            <div className="justify-between p-5 lg:p-10">
+                <div className="flex w-fit mx-auto gap-6">
+                    <a href="https://web.facebook.com/Asherroth" target="_blank"><BsFacebook className="w-6 h-6 hover:text-yellow-600"/></a>
+                    <a href="https://twitter.com/asherroth" target="_blank"><BsTwitter className="w-6 h-6 hover:text-yellow-600"/></a>
+                    <a href="https://www.instagram.com/asherroth" target="_blank"><BsInstagram className="w-6 h-6 hover:text-yellow-600"/></a>
                 </div>
-                <div>Coming Soon</div>
-                </button>
-            </div> */}
-            <div className="flex flex-wrap justify-between p-10 gap-8">
-                <div className="mb-5">
-                    <div>
-                        <Link href="/" passHref>
-                            <a className="py-6 relative w-40 h-20 inline-block">
-                                <Image src={config.logo1!} layout="fill" objectFit="contain" alt="logo" className="cursor-pointer mb-5" />
+                <div className=" pt-6 pb-3">
+                    <span>&copy; {new Date().getFullYear()} {config.title}. All right reserved.</span>
+                </div>
+                <div className="flex flex-wrap justify-center md:break-after-column">
+                    {
+                        footerTitles.map((footerTitle, index) => (
+                            <a key={index} href={footerTitle.href} className={`px-2 lg:px-3 ${index !== footerTitles.length - 1 && 'border-black border-r'}`}>
+                                <p className="mt-1 py-0">{footerTitle.name}</p>
                             </a>
-                        </Link>
-                        <div className="leading-loose">
-                            <span>support@harmonicguild.io</span> <br />
-                            {/* <span>+2343878472983</span> */}
-                        </div>
-                    </div>
-                </div>
-                <div className="lg:text-xl text-sm">
-                    <span className="font-bold font-header">LEARN MORE</span>
-                    <ul className="leading-loose capitalize font-text">
-                        <li>About</li>
-                        <li>Merchant</li>
-                        <li>Partners</li>
-                        <li>Contact</li>
-                    </ul>
-                </div>
-                <div className="lg:text-xl text-sm">
-                    <span className="font-bold font-header">LEGAL</span>
-                    <ul className="leading-loose capitalize font-text">
-                        <li>General Info</li>
-                        <li>Privacy Policy</li>
-                        <li>Terms of Service</li>
-                    </ul>
-                </div>
-                <div className="lg:text-xl text-sm">
-                    <span className="font-bold font-header">TALK TO US</span>
-                    <ul className="leading-loose capitalize font-text">
-                        <li>Contact us</li>
-                        <li>Facebook</li>
-                        <li>LinkedIn</li>
-                        <li>Twitter</li>
-                    </ul>
-                </div>
-                <div onClick={() => scrollToTop()} className="p-4 btnColor rounded-full w-10 h-10 cursor-pointer">
-                    <BsArrowUp className="w-6 h-6 -mt-2 -ml-2" />
+                        ))
+                    }
                 </div>
             </div>
-            <div className="text-center">
-                <span>&copy; {new Date().getFullYear()} {config.title}. All right reserved. <br /> Powered by Harmonic Guild</span>
-            </div>
+            
         </footer>
     );
 };

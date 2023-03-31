@@ -25,7 +25,7 @@ const FeaturedNft = (storeId: any) => {
         infinite: true,
         centerPadding: "8px",
         centerMode: true,
-        slidesToShow: 3,
+        slidesToShow: 1,
         autoplay: true,
         autoplaySpeed: 2000,
         pauseOnHover: true,
@@ -47,9 +47,9 @@ const FeaturedNft = (storeId: any) => {
             {
                 breakpoint: 800,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 1,
                     slidesToScroll: 1,
-                    initialSlide: 3,
+                    initialSlide: 1,
                 },
             },
             {
@@ -84,32 +84,61 @@ const FeaturedNft = (storeId: any) => {
 
 
     return (
-        <div className={styles.container}>
-            <div className=" text-center  font-bold text-gray-900 mb-6">
-                <p className="text-secondary-color mb-2">
-                    <GiStarShuriken className="inline w-6 h-5" />
-                </p>
-                <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured NFTs </h2>
-                <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
-            </div>
-            <Slider {...settings}>
-                {tokens.map((token: Token, index) => (
-                    <Link href={`/thing/${token.metadata_id}`} key={index}>
-                        <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
-                            <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
-                                <Image src={resolveUrl(token.media)}  alt="" objectFit="cover" layout="fill" />
-                                {index === slideIndex && (
-                                    <div className="absolute bottom-5 text-center font-semibold w-full">
-                                        <p className="text-white">{token.title}</p>
-                                        {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
-                                    </div>
-                                )}
+        // <div className={styles.container}>
+        //     <div className=" text-center  font-bold text-gray-900 mb-6">
+        //         <p className="text-secondary-color mb-2">
+        //             <GiStarShuriken className="inline w-6 h-5" />
+        //         </p>
+        //         <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured</h2>
+                
+        //     </div>
+        //     <Slider {...settings}>
+        //         {tokens.map((token: Token, index) => (
+        //             <Link href={`/thing/${token.metadata_id}`} key={index}>
+        //                 <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
+        //                     <div className="flex justify-center h-96 w-2/5 rounded-xl shadow-lg relative overflow-hidden">
+        //                         <Image src={resolveUrl(token.media)}  alt="" objectFit="cover" layout="fill" />
+        //                         {index === slideIndex && (
+        //                             <div className="absolute bottom-5 text-center font-semibold w-full">
+        //                                 <p className="text-white">{token.title}</p>
+        //                                 {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
+        //                             </div>
+        //                         )}
+        //                     </div>
+        //                 </div>
+        //             </Link>
+        //         ))}
+        //     </Slider>
+        // </div>
+      
+
+<div className={styles.container} style={{margin: 'auto'}}>
+    <div className="text-center font-bold text-gray-900 mb-6">
+        <p className="text-secondary-color mb-2">
+            <GiStarShuriken className="inline w-6 h-5" />
+        </p>
+        <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured</h2>
+    </div>
+    <Slider {...settings}>
+        {tokens.map((token: Token, index) => (
+            <Link href={`/thing/${token.metadata_id}`} key={index}>
+                <div className={index === slideIndex ? "slide:active flex justify-center items-center" : "slide flex justify-center items-center"} key={index}>
+                    <div className="h-96 w-full lg:w-3/5 rounded-xl shadow-lg relative overflow-hidden">
+                        <Image src={resolveUrl(token.media)} alt="" objectFit="cover" layout="fill" />
+                        {index === slideIndex && (
+                            <div className="absolute bottom-5 text-center font-semibold w-full">
+                                <p className="text-white">{token.title}</p>
+                                {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
                             </div>
-                        </div>
-                    </Link>
-                ))}
-            </Slider>
-        </div>
+                        )}
+                    </div>
+                </div>
+            </Link>
+        ))}
+    </Slider>
+</div>
+
+
     );
 };
 

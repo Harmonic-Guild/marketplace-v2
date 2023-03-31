@@ -13,8 +13,8 @@ import styles from "../styles/Header.module.scss";
 
 const navTitles = [
     { title: "Home", href: "/" },
-    { title: "Explore", href: "/explore" },
-    { title: "My NFTs", href: "/myOwn" },
+    { title: "Gallery", href: "/explore" },
+    { title: "My Collectibles", href: "/myOwn" },
     //{ title: "Profile", href: "#" },
 ];
 
