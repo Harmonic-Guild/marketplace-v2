@@ -78,14 +78,14 @@ const explore = () => {
             <div className="text-center">
                 <h2 className="text-mp-dark-2 text-4xl font-bold">Explore</h2>
             </div>
-            <div className="flex w-1/3 mx-auto justify-around mt-4">
-                <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(true)}>All</button>
-                <button className={`border-secondary-color border rounded-md px-3 py-2 w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(false)}>On Sale</button>
+            <div className="flex lg:w-1/3 mx-auto justify-around mt-6">
+                <button className={`border-secondary-color border rounded-md px-6 py-1 w-2/5 lg:px-3 lg:py-2 lg:w-2/5 ${showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(true)}>All</button>
+                <button className={`border-secondary-color border rounded-md px-4 py-1 w-2/5 lg:px-3 lg:py-2 lg:w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(false)}>On Sale</button>
             </div>
             <div className="xl:flex block justify-around">
                 
                 
-                <div className="grid grid-cols-2 lg:grid-cols-3 w-full pt-4 gap-y-5 gap-x-2 col-span-3">
+                <div className="grid grid-cols-1 lg:grid-cols-3 w-full pt-4 gap-y-5 gap-x-2 col-span-3">
                     {tokens?.map((token: Token) => (
                         <NFT token={token}  key={token.metadata_id} />
                     ))}

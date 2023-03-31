@@ -43,7 +43,7 @@ const NFT: FC<Props> = ({ token }) => {
                                     
                                         <div className="flex items-center gap-2 whitespace-nowrap">
                                             <div>
-                                                Price:{" "}
+                                                {/* Price:{" "} */}
                                                 <span className="font-bold">
                                                     {formatNearAmount(Number(token?.price).toLocaleString("fullwide", { useGrouping: false }), 5)}
                                                 </span>
@@ -60,7 +60,7 @@ const NFT: FC<Props> = ({ token }) => {
                         </div>
                         <div className="flex mt-4 justify-between">
                             <button className={`font-header ${styles["buy-button"]}`}>
-                                <div className="">View NFT</div>
+                                <div className="">View</div>
                                 <span>&rarr;</span>
                             </button>
                         </div>

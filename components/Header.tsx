@@ -62,12 +62,6 @@ const Header = () => {
                 <div className={styles["mobile-nav-cont"]}>
                     {toggleMenu ? (
                         <div className={styles["mobile-nav"]}>
-                            <button className={styles["connect-btn"]} onClick={walletAction}>
-                                {isConnected ? "Disconnect" : "Connect"}
-                                <span className="ml-2 mt-1">
-                                    <Near className="w-4 h-4" fill="white" />
-                                </span>
-                            </button>
                             <button className={styles["menu-btn"]}>
                                 <FiMenu className="w-6 h-6 text-white" onClick={() => setToggleMenu(false)} />
                             </button>
@@ -77,23 +71,21 @@ const Header = () => {
                             <FiX className="w-6 h-6 relative text-black z-20" onClick={() => setToggleMenu(true)} />
                             <div className={styles["nav-content"]}>
                                 <div className={styles["connection-cont"]}>
-                                    {isConnected ? (
+                                    {/* {isConnected ? (
                                         <div className={styles["info-cont"]}>
-                                            <div className={styles.avatar}>
-                                                <Image
-                                                    src="https://images.unsplash.com/photo-1654792393225-3e8a53d124d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fG5mdCUyMGFydHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                />
-                                            </div>
                                             <div className={styles["info-text"]}>
-                                                <p className={styles["big-text"]}>Email</p>
                                                 <p className={styles.address}>Address: {activeAccountId}</p>
                                             </div>
                                         </div>
-                                    ) : (
-                                        <p>Not connected</p>
-                                    )}
+                                    ) : ( */}
+                                        <button className={styles["connect-btn"]} onClick={walletAction}>
+                                {isConnected ? "Disconnect" : "Connect"}
+                                {/* <span className="mt-1">
+                                    <Near className="w-4 h-4" fill="white" />
+                                </span> */}
+                            </button>
+        
+                                  
                                 </div>
                                 {navTitles.map((item, index) => (
                                     <Link key={index} href={item.href} passHref>
@@ -104,14 +96,7 @@ const Header = () => {
                                 ))}
                                 <div className={styles["nav-bottom"]}>
                                     <div className={styles["inner-cont"]}>
-                                        <div className={styles["toggle-light-dark"]} onClick={() => setToggleIcons(!toggleIcons)}>
-                                            <div className={`${styles.ball} ${toggleIcons ? styles.active : ""}`}></div>
-                                        </div>
-                                        <div className={"border-r border-solid border-gray-300 h-8"}></div>
-                                        <div className={styles["update-cont"]}>
-                                            <span>Updates</span>
-                                            <BsLayoutTextSidebarReverse className="w-5 h-5  px-1" />
-                                        </div>
+                                            <span>{activeAccountId}</span>
                                     </div>
                                 </div>
                             </div>
