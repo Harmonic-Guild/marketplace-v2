@@ -38,11 +38,6 @@ const MakeOffer = ({ args, isConnected, latestBid, bidder, owner }: any) => {
         <div className={styles.container}>
             <div className="flex flex-col justify-center items-center w-full lg:w-1/2">
                 <div className="flex flex-wrap justify-center items-center gap-2">
-                    {/* <img
-                        className="inline-block h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                    /> */}
                     <span className="font-bold text-lg">Latest bidder - </span>
                     <span className="font-bold text-lg">{bidder}</span>
                 </div>
@@ -76,12 +71,6 @@ const MakeOffer = ({ args, isConnected, latestBid, bidder, owner }: any) => {
                 <div className="text-center flex flex-col lg:flex-row justify-center items-center mt-3">
                     <p className="font-bold">Owned by - @ {owner ? owner : "None"}</p>
                     <div className="flex">
-                        {/* <img
-                            className="h-5 w-5 rounded-full mx-2"
-                            src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt=""
-                        />
-                        <span>@owner</span> */}
                     </div>
                 </div>
             </div>
