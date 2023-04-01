@@ -34,12 +34,12 @@ const Header = () => {
 
     const buttonStyles = {
         backgroundImage: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
-        borderRadius: '100%',
         color: 'white'
     }
 
     useEffect(() => {
         setCurrentPath(router.pathname);
+        console.log(process.env.NEXT_PUBLIC_PRIMARY_COLOR);
     }, [router.pathname]);
 
     const walletAction  = isConnected ? disconnect : connect;
@@ -127,9 +127,9 @@ const Header = () => {
                             </Link>
                         ))}
                     </div>
-                    <div style={buttonStyles} className={`font-header ${styles["button-cont"]}`}>
+                    <div className={`font-header`}>
                         {/* <div onClick={() => setToggleIcons(!toggleIcons)}></div> */}
-                        <button onClick={walletAction}>
+                        <button style={buttonStyles} className='flex items-center gap-2 px-4 py-2 rounded-full hover:bg-secondary-color' onClick={walletAction}>
                             {isConnected ? "Disconnect" : "Connect"}
                             <span className="ml-2 mt-1">
                                 <Near className="w-4 h-4" fill="white" />
