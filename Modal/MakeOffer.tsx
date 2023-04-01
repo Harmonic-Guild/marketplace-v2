@@ -20,18 +20,19 @@ const MakeOffer = ({ args, isConnected, latestBid, bidder, owner }: any) => {
         setBid(e.target.value);
     };
 
-    const oldBuyParams: any = {
-        contractAddress: args.marketAddress,
-        methodName: 'make_offer',
-        args: {token_id: args.token_id},
-    }
+    
 
     const oldBid = async (bid: string) => {
-        
-        const wallet = await selector.wallet();
-        oldBuyParams['args'].price = bid;
 
-        return await execute({wallet}, { ...oldBuyParams });
+        const oldBidParams: any = {
+            contractAddress: args.marketAddress,
+            methodName: 'make_offer',
+            args: {token_id: args.token_id},
+        }
+        const wallet = await selector.wallet();
+        oldBidParams['args'].price = bid;
+
+        return await execute({wallet}, { ...oldBidParams });
     }
 
     return (

@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     const network = process.env.NEXT_PUBLIC_NETWORK
     const contractAddress = process.env.NEXT_PUBLIC_STORE_NAME 
 
-        mbjs.config({network, contractAddress})
+    mbjs.config({network, contractAddress})
 
     useEffect(() => {
         

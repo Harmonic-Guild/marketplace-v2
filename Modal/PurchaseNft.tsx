@@ -22,14 +22,17 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
 
     const tokenId = tokensData && tokensData[0].token.token_id! //+ ":" + thingId.split(":")[0];
 
-    const oldBuyParams: any = {
-        contractAddress: args.marketAddress,
-        methodName: 'make_offer',
-        args: {token_id: args.token_id, price: args.price},
-    }
+    
 
     const oldBuy = async () => {
+
         console.log('old');
+
+        const oldBuyParams: any = {
+            contractAddress: args.marketAddress,
+            methodName: 'make_offer',
+            args: {token_id: args.token_id, price: args.price},
+        }
         
         const wallet = await selector.wallet();
 
@@ -39,8 +42,6 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
     const newBuy = async () => {
         
         const wallet = await selector.wallet();
-    
-        console.log('new', tokenId);
       
         const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!, tokenId: tokenId!, marketId: marketId!, price: parseNearAmount(price.toString())!,}
       
