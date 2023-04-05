@@ -93,7 +93,7 @@ const FeaturedNft = () => {
                 <p className="lg:text-2xl text-lg text-mp-dark-2">New arivals</p>
             </div>
             <Slider {...settings}>
-                {tokens.map((token: Token, index) => (
+                {tokens?.map((token: Token, index) => (
                     <Link href={`/thing/${token.metadata_id}`} key={index}>
                         <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
                             <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
