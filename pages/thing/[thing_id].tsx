@@ -60,32 +60,27 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     const [listings, setListings] = useState<any>([]);
     const [metadata, setMetadata] = useState<any>([]);
     const [tokenCount, setTokenCount] = useState<number>(0);
-    const [tokens, setTokens] = useState<any>(null);
     const { wallet, isConnected } = useWallet();
     const [hide, setHide] = useState<boolean>(false);
     const [enlarge, setEnlarge] = useState(false);
 
 
-    const  myFetchMethod = async () => {
-        const { data, error } = await metadataByMetadataId(thing_id);
-        console.log(data);
-        setMetadata(data?.metadata)
-        setTokenCount(data?.tokenCount.aggregate.count!)
-        setListings(data?.listings)
-        return data;
-    }
+    
 
     useEffect( ()=> {
+        const  myFetchMethod = async () => {
+            const { data, error } = await metadataByMetadataId(thing_id);
+            if(data?.metadata) setMetadata(data?.metadata)
+            if(data?.tokenCount) setTokenCount(data?.tokenCount.aggregate.count!)
+            if(data?.listings) setListings(data?.listings)
+        }
         myFetchMethod()
     }, [])
 
-
-    const toggleDiscription = () => {
+    
+    const toggleDescription = () => {
         setHide(!hide);
     };
-
-    
-
     
         const tokenPriceNumber = Number(listings && listings[0]?.price) || 0;
         const stringPrice = (tokenPriceNumber!== null && !Number.isNaN(tokenPriceNumber) )? tokenPriceNumber.toLocaleString("fullwide", { useGrouping: false }) : '0'
@@ -101,19 +96,30 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
             currentBid =listings && formatNearAmount(Number(listings[0]?.offers[0]?.offer_price).toLocaleString("fullwide", { useGrouping: false }), 5) || 0;
         }
 
-        const args = {
+        let args = {
             token_Id :listings && listings[0]?.token.id! + ":" + thing_id.split(":")[0],
             marketAddress :listings && listings[0]?.market_id,
-            tokenPrice
+            tokenPrice,
+            contractId: listings && listings[0]?.token.nft_contract_id
         }
 
-    
+        console.log(listings, 'kokokkokokokokokokoko');
+        
+        // useEffect(()=> {
+        //     if(!listings[0]) return;
 
+        //     args = {
+        //         token_Id :listings && listings[0]?.token.id! + ":" + thing_id.split(":")[0],
+        //         marketAddress :listings && listings[0]?.market_id,
+        //         tokenPrice
+        //     }
+        // })
+        
     
 
     return (
         <>
-            {metadata &&
+            {metadata && //listings &&
                 <div className={`container ${styles.container}`}>
                 {enlarge && (
                     <div className={styles.enlarged}>
@@ -185,7 +191,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                 </div>
         
                                 <p className={hide ? "" : "line-clamp-3"}>{metadata[0]?.description}</p>
-                                <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
+                                <span id="span" onClick={toggleDescription} className="cursor-pointer text-blue-400 hover:underline">
                                     {" "}
                                     {!hide ? ".....see more" : "see less"}
                                 </span>
@@ -229,6 +235,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                 <div>
                                     {listings && listings[0]?.kind === 'simple' ? (
                                         <PurchaseNft args={args} tokensData={listings} thingId={thing_id} price={price!} isConnected={isConnected} />
+                                        
                                     ) : (
                                         <MakeOffer
                                             args = {args}
