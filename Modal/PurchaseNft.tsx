@@ -2,12 +2,12 @@ import React from "react";
 import Near from "../icons/near.svg";
 import {parseNearAmount } from "near-api-js/lib/utils/format";
 import {useWallet } from '@mintbase-js/react'
-import {buy, execute } from '@mintbase-js/sdk'
+import {TransactionSuccessEnum, buy, execute } from '@mintbase-js/sdk'
 
 const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
   const { selector }  = useWallet();
   
-  const marketId = tokensData.listings &&  tokensData.listings[0]?.market_id;
+  const marketId = tokensData &&  tokensData[0]?.market_id;
 
     const handleBuy = async () => {
         if(marketId === process.env.NEXT_PUBLIC_marketAddress){
@@ -21,9 +21,6 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
     };
 
     const tokenId = tokensData && tokensData[0].token.token_id! //+ ":" + thingId.split(":")[0];
-
-    
-
     const oldBuy = async () => {
 
         console.log('old');
@@ -31,15 +28,18 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
         const oldBuyParams: any = {
             contractAddress: args.marketAddress,
             methodName: 'make_offer',
-            args: {token_id: args.token_id, price: args.price},
+            args: {token_id: args.token_id, price: args.price,}
         }
         
         const wallet = await selector.wallet();
 
-        return await execute({wallet}, oldBuyParams);
+        const callbackArgs = {args: {}, type: TransactionSuccessEnum.MAKE_OFFER}
+
+        return await execute({wallet, callbackUrl:'https://www.mintbase.xyz/success'}, [oldBuyParams]);
     }
-    
+
     const newBuy = async () => {
+        console.log('new');
         
         const wallet = await selector.wallet();
       
