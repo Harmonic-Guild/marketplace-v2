@@ -20,8 +20,6 @@ const MakeOffer = ({ args, isConnected, latestBid, bidder, owner }: any) => {
         setBid(e.target.value);
     };
 
-    
-
     const oldBid = async (bid: string) => {
 
         const oldBidParams: any = {

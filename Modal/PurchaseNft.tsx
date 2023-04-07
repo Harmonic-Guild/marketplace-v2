@@ -73,3 +73,4 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
 };
 
 export default PurchaseNft;
+

@@ -13,7 +13,6 @@ import { Token, ResponseType } from '../constants/interfaces';
 import { resolveUrl } from '../helpers/resolveUrl';
 
 const FeaturedNft = () => {
-  
 
     const [tokens, setTokens] = useState<Token[]| []>([]);
     const [slideIndex, setSlideIndex] = useState(0);
