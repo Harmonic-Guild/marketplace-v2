@@ -5,8 +5,7 @@ import { useState } from "react";
 
 const Footer = () => {
     const [footerTitles, setFooterTitles] = useState([
-        {name: "Contact us", href: ''},
-        {name: "Faqs", href: ''},
+        {name: "Support", href: ''},
         {name: "Terms", href: ''},
         {name: "Privacy", href: ''},
         {name: "Cookie choices", href: '#'}
@@ -16,9 +15,9 @@ const Footer = () => {
         <footer className="text-center uppercase md:text-xs text-xss font-medium w-full mx-auto mt-20">
             <div className="justify-between p-5 lg:p-10">
                 <div className="flex w-fit mx-auto gap-6">
-                    <a href="https://web.facebook.com/Asherroth" target="_blank"><BsFacebook className="w-6 h-6 hover:text-yellow-600"/></a>
-                    <a href="https://twitter.com/asherroth" target="_blank"><BsTwitter className="w-6 h-6 hover:text-yellow-600"/></a>
-                    <a href="https://www.instagram.com/asherroth" target="_blank"><BsInstagram className="w-6 h-6 hover:text-yellow-600"/></a>
+                    <a href="" target="_blank"><BsFacebook className="w-6 h-6 hover:text-yellow-600"/></a>
+                    <a href="" target="_blank"><BsTwitter className="w-6 h-6 hover:text-yellow-600"/></a>
+                    <a href="" target="_blank"><BsInstagram className="w-6 h-6 hover:text-yellow-600"/></a>
                 </div>
                 <div className=" pt-6 pb-3">
                     <span>&copy; {new Date().getFullYear()} {config.title}. All right reserved.</span>

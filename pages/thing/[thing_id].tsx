@@ -255,7 +255,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     </div>
                 </div>
                 {/* <SimilarNft /> */}
-                stoopid
+                
             </div>
             }
         </>

@@ -79,11 +79,11 @@ const Header = () => {
                                         </div>
                                     ) : ( */}
                                         <button className={styles["connect-btn"]} onClick={walletAction}>
-                                {isConnected ? "Disconnect" : "Connect"}
+                                            {isConnected ? "Disconnect" : "Connect"}
                                 {/* <span className="mt-1">
                                     <Near className="w-4 h-4" fill="white" />
                                 </span> */}
-                            </button>
+                                        </button>
         
                                   
                                 </div>

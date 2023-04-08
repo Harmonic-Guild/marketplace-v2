@@ -20,7 +20,7 @@ const FeaturedNft = (storeId: any) => {
 
     // render() {
     const settings = {
-        dots: true,
+        //dots: true,
         // className: "center",
         infinite: true,
         centerPadding: "8px",
@@ -29,7 +29,7 @@ const FeaturedNft = (storeId: any) => {
         autoplay: true,
         autoplaySpeed: 2000,
         pauseOnHover: true,
-        slidesToScroll: 1,
+        slidesToScroll: 0,
         initialSlide: 0,
         beforeChange: (current: any, next: any) => setSlideIndex(next),
         // nextArrow: <SampleNextArrow/>,
@@ -40,7 +40,7 @@ const FeaturedNft = (storeId: any) => {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 1,
-                    infinite: true,
+                    //infinite: true,
                     dots: true,
                 },
             },
@@ -115,15 +115,15 @@ const FeaturedNft = (storeId: any) => {
 <div className={styles.container} style={{margin: 'auto'}}>
     <div className="text-center font-bold text-gray-900 mb-6">
         <p className="text-secondary-color mb-2">
-            <GiStarShuriken className="inline w-6 h-5" />
+            {/* <GiStarShuriken className="inline w-6 h-5" /> */}
         </p>
-        <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured</h2>
+        {/* <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured</h2> */}
     </div>
-    <Slider {...settings}>
-        {tokens.map((token: Token, index) => (
+    {/* <Slider {...settings}> */}
+        {tokens.slice(0,1).map((token: Token, index) => (
             <Link href={`/thing/${token.metadata_id}`} key={index}>
                 <div className={index === slideIndex ? "slide:active flex justify-center items-center" : "slide flex justify-center items-center"} key={index}>
-                    <div className="h-96 w-full lg:w-3/5 rounded-xl shadow-lg relative overflow-hidden">
+                    <div className="h-96 w-full lg:w-3/5 mt-10 rounded-xl shadow-lg relative overflow-hidden">
                         <Image src={resolveUrl(token.media)} alt="" objectFit="cover" layout="fill" />
                         {index === slideIndex && (
                             <div className="absolute bottom-5 text-center font-semibold w-full">
@@ -135,7 +135,7 @@ const FeaturedNft = (storeId: any) => {
                 </div>
             </Link>
         ))}
-    </Slider>
+    {/* </Slider> */}
 </div>
 
 

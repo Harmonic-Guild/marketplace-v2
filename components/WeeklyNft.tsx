@@ -16,15 +16,15 @@ const WeeklyNft = (storeId : any) => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 4,
         // autoplay: true,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                     infinite: true,
                     dots: true,
                 },
@@ -58,7 +58,7 @@ const WeeklyNft = (storeId : any) => {
             //   ...(showOnlyListed && { price: { _is_null: false } }),
             },
             limit: 5,
-            offset: 3,
+            offset: 1,
           }
         });
         setTokens(data?.mb_views_nft_metadata_unburned!)    
