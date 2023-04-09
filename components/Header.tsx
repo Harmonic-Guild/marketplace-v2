@@ -72,23 +72,12 @@ const Header = () => {
                                             </div>
                                         </div>
                                     ) : ( */}
-<<<<<<< HEAD
-                                        <button className={styles["connect-btn"]} onClick={walletAction}>
-                                            {isConnected ? "Disconnect" : "Connect"}
-                                {/* <span className="mt-1">
-                                    <Near className="w-4 h-4" fill="white" />
-                                </span> */}
-                                        </button>
-        
-                                  
-=======
                                     <button className={`${styles["connect-btn"]} text-white`} onClick={walletAction}>
                                         {isConnected ? "Disconnect" : "Connect"}
                                         {/* <span className="mt-1">
                                     <Near className="w-4 h-4" fill="white" />
                                 </span> */}
                                     </button>
->>>>>>> f71fa911cf0f2fe2e4349ecc65b04bbdf8bd5ecf
                                 </div>
                                 {navTitles.map((item, index) => (
                                     <Link key={index} href={item.href} passHref>
