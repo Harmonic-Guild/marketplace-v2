@@ -9,9 +9,8 @@ import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
 import { mbjs } from "@mintbase-js/sdk";
 
 const WeeklyNft = () => {
-
     const [tokens, setTokens] = useState<Token[]>([]);
-    
+
     const settings = {
         dots: true,
         infinite: true,
@@ -49,25 +48,24 @@ const WeeklyNft = () => {
         ],
     };
 
-   async function myFetchMethod  () {
+    async function myFetchMethod() {
         const { data, error } = await fetchGraphQl<ResponseType>({
-          query: QUERIES.storeNftsQuery,
-          variables: {
-            condition: {
-              nft_contract_id: { _in: mbjs.keys.contractAddress },
-            //   ...(showOnlyListed && { price: { _is_null: false } }),
+            query: QUERIES.storeNftsQuery,
+            variables: {
+                condition: {
+                    nft_contract_id: { _in: mbjs.keys.contractAddress },
+                    //   ...(showOnlyListed && { price: { _is_null: false } }),
+                },
+                limit: 5,
+                offset: 3,
             },
-            limit: 5,
-            offset: 3,
-          }
         });
-        setTokens(data?.mb_views_nft_metadata_unburned!)    
-      }
+        setTokens(data?.mb_views_nft_metadata_unburned!);
+    }
 
-    useEffect( ()=> {
-        myFetchMethod()
-    }, [])
-
+    useEffect(() => {
+        myFetchMethod();
+    }, []);
 
     return (
         <>
