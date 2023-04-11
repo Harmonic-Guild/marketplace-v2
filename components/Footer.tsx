@@ -20,7 +20,7 @@ const Footer = () => {
                     <a href="" target="_blank"><BsInstagram className="w-6 h-6 hover:text-yellow-600"/></a>
                 </div>
                 <div className=" pt-6 pb-3">
-                    <span>&copy; {new Date().getFullYear()} {config.title}. All right reserved.</span>
+                    <span>&copy; {new Date().getFullYear()} {config.title}. All rights reserved.</span>
                 </div>
                 <div className="flex flex-wrap justify-center md:break-after-column">
                     {

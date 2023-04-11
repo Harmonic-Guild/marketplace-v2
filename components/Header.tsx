@@ -56,29 +56,22 @@ const Header = () => {
                 <div className={styles["mobile-nav-cont"]}>
                     {toggleMenu ? (
                         <div className={styles["mobile-nav"]}>
+                            <div style={buttonStyles} className={`font-header ${styles["button-cont"]}`}>
+                        {/* <div onClick={() => setToggleIcons(!toggleIcons)}></div> */}
+                        <button onClick={walletAction}>
+                            {isConnected ? "Disconnect" : "Connect"}
+                        </button>
+                    </div>
                             <button className={styles["menu-btn"]}>
                                 <FiMenu className="w-6 h-6 text-white" onClick={() => setToggleMenu(false)} />
                             </button>
+                            
                         </div>
                     ) : (
                         <div className="w-1/2 h-full">
                             <FiX className="w-6 h-6 relative text-black z-20" onClick={() => setToggleMenu(true)} />
                             <div className={styles["nav-content"]}>
-                                <div className={styles["connection-cont"]}>
-                                    {/* {isConnected ? (
-                                        <div className={styles["info-cont"]}>
-                                            <div className={styles["info-text"]}>
-                                                <p className={styles.address}>Address: {activeAccountId}</p>
-                                            </div>
-                                        </div>
-                                    ) : ( */}
-                                    <button className={`${styles["connect-btn"]} text-white`} onClick={walletAction}>
-                                        {isConnected ? "Disconnect" : "Connect"}
-                                        {/* <span className="mt-1">
-                                    <Near className="w-4 h-4" fill="white" />
-                                </span> */}
-                                    </button>
-                                </div>
+                                
                                 {navTitles.map((item, index) => (
                                     <Link key={index} href={item.href} passHref>
                                         <div

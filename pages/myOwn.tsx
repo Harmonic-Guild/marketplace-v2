@@ -148,7 +148,7 @@ const MyOwn = () => {
             )}
                 <>
                     <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8 font-header">
-                        your tokens from this store
+                        My Collection
                     </h1>
 
                     <div className="pb-24 w-full mx-auto px-10">

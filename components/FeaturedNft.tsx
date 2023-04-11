@@ -122,15 +122,20 @@ const FeaturedNft = (storeId: any) => {
     {/* <Slider {...settings}> */}
         {tokens.slice(0,1).map((token: Token, index) => (
             <Link href={`/thing/${token.metadata_id}`} key={index}>
-                <div className={index === slideIndex ? "slide:active flex justify-center items-center" : "slide flex justify-center items-center"} key={index}>
-                    <div className="h-96 w-full lg:w-3/5 mt-10 rounded-xl shadow-lg relative overflow-hidden">
-                        <Image src={resolveUrl(token.media)} alt="" objectFit="cover" layout="fill" />
-                        {index === slideIndex && (
+                <div className="flex justify-center items-center" key={index}>
+                    <div className="h-80 lg:h-96 w-full lg:w-2/5 mt-10 rounded-xl shadow-xl relative overflow-hidden">
+                        <Image src={resolveUrl(token.media)} 
+                                //width={500}
+                                //height={500}
+                               layout='fill'
+                               alt="NFT Image" 
+                               objectFit="contain" />
+                        {/* {index === slideIndex && ( */}
                             <div className="absolute bottom-5 text-center font-semibold w-full">
-                                <p className="text-white">{token.title}</p>
+                                <p className="text-black">{token.title}</p>
                                 {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
                             </div>
-                        )}
+                        {/* )} */}
                     </div>
                 </div>
             </Link>
