@@ -9,6 +9,7 @@ import { mbjs } from '@mintbase-js/sdk'
 import Image from "next/image";
 
 import styles from "../styles/FeaturedNfts.module.scss";
+//import styles1 from "../styles/NFT.module.scss";
 import { Token, ResponseType } from '../constants/interfaces';
 import { resolveUrl } from '../helpers/resolveUrl';
 
@@ -113,17 +114,13 @@ const FeaturedNft = (storeId: any) => {
       
 
 <div className={styles.container} style={{margin: 'auto'}}>
-    <div className="text-center font-bold text-gray-900 mb-6">
-        <p className="text-secondary-color mb-2">
-            {/* <GiStarShuriken className="inline w-6 h-5" /> */}
-        </p>
-        {/* <h2 className="text-mp-dark-2 text-4xl font-semibold mb-2"> Featured</h2> */}
-    </div>
+    
     {/* <Slider {...settings}> */}
         {tokens.slice(0,1).map((token: Token, index) => (
+            <div>
             <Link href={`/thing/${token.metadata_id}`} key={index}>
                 <div className="flex justify-center items-center" key={index}>
-                    <div className="h-80 lg:h-96 w-full lg:w-2/5 mt-10 rounded-xl shadow-xl relative overflow-hidden">
+                    <div className="h-80 lg:h-96 w-full lg:w-2/5 lg:mt-8 mt-4 rounded-xl shadow-xl relative overflow-hidden">
                         <Image src={resolveUrl(token.media)} 
                                 //width={500}
                                 //height={500}
@@ -137,10 +134,21 @@ const FeaturedNft = (storeId: any) => {
                             </div>
                         {/* )} */}
                     </div>
+                    
                 </div>
             </Link>
+        <Link href={`/thing/${token.metadata_id}`}>
+        <div className="flex justify-center items-center mt-4">
+            <button className={`font-header ${styles["buy-button"]}`}>
+                    <div className="">Buy</div>
+                    <span>&rarr;</span>
+            </button>
+        </div>
+        </Link>
+        </div>
         ))}
-    {/* </Slider> */}
+   
+    
 </div>
 
 

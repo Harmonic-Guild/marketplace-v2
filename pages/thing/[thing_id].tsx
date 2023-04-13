@@ -178,16 +178,17 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                     <div className="w-full">
                         <div className="text-4xl font-bold mb-5">{metadata[0]?.title}</div>
         
-                        <div className="text-lg">
+                        {/* <div className="text-lg">
                             {metadata[0]?.contract?.created_at ? (
                                 `_`
                             ) : (
                                 <div className="flex gap-3">
                                     {`Minted On: ` + new Date(metadata[0]?.contract?.created_at!).toDateString()}{" "}
                                     <TbExternalLink color="#AA5F2A" className="w-6 h-6" />
+                                    
                                 </div>
                             )}
-                        </div>
+                        </div> */}
                         
                         <div className="">
                             <div className="mt-10 border-b md:border-b-0 border-primary-color pb-4">
