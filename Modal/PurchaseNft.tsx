@@ -51,7 +51,7 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
         console.log('new', tokenId);
         
       
-        const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!, tokenId: tokenId!, marketId: marketId!, price: parseNearAmount(price.toString())!,}
+        const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!, tokenId: tokenId!, marketId: marketId!, price: parseNearAmount(price.toString())! , referrerId: process.env.NEXT_PUBLIC_REFERRAL_ID}
       
         await execute({wallet}, buy(buyArgs));
 
