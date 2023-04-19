@@ -15,9 +15,9 @@ const Footer = () => {
         <footer className="text-center uppercase md:text-xs text-xss font-medium w-full mx-auto mt-20">
             <div className="justify-between p-5 lg:p-10">
                 <div className="flex w-fit mx-auto gap-6">
-                    <a href="" target="_blank"><BsFacebook className="w-6 h-6 hover:text-yellow-600"/></a>
-                    <a href="" target="_blank"><BsTwitter className="w-6 h-6 hover:text-yellow-600"/></a>
-                    <a href="" target="_blank"><BsInstagram className="w-6 h-6 hover:text-yellow-600"/></a>
+                    <a href={process.env.NEXT_PUBLIC_FACEBOOK_LINK} target="_blank"><BsFacebook className="w-6 h-6 hover:text-yellow-600"/></a>
+                    <a href={process.env.NEXT_PUBLIC_TWITTER_LINK} target="_blank"><BsTwitter className="w-6 h-6 hover:text-yellow-600"/></a>
+                    <a href={process.env.NEXT_PUBLIC_IG_LINK} target="_blank"><BsInstagram className="w-6 h-6 hover:text-yellow-600"/></a>
                 </div>
                 <div className=" pt-6 pb-3">
                     <span>&copy; {new Date().getFullYear()} {config.title}. All rights reserved.</span>

@@ -8,7 +8,7 @@ export default {
     "igLink": process.env.NEXT_PUBLIC_IG_LINK || 'https://www.harmonicguild.io/',
     "twitterLink": process.env.NEXT_PUBLIC_TWITTER_LINK || 'https://twitter.com/HarmonicGuild',
     "profile": process.env.NEXT_PUBLIC_PROFILE || 'https://www.harmonicguild.io/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FharmonicLogo.492f77f9.webp&w=1920&q=75',
-    "favicon": process.env.NEXT_PUBLIC_FAVICON || 'https://www.harmonicguild.io/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FharmonicLogo.492f77f9.webp&w=1920&q=75',
+    "favicon": process.env.NEXT_PUBLIC_FAVICON || '',
     "images": [
         'https://ik.imagekit.io/epyh88t15/we-build.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1669132292846'
     ],

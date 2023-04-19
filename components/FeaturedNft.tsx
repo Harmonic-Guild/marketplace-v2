@@ -116,7 +116,7 @@ const FeaturedNft = (storeId: any) => {
 <div className={styles.container} style={{margin: 'auto'}}>
     
     {/* <Slider {...settings}> */}
-        {tokens.slice(0,1).map((token: Token, index) => (
+        {tokens.slice(4,5).map((token: Token, index) => (
             <div>
             <Link href={`/thing/${token.metadata_id}`} key={index}>
                 <div className="flex justify-center items-center" key={index}>
