@@ -244,9 +244,9 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         <MakeOffer
                                             buy={buy}
                                             isConnected={isConnected}
-                                            latestBid={listings[0]?.offers[0]?.offer_price}
-                                            bidder={listings[0]?.offers[0]?.offered_by}
-                                            owner={listings[0]?.token.ownerId}
+                                            latestBid={listings[0]?.offers? listings[0]?.offers[0]?.offer_price : 0}
+                                            bidder={listings[0]?.offers? listings[0]?.offers[0]?.offered_by: 'No bids yet'}
+                                            owner={listings[0]?.token.owner}
                                         />
                                     )}
                                 </div>
