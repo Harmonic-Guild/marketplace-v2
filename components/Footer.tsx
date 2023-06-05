@@ -30,7 +30,7 @@ const Footer = () => {
                     <div>
                         <Link href="/" passHref>
                             <a className="py-6 relative w-40 h-20 inline-block">
-                                <Image src={config.logo1!} layout="fill" objectFit="contain" alt="logo" className="cursor-pointer mb-5" />
+                                <Image src={'https://ik.imagekit.io/epyh88t15/harmonic-logo.png?updatedAt=1669053507785'} layout="fill" objectFit="contain" alt="logo" className="cursor-pointer mb-5" />
                             </a>
                         </Link>
                         <div className="leading-loose">
@@ -59,10 +59,11 @@ const Footer = () => {
                 <div className="lg:text-xl text-sm">
                     <span className="font-bold font-header">TALK TO US</span>
                     <ul className="leading-loose capitalize font-text">
-                        <li>Contact us</li>
-                        <li>Facebook</li>
-                        <li>LinkedIn</li>
-                        <li>Twitter</li>
+                        <Link href="/">Contact us</Link>
+                        <Link href={'https://www.instagram.com/harmonic_guild/'}>instagram</Link>
+                        <Link href={'https://www.linkedin.com/company/harmonic-guild'}>LinkedIn</Link>
+                        <Link href={'https://twitter.com/HarmonicGuild'}>Twitter</Link>
+                        
                     </ul>
                 </div>
                 <div onClick={() => scrollToTop()} className="p-4 btnColor rounded-full w-10 h-10 cursor-pointer">
