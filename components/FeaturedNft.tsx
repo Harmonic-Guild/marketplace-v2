@@ -63,18 +63,23 @@ const FeaturedNft = (storeId: any) => {
     };
 
     async function myFetchMethod  () {
+       try {
         const { data, error } = await fetchGraphQl<ResponseType>({
-          query: QUERIES.storeNftsQuery,
-          variables: {
-            condition: {
-              nft_contract_id: { _in: mbjs.keys.contractAddress },
-            //   ...(showOnlyListed && { price: { _is_null: false } }),
-            },
-            limit: 5,
-            offset: 0,
-          }
-        });
-        setTokens(data?.mb_views_nft_metadata_unburned!)
+            query: QUERIES.storeNftsQuery,
+            variables: {
+              condition: {
+                nft_contract_id: { _in: mbjs.keys.contractAddress },
+              //   ...(showOnlyListed && { price: { _is_null: false } }),
+              },
+              limit: 5,
+              offset: 0,
+            }
+          });
+          setTokens(data?.mb_views_nft_metadata_unburned!)
+       } catch (error) {
+            console.log(error);
+            
+       }
         
       }
 
@@ -84,32 +89,32 @@ const FeaturedNft = (storeId: any) => {
 
 
     return (
-        <div className={styles.container}>
-            <div className=" text-center  font-bold text-gray-900 mb-6">
-                <p className="text-secondary-color mb-2">
-                    <GiStarShuriken className="inline w-6 h-5" />
-                </p>
-                <h2 className="text-mp-dark-2 text-4xl font-header font-semibold mb-2"> Featured NFTs </h2>
-                <p className="lg:text-2xl text-lg text-mp-dark-2 font-header">New arrivals</p>
-            </div>
-            <Slider {...settings}>
-                {tokens.map((token: Token, index) => (
-                    <Link href={`/thing/${token.metadata_id}`} key={index}>
-                        <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
-                            <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
-                                <Image src={resolveUrl(token.media)}  alt="" objectFit="cover" layout="fill" />
-                                {index === slideIndex && (
-                                    <div className="absolute bottom-5 text-center font-semibold w-full">
-                                        <p className="text-white">{token.title}</p>
-                                        {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-            </Slider>
-        </div>
+       <>{tokens.length ?  <div className={styles.container}>
+       <div className=" text-center  font-bold text-gray-900 mb-6">
+           <p className="text-font-color mb-2">
+               <GiStarShuriken className="inline w-6 h-5" />
+           </p>
+           <h2 className="text-font-color text-4xl font-header font-semibold mb-2"> Featured NFTs </h2>
+           <p className="lg:text-2xl text-lg text-font-color font-header">New arrivals</p>
+       </div>
+       <Slider {...settings}>
+           {tokens.map((token: Token, index) => (
+               <Link href={`/thing/${token.metadata_id}`} key={index}>
+                   <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
+                       <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
+                           <Image src={resolveUrl(token.media)}  alt="" objectFit="cover" layout="fill" />
+                           {index === slideIndex && (
+                               <div className="absolute bottom-5 text-center font-semibold w-full">
+                                   <p className="text-primary-color">{token.title}</p>
+                                   {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
+                               </div>
+                           )}
+                       </div>
+                   </div>
+               </Link>
+           ))}
+       </Slider>
+   </div> : <p></p>}</>
     );
 };
 
