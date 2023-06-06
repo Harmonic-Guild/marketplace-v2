@@ -99,10 +99,10 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
     
     
     return (
-        <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary-color bg-secondary-color rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
+        <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary-color bg-primary-color rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
             <div className="flex items-center justify-between gap-2 mb-3 lg:mb-0 font-medium text-lg">
-                <div className="font-header text-primary-color">Get it at:</div>
-                <div className="font-bold text-xl">{price}</div>
+                <div className="font-header text-font-color">Get it at:</div>
+                <div className="font-bold text-xl text-font-color">{price}</div>
                 <div>
                     <Near className="w-4 h-4" fill="black" />
                 </div>
@@ -110,8 +110,8 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
             <div className="w-full lg:w-3/5">
                 <button
                     onClick={handleBuy}
-                    className={`w-full py-2 rounded-md text-lg font-bold text-gray-900 px-5 border border-card ${
-                        isConnected ? "bg-card hover:bg-primary-color" : "border border-secondary-color py-2 cursor-not-allowed"
+                    className={`w-full py-2 rounded-md text-lg font-bold text-font-color px-5 border border-font-color ${
+                        isConnected ? "bg-card" : "border border-secondary-color py-2 cursor-not-allowed"
                     }`}
                 >
                     Purchase
