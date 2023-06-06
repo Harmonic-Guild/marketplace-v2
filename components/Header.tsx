@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 import { useWallet } from "@mintbase-js/react";
 import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
 import Near from "../icons/near.svg";
-import config from '../config/config'
+import config from "../config/config";
 
 import styles from "../styles/Header.module.scss";
 
@@ -25,35 +25,29 @@ const Header = () => {
     // const [darkMode, setDarkMode] = useState<boolean>(true);
     const [toggleIcons, setToggleIcons] = useState<boolean>();
     const [currentPath, setCurrentPath] = useState<string>();
-    const {
-        isConnected, connect, disconnect, activeAccountId,
-      } = useWallet();
+    const { isConnected, connect, disconnect, activeAccountId } = useWallet();
 
-    const primaryColor = process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#233247';
-    const secondaryColor = process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#5174a6';
+    const primaryColor = process.env.NEXT_PUBLIC_PRIMARY_COLOR || "#233247";
+    const secondaryColor = process.env.NEXT_PUBLIC_SECONDARY_COLOR || "#5174a6";
 
     const buttonStyles = {
         backgroundImage: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
-        borderRadius: '100%',
-        color: 'white'
-    }
+        borderRadius: "100%",
+        color: "white",
+    };
 
     useEffect(() => {
         setCurrentPath(router.pathname);
     }, [router.pathname]);
 
-    const walletAction  = isConnected ? disconnect : connect;
+    const walletAction = isConnected ? disconnect : connect;
 
     return (
         <header className={styles.header} id="nav">
-            <div className={styles['inner-nav-cont']}>
+            <div className={styles["inner-nav-cont"]}>
                 <Link href="/" passHref>
                     <a className="py-6 relative w-24 lg:w-40 h-20 inline-block">
-                        {
-                            config.logo1 && (
-                                <Image src={config.logo1} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
-                            )
-                        }
+                        {config.logo1 && <Image src={config.logo1} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />}
                     </a>
                 </Link>
 
@@ -78,25 +72,26 @@ const Header = () => {
                                             </div>
                                         </div>
                                     ) : ( */}
-                                        <button className={styles["connect-btn"]} onClick={walletAction}>
-                                {isConnected ? "Disconnect" : "Connect"}
-                                {/* <span className="mt-1">
-                                    <Near className="w-4 h-4" fill="white" />
-                                </span> */}
-                            </button>
-        
-                                  
+                                    
+                                    <button onClick={walletAction} className="text-white">
+                            {isConnected ? "Disconnect" : "Connect"}
+                        </button>
+
                                 </div>
                                 {navTitles.map((item, index) => (
                                     <Link key={index} href={item.href} passHref>
-                                        <div className={`font-header ${styles["nav-link"]} ${currentPath == item.href ? "border-black" : "border-white"}`}>
+                                        <div
+                                            className={`font-header ${styles["nav-link"]} ${
+                                                currentPath == item.href ? "border-font-color" : "border-white"
+                                            }`}
+                                        >
                                             {item.title}
                                         </div>
                                     </Link>
                                 ))}
                                 <div className={styles["nav-bottom"]}>
                                     <div className={styles["inner-cont"]}>
-                                            <span>{activeAccountId}</span>
+                                        <span>{activeAccountId}</span>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +103,9 @@ const Header = () => {
                     <div className={styles["nav-cont"]}>
                         {navTitles.map((item, index) => (
                             <Link key={index} href={item.href} passHref>
-                                <a className={`font-header ${styles["nav-item"]} ${currentPath == item.href ? "border-black" : "border-white"}`}>{item.title}</a>
+                                <p className={`font-header ${styles["nav-item"]} ${currentPath == item.href ? "border-font-color" : "border-white"}`}>
+                                    {item.title}
+                                </p>
                             </Link>
                         ))}
                     </div>
@@ -117,7 +114,7 @@ const Header = () => {
                         <button onClick={walletAction}>
                             {isConnected ? "Disconnect" : "Connect"}
                             <span className="ml-2 mt-1">
-                                <Near className="w-4 h-4" fill="white" />
+                                <Near className="w-4 h-4" fill={process.env.NEXT_PUBLIC_FONT_COLOR} />
                             </span>
                         </button>
                     </div>
