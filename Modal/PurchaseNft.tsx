@@ -56,45 +56,6 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
         await execute({wallet}, buy(buyArgs));
 
     }
-
-    // const newBuy = useCallback(async () => {
-    
-    //     const txns = [
-    //       {
-    //         receiverId: marketId,
-    //         functionCalls: [
-    //           {
-    //             methodName: 'buy',
-    //             receiverId: marketId,
-    //             gas: '200000000000000',
-    //             args: {
-    //               nft_contract_id: process.env.NEXT_PUBLIC_STORE_NAME,
-    //               token_id: tokenId,
-    //               referrer_id: process.env.NEXT_PUBLIC_REFERRAL_ID
-    //             //     process.env.NEXT_PUBLIC_REFERRAL_ID || TESTNET_CONFIG.referral,
-    //             },
-    //             deposit: parseNearAmount(price.toString()),
-    //           },
-    //         ],
-    //       },
-    //     ];
-    
-    //     await wallet!.executeMultipleTransactions({
-    //       transactions: txns as never,
-    //       options: {
-    //         //callbackUrl: `${window.location.origin}/wallet-callback`,
-    //         meta: JSON.stringify({
-    //           type: 'make-offer',
-    //           args: {
-    //             tokenId,
-    //             price: parseNearAmount(price.toString()),
-    //           },
-    //         }),
-    //       },
-    //     });
-    //   }, [price, tokenId, wallet]);
-    
-
     
     
     
