@@ -3,7 +3,6 @@ import Head from "next/head";
 import NextProgress from "next-progress";
 import dynamic from "next/dynamic";
 import type { AppProps } from "next/app";
-import { useApollo } from "../services/apolloClient";
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import * as Fathom from 'fathom-client';
@@ -20,7 +19,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const apolloClient = useApollo(pageProps);
     const router = useRouter();
 
     const network = process.env.NEXT_PUBLIC_NETWORK
@@ -60,11 +58,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             </Head>
 
             <WalletContextProvider>
-                <ApolloProvider client={apolloClient}>
                     <Header />
                     <Component {...pageProps} />
                     <Footer />
-                </ApolloProvider>
             </WalletContextProvider>
         </>
     );

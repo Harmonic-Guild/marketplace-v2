@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import Connect_Line from '../icons/connect_Line.svg'
 import Near from '../icons/near.svg'
 import { FiX } from 'react-icons/fi'
-import { useWallet } from '../services/providers/MintbaseWalletContext';
 
 import styles from '../styles/NotConnected.module.scss';
+import { useWallet } from '@mintbase-js/react';
 
 const NotConnected = ({closeModal}: any) => {   
 
-    const { wallet, isConnected} = useWallet()
+    const { isConnected, connect, disconnect } = useWallet();
+
+    const walletAction = isConnected ? disconnect : connect;
     
 
   return (
@@ -24,7 +26,7 @@ const NotConnected = ({closeModal}: any) => {
                     <div className='flex'>
                         <span className=''><Connect_Line/></span>
                         <div className="p-4 mt-2">
-                            <button onClick={() => wallet?.connect({ requestSignIn: true })} className="border-2 hover:bg-primary-color rounded-full outline-none w-full p-2 px-5 lg:px-12 text-font-color border-secondary-color">Connect</button>                    
+                            <button onClick={walletAction} className="border-2 hover:bg-primary-color rounded-full outline-none w-full p-2 px-5 lg:px-12 text-font-color border-secondary-color">Connect</button>                    
                         </div>
                     </div>
                 </div>
