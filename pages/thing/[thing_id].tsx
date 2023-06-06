@@ -166,7 +166,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                             alt={"alt"}
                                         />
                                         <div className="flex gap-5 justify-end py-4">
-                                            <div className="bg-primary-color p-2 rounded-full cursor-pointer" onClick={() => setEnlarge(true)}>
+                                            <div className="bg-secondary-color p-2 rounded-full cursor-pointer" onClick={() => setEnlarge(true)}>
                                                 <CgArrowsExpandRight color="white" />
                                             </div>
                                         </div>
@@ -175,24 +175,24 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             </div>
                         )}
                     </div>
-                    <div className="w-full">
-                        <div className="text-4xl font-bold mb-5">{metadata[0]?.title}</div>
+                    <div className="w-full text-font-color">
+                        <div className="text-4xl font-bold mb-5 text-font-color">{metadata[0]?.title}</div>
         
                         <div className="text-lg">
                             {metadata[0]?.contract?.created_at ? (
                                 `_`
                             ) : (
-                                <div className="flex gap-3">
+                                <div className="flex gap-3 text-font-color">
                                     {`Minted On: ` + new Date(metadata[0]?.contract?.created_at!).toDateString()}{" "}
-                                    <TbExternalLink color="#AA5F2A" className="w-6 h-6" />
+                                    <TbExternalLink  color={process.env.NEXT_PUBLIC_SECONDARY_COLOR} className="w-6 h-6" />
                                 </div>
                             )}
                         </div>
                         
-                        <div className="">
+                        <div className="text-font-color">
                             <div className="mt-10 border-b md:border-b-0 border-primary-color pb-4">
                                 <div className="border-b border-primary-color mb-3 pb-3">
-                                    <span className="text-3xl font-bold">Description</span>
+                                    <span className="text-3xl font-bold text">Description</span>
                                 </div>
         
                                 <p className={hide ? "" : "line-clamp-3"}>{metadata[0]?.description}</p>
@@ -203,13 +203,13 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                             </div>
                         </div>
         
-                        <div className="flex flex-col-reverse lg:flex-col">
+                        <div className="flex flex-col-reverse lg:flex-col text-font-color">
                             <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
                                 <div className="">
                                     <div className="flex items-center justify-between gap-3">
                                         <p className="text-2xl font-bold">Details</p>
                                         <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                                        <div className="border-2 border-primary-color rounded-full p-2 px-3">
+                                        <div className="border-2 border-secondary-color rounded-full p-2 px-3">
                                             <a
                                                 href={`https://explorer.testnet.near.org/transactions/${metadata[0]?.title}`}
                                                 target="_blank"
@@ -218,7 +218,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                                 <Near className="w-4 h-4" fill="black" />
                                             </a>
                                         </div>
-                                        <div className="border-2 border-primary-color rounded-full p-1 px-3">
+                                        <div className="border-2 border-secondary-color rounded-full p-1 px-3">
                                             <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
                                                 <div className="w-6 h-6">
                                                     <Image src={Arweave} className="" />
@@ -228,7 +228,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                     </div>
         
                                     <div className="bg-primary-color rounded-lg my-8 py-2">
-                                        <p className="text-center text-white text-lg">
+                                        <p className="text-center text-font-color text-lg">
                                             {tokenCount} Tokens Minted
                                         </p>
                                     </div>
