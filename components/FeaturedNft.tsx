@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import Slider from "react-slick";
 import { GiStarShuriken } from "react-icons/gi";
 
-import { QUERIES, fetchGraphQl } from '@mintbase-js/data'
-import { mbjs } from '@mintbase-js/sdk'
+import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
+import { mbjs } from "@mintbase-js/sdk";
 
 import Image from "next/image";
 
 import styles from "../styles/FeaturedNfts.module.scss";
-import { Token, ResponseType } from '../constants/interfaces';
-import { resolveUrl } from '../helpers/resolveUrl';
+import { Token, ResponseType } from "../constants/interfaces";
+import { resolveUrl } from "../helpers/resolveUrl";
 
-const FeaturedNft = (storeId: any) => {
-  
-
-    const [tokens, setTokens] = useState<Token[]| []>([]);
+const FeaturedNft = ({ data }: any) => {
+    const [tokens, setTokens] = useState<Token[] | []>([]);
     const [slideIndex, setSlideIndex] = useState(0);
 
     // render() {
@@ -62,59 +60,43 @@ const FeaturedNft = (storeId: any) => {
         ],
     };
 
-    async function myFetchMethod  () {
-       try {
-        const { data, error } = await fetchGraphQl<ResponseType>({
-            query: QUERIES.storeNftsQuery,
-            variables: {
-              condition: {
-                nft_contract_id: { _in: mbjs.keys.contractAddress },
-              //   ...(showOnlyListed && { price: { _is_null: false } }),
-              },
-              limit: 5,
-              offset: 0,
-            }
-          });
-          setTokens(data?.mb_views_nft_metadata_unburned!)
-       } catch (error) {
-            console.log(error);
-            
-       }
-        
-      }
-
-    useEffect( ()=> {
-        myFetchMethod()
-    }, [])
-
+    useEffect(() => {
+        setTokens(data.mb_views_nft_metadata_unburned);
+    }, []);
 
     return (
-       <>{tokens.length ?  <div className={styles.container}>
-       <div className=" text-center  font-bold text-gray-900 mb-6">
-           <p className="text-font-color mb-2">
-               <GiStarShuriken className="inline w-6 h-5" />
-           </p>
-           <h2 className="text-font-color text-4xl font-header font-semibold mb-2"> Featured NFTs </h2>
-           <p className="lg:text-2xl text-lg text-font-color font-header">New arrivals</p>
-       </div>
-       <Slider {...settings}>
-           {tokens.map((token: Token, index) => (
-               <Link href={`/thing/${token.metadata_id}`} key={index}>
-                   <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
-                       <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
-                           <Image src={resolveUrl(token.media)}  alt="" objectFit="cover" layout="fill" />
-                           {index === slideIndex && (
-                               <div className="absolute bottom-5 text-center font-semibold w-full">
-                                   <p className="text-primary-color">{token.title}</p>
-                                   {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
-                               </div>
-                           )}
-                       </div>
-                   </div>
-               </Link>
-           ))}
-       </Slider>
-   </div> : <p></p>}</>
+        <>
+            {tokens.length ? (
+                <div className={styles.container}>
+                    <div className=" text-center  font-bold text-gray-900 mb-6">
+                        <p className="text-font-color mb-2">
+                            <GiStarShuriken className="inline w-6 h-5" />
+                        </p>
+                        <h2 className="text-font-color text-4xl font-header font-semibold mb-2"> Featured NFTs </h2>
+                        <p className="lg:text-2xl text-lg text-font-color font-header">New arrivals</p>
+                    </div>
+                    <Slider {...settings}>
+                        {tokens.map((token: Token, index) => (
+                            <Link href={`/thing/${token.metadata_id}`} key={index}>
+                                <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
+                                    <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
+                                        <Image src={resolveUrl(token.media)} alt="" objectFit="cover" layout="fill" />
+                                        {index === slideIndex && (
+                                            <div className="absolute bottom-5 text-center font-semibold w-full">
+                                                <p className="text-primary-color">{token.title}</p>
+                                                {/* <button className={styles["bid-button"]}>Bid &rarr;</button> */}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </Slider>
+                </div>
+            ) : (
+                <p></p>
+            )}
+        </>
     );
 };
 

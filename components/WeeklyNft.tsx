@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { GiStarShuriken } from "react-icons/gi";
 import Slider from "react-slick";
-import NFT from "./NFT";
 import { ResponseType, Token } from "../constants/interfaces";
+import dynamic from "next/dynamic";
 
 import styles from "../styles/WeeklyNft.module.scss";
-import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
-import { mbjs } from "@mintbase-js/sdk";
 
-const WeeklyNft = (storeId : any) => {
+const NFT = dynamic(() => import("../components/NFT"));
 
+const WeeklyNft = ({ data }: any) => {
     const [tokens, setTokens] = useState<Token[]>([]);
-    
+
     const settings = {
         dots: true,
         infinite: true,
@@ -49,25 +48,9 @@ const WeeklyNft = (storeId : any) => {
         ],
     };
 
-   async function myFetchMethod  () {
-        const { data, error } = await fetchGraphQl<ResponseType>({
-          query: QUERIES.storeNftsQuery,
-          variables: {
-            condition: {
-              nft_contract_id: { _in: mbjs.keys.contractAddress },
-            //   ...(showOnlyListed && { price: { _is_null: false } }),
-            },
-            limit: 5,
-            offset: 3,
-          }
-        });
-        setTokens(data?.mb_views_nft_metadata_unburned!)    
-      }
-
-    useEffect( ()=> {
-        myFetchMethod()
-    }, [])
-
+    useEffect(() => {
+        setTokens(data.mb_views_nft_metadata_unburned);
+    }, []);
 
     return (
         <>
