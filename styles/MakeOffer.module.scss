@@ -1,17 +1,12 @@
 @import './variables';
 
 .container {
-    @apply border border-primary-color border-solid bg-card rounded-lg px-6 py-6 mt-8 flex flex-col lg:flex-row justify-between lg:gap-10;
+    @apply border border-primary-color border-solid bg-primary-color rounded-lg px-6 py-6 mt-8 flex flex-col lg:flex-row justify-between lg:gap-10;
 
     .button-cont {
-        .connected-btn {
+        .connect-btn {
             @include buttonColor;
-            @apply tracking-wider text-lg py-2 rounded-md font-bold text-white w-full;
-        }
-
-        .not-connected-btn {
-            @include buttonColor;
-            @apply tracking-wider text-lg py-2 rounded-md font-bold text-white w-full;
+            @apply tracking-wider text-font-color text-lg py-2 rounded-md font-bold w-full border border-font-color;
         }
     }
 
