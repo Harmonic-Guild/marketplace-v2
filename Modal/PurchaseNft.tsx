@@ -1,63 +1,67 @@
 import React from "react";
 import Near from "../icons/near.svg";
-import {parseNearAmount } from "near-api-js/lib/utils/format";
-// import { useWallet } from "../services/providers/MintbaseWalletContext";
-import {useWallet } from '@mintbase-js/react'
-import { ContractCall, NearContractCall, NearExecuteOptions, buy, execute } from '@mintbase-js/sdk'
+import { parseNearAmount } from "near-api-js/lib/utils/format";
+import { useWallet } from "@mintbase-js/react";
+import { ContractCall, NearContractCall, NearExecuteOptions, buy, execute } from "@mintbase-js/sdk";
 
+const PurchaseNft = ({
+    listings,
+    thingId,
+    price,
+    isConnected,
+}: {
+    listings: any;
+    tokensData: any;
+    thingId: string;
+    price: string;
+    isConnected: boolean;
+}) => {
+    const { selector } = useWallet();
 
-const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
-  const { selector }  = useWallet();
-
-  // const { wallet } = useWallet();
-  
-  const marketId = tokensData.listings &&  tokensData.listings[0]?.market_id;
-
+    const marketId = listings[0]?.market_id;
+    
     // handler function to call the wallet methods to proceed the buy.
     const handleBuy = async () => {
-        if(marketId === process.env.NEXT_PUBLIC_marketAddress){
-            
+        if (marketId === process.env.NEXT_PUBLIC_marketAddress) {
             await oldBuy();
-        }   
-        else{
-          await newBuy();
+        } else {
+            await newBuy();
         }
-        
     };
 
-
+    const tokenId = listings[0].token.token_id!; //+ ":" + thingId.split(":")[0];
     
-    const tokenId = tokensData && tokensData[0].token.token_id! //+ ":" + thingId.split(":")[0];
 
     const oldBuyParams: any = {
-        contractAddress: args.marketAddress,
-        methodName: 'make_offer',
-        args: {token_id: args.token_id, price: args.price},
-    }
+        contractAddress: listings[0]?.market_id,
+        methodName: "make_offer",
+        args: { token_id: listings[0]?.token.id! + ":" + thingId.split(":")[0], price: listings[0].price },
+    };
 
     const oldBuy = async () => {
-        console.log('old');
-        
-        const wallet = await selector.wallet();
+        console.log("old");
 
-        return await execute({wallet}, oldBuyParams);
-    }
-    
+        // return await execute({ wallet }, oldBuyParams);
+    };
+
     const newBuy = async () => {
-        
-        const wallet = await selector.wallet();
-    
-        console.log('new', tokenId);
-        
-      
-        const buyArgs = {contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!, tokenId: tokenId!, marketId: marketId!, price: parseNearAmount(price.toString())! , referrerId: process.env.NEXT_PUBLIC_REFERRAL_ID}
-      
-        await execute({wallet}, buy(buyArgs));
 
-    }
-    
-    
-    
+        console.log("new", tokenId);
+
+        const wallet = await selector.wallet();
+
+        const buyArgs = {
+            // contractAddress: process.env.NEXT_PUBLIC_STORE_NAME!,
+            tokenId: tokenId!,
+            // marketId: marketId!,
+            price: parseNearAmount(price.toString())!,
+            // referrerId: process.env.NEXT_PUBLIC_REFERRAL_ID,
+        };
+
+        
+        await execute({ wallet }, buy(buyArgs));
+    };
+
     return (
         <div className="flex flex-col lg:flex-row lg:justify-between items-center  border border-primary-color bg-card rounded-lg w-full tokenPriceNumber px-6 py-6 mt-10">
             <div className="flex items-center justify-between gap-2 mb-3 lg:mb-0 font-medium text-lg">
