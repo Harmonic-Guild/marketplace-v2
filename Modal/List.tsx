@@ -5,12 +5,12 @@ import { useWallet } from '@mintbase-js/react';
 import {parseNearAmount} from 'near-api-js/lib/utils/format'
 
 import styles from '../styles/MintNft.module.scss';
-import { execute, list } from '@mintbase-js/sdk';
+import { depositStorage, execute, list } from '@mintbase-js/sdk';
 
     
     
     
-const MintNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
+const ListNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
     const [price, setPrice] = useState<string|undefined>('0')
 
   
@@ -24,8 +24,10 @@ const MintNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
         //const contractName = process.env.NEXT_PUBLIC_STORE_NAME!
         const contractName = thingId.split(":")[0]
         const amount = parseNearAmount(price)!
-
-        await execute({wallet}, list({contractAddress: contractName, tokenId, price: amount}))
+        
+        await execute({wallet},
+            depositStorage({listAmount: Number(price)})),
+            list({contractAddress: contractName, tokenId, price: amount})
 
     }
     
@@ -35,7 +37,7 @@ const MintNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
                 <div className={styles.modal}>
                     <div className='flex w-full justify-between'>
                         <p className='text-xl font-bold '>{title}</p>
-                        <span className='text-gray-400 border border-mp-brown-1 rounded-full p-2 cursor-pointer' onClick={cancel}><AiOutlineClose/></span>
+                        <span className='text-gray-400 border border-secondary-color bg-primary-color rounded-full p-2 cursor-pointer' onClick={cancel}><AiOutlineClose/></span>
                     </div>
                     <div className='flex text-xl text-gray-400 '>
                         <p>Adress: <span className='font-bold text-gray-800'>{activeAccountId}</span></p> 
@@ -43,9 +45,9 @@ const MintNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
         
                     <div className="flex mt-3">
                         <span className='outline-none flex text-gray-800 w-full'>
-                            <input type='number' placeholder='enter price' className='outline-none h-12 mx-3 w-2/3 appearance-none border px-3 rounded-lg' onChange={(e)=> setPrice(e.target.value)}/><span className='mt-4 px-2'><Near/></span></span>
+                            <input type='number' placeholder='enter price' className='outline-none h-12 mx-3 w-2/3 appearance-none border px-3 rounded-lg border-secondary-color' onChange={(e)=> setPrice(e.target.value)}/><span className='mt-4 px-2'><Near/></span></span>
                          
-                            <button className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-4 w-2/3 text-gray-800" onClick={listOnSale}>Sell</button>            
+                            <button className="border-2 rounded-xl outline-none bg-primary-color py-2 font-medium px-4 w-2/3 text-font-color" onClick={listOnSale}>Sell</button>            
                     </div>
                 </div>
             </div>
@@ -53,4 +55,4 @@ const MintNft = ({closeModal, thingId, tokenId, title, metaId}: any) => {
     )
 }
 
-export default MintNft
+export default ListNft
