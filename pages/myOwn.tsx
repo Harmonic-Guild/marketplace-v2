@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import { useLazyQuery } from "@apollo/client";
 import React from "react";
 import Image from "next/image";
-import MintNft from "../Modal/MintNft";
+import ListNft from "../Modal/List";
 import { BsCircle } from "react-icons/bs";
 import { AiOutlineExpandAlt } from "react-icons/ai";
-import { FETCH_TOKENS, FETCH_LISTING } from "../queries/myown";
 
 import styles from "../styles/MyOwn.module.scss";
 import { resolveUrl } from "../helpers/resolveUrl";
-import { ownedTokens } from "@mintbase-js/data";
-import { useWallet } from "@mintbase-js/react";
+import { Token, ownedTokens, tokensByStatus } from "@mintbase-js/data";
 
 const NFT = ({
     thing_id,
@@ -19,7 +16,7 @@ const NFT = ({
     tokenId,
     media,
     title,
-    animationUrl,
+    animationUrl
 }: {
     thing_id: string;
     toggle: any;
@@ -30,16 +27,31 @@ const NFT = ({
     animationUrl: string;
 }) => {
     const [sellModal, showSellModal] = useState(false);
+    const [listed, setListed] = useState<boolean | undefined>(undefined);
 
     const toggleFullScreen = (media: any) => {
         toggle(media);
     };
+    
+
+    // let listed: boolean | undefined = undefined;
+    const fetchData = async () => {
+        const {data, error} = await tokensByStatus(thing_id, 'codeslayer.testnet');
+
+        setListed(data?.listedTokens.includes(tokenId))  
+        
+    }
+    
+    useEffect(() => {
+        thing_id && fetchData()
+    }, [])
+    
 
 
     return (
         <div className="w-full h-auto border border-primary-color rounded-2xl bg-card bg-opacity-10">
             <div className="p-4">
-                {sellModal && <MintNft closeModal={() => showSellModal(false)} thingId={thing_id} tokenId={tokenId} title={title} />}
+                {sellModal && <ListNft closeModal={() => showSellModal(false)} thingId={thing_id} tokenId={tokenId} title={title} />}
                 <div>
                     {animationUrl === null ||
                     animationUrl === undefined ?(
@@ -65,15 +77,11 @@ const NFT = ({
 
                     <div className="px-30 py-2">
                         <div className="text-center font-bold text-lg font-text">{title}</div>
-                        <div className="w-full flex justify-center mt-6">
-                        {/* {metaData.length? (
-                            <>
-                                {metaData.price}
-                                <button className="border hover:text-primary-color hover:bg-secondary-color rounded-xl outline-none bg-card border-secondary-color py-2 font-medium px-4 w-2/3 text-gray-800 font-header">Unlist (coming&nbsp;soon)</button> 
-                            </> 
-                        ): ( */}
-                            <button className="border hover:text-primary-color hover:bg-secondary-color rounded-xl outline-none bg-card border-secondary-color py-2 font-medium px-4 w-2/3 text-gray-800 font-header" onClick={()=> showSellModal(true)}>List on sale</button>  
-                         {/* )}  */}
+                        <div className="w-full justify-center mt-6">
+                        { listed ?
+                        <button className="border hover:text-primary-color hover:bg-secondary-color rounded-xl outline-none bg-card border-secondary-color py-2 font-medium px-4 w-full mb-3 text-gray-800 font-header">Unlist (coming&nbsp;soon)</button> :
+                            <button className="border hover:text-font-color hover:bg-secondary-color rounded-xl outline-none bg-card border-secondary-color py-2 font-medium px-4 w-full text-gray-800 font-header" onClick={()=> showSellModal(true)}>List on sale</button>  }
+                         
                         </div>
                     </div>
                 </div>
@@ -105,28 +113,9 @@ interface List {
     price: number;
 }
 
-const MyOwn = () => {
-    const { activeAccountId } = useWallet();
+const MyOwn = ({tokens}: {tokens: Token[]}) => {
     const [fullScreen, setFullScreen] = useState(false);
     const [image, setImage] = useState<any>(null);
-    const [tokens, setTokens] = useState<any>([])
-
-
-    const fetchOwnedTokens = async () => {
-        if(activeAccountId) {
-            const {data, error} = await ownedTokens(activeAccountId, {limit: 20})
-            console.log('banana',error);
-
-            console.log('banana',data);
-            setTokens(data);
-            
-        }
-    }
-
-    useEffect(() => {
-        fetchOwnedTokens()
-    }, [])
-
 
     const toggle = (image: any) => {
         setFullScreen(true);
@@ -148,12 +137,12 @@ const MyOwn = () => {
             )}
                 <>
                     <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8 font-header">
-                        your tokens from this store
+                        your tokens
                     </h1>
 
                     <div className="pb-24 w-full mx-auto px-10">
                         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2  w-full pt-4 gap-y-5 gap-x-2">
-                            {tokens.map((meta: MetaData, index: string) => (
+                            {tokens.map((meta: MetaData, index: number) => (
                                 <NFT
                                     key={index}
                                     thing_id={meta.metadataId}
@@ -173,3 +162,25 @@ const MyOwn = () => {
 };
 
 export default MyOwn;
+
+export async function getServerSideProps({query}: {query:{account: string}}) {
+
+    const {account} = query;
+
+    let tokens: Token[] | null | undefined = undefined;
+    try {
+        const {data, error} = await ownedTokens(account, {limit: 30})
+        tokens = data;
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+    return {
+        props: {
+            tokens
+        },
+    };
+}
+
+
