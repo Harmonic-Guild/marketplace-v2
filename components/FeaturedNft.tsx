@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Slider from "react-slick";
 import { GiStarShuriken } from "react-icons/gi";
 
-import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
-import { mbjs } from "@mintbase-js/sdk";
-
 import Image from "next/image";
 
 import styles from "../styles/FeaturedNfts.module.scss";
-import { Token, ResponseType } from "../constants/interfaces";
+import { Token } from "../constants/interfaces";
 import { resolveUrl } from "../helpers/resolveUrl";
 
 const FeaturedNft = ({ data }: any) => {
-    const [tokens, setTokens] = useState<Token[] | []>([]);
     const [slideIndex, setSlideIndex] = useState(0);
 
     // render() {
@@ -60,9 +56,7 @@ const FeaturedNft = ({ data }: any) => {
         ],
     };
 
-    useEffect(() => {
-        setTokens(data.mb_views_nft_metadata_unburned);
-    }, []);
+    const tokens: Token[] = data.mb_views_nft_metadata_unburned
 
     return (
         <>
@@ -76,7 +70,7 @@ const FeaturedNft = ({ data }: any) => {
                         <p className="lg:text-2xl text-lg text-font-color font-header">New arrivals</p>
                     </div>
                     <Slider {...settings}>
-                        {tokens.map((token: Token, index) => (
+                        {tokens.map((token: Token, index: number) => (
                             <Link href={`/thing/${token.metadata_id}`} key={index}>
                                 <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
                                     <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">

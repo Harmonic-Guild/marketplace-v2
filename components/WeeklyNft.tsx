@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { GiStarShuriken } from "react-icons/gi";
 import Slider from "react-slick";
-import { ResponseType, Token } from "../constants/interfaces";
+import { Token } from "../constants/interfaces";
 import dynamic from "next/dynamic";
 
 import styles from "../styles/WeeklyNft.module.scss";
@@ -9,7 +8,6 @@ import styles from "../styles/WeeklyNft.module.scss";
 const NFT = dynamic(() => import("../components/NFT"));
 
 const WeeklyNft = ({ data }: any) => {
-    const [tokens, setTokens] = useState<Token[]>([]);
 
     const settings = {
         dots: true,
@@ -48,10 +46,7 @@ const WeeklyNft = ({ data }: any) => {
         ],
     };
 
-    useEffect(() => {
-        setTokens(data.mb_views_nft_metadata_unburned);
-    }, []);
-
+        const tokens: Token[] = data.mb_views_nft_metadata_unburned
     return (
         <>
             {/* {loadingtokensData && <div className="h-5 w-5 bg-primary-color animate-pulse rounded-full"></div>} */}
@@ -64,7 +59,7 @@ const WeeklyNft = ({ data }: any) => {
                 </div>
                 {/* <div className={styles["nfts-cont"]}> */}
                 <Slider {...settings} className={styles["nfts-cont"]}>
-                    {tokens.map((token, id) => (
+                    {tokens.map((token: Token, id: number) => (
                         <NFT token={token} key={id} />
                     ))}
                 </Slider>
