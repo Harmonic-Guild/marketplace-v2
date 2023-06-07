@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useWallet } from "@mintbase-js/react";
-import { BsLayoutTextSidebarReverse } from "react-icons/bs";
 import { FiMenu, FiX } from "react-icons/fi";
 // import NavBreadCrumb from './NavBreadCrumb'
 import Near from "../icons/near.svg";
@@ -11,19 +10,11 @@ import config from "../config/config";
 
 import styles from "../styles/Header.module.scss";
 
-const navTitles = [
-    { title: "Home", href: "/" },
-    { title: "Explore", href: "/explore" },
-    { title: "My NFTs", href: "/myOwn" },
-    //{ title: "Profile", href: "#" },
-];
-
 const Header = () => {
     const router = useRouter();
 
     const [toggleMenu, setToggleMenu] = useState<boolean>(true);
     // const [darkMode, setDarkMode] = useState<boolean>(true);
-    const [toggleIcons, setToggleIcons] = useState<boolean>();
     const [currentPath, setCurrentPath] = useState<string>();
     const { isConnected, connect, disconnect, activeAccountId } = useWallet();
 
