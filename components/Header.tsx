@@ -65,30 +65,42 @@ const Header = () => {
                             <FiX className="w-6 h-6 relative text-black z-20" onClick={() => setToggleMenu(true)} />
                             <div className={styles["nav-content"]}>
                                 <div className={styles["connection-cont"]}>
-                                    {/* {isConnected ? (
-                                        <div className={styles["info-cont"]}>
-                                            <div className={styles["info-text"]}>
-                                                <p className={styles.address}>Address: {activeAccountId}</p>
-                                            </div>
-                                        </div>
-                                    ) : ( */}
                                     
                                     <button onClick={walletAction} className="text-white">
                             {isConnected ? "Disconnect" : "Connect"}
                         </button>
 
                                 </div>
-                                {navTitles.map((item, index) => (
-                                    <Link key={index} href={item.href} passHref>
+                                    <Link  href={'/'} passHref>
                                         <div
                                             className={`font-header ${styles["nav-link"]} ${
-                                                currentPath == item.href ? "border-font-color" : "border-white"
+                                                currentPath === '/' ? "border-font-color" : "border-white"
                                             }`}
                                         >
-                                            {item.title}
+                                            Home
                                         </div>
                                     </Link>
-                                ))}
+
+                                    <Link  href={'/explore'} passHref>
+                                        <div
+                                            className={`font-header ${styles["nav-link"]} ${
+                                                currentPath === '/explore' ? "border-font-color" : "border-white"
+                                            }`}
+                                        >
+                                            Explore
+                                        </div>
+                                    </Link>
+
+                                    {isConnected && <Link  href={`/myOwn?account=${activeAccountId}`} passHref>
+                                        <div
+                                            className={`font-header ${styles["nav-link"]} ${
+                                                currentPath === `/myOwn?account=${activeAccountId}` ? "border-font-color" : "border-white"
+                                            }`}
+                                        >
+                                            My NFTs
+                                        </div>
+                                    </Link>}
+
                                 <div className={styles["nav-bottom"]}>
                                     <div className={styles["inner-cont"]}>
                                         <span>{activeAccountId}</span>
@@ -101,16 +113,23 @@ const Header = () => {
 
                 <div className="hidden lg:flex w-full lg:w-3/5 mb-6 lg:mb-0 text-center space-x-5 lg:text-right">
                     <div className={styles["nav-cont"]}>
-                        {navTitles.map((item, index) => (
-                            <Link key={index} href={item.href} passHref>
-                                <p className={`font-header ${styles["nav-item"]} ${currentPath == item.href ? "border-font-color" : "border-white"}`}>
-                                    {item.title}
+                            <Link href={'/'} passHref>
+                                <p className={`font-header ${styles["nav-item"]} ${currentPath === '/' ? "border-font-color" : "border-white"}`}>
+                                    Home
                                 </p>
                             </Link>
-                        ))}
+                            <Link href={'/explore'} passHref>
+                                <p className={`font-header ${styles["nav-item"]} ${currentPath === '/explore' ? "border-font-color" : "border-white"}`}>
+                                    Explore
+                                </p>
+                            </Link>
+                            {isConnected &&<Link href={`/myOwn?account=${activeAccountId}`} passHref>
+                                <p className={`font-header ${styles["nav-item"]} ${currentPath === `/myOwn?account=${activeAccountId}` ? "border-font-color" : "border-white"}`}>
+                                    My NFTs
+                                </p>
+                            </Link>}
                     </div>
                     <div style={buttonStyles} className={`font-header ${styles["button-cont"]}`}>
-                        {/* <div onClick={() => setToggleIcons(!toggleIcons)}></div> */}
                         <button onClick={walletAction}>
                             {isConnected ? "Disconnect" : "Connect"}
                             <span className="ml-2 mt-1">
