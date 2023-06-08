@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Connect_Line from '../icons/connect_Line.svg'
 import Near from '../icons/near.svg'
 import { FiX } from 'react-icons/fi'
