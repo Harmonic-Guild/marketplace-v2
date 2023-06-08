@@ -16,7 +16,8 @@ const NFT = ({
     tokenId,
     media,
     title,
-    animationUrl
+    animationUrl,
+    accountId
 }: {
     thing_id: string;
     toggle: any;
@@ -25,6 +26,7 @@ const NFT = ({
     media: string;
     title: string;
     animationUrl: string;
+    accountId: string;
 }) => {
     const [sellModal, showSellModal] = useState(false);
     const [listed, setListed] = useState<boolean | undefined>(undefined);
@@ -33,10 +35,9 @@ const NFT = ({
         toggle(media);
     };
     
-
     // let listed: boolean | undefined = undefined;
     const fetchData = async () => {
-        const {data, error} = await tokensByStatus(thing_id, 'codeslayer.testnet');
+        const {data, error} = await tokensByStatus(thing_id, accountId);
 
         setListed(data?.listedTokens.includes(tokenId))  
         
@@ -113,7 +114,7 @@ interface List {
     price: number;
 }
 
-const MyOwn = ({tokens}: {tokens: Token[]}) => {
+const MyOwn = ({tokens, accountId}: {tokens: Token[], accountId: string}) => {
     const [fullScreen, setFullScreen] = useState(false);
     const [image, setImage] = useState<any>(null);
 
@@ -152,6 +153,7 @@ const MyOwn = ({tokens}: {tokens: Token[]}) => {
                                     title={meta.title}
                                     animationUrl={meta.animationUrl}
                                     metadata_id={meta.metadataId}
+                                    accountId = {accountId}
                                 />
                             ))}
                         </div>
@@ -178,7 +180,8 @@ export async function getServerSideProps({query}: {query:{account: string}}) {
 
     return {
         props: {
-            tokens
+            tokens,
+            accountId: account
         },
     };
 }
