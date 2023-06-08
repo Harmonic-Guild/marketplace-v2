@@ -121,14 +121,14 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
                     <div className="lg:flex gap-4 justify-between w-4/5 lg:w-full mx-auto">
                         <div className="mx-auto w-full">
                             {metadata[0]?.animationUrl !== null && metadata[0]?.animationUrl !== undefined ? (
-                                <div className="w-full mx-auto flex align-middle">
-                                    <video controls className="" poster={resolveUrl(metadata[0]?.media)} controlsList="nodownload" muted>
+                                <div className="w-full h-full mx-auto relative">
+                                    <video controls className="w-full" poster={resolveUrl(metadata[0]?.media)} controlsList="nodownload" muted>
                                         <source src={resolveUrl(metadata[0]?.animationUrl)}></source>
                                     </video>
                                     <br />
                                 </div>
                             ) : (
-                                <div className=" w-full xl:w-4/5 mx-auto">
+                                <div className=" w-full xl:w-4/5 mx-auto border-2">
                                     {metadata[0]?.media && (
                                         <div className="">
                                             <Image
@@ -150,6 +150,7 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
                                 </div>
                             )}
                         </div>
+                        <div className="w-full">
                         <div className="w-full text-font-color">
                             <div className="text-4xl font-bold mb-5 text-font-color">{metadata[0]?.title}</div>
                         </div>
@@ -223,6 +224,7 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
                                     <div className="bg-primary-color text-white text-center w-fit rounded-lg p-3">Not Listed</div>
                                 )}
                             </div>
+                        </div>
                     </div>
                     {/* <SimilarNft /> */}
                 </div>
