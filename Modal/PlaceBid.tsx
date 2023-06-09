@@ -2,8 +2,6 @@ import { useState } from 'react'
 import Near from '../icons/near.svg'
 import { AiOutlineClose } from 'react-icons/ai';
 
-import styles from "../styles/MakeOffer.module.scss";
-
 const PlaceBid = ({buy, closeModal}: any) => {
 
     const [bid, setBid] = useState("0")
@@ -13,8 +11,8 @@ const PlaceBid = ({buy, closeModal}: any) => {
     };
 
   return (
-    <div className={`${styles["modal-cont"]} glass-morphism`}>
-                    <div className={`mx-auto w-4/5 relative top-80 lg:top-52 rounded-xl bg-white ${styles["inner-cont"]}`}>
+    <div className={`bg-gradient-to-l from-primary-color to-secondary-color py-4 rounded-md`}>
+                    <div className={`mx-auto w-4/5 relative top-80 lg:top-52 rounded-xl}`}>
                         <div className="flex w-full justify-between">
                             <p className="text-xl font-bold">Buster character color</p>
                             <span
@@ -35,7 +33,7 @@ const PlaceBid = ({buy, closeModal}: any) => {
                             </span>
                         </div>
 
-                        <div className="">
+                        <div className="pb-6">
                             <button
                                 onClick={() => buy(bid)}
                                 className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800"
