@@ -10,11 +10,11 @@
         }
     }
 
-    .modal-cont {
-        @apply h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-center;
+    // .modal-cont {
+    //     @apply h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-center;
 
-        .inner-cont {
-            @apply max-w-2xl p-8;
-        }
-    }
+    //     .inner-cont {
+    //         @apply max-w-2xl p-8;
+    //     }
+    // }
 }
