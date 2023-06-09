@@ -16,6 +16,7 @@ import styles from "../../styles/Thing.module.scss";
 import { metadataByMetadataId } from "@mintbase-js/data";
 import { MetadataByMetadataIdQueryResult } from "@mintbase-js/data/lib/api/metadataByMetadataId/metadataByMetadataId.types";
 import { useWallet } from "@mintbase-js/react";
+import { MAX_GAS, execute } from "@mintbase-js/sdk";
 
 const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetadataIdQueryResult | null | undefined }) => {
     interface Thing {
@@ -52,28 +53,40 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
         createdAt: string | number;
     }
 
-    const { isConnected } = useWallet();
+    const { isConnected, selector} = useWallet();
     const [hide, setHide] = useState<boolean>(false);
     const [enlarge, setEnlarge] = useState(false);
 
     const metadata = data?.metadata!;
     const tokenCount = data?.tokenCount.aggregate.count!;
-    const listings = data?.listings!;
-    console.log(data);
+    const listings: any = data?.listings!;
     
 
     const toggleDiscription = () => {
         setHide(!hide);
     };
 
-    const buy = (bid: number) => {
-        // const token_Id = listings[0]?.token?.token.id! + ":" + thing_id.split(":")[0];
-        // const marketAddress = listings[0]?.market_id;
-        // if (listings[0]?.kind === "simple") {
-        //     wallet?.makeOffer(token_Id, tokenPrice, { marketAddress });
-        // } else {
-        //     wallet?.makeOffer(token_Id, parseNearAmount(bid.toString())!.toString(), { marketAddress });
-        // }
+    const buy = async (bid: number) => {
+
+        const wallet = await selector.wallet();
+
+        return await execute({ wallet }, {
+            contractAddress: listings[0].market_id,
+            methodName: "make_offer",
+            args: {
+                token_key: [listings[0]?.token?.token_id! + ":" + thing_id.split(":")[0]], 
+                price: [parseNearAmount(String(bid))],
+                timeout: [
+                    {
+                        Hours: 24
+                    }
+                ]
+
+            },
+            gas: MAX_GAS,
+            deposit: parseNearAmount(String(bid))
+        } );
+
     };
     const tokenPriceNumber = Number(listings && listings[0]?.price) || 0;
     const stringPrice =
@@ -90,13 +103,6 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
     //     currentBid =
     //         (listings && formatNearAmount(Number(listings[0]?.offers[0]?.offer_price).toLocaleString("fullwide", { useGrouping: false }), 5)) || 0;
     // }
-
-    // const args = {
-    //     token_Id: listings && listings[0]?.token.id! + ":" + thing_id.split(":")[0],
-    //     marketAddress: listings && listings[0]?.market_id,
-    //     tokenPrice,
-    // };
-
     return (
         <>
             {metadata && (
@@ -128,7 +134,7 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
                                     <br />
                                 </div>
                             ) : (
-                                <div className=" w-full xl:w-4/5 mx-auto border-2">
+                                <div className=" w-full xl:w-4/5 mx-auto">
                                     {metadata[0]?.media && (
                                         <div className="">
                                             <Image
@@ -210,14 +216,13 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
                                                 isConnected={isConnected}
                                             />
                                         ) : (
-                                            // <MakeOffer
-                                            //     buy={buy}
-                                            //     isConnected={isConnected}
-                                            //     latestBid={listings[0]?.offers ? listings[0]?.offers[0]?.offer_price : 0}
-                                            //     bidder={listings[0]?.offers ? listings[0]?.offers[0]?.offered_by : "No bids yet"}
-                                            //     owner={listings[0]?.token.owner}
-                                            // />
-                                            'great'
+                                            <MakeOffer
+                                                buy={buy}
+                                                isConnected={isConnected}
+                                                latestBid={listings[0]?.offers ? listings[0]?.offers[0]?.offer_price : 0}
+                                                bidder={listings[0]?.offers ? listings[0]?.offers[0]?.offered_by : "No bids yet"}
+                                                owner={listings[0]?.token.owner}
+                                            />
                                         )}
                                     </div>
                                 ) : (
