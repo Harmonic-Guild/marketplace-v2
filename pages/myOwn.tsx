@@ -75,7 +75,6 @@ const NFT = ({
                             </video>
                         </div>
                     )}
-
                     <div className="px-30 py-2">
                         <div className="text-center font-bold text-lg font-text">{title}</div>
                         <div className="w-full justify-center mt-6">
