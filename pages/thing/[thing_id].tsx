@@ -18,7 +18,7 @@ import { MetadataByMetadataIdQueryResult } from "@mintbase-js/data/lib/api/metad
 import { useWallet } from "@mintbase-js/react";
 import { MAX_GAS, execute } from "@mintbase-js/sdk";
 
-const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetadataIdQueryResult | null | undefined }) => {
+const thing_id = ({ thing_id, data, bidInfo }: { thing_id: string; data: MetadataByMetadataIdQueryResult | null | undefined; bidInfo: any }) => {
     interface Thing {
         contract: {
             id: string;
@@ -65,6 +65,8 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
     const toggleDiscription = () => {
         setHide(!hide);
     };
+
+    
 
     const buy = async (bid: number) => {
 
@@ -219,9 +221,9 @@ const thing_id = ({ thing_id, data }: { thing_id: string; data: MetadataByMetada
                                             <MakeOffer
                                                 buy={buy}
                                                 isConnected={isConnected}
-                                                latestBid={listings[0]?.offers ? listings[0]?.offers[0]?.offer_price : 0}
-                                                bidder={listings[0]?.offers ? listings[0]?.offers[0]?.offered_by : "No bids yet"}
-                                                owner={listings[0]?.token.owner}
+                                                latestBid={bidInfo.offers ? bidInfo?.offers[0]?.offer_price : 0}
+                                                bidder={bidInfo.offers ? bidInfo?.offers[0]?.offered_by : "No bids yet"}
+                                                owner={bidInfo.listed_by}
                                             />
                                         )}
                                     </div>
@@ -242,6 +244,7 @@ export default thing_id;
 export async function getServerSideProps({ params }: any) {
     const thing_id = params.thing_id;
     let thingData: MetadataByMetadataIdQueryResult | null | undefined = undefined;
+    let bidInfo;
 
     try {
         const { data, error } = await metadataByMetadataId(thing_id);
@@ -250,10 +253,35 @@ export async function getServerSideProps({ params }: any) {
         console.log(error);
     }
 
+     const res = await fetch(`https://graph.mintbase.xyz/${process.env.NEXT_PUBLIC_NETWORK}`, {
+        method: "POST",
+        headers: {
+          "mb-api-key": "omni-site",
+          "content-type": "application/json",
+          "x-hasura-role": "anonymous"
+        },
+        body: JSON.stringify({
+          query: `query MyQuery {
+            mb_views_active_listings(
+              where: {metadata_id: {_eq: "${thing_id}"}}
+            ) {
+              offers(order_by: {offered_at: desc}) {
+                offer_price
+                offered_by
+              }
+              listed_by
+            }
+          }`
+        })
+      })
+      
+      bidInfo = await res.json()
+
     return {
         props: {
             thing_id,
             data: thingData,
+            bidInfo: bidInfo.data.mb_views_active_listings[0]
         },
     };
 }
