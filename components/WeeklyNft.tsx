@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
 import { GiStarShuriken } from "react-icons/gi";
 import Slider from "react-slick";
-import NFT from "./NFT";
-import { ResponseType, Token } from "../constants/interfaces";
+import { Token } from "../constants/interfaces";
+import dynamic from "next/dynamic";
 
 import styles from "../styles/WeeklyNft.module.scss";
-import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
-import { mbjs } from "@mintbase-js/sdk";
 
-const WeeklyNft = (storeId : any) => {
+const NFT = dynamic(() => import("../components/NFT"));
 
-    const [tokens, setTokens] = useState<Token[]>([]);
-    
+const WeeklyNft = ({ data }: any) => {
+
     const settings = {
         dots: true,
         infinite: true,
@@ -49,39 +46,20 @@ const WeeklyNft = (storeId : any) => {
         ],
     };
 
-   async function myFetchMethod  () {
-        const { data, error } = await fetchGraphQl<ResponseType>({
-          query: QUERIES.storeNftsQuery,
-          variables: {
-            condition: {
-              nft_contract_id: { _in: mbjs.keys.contractAddress },
-            //   ...(showOnlyListed && { price: { _is_null: false } }),
-            },
-            limit: 5,
-            offset: 3,
-          }
-        });
-        setTokens(data?.mb_views_nft_metadata_unburned!)    
-      }
-
-    useEffect( ()=> {
-        myFetchMethod()
-    }, [])
-
-
+        const tokens: Token[] = data.mb_views_nft_metadata_unburned
     return (
         <>
             {/* {loadingtokensData && <div className="h-5 w-5 bg-primary-color animate-pulse rounded-full"></div>} */}
             <div className={styles.container}>
                 <div className=" text-center  font-bold text-gray-900 mb-4">
-                    <p className="text-secondary-color mb-2">
+                    <p className="text-font-color mb-2">
                         Hot <GiStarShuriken className="inline w-6 h-5" />
                     </p>
-                    <h2 className="text-mp-dark-2 text-4xl font-bold font-header">NFTs of the week </h2>
+                    <h2 className="text-font-color text-4xl font-bold font-header">NFTs of the week </h2>
                 </div>
                 {/* <div className={styles["nfts-cont"]}> */}
                 <Slider {...settings} className={styles["nfts-cont"]}>
-                    {tokens.map((token, id) => (
+                    {tokens.map((token: Token, id: number) => (
                         <NFT token={token} key={id} />
                     ))}
                 </Slider>

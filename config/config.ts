@@ -15,5 +15,6 @@ export default {
 
     "primary-color": process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#233247',
     "secondary-color": process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#5174a6',
-    "card-color": process.env.NEXT_PUBLIC_CARD_COLOR || '#5174a6'
+    "card-color": process.env.NEXT_PUBLIC_CARD_COLOR || '#5174a6',
+    "font-color": process.env.NEXT_PUBLIC_FONT_COLOR || '#111'
 }

@@ -19,7 +19,7 @@ const NFT: FC<Props> = ({ token }) => {
 
     return (
         <Link href={`/thing/${token.metadata_id}`} passHref>
-            <a className={`${styles.container} nft_height`}>
+            <section className={`${styles.container} nft_height`}>
                 <div className="">
 
                 <div className="object-contain mx-auto">
@@ -38,7 +38,7 @@ const NFT: FC<Props> = ({ token }) => {
                      
                         <div className={`font-text ${styles.title}`}>{token.title}</div>
                         <div>
-                            <div className="flex gap-2 items-center text-lg">
+                            <div className="flex gap-2 items-center text-lg text-font-color">
                                 {token.price ? (
                                     
                                         <div className="flex items-center gap-2 whitespace-nowrap">
@@ -66,7 +66,7 @@ const NFT: FC<Props> = ({ token }) => {
                         </div>
                     </div>
                 </div>
-            </a>
+            </section>
         </Link>
     );
 };

@@ -1,7 +1,7 @@
 @import "./variables";
 
 .header {
-    @apply w-full px-6 text-gray-700;
+    @apply w-full px-6 text-secondary-color;
     
     .inner-nav-cont {
         @apply w-full max-w-[100rem] flex mt-1 mx-auto justify-between items-center;
@@ -18,19 +18,21 @@
             }
 
             .connect-btn {
-                @include buttonColor;
+                button {
+                    @include buttonColor;
+                }
             }
 
             .menu-btn {
-                @apply bg-black;
+                @apply bg-secondary-color;
             }
         }
 
         .nav-content {
-            @apply bg-[#F8F5FF] text-gray-900 absolute top-0 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-20 h-screen w-4/5 z-10;
+            @apply bg-[#F8F5FF] text-font-color absolute top-0 right-0 text-lg font-bold shadow-xl rounded-tl-xl rounded-bl-xl px-7 pt-20 h-screen w-4/5 z-10;
 
             .connection-cont {
-                @apply border border-solid border-primary-color bg-secondary-color rounded-lg p-4;
+                @apply border border-solid border-primary-color bg-gradient-to-r from-primary-color to-secondary-color rounded-lg p-4;
 
                 .info-cont {
                     @apply flex items-center gap-4;
@@ -92,7 +94,7 @@
         @apply mt-2 flex justify-end mx-4 text-lg font-bold w-full;
 
         .nav-item {
-            @apply cursor-pointer border-b-2 hover:border-black mx-6 whitespace-nowrap;
+            @apply cursor-pointer border-b-2 hover:border-font-color text-font-color mx-6 whitespace-nowrap;
         }
     }
 

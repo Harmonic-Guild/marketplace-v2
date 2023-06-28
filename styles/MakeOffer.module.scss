@@ -1,24 +1,20 @@
 @import './variables';
 
 .container {
-    @apply border border-primary-color border-solid bg-card rounded-lg px-6 py-6 mt-8 flex flex-col lg:flex-row justify-between lg:gap-10;
+    @apply border border-primary-color border-solid bg-primary-color rounded-lg px-6 py-6 mt-8 flex flex-col lg:flex-row justify-between lg:gap-10;
 
     .button-cont {
-        .connected-btn {
+        .connect-btn {
             @include buttonColor;
-            @apply tracking-wider text-lg py-2 rounded-md font-bold text-white w-full;
-        }
-
-        .not-connected-btn {
-            @apply tracking-wider text-lg py-2 rounded-md font-bold text-gray-500 w-full border border-gray-300 bg-gray-300 cursor-not-allowed;
+            @apply tracking-wider text-font-color text-lg py-2 rounded-md font-bold w-full border border-font-color;
         }
     }
 
-    .modal-cont {
-        @apply h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-center;
+    // .modal-cont {
+    //     @apply h-screen w-screen fixed top-0 left-0 z-40 flex justify-center items-center;
 
-        .inner-cont {
-            @apply max-w-2xl p-8;
-        }
-    }
+    //     .inner-cont {
+    //         @apply max-w-2xl p-8;
+    //     }
+    // }
 }
