@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Slider from "react-slick";
 import { GiStarShuriken } from "react-icons/gi";
@@ -8,9 +8,40 @@ import Image from "next/image";
 import styles from "../styles/FeaturedNfts.module.scss";
 import { Token } from "../constants/interfaces";
 import { resolveUrl } from "../helpers/resolveUrl";
+import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
+import { mbjs } from "@mintbase-js/sdk";
 
-const FeaturedNft = ({ data }: any) => {
+const FeaturedNft = ({ ids }: any) => {
     const [slideIndex, setSlideIndex] = useState(0);
+    const [tokens, setTokens] = useState<any>()
+
+    const idsToFetch = ids?.c?.map((k:any)=> {
+        return k.v
+    }) || [];
+    
+
+    const fetchFeatured = async () => {
+        
+        const { data, error } = await fetchGraphQl<any>({
+            query: QUERIES.storeNftsQuery,
+            variables: {
+                condition: {
+                    nft_contract_id: { _in: mbjs.keys.contractAddress },
+                    metadata_id: {_in: idsToFetch}
+                    //   ...(showOnlyListed && { price: { _is_null: false } }),
+                },
+                limit: 5,
+                offset: 0,
+            },
+        });
+        // console.log('okkkokokokkokk',data.mb_views_nft_metadata_unburned);
+        
+        setTokens(data?.mb_views_nft_metadata_unburned)
+    }
+
+    useEffect(()=> {
+      if(ids?.c?.length)  fetchFeatured()
+    }, [ids])
 
     // render() {
     const settings = {
@@ -26,8 +57,6 @@ const FeaturedNft = ({ data }: any) => {
         slidesToScroll: 1,
         initialSlide: 0,
         beforeChange: (current: any, next: any) => setSlideIndex(next),
-        // nextArrow: <SampleNextArrow/>,
-        // prevArrow: <SamplePrevArrow/>,
         responsive: [
             {
                 breakpoint: 1024,
@@ -55,12 +84,12 @@ const FeaturedNft = ({ data }: any) => {
             },
         ],
     };
+    if(!tokens) return <h1 className="text-font-color text-2xl mb-8">No featured Tokens to show</h1>
 
-    const tokens: Token[] = data.mb_views_nft_metadata_unburned
 
     return (
         <>
-            {tokens.length ? (
+            {tokens?.length ? (
                 <div className={styles.container}>
                     <div className=" text-center  font-bold text-gray-900 mb-6">
                         <p className="text-font-color mb-2">
