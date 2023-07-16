@@ -4,10 +4,40 @@ import { Token } from "../constants/interfaces";
 import dynamic from "next/dynamic";
 
 import styles from "../styles/WeeklyNft.module.scss";
+import { useEffect, useState } from "react";
+import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
+import { mbjs } from "@mintbase-js/sdk";
 
 const NFT = dynamic(() => import("../components/NFT"));
 
-const WeeklyNft = ({ data }: any) => {
+const WeeklyNft = ({ ids }: any) => {
+    const [tokens, setTokens] = useState<any>();
+
+    const idsToFetch = ids?.c?.map((k: any) => {
+        return k.v;
+    }) || [];
+
+    const fetchFeatured = async () => {
+        const { data, error } = await fetchGraphQl<any>({
+            query: QUERIES.storeNftsQuery,
+            variables: {
+                condition: {
+                    nft_contract_id: { _in: mbjs.keys.contractAddress },
+                    metadata_id: { _in: idsToFetch },
+                    //   ...(showOnlyListed && { price: { _is_null: false } }),
+                },
+                limit: 5,
+                offset: 0,
+            },
+        });
+        // console.log('okkkokokokkokk',data.mb_views_nft_metadata_unburned);
+
+        setTokens(data?.mb_views_nft_metadata_unburned);
+    };
+
+    useEffect(() => {
+        if (ids?.c?.length) fetchFeatured();
+    }, [ids]);
 
     const settings = {
         dots: true,
@@ -46,7 +76,9 @@ const WeeklyNft = ({ data }: any) => {
         ],
     };
 
-        const tokens: Token[] = data.mb_views_nft_metadata_unburned
+    if(!tokens) return <h1 className="text-font-color text-2xl mb-8">No tokens to show</h1>
+
+    // const tokens: Token[] = data.mb_views_nft_metadata_unburned
     return (
         <>
             {/* {loadingtokensData && <div className="h-5 w-5 bg-primary-color animate-pulse rounded-full"></div>} */}
