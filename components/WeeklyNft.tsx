@@ -14,9 +14,9 @@ const WeeklyNft = ({ ids }: any) => {
     const [tokens, setTokens] = useState<any>();
 
     const idsToFetch = ids?.c?.map((k: any) => {
-        return k.v;
+        return k.v || "";
     }) || [];
-
+    
     const fetchFeatured = async () => {
         const { data, error } = await fetchGraphQl<any>({
             query: QUERIES.storeNftsQuery,
