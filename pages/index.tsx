@@ -2,19 +2,26 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 // import AboutArtist from "../components/AboutArtist";
-import Gleap from 'gleap';
-import config from '../config/config'
-import { useEffect } from 'react';
+import Gleap from "gleap";
+import config from "../config/config";
+import { useEffect, useState } from "react";
+import { getData } from "../helpers/fetchSheetsData";
 
 const FeaturedNft = dynamic(() => import("../components/FeaturedNft"));
 const WeeklyNft = dynamic(() => import("../components/WeeklyNft"));
 const AboutArtist = dynamic(() => import("../components/AboutArtist"));
 
 const Home: NextPage = () => {
-    const storeName = process.env.NEXT_PUBLIC_STORE_NAME!;
+    const [data, setData] = useState<{rows: any}>()
+
+    const fetchData = async () => {
+        const data = await getData();
+        setData(data);
+    }
 
     useEffect(() => {
         // Run within useEffect to execute this code on the frontend.
+        fetchData()
         Gleap.initialize("QiQEFx0bETLdNLtHD0n1dFu81ayhDck3");
     }, []);
 
@@ -24,8 +31,9 @@ const Home: NextPage = () => {
                 <title>{config.title}</title>
                 <link rel="icon" href={config.logo2} />
             </Head>
-            <FeaturedNft storeId={storeName} />
-            <WeeklyNft storeId={storeName} />
+            
+                <FeaturedNft ids={data?.rows[0] || []}/>
+                <WeeklyNft ids={data?.rows[1] || []} />
             {/* <AboutArtist storeId={storeName} /> */}
         </div>
     );
