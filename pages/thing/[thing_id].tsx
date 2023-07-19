@@ -19,6 +19,8 @@ import { useWallet } from "@mintbase-js/react";
 import { MAX_GAS, execute } from "@mintbase-js/sdk";
 
 const thing_id = ({ thing_id, data, bidInfo }: { thing_id: string; data: MetadataByMetadataIdQueryResult | null | undefined; bidInfo: any }) => {
+
+    
     interface Thing {
         contract: {
             id: string;
@@ -53,42 +55,39 @@ const thing_id = ({ thing_id, data, bidInfo }: { thing_id: string; data: Metadat
         createdAt: string | number;
     }
 
-    const { isConnected, selector} = useWallet();
+    const { isConnected, selector } = useWallet();
     const [hide, setHide] = useState<boolean>(false);
     const [enlarge, setEnlarge] = useState(false);
 
     const metadata = data?.metadata!;
     const tokenCount = data?.tokenCount.aggregate.count!;
     const listings: any = data?.listings!;
-    
 
     const toggleDiscription = () => {
         setHide(!hide);
     };
 
-    
-
     const buy = async (bid: number) => {
-
         const wallet = await selector.wallet();
 
-        return await execute({ wallet }, {
-            contractAddress: listings[0].market_id,
-            methodName: "make_offer",
-            args: {
-                token_key: [listings[0]?.token?.token_id! + ":" + thing_id.split(":")[0]], 
-                price: [parseNearAmount(String(bid))],
-                timeout: [
-                    {
-                        Hours: 24
-                    }
-                ]
-
-            },
-            gas: MAX_GAS,
-            deposit: parseNearAmount(String(bid))
-        } );
-
+        return await execute(
+            { wallet },
+            {
+                contractAddress: listings[0].market_id,
+                methodName: "make_offer",
+                args: {
+                    token_key: [listings[0]?.token?.token_id! + ":" + thing_id.split(":")[0]],
+                    price: [parseNearAmount(String(bid))],
+                    timeout: [
+                        {
+                            Hours: 24,
+                        },
+                    ],
+                },
+                gas: MAX_GAS,
+                deposit: parseNearAmount(String(bid)),
+            }
+        );
     };
     const tokenPriceNumber = Number(listings && listings[0]?.price) || 0;
     const stringPrice =
@@ -159,54 +158,58 @@ const thing_id = ({ thing_id, data, bidInfo }: { thing_id: string; data: Metadat
                             )}
                         </div>
                         <div className="w-full">
-                        <div className="w-full text-font-color">
-                            <div className="text-4xl font-bold mb-5 text-font-color">{metadata[0]?.title}</div>
-                        </div>
-
-                        <div className="text-font-color">
-                            <div className="mt-10 border-b md:border-b-0 border-primary-color pb-4">
-                                <div className="border-b border-primary-color mb-3 pb-3">
-                                    <span className="text-3xl font-bold text">Description</span>
-                                </div>
-
-                                <p className={hide ? "" : "line-clamp-3"}>{metadata[0]?.description}</p>
-                                <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
-                                    {" "}
-                                    {!hide ? ".....see more" : "see less"}
-                                </span>
+                            <div className="w-full text-font-color">
+                                <div className="text-4xl font-bold mb-5 text-font-color">{metadata[0]?.title}</div>
                             </div>
-                        </div>
 
-                        <div className="flex flex-col-reverse lg:flex-col text-font-color">
-                            <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
-                                <div className="">
-                                    <div className="flex items-center justify-between gap-3">
-                                        <p className="text-2xl font-bold">Details</p>
-                                        <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
-                                        <div className="border-2 border-secondary-color rounded-full p-2 px-3">
-                                            <a
-                                                href={`https://explorer.testnet.near.org/transactions/${metadata[0]?.title}`}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                            >
-                                                <Near className="w-4 h-4" fill="black" />
-                                            </a>
-                                        </div>
-                                        <div className="border-2 border-secondary-color rounded-full p-1 px-3">
-                                            <a href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`} target="_blank" rel="noreferrer">
-                                                <div className="w-6 h-6">
-                                                    <Image src={Arweave} className="" />
-                                                </div>
-                                            </a>
-                                        </div>
+                            <div className="text-font-color">
+                                <div className="mt-10 border-b md:border-b-0 border-primary-color pb-4">
+                                    <div className="border-b border-primary-color mb-3 pb-3">
+                                        <span className="text-3xl font-bold text">Description</span>
                                     </div>
 
-                                    <div className="bg-primary-color rounded-lg my-8 py-2">
-                                        <p className="text-center text-font-color text-lg">{tokenCount} Tokens Minted</p>
-                                    </div>
+                                    <p className={hide ? "" : "line-clamp-3"}>{metadata[0]?.description}</p>
+                                    <span id="span" onClick={toggleDiscription} className="cursor-pointer text-blue-400 hover:underline">
+                                        {" "}
+                                        {!hide ? ".....see more" : "see less"}
+                                    </span>
                                 </div>
                             </div>
-                            {listings && listings.length ? (
+
+                            <div className="flex flex-col-reverse lg:flex-col text-font-color">
+                                <div className="flex flex-col-reverse items-center lg:flex-row mt-8 lg:gap-5 lg:justify-between">
+                                    <div className="">
+                                        <div className="flex items-center justify-between gap-3">
+                                            <p className="text-2xl font-bold">Details</p>
+                                            <span className="border-b px-12 lg:px-20 border-yellow-600 mx-2" />
+                                            <div className="border-2 border-secondary-color rounded-full p-2 px-3">
+                                                <a
+                                                    href={`https://explorer.testnet.near.org/transactions/${metadata[0]?.title}`}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <Near className="w-4 h-4" fill="black" />
+                                                </a>
+                                            </div>
+                                            <div className="border-2 border-secondary-color rounded-full p-1 px-3">
+                                                <a
+                                                    href={`https://viewblock.io/arweave/tx/${thing_id.split(":")[0]}`}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >
+                                                    <div className="w-6 h-6">
+                                                        <Image src={Arweave} className="" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-primary-color rounded-lg my-8 py-2">
+                                            <p className="text-center text-font-color text-lg">{tokenCount} Tokens Minted</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {listings && listings.length ? (
                                     //&& (tokensData.listings[0].market_id === process.env.NEXT_PUBLIC_marketAddress)
                                     <div>
                                         {listings && listings[0]?.kind === "simple" ? (
@@ -221,9 +224,7 @@ const thing_id = ({ thing_id, data, bidInfo }: { thing_id: string; data: Metadat
                                             <MakeOffer
                                                 buy={buy}
                                                 isConnected={isConnected}
-                                                latestBid={bidInfo.offers ? bidInfo?.offers[0]?.offer_price : 0}
-                                                bidder={bidInfo.offers ? bidInfo?.offers[0]?.offered_by : "No bids yet"}
-                                                owner={bidInfo.listed_by}
+                                                bidInfo = {bidInfo}
                                             />
                                         )}
                                     </div>
@@ -253,15 +254,15 @@ export async function getServerSideProps({ params }: any) {
         console.log(error);
     }
 
-     const res = await fetch(`https://graph.mintbase.xyz/${process.env.NEXT_PUBLIC_NETWORK}`, {
+    const res = await fetch(`https://graph.mintbase.xyz/${process.env.NEXT_PUBLIC_NETWORK}`, {
         method: "POST",
         headers: {
-          "mb-api-key": "omni-site",
-          "content-type": "application/json",
-          "x-hasura-role": "anonymous"
+            "mb-api-key": "omni-site",
+            "content-type": "application/json",
+            "x-hasura-role": "anonymous",
         },
         body: JSON.stringify({
-          query: `query MyQuery {
+            query: `query MyQuery {
             mb_views_active_listings(
               where: {metadata_id: {_eq: "${thing_id}"}}
             ) {
@@ -271,17 +272,17 @@ export async function getServerSideProps({ params }: any) {
               }
               listed_by
             }
-          }`
-        })
-      })
-      
-      bidInfo = await res.json()
+          }`,
+        }),
+    });
+
+    bidInfo = await res.json();
 
     return {
         props: {
             thing_id,
             data: thingData,
-            bidInfo: bidInfo.data.mb_views_active_listings[0]
+            bidInfo: bidInfo.data.mb_views_active_listings,
         },
     };
 }
