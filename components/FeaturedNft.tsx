@@ -15,9 +15,11 @@ const FeaturedNft = ({ ids }: any) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const [tokens, setTokens] = useState<any>()
 
-    const idsToFetch = ids?.c?.map((k:any)=> {
-        return k.v
-    }) || [];
+    const idsToFetch = 
+    ids?.c?.map((k:any)=> {
+        return k.v || "";
+    }) ||
+     [];
     
 
     const fetchFeatured = async () => {
