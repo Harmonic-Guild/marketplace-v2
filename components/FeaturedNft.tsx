@@ -11,13 +11,25 @@ import { resolveUrl } from "../helpers/resolveUrl";
 import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
 import { mbjs } from "@mintbase-js/sdk";
 
-const FeaturedNft = ({ ids }: any) => {
+type Props = {
+    ids: any,
+    stores: any
+}
+
+const FeaturedNft = ({ sheetData }: any) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const [tokens, setTokens] = useState<any>()
 
-    const idsToFetch = ids?.c?.map((k:any)=> {
+    const idsToFetch = sheetData.ids?.c?.map((k:any)=> {
         return k.v
     }) || [];
+
+    const storeNames =
+         sheetData.stores.c?.map((k: any) => {
+            return k?.v || ""
+            
+        }) ||
+         mbjs.keys.contractAddress
     
 
     const fetchFeatured = async () => {
@@ -26,7 +38,7 @@ const FeaturedNft = ({ ids }: any) => {
             query: QUERIES.storeNftsQuery,
             variables: {
                 condition: {
-                    nft_contract_id: { _in: mbjs.keys.contractAddress },
+                    nft_contract_id: { _in: storeNames },
                     metadata_id: {_in: idsToFetch}
                     //   ...(showOnlyListed && { price: { _is_null: false } }),
                 },
@@ -35,14 +47,13 @@ const FeaturedNft = ({ ids }: any) => {
                 
             },
         });
-        // console.log('okkkokokokkokk',data.mb_views_nft_metadata_unburned);
         
         setTokens(data?.mb_views_nft_metadata_unburned)
     }
 
     useEffect(()=> {
-      if(ids?.c?.length)  fetchFeatured()
-    }, [ids])
+      if(sheetData.ids?.c?.length)  fetchFeatured()
+    }, [sheetData])
 
     // render() {
     const settings = {
