@@ -3,8 +3,6 @@ import { useWallet } from "../../services/providers/MintbaseWalletContext";
 import { TbExternalLink } from "react-icons/tb";
 import { BsChevronLeft } from "react-icons/bs";
 import { CgArrowsExpandRight } from "react-icons/cg";
-import { gql } from "apollo-boost";
-import { useLazyQuery } from "@apollo/client";
 import Image from "next/image";
 import { formatNearAmount, parseNearAmount } from "near-api-js/lib/utils/format";
 import MakeOffer from "../../Modal/MakeOffer";
@@ -18,7 +16,6 @@ import { resolveUrl } from '../../helpers/resolveUrl';
 
 import styles from "../../styles/Thing.module.scss";
 import { metadataByMetadataId } from "@mintbase-js/data";
-import { mbjs } from "@mintbase-js/sdk";
 
 const thing_id = ({ thing_id }: { thing_id: string }) => {
     
