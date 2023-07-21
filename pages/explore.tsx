@@ -6,24 +6,41 @@ import QueryFilters from "../helpers/getQuery";
 import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
 import { mbjs } from '@mintbase-js/sdk';
 import { ResponseType, Token } from '../constants/interfaces';
+import { getData } from "../helpers/fetchSheetsData";
+import MakeOffer from '../Modal/MakeOffer';
 
 const explore = () => {
     const [tokens, setTokens] = useState<any>([]);
     const [filterParams, setFilterParams] = useState<any>(null);
-    const [showAll, setShowAll] = useState(true)
+    const [showAll, setShowAll] = useState(true);
+    const [page, setPage] = useState<number>(0);
 
 
 
     const fetchAll = async () => {
+
+        const result = await getData();
+        if(!result?.rows?.[2]) return
+
+        const storeNames =
+         result?.rows?.[2].c?.map((k: any) => {
+            return k?.v || ""
+            
+        }) ||
+         mbjs.keys.contractAddress
+
+        
         const { data, error } = await fetchGraphQl<ResponseType>({
           query: QUERIES.storeNftsQuery,
           variables: {
             condition: {
-              nft_contract_id: { _in: mbjs.keys.contractAddress },
+              nft_contract_id: { _in: storeNames },
+
+            //    order_by:{createdAT: 'Asc'}
             //   ...(showOnlyListed && { price: { _is_null: false } }),
             },
             limit: 20,
-            offset:  0,
+            offset:  page * 20,
           }
         });
         return data?.mb_views_nft_metadata_unburned;
@@ -38,7 +55,7 @@ const explore = () => {
                price: { _is_null: false },
             },
             limit: 20,
-            offset:  0,
+            offset:  page * 20,
           }
         });
         return data?.mb_views_nft_metadata_unburned;
@@ -57,7 +74,7 @@ const explore = () => {
         }
         handleFetchTokens()
         
-      }, [showAll])
+      }, [showAll, page])
 
     // fetching
 
@@ -90,6 +107,10 @@ const explore = () => {
                         <NFT token={token}  key={token.metadata_id} />
                     ))}
                 </div>
+            </div>
+            <div className="flex lg:w-1/3 mx-auto justify-around mt-6">
+                <button disabled={page < 2} className={`border-secondary-color disabled:cursor-not-allowed disabled:bg-gray-500 bg-primary-color disabled:text-white border rounded-md px-6 py-1 w-2/5 lg:px-3 lg:py-2 lg:w-2/5 `} onClick={()=> setPage(page - 1)}>Previous</button>
+                <button className={`bg-primary-color border-secondary-color border rounded-md px-4 py-1 w-2/5 lg:px-3 lg:py-2 lg:w-2/5 `} onClick={()=> setPage(page + 1)}>Next</button>
             </div>
             {/* <div className="flex justify-center items-center my-4">
                 {
