@@ -32,7 +32,7 @@ const Home: NextPage = () => {
                 <link rel="icon" href={config.logo2} />
             </Head>
             
-                <FeaturedNft ids={data?.rows[0] || []}/>
+                <FeaturedNft sheetData={{ids: data?.rows[0], stores: data?.rows[2]}}/>
                 <WeeklyNft ids={data?.rows[1] || []} />
             {/* <AboutArtist storeId={storeName} /> */}
         </div>
