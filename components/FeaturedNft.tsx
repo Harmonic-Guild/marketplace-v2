@@ -20,12 +20,13 @@ const FeaturedNft = ({ sheetData }: any) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const [tokens, setTokens] = useState<any>()
 
-    const idsToFetch = sheetData.ids?.c?.map((k:any)=> {
+    const idsToFetch = sheetData?.ids?.c?.map((k:any)=> {
         return k.v
     }) || [];
 
+
     const storeNames =
-         sheetData.stores.c?.map((k: any) => {
+         sheetData?.stores?.c?.map((k: any) => {
             return k?.v || ""
             
         }) ||
