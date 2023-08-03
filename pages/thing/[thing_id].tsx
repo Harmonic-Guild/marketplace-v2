@@ -19,6 +19,7 @@ import { resolveUrl } from '../../helpers/resolveUrl';
 import styles from "../../styles/Thing.module.scss";
 import { metadataByMetadataId } from "@mintbase-js/data";
 import { mbjs } from "@mintbase-js/sdk";
+import Media from "../../components/Media";
 
 const thing_id = ({ thing_id }: { thing_id: string }) => {
     
@@ -146,12 +147,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                 <div className="lg:flex gap-4 justify-between w-4/5 lg:w-full mx-auto">
                     <div className="mx-auto w-full">
                         {(metadata[0]?.animationUrl !== null && metadata[0]?.animationUrl !== undefined) ? (
-                            <div className="w-full mx-auto flex align-middle">
-                                <video controls className="" poster={resolveUrl(metadata[0]?.media)} controlsList="nodownload" muted>
-                                    <source src={resolveUrl(metadata[0]?.animationUrl)}></source>
-                                </video>
-                                <br />
-                            </div>
+                            <Media animation={resolveUrl(metadata[0]?.animationUrl)} poster={resolveUrl(metadata[0]?.media)} enlarge={()=> setEnlarge(true)} />
                         ) : (
                             <div className=" w-full xl:w-4/5 mx-auto">
                                 {metadata[0]?.media && (
