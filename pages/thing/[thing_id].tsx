@@ -240,8 +240,8 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                                         <MakeOffer
                                             buy={buy}
                                             isConnected={isConnected}
-                                            latestBid={listings[0]?.price}
-                                            bidder={listings[0]?.offers[0]?.offered_by}
+                                            latestBid={listings[0]?.offers?.length ? listings[0]?.offers[0]?.offer_price : 0}
+                                            bidder={listings[0]?.offers?.length ? listings[0]?.offers[0]?.offered_by : "No bids yets."}
                                             owner={listings[0]?.token.ownerId}
                                         />
                                     )}

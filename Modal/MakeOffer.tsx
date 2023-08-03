@@ -37,7 +37,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                                 <Near className="w-4 h-4" fill="black" />
                             </div>
                         ) : (
-                            "none"
+                            "None"
                         )}
                     </div>
                 </div>
