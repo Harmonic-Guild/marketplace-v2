@@ -79,8 +79,8 @@ const explore = () => {
                 <h2 className="text-mp-dark-2 text-4xl font-bold font-header">Explore</h2>
             </div>
             <div className="flex lg:w-1/3 mx-auto justify-around mt-6">
-                <button className={`border-secondary-color border rounded-md px-6 py-1 w-2/5 lg:px-3 lg:py-2 lg:w-2/5 ${showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(true)}>All</button>
-                <button className={`border-secondary-color border rounded-md px-4 py-1 w-2/5 lg:px-3 lg:py-2 lg:w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-secondary-color'}`} onClick={()=> selectTab(false)}>On Sale</button>
+                <button className={`border-secondary-color border rounded-md px-6 py-1 w-2/5 lg:px-3 lg:py-2 lg:w-2/5 ${showAll? 'bg-secondary-color text-white': 'text-white'}`} onClick={()=> selectTab(true)}>All</button>
+                <button className={`border-secondary-color border rounded-md px-4 py-1 w-2/5 lg:px-3 lg:py-2 lg:w-2/5 ${!showAll? 'bg-secondary-color text-white': 'text-white'}`} onClick={()=> selectTab(false)}>On Sale</button>
             </div>
             <div className="xl:flex block justify-around">
                 
