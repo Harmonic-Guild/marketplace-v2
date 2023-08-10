@@ -37,7 +37,7 @@ const NFT = ({
 
 
     return (
-        <div className="w-full h-auto border border-primary-color rounded-2xl bg-card bg-opacity-10">
+        <div className="w-full h-auto border border-primary-color rounded-2xl bg-card">
             <div className="p-4">
                 {sellModal && <MintNft closeModal={() => showSellModal(false)} thingId={thing_id} tokenId={tokenId} title={title} />}
                 <div>
@@ -64,7 +64,7 @@ const NFT = ({
                     )}
 
                     <div className="px-30 py-2">
-                        <div className="text-center font-bold text-lg font-text">{title}</div>
+                        <div className="text-center font-bold text-lg font-text text-white">{title}</div>
                         <div className="w-full flex justify-center mt-6">
                         {/* {metaData.length? (
                             <>
@@ -72,7 +72,7 @@ const NFT = ({
                                 <button className="border hover:text-primary-color hover:bg-secondary-color rounded-xl outline-none bg-card border-secondary-color py-2 font-medium px-4 w-2/3 text-gray-800 font-header">Unlist (coming&nbsp;soon)</button> 
                             </> 
                         ): ( */}
-                            <button className="border hover:text-primary-color hover:bg-secondary-color rounded-xl outline-none bg-card border-secondary-color py-2 font-medium px-4 w-2/3 text-gray-800 font-header" onClick={()=> showSellModal(true)}>List on sale</button>  
+                            <button className="border text-white hover:bg-gradient-to-r hover:from-red-500 hover:to-yellow-400 rounded-xl outline-none bg-gradient-to-r from-yellow-400 to-red-500 py-2 font-medium px-4 w-2/3  font-header" onClick={()=> showSellModal(true)}>List on sale</button>  
                          {/* )}  */}
                         </div>
                     </div>
@@ -133,10 +133,12 @@ const MyOwn = () => {
         setImage(image);
     };
 
+    if(!tokens.length) return (<h1 className="text-white text-2xl text-center mt-6">You don't have anu tokens </h1>)
+
     return (
         <div className={styles.container}>
             {fullScreen && (
-                <div className="h-screen w-screen bg-gray-900 fixed left-0 top-0 z-50">
+                <div className="h-screen w-screen fixed left-0 top-0 z-50">
                     <div className="relative h-screen w-screen transition-opacity duration-200 cursor-pointer">
                         <Image src={image} layout="fill" objectFit="contain" />
                         <div className="absolute bottom-2 right-8 text-primary-color" onClick={() => setFullScreen(false)}>
@@ -147,7 +149,7 @@ const MyOwn = () => {
                 </div>
             )}
                 <>
-                    <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-gray-500 title-font md:text-2xl px-6 py-8 font-header">
+                    <h1 className="drop-shadow-lg text-xl text-center font-semibold tracking-widest uppercase text-white title-font md:text-2xl px-6 py-8 font-header">
                         your tokens from this store
                     </h1>
 
