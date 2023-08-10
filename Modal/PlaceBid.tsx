@@ -21,7 +21,7 @@ const PlaceBid = () => {
                     {cancleModal && <span className='text-gray-400 border border-mp-brown-1 rounded-full p-2 cursor-pointer' onClick={cancle}><AiOutlineClose/></span>}
                 </div>
                 <div className="flex font-bold justify-between w-full lg:w-3/5">
-                    <div className="bg-gray-900 text-white rounded-md px-2 py-1">16:12:56 hrs</div>
+                    <div className="bg-secondary text-white rounded-md px-2 py-1">16:12:56 hrs</div>
                     <span className='lg:text-sm text-lg'>Time remaining</span>
                 </div>
                 <div className='my-2 flex justify-between w-full lg:w-3/5 border border-gray-400 rounded-lg'>
