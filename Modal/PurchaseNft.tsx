@@ -104,13 +104,13 @@ const PurchaseNft = ({ args, tokensData, thingId, price, isConnected }: { args: 
                 <div className="font-header text-primary-color">Get it at:</div>
                 <div className="font-bold text-xl">{price}</div>
                 <div>
-                    <Near className="w-4 h-4" fill="black" />
+                    <Near className="w-4 h-4" fill="white" />
                 </div>
             </div>
             <div className="w-full lg:w-3/5">
                 <button
                     onClick={handleBuy}
-                    className={`w-full py-2 rounded-md text-lg font-bold text-gray-900 px-5 border border-card ${
+                    className={`w-full py-2 rounded-md text-lg font-bold text-white border-white px-5 border ${
                         isConnected ? "bg-card hover:bg-primary-color" : "border border-secondary-color py-2 cursor-not-allowed"
                     }`}
                 >
