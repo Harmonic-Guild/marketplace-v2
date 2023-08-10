@@ -13,7 +13,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="w-full max-w-screen-2xl mx-auto px-6 py-10 text-gray-700 mt-20">
+        <footer className="w-full max-w-screen-2xl mx-auto px-6 py-10 text-white glass-morphism mt-20 bg-gradient" >
             {/* <div className="flex justify-center items-center my-10">
                 <button className="lg:flex lg:gap-10 text-center no-underline bg-yellow-500 px-10 py-3 font-bold rounded-md text-gray-900 text-lg">
                 <div className="flex items-center justify-center gap-3">
@@ -58,7 +58,7 @@ const Footer = () => {
                 </div>
                 <div className="lg:text-xl text-sm">
                     <span className="font-bold font-header">TALK TO US</span>
-                    <ul className="leading-loose capitalize font-text">
+                    <ul className="leading-loose capitalize font-text flex flex-col">
                         <Link href="/">Contact us</Link>
                         <Link href={'https://www.instagram.com/harmonic_guild/'}>instagram</Link>
                         <Link href={'https://www.linkedin.com/company/harmonic-guild'}>LinkedIn</Link>
