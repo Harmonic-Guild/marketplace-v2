@@ -85,18 +85,18 @@ const FeaturedNft = (storeId: any) => {
 
     return (
         <div className={styles.container}>
-            <div className=" text-center  font-bold text-gray-900 mb-6">
+            <div className=" text-center  font-bold text-white mb-6 ">
                 <p className="text-secondary-color mb-2">
-                    <GiStarShuriken className="inline w-6 h-5" />
+                    <GiStarShuriken className="inline w-6 h-5" fill="white" />
                 </p>
-                <h2 className="text-mp-dark-2 text-4xl font-header font-semibold mb-2"> Featured NFTs </h2>
-                <p className="lg:text-2xl text-lg text-mp-dark-2 font-header">New arrivals</p>
+                <h2 className="text-4xl font-header font-semibold mb-2"> Featured NFTs </h2>
+                <p className="lg:text-2xl text-lg font-header">New arrivals</p>
             </div>
             <Slider {...settings}>
                 {tokens.map((token: Token, index) => (
                     <Link href={`/thing/${token.metadata_id}`} key={index}>
                         <div className={index === slideIndex ? "slide:active" : "slide"} key={index}>
-                            <div className="h-96 w-full rounded-xl shadow-lg relative overflow-hidden">
+                            <div className="h-96 w-full rounded-xl shadow-lg relative border-2 overflow-hidden border-white">
                                 <Image src={resolveUrl(token.media)}  alt="" objectFit="cover" layout="fill" />
                                 {index === slideIndex && (
                                     <div className="absolute bottom-5 text-center font-semibold w-full">
