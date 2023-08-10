@@ -37,7 +37,7 @@ const NFT: FC<Props> = ({ token }) => {
                     <div className="text-sm py-2 text-mp-dark-3 relative">
                      
                         <div className={`font-text ${styles.title}`}>{token.title}</div>
-                        <div>
+                        <div className=" text-white">
                             <div className="flex gap-2 items-center text-lg">
                                 {token.price ? (
                                     
@@ -49,7 +49,7 @@ const NFT: FC<Props> = ({ token }) => {
                                                 </span>
                                             </div>
                                             <div>
-                                                <Near className="w-4 h-4" fill="black" />
+                                                <Near className="w-4 h-4" fill="white" />
                                             </div>
                                         </div>
                                     
