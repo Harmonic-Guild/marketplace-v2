@@ -125,7 +125,7 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
     return (
         <>
             {metadata &&
-                <div className={`container ${styles.container}`}>
+                <div className={`container ${styles.container} glass-morphism`}>
                 {enlarge && (
                     <div className={styles.enlarged}>
                         <div className={styles["cancel-cont"]} onClick={() => setEnlarge(false)}>
