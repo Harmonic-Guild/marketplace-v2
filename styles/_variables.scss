@@ -2,9 +2,9 @@
 // $secondary-color: #fbc026;
 
 @mixin buttonColor {
-    @apply text-white bg-gradient-to-l from-primary-color to-secondary-color;
+    @apply text-white bg-gradient-to-l from-yellow-400 to-red-500 border-white border;
 
     &:hover {
-        @apply bg-gradient-to-l from-secondary-color to-primary-color;
+        @apply bg-gradient-to-l from-red-500 to-yellow-400 border-white border;
     }
 }

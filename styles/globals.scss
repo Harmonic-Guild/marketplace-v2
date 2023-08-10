@@ -7,13 +7,20 @@
 
 html {
     scroll-behavior: smooth;
+    @apply py-0 mt-0;
 }
+
+
 @layer utilities {
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
+}
+.main_body {
+    background-image: url("https://ik.imagekit.io/epyh88t15/Webbackground-dark32.jpg?updatedAt=1691683651529");
+    background-size: cover;
 }
 
 @font-face {
