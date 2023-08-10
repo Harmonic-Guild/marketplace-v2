@@ -23,9 +23,9 @@ module.exports = {
         },
         extend: {
             colors: {
-                'primary-color': process.env.NEXT_PUBLIC_PRIMARY_COLOR || '#233247',
-                'secondary-color': process.env.NEXT_PUBLIC_SECONDARY_COLOR || '#5174a6',
-                card: process.env.NEXT_PUBLIC_CARD_COLOR || '#5174a6',
+                'primary-color': "##facc15",
+                'secondary-color': "#ef4444",
+                card:  '#59b568',
                 "mp-dark": {
                     1: "#252B42",
                     2: "#161621",
