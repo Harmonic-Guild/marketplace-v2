@@ -72,7 +72,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                         <div className="flex w-full justify-between">
                             <p className="text-xl font-bold">Buster character color</p>
                             <span
-                                className="text-gray-400 border border-mp-brown-1 rounded-full p-2 cursor-pointer"
+                                className="text-white border border-mp-brown-1 rounded-full p-2 cursor-pointer"
                                 onClick={() => setShowModal(false)}
                             >
                                 <AiOutlineClose />
@@ -92,7 +92,7 @@ const MakeOffer = ({ buy, isConnected, latestBid, bidder, owner }: any) => {
                         <div className="">
                             <button
                                 onClick={() => buy(bid)}
-                                className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-gray-800"
+                                className="border-2 rounded-xl outline-none btnColor py-2 font-medium px-6 lg:px-12 text-white"
                             >
                                 Place bid
                             </button>
