@@ -24,13 +24,7 @@ const FeaturedNft = ({ sheetData }: any) => {
         return k.v
     }) || [];
 
-    const storeNames =
-         sheetData.stores.c?.map((k: any) => {
-            return k?.v || ""
-            
-        }) ||
-         mbjs.keys.contractAddress
-    
+    const storeNames = JSON.parse(process.env.NEXT_PUBLIC_STORE_ARRAY!) || mbjs.keys.contractAddress;
 
     const fetchFeatured = async () => {
         

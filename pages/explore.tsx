@@ -22,12 +22,8 @@ const explore = () => {
         const result = await getData();
         if(!result?.rows?.[2]) return
 
-        const storeNames =
-         result?.rows?.[2].c?.map((k: any) => {
-            return k?.v || ""
-            
-        }) ||
-         mbjs.keys.contractAddress
+        const storeNames = JSON.parse(process.env.NEXT_PUBLIC_STORE_ARRAY!) || mbjs.keys.contractAddress;
+
 
         
         const { data, error } = await fetchGraphQl<ResponseType>({
