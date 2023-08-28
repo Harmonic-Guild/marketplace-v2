@@ -59,11 +59,10 @@ const Footer = () => {
                 <div className="lg:text-xl text-sm">
                     <span className="font-bold font-header">TALK TO US</span>
                     <ul className="leading-loose capitalize font-text">
-                        <Link href="/">Contact us</Link>
-                        <Link href={'https://www.instagram.com/harmonic_guild/'}>instagram</Link>
-                        <Link href={'https://www.linkedin.com/company/harmonic-guild'}>LinkedIn</Link>
-                        <Link href={'https://twitter.com/HarmonicGuild'}>Twitter</Link>
-                        
+                        <li><Link href="/">Contact us</Link></li>
+                        <li><Link href={'https://www.instagram.com/harmonic_guild/'}>instagram</Link></li>
+                        <li><Link href={'https://www.linkedin.com/company/harmonic-guild'}>LinkedIn</Link></li>
+                        <li><Link href={'https://twitter.com/HarmonicGuild'}>Twitter</Link></li>  
                     </ul>
                 </div>
                 <div onClick={() => scrollToTop()} className="p-4 btnColor rounded-full w-10 h-10 cursor-pointer">
