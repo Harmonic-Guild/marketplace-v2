@@ -34,7 +34,7 @@ const Home: NextPage = () => {
             </Head>
             
             <FeaturedNft ids={data?.rows[0]} stores={data?.rows[2]} />
-            <WeeklyNft ids={data?.rows[1] || []} />
+            <WeeklyNft ids={data?.rows[1] || []} stores={data?.rows[2]} />
             {/* <AboutArtist storeId={storeName} /> */}
         </div>
     );

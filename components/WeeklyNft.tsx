@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { GiStarShuriken } from "react-icons/gi";
 import Slider from "react-slick";
 import { Token } from "../constants/interfaces";
@@ -10,13 +11,25 @@ import { mbjs } from "@mintbase-js/sdk";
 
 const NFT = dynamic(() => import("../components/NFT"));
 
-const WeeklyNft = ({ ids }: any) => {
+type Props = {
+    ids: {
+        c: { v: string }[]
+    },
+    stores: {
+        c: { v: string }[]
+    }
+}
+
+const WeeklyNft: FC<Props> = ({ ids, stores }) => {
     const [loading, setLoading] = useState(true);
     const [tokens, setTokens] = useState<any>();
 
-    const idsToFetch = ids?.c?.map((k: any) => {
-        return k.v;
-    }) || [];
+    const allIds = ids?.c?.map(k => k && k.v) || [];
+    const idsToFetch = allIds.filter(i => i);
+    console.log('ids to fetch', idsToFetch);
+
+    const allStores = stores?.c?.map(s => s && s.v) || [];
+    const storesToFetch = allStores.filter(s => s);
 
     const storeNames = JSON.parse(process.env.NEXT_PUBLIC_STORE_ARRAY!) || mbjs.keys.contractAddress;
 
@@ -26,7 +39,7 @@ const WeeklyNft = ({ ids }: any) => {
             query: QUERIES.storeNftsQuery,
             variables: {
                 condition: {
-                    nft_contract_id: { _in: storeNames },
+                    nft_contract_id: { _in: storesToFetch },
                     metadata_id: { _in: idsToFetch },
                     //   ...(showOnlyListed && { price: { _is_null: false } }),
                 },
@@ -35,12 +48,13 @@ const WeeklyNft = ({ ids }: any) => {
             },
         });
 
+        console.log(data?.mb_views_nft_metadata_unburned);
         setTokens(data?.mb_views_nft_metadata_unburned);
         setLoading(false);
     };
 
     useEffect(() => {
-        if (ids?.c?.length) fetchFeatured();
+        if (ids?.c?.length && stores?.c?.length) fetchFeatured();
     }, [ids]);
 
     const settings = {

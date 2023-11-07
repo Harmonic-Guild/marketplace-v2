@@ -25,7 +25,8 @@ const FeaturedNft: FC<Props> = ({ ids, stores }) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const [tokens, setTokens] = useState<any>();
 
-    const idsToFetch = ids?.c?.map(k => k.v) || [];
+    const allIds = ids?.c?.map(k => k && k.v) || [];
+    const idsToFetch = allIds.filter(i => i);
 
     const allStores = stores?.c?.map(s => s && s.v) || [];
     const storesToFetch = allStores.filter(s => s);
