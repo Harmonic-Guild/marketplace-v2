@@ -26,7 +26,6 @@ const WeeklyNft: FC<Props> = ({ ids, stores }) => {
 
     const allIds = ids?.c?.map(k => k && k.v) || [];
     const idsToFetch = allIds.filter(i => i);
-    console.log('ids to fetch', idsToFetch);
 
     const allStores = stores?.c?.map(s => s && s.v) || [];
     const storesToFetch = allStores.filter(s => s);
@@ -48,7 +47,6 @@ const WeeklyNft: FC<Props> = ({ ids, stores }) => {
             },
         });
 
-        console.log(data?.mb_views_nft_metadata_unburned);
         setTokens(data?.mb_views_nft_metadata_unburned);
         setLoading(false);
     };

@@ -16,7 +16,6 @@ const Home: NextPage = () => {
 
     const fetchData = async () => {
         const data = await getData();
-        console.log(data);
         setData(data);
     }
 
