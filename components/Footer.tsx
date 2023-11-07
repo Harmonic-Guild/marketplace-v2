@@ -3,8 +3,7 @@ import Image from "next/image";
 import { BsArrowUp } from "react-icons/bs";
 import logo from "../assets/harmonic-logo.png";
 import { FiUsers } from "react-icons/fi";
-import config from '../config/config'
-
+import config from '../config/config';
 
 const Footer = () => {
     const scrollToTop = () => {
@@ -28,13 +27,17 @@ const Footer = () => {
             <div className="flex flex-wrap justify-between p-10 gap-8">
                 <div className="mb-5">
                     <div>
-                        <Link href="/" passHref>
-                            <a className="py-6 relative w-40 h-20 inline-block">
-                                <Image src={'https://ik.imagekit.io/epyh88t15/harmonic-logo.png?updatedAt=1669053507785'} layout="fill" objectFit="contain" alt="logo" className="cursor-pointer mb-5" />
+                        <Link href={config.publicUrl} passHref>
+                            <a className="py-6 relative w-24 lg:w-40 h-20 inline-block" target="_blank">
+                                {
+                                    config.logo1 && (
+                                        <Image src={config.logo1} layout="fill" objectFit="contain" alt="" className="cursor-pointer" />
+                                    )
+                                }
                             </a>
                         </Link>
                         <div className="leading-loose">
-                            <span>support@harmonicguild.io</span> <br />
+                            {/* <span>support@harmonicguild.io</span> <br /> */}
                             {/* <span>+2343878472983</span> */}
                         </div>
                     </div>

@@ -16,6 +16,7 @@ const Home: NextPage = () => {
 
     const fetchData = async () => {
         const data = await getData();
+        console.log(data);
         setData(data);
     }
 
@@ -32,8 +33,8 @@ const Home: NextPage = () => {
                 <link rel="icon" href={config.logo2} />
             </Head>
             
-                <FeaturedNft sheetData={{ids: data?.rows[0], stores: data?.rows[2]}}/>
-                <WeeklyNft ids={data?.rows[1] || []} />
+            <FeaturedNft ids={data?.rows[0]} stores={data?.rows[2]} />
+            <WeeklyNft ids={data?.rows[1] || []} />
             {/* <AboutArtist storeId={storeName} /> */}
         </div>
     );

@@ -11,18 +11,22 @@ import { mbjs } from "@mintbase-js/sdk";
 const NFT = dynamic(() => import("../components/NFT"));
 
 const WeeklyNft = ({ ids }: any) => {
+    const [loading, setLoading] = useState(true);
     const [tokens, setTokens] = useState<any>();
 
     const idsToFetch = ids?.c?.map((k: any) => {
         return k.v;
     }) || [];
 
+    const storeNames = JSON.parse(process.env.NEXT_PUBLIC_STORE_ARRAY!) || mbjs.keys.contractAddress;
+
     const fetchFeatured = async () => {
+        setLoading(true);
         const { data, error } = await fetchGraphQl<any>({
             query: QUERIES.storeNftsQuery,
             variables: {
                 condition: {
-                    nft_contract_id: { _in: mbjs.keys.contractAddress },
+                    nft_contract_id: { _in: storeNames },
                     metadata_id: { _in: idsToFetch },
                     //   ...(showOnlyListed && { price: { _is_null: false } }),
                 },
@@ -32,6 +36,7 @@ const WeeklyNft = ({ ids }: any) => {
         });
 
         setTokens(data?.mb_views_nft_metadata_unburned);
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -75,7 +80,17 @@ const WeeklyNft = ({ ids }: any) => {
         ],
     };
 
-    if(!tokens) return <h1 className="text-font-color text-2xl mb-8">No tokens to show</h1>
+    if (loading) return (
+        <div className="w-full lg:h-72 flex justify-center items-center">
+            <h1 className="text-3xl font-bold">Loading Weekly NFTs...</h1>
+        </div>
+    )
+
+    if(!tokens) return (
+        <div className="w-full lg:h-72 flex justify-center items-center">
+            <h1 className="text-font-color text-2xl mb-8">No tokens to show</h1>
+        </div>
+    )
 
     // const tokens: Token[] = data.mb_views_nft_metadata_unburned
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import Slider from "react-slick";
 import { GiStarShuriken } from "react-icons/gi";
@@ -12,27 +12,33 @@ import { QUERIES, fetchGraphQl } from "@mintbase-js/data";
 import { mbjs } from "@mintbase-js/sdk";
 
 type Props = {
-    ids: any,
-    stores: any
+    ids: {
+        c: { v: string }[]
+    },
+    stores: {
+        c: { v: string }[]
+    }
 }
 
-const FeaturedNft = ({ sheetData }: any) => {
+const FeaturedNft: FC<Props> = ({ ids, stores }) => {
+    const [loading, setLoading] = useState(true);
     const [slideIndex, setSlideIndex] = useState(0);
-    const [tokens, setTokens] = useState<any>()
+    const [tokens, setTokens] = useState<any>();
 
-    const idsToFetch = sheetData.ids?.c?.map((k:any)=> {
-        return k.v
-    }) || [];
+    const idsToFetch = ids?.c?.map(k => k.v) || [];
 
-    const storeNames = JSON.parse(process.env.NEXT_PUBLIC_STORE_ARRAY!) || mbjs.keys.contractAddress;
+    const allStores = stores?.c?.map(s => s && s.v) || [];
+    const storesToFetch = allStores.filter(s => s);
+
+    // const storeNames = JSON.parse(process.env.NEXT_PUBLIC_STORE_ARRAY!) || mbjs.keys.contractAddress;
 
     const fetchFeatured = async () => {
-        
+        setLoading(true);
         const { data, error } = await fetchGraphQl<any>({
             query: QUERIES.storeNftsQuery,
             variables: {
                 condition: {
-                    nft_contract_id: { _in: storeNames },
+                    nft_contract_id: { _in: storesToFetch },
                     metadata_id: {_in: idsToFetch}
                     //   ...(showOnlyListed && { price: { _is_null: false } }),
                 },
@@ -42,12 +48,13 @@ const FeaturedNft = ({ sheetData }: any) => {
             },
         });
         
-        setTokens(data?.mb_views_nft_metadata_unburned)
+        setTokens(data?.mb_views_nft_metadata_unburned);
+        setLoading(false);
     }
 
     useEffect(()=> {
-      if(sheetData.ids?.c?.length)  fetchFeatured()
-    }, [sheetData])
+      if(ids?.c?.length && stores?.c?.length) fetchFeatured();
+    }, [ids])
 
     // render() {
     const settings = {
@@ -90,8 +97,14 @@ const FeaturedNft = ({ sheetData }: any) => {
             },
         ],
     };
-    if(!tokens) return <h1 className="text-font-color text-2xl mb-8">No featured Tokens to show</h1>
 
+    if (loading) return (
+        <div className="w-full lg:h-72 flex justify-center items-center">
+            <h1 className="text-3xl font-bold">Loading Featured NFTs...</h1>
+        </div>
+    )
+
+    if(!tokens) return <h1 className="text-font-color text-2xl mb-8">No featured Tokens to show</h1>
 
     return (
         <>
