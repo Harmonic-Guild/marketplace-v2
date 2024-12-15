@@ -315,7 +315,17 @@ const thing_id = ({ thing_id }: { thing_id: string }) => {
                         ? (
                             <div>
                                 {tokensData?.listings[0]?.kind === 'simple' ? (
-                                    <PurchaseNft buy={buy} tokensData={tokensData} thingId={thing_id} price={price!} isConnected={isConnected} />
+                                    <PurchaseNft
+                                     buy={buy} 
+                                     ids={{
+                                            tokenId:tokensData.listings[0]?.token.id!,
+                                            marketId: tokensData.listings[0]?.market_id,
+                                            contractId: tokensData.metadata[0]?.contract.id
+                                        }} 
+                                     thingId={thing_id} 
+                                     price={price!} 
+                                     isConnected={isConnected} 
+                                    />
                                 ) : (
                                     <MakeOffer
                                         buy={buy}

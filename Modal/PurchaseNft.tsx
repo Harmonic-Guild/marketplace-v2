@@ -5,12 +5,13 @@ import {parseNearAmount } from "near-api-js/lib/utils/format";
 import { useWallet } from "../services/providers/MintbaseWalletContext";
 
 
-const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: any; tokensData: any; thingId: string; price: string; isConnected: boolean }) => {
-    
+const PurchaseNft = ({ buy, ids, thingId, price, isConnected }: { buy: any; ids: {marketId: string, tokenId: string, contractId: string}; thingId: string; price: string; isConnected: boolean }) => {
 
     const { wallet } = useWallet();
 
-    const marketId = tokensData.listings[0]?.market_id;
+    const {marketId, tokenId, contractId} = ids;
+
+    // const marketId = tokensData.listings[0]?.market_id;
 
     // handler function to call the wallet methods to proceed the buy.
     const handleBuy = async () => {
@@ -25,7 +26,8 @@ const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: an
 
 
     
-    const tokenId = tokensData.listings[0]?.token.id! //+ ":" + thingId.split(":")[0];
+    // const tokenId = tokensData.listings[0]?.token.id! //+ ":" + thingId.split(":")[0];
+    // const contractId = ''
 
     const newBuy = useCallback(async () => {
     
@@ -38,7 +40,7 @@ const PurchaseNft = ({ buy, tokensData, thingId, price, isConnected }: { buy: an
                 receiverId: marketId,
                 gas: '200000000000000',
                 args: {
-                  nft_contract_id: process.env.NEXT_PUBLIC_STORE_NAME,
+                  nft_contract_id: contractId,
                   token_id: tokenId,
                   referrer_id: process.env.NEXT_PUBLIC_REFERRAL_ID
                 //     process.env.NEXT_PUBLIC_REFERRAL_ID || TESTNET_CONFIG.referral,
